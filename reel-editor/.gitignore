@@ -18,3 +18,6 @@ media/*.m4a
 public/*.mp4
 public/*.mov
 stills/
+
+# large derived A-roll (regenerate via scripts/silence_cut.py)
+public/appraisal.mp4

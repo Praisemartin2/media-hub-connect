@@ -1,1 +1,7 @@
-[]
+[
+ {"start":14.0,"dur":1.6,"src":"broll/quadplex.mp4"},
+ {"start":17.3,"dur":1.5,"src":"broll/contract.mp4"},
+ {"start":23.6,"dur":1.5,"src":"broll/clock.mp4"},
+ {"start":59.2,"dur":1.7,"src":"broll/finger.mp4"},
+ {"start":66.0,"dur":1.6,"src":"broll/notification.mp4"}
+]
