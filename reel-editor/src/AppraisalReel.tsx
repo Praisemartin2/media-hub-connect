@@ -11,6 +11,7 @@ import {
 } from "remotion";
 import { COLORS, TITLE_CARDS, HOOK, CTA } from "./reel-data";
 import captions from "./captions.json";
+import brollData from "./broll.json";
 
 const FONT =
   '"Helvetica Neue", Helvetica, "Arial Black", Arial, sans-serif';
@@ -48,6 +49,52 @@ const Grade: React.FC = () => (
     />
   </AbsoluteFill>
 );
+
+// ---------- B-roll keyword punch-ins ----------
+type Broll = { start: number; dur: number; src: string };
+const BROLL = brollData as Broll[];
+
+const BrollClip: React.FC<{ src: string }> = ({ src }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const s = spring({ frame, fps, config: { damping: 200 }, durationInFrames: 6 });
+  const scale = interpolate(s, [0, 1], [1.08, 1]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.ink }}>
+      <OffthreadVideo
+        src={staticFile(src)}
+        muted
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: `scale(${scale})`,
+          filter: "contrast(1.05) saturate(1.05) brightness(1.0) sepia(0.05) hue-rotate(-5deg)",
+        }}
+      />
+      {/* same bottom scrim so captions stay legible over b-roll */}
+      <AbsoluteFill
+        style={{
+          background:
+            "linear-gradient(to top, rgba(17,17,17,0.62) 0%, rgba(17,17,17,0.18) 22%, rgba(17,17,17,0) 38%)",
+        }}
+      />
+    </AbsoluteFill>
+  );
+};
+
+const BrollLayer: React.FC = () => {
+  const { fps } = useVideoConfig();
+  return (
+    <>
+      {BROLL.map((b, i) => (
+        <Sequence key={i} from={Math.round(b.start * fps)} durationInFrames={Math.round(b.dur * fps)}>
+          <BrollClip src={b.src} />
+        </Sequence>
+      ))}
+    </>
+  );
+};
 
 // ---------- Karaoke captions ----------
 const Captions: React.FC = () => {
@@ -252,6 +299,7 @@ export const AppraisalReel: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.ink }}>
       <Grade />
+      <BrollLayer />
       <Captions />
       <Sequence from={Math.round(HOOK.start * fps)} durationInFrames={Math.round((HOOK.end - HOOK.start) * fps)}>
         <Hook />
