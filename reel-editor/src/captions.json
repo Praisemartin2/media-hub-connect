@@ -1,0 +1,2139 @@
+[
+ {
+  "start": 0.24,
+  "end": 0.735,
+  "words": [
+   {
+    "w": "7:30",
+    "start": 0.24,
+    "end": 0.452
+   },
+   {
+    "w": "PM,",
+    "start": 0.452,
+    "end": 0.594
+   },
+   {
+    "w": "my",
+    "start": 0.594,
+    "end": 0.735
+   }
+  ],
+  "text": "7:30 PM, my"
+ },
+ {
+  "start": 0.735,
+  "end": 1.796,
+  "words": [
+   {
+    "w": "hand",
+    "start": 0.735,
+    "end": 1.018
+   },
+   {
+    "w": "was",
+    "start": 1.018,
+    "end": 1.23
+   },
+   {
+    "w": "hovering",
+    "start": 1.23,
+    "end": 1.796
+   }
+  ],
+  "text": "hand was hovering"
+ },
+ {
+  "start": 1.796,
+  "end": 3.07,
+  "words": [
+   {
+    "w": "over",
+    "start": 1.796,
+    "end": 2.079
+   },
+   {
+    "w": "the",
+    "start": 2.079,
+    "end": 2.291
+   },
+   {
+    "w": "termination",
+    "start": 2.291,
+    "end": 3.07
+   }
+  ],
+  "text": "over the termination"
+ },
+ {
+  "start": 3.07,
+  "end": 3.706,
+  "words": [
+   {
+    "w": "button",
+    "start": 3.07,
+    "end": 3.494
+   },
+   {
+    "w": "on",
+    "start": 3.494,
+    "end": 3.636
+   },
+   {
+    "w": "a",
+    "start": 3.636,
+    "end": 3.706
+   }
+  ],
+  "text": "button on a"
+ },
+ {
+  "start": 3.706,
+  "end": 4.838,
+  "words": [
+   {
+    "w": "one",
+    "start": 3.706,
+    "end": 3.919
+   },
+   {
+    "w": "million",
+    "start": 3.919,
+    "end": 4.414
+   },
+   {
+    "w": "dollar",
+    "start": 4.414,
+    "end": 4.838
+   }
+  ],
+  "text": "one million dollar"
+ },
+ {
+  "start": 4.838,
+  "end": 5.121,
+  "words": [
+   {
+    "w": "deal.",
+    "start": 4.838,
+    "end": 5.121
+   }
+  ],
+  "text": "deal."
+ },
+ {
+  "start": 5.121,
+  "end": 6.324,
+  "words": [
+   {
+    "w": "Here's",
+    "start": 5.121,
+    "end": 5.475
+   },
+   {
+    "w": "what",
+    "start": 5.475,
+    "end": 5.758
+   },
+   {
+    "w": "happened",
+    "start": 5.758,
+    "end": 6.324
+   }
+  ],
+  "text": "Here's what happened"
+ },
+ {
+  "start": 6.324,
+  "end": 6.96,
+  "words": [
+   {
+    "w": "in",
+    "start": 6.324,
+    "end": 6.465
+   },
+   {
+    "w": "the",
+    "start": 6.465,
+    "end": 6.677
+   },
+   {
+    "w": "next",
+    "start": 6.677,
+    "end": 6.96
+   }
+  ],
+  "text": "in the next"
+ },
+ {
+  "start": 6.96,
+  "end": 7.88,
+  "words": [
+   {
+    "w": "thirty",
+    "start": 6.96,
+    "end": 7.385
+   },
+   {
+    "w": "minutes.",
+    "start": 7.385,
+    "end": 7.88
+   }
+  ],
+  "text": "thirty minutes."
+ },
+ {
+  "start": 10.82,
+  "end": 11.517,
+  "words": [
+   {
+    "w": "This",
+    "start": 10.82,
+    "end": 11.099
+   },
+   {
+    "w": "part",
+    "start": 11.099,
+    "end": 11.378
+   },
+   {
+    "w": "of",
+    "start": 11.378,
+    "end": 11.517
+   }
+  ],
+  "text": "This part of"
+ },
+ {
+  "start": 11.517,
+  "end": 12.493,
+  "words": [
+   {
+    "w": "real",
+    "start": 11.517,
+    "end": 11.796
+   },
+   {
+    "w": "estate",
+    "start": 11.796,
+    "end": 12.214
+   },
+   {
+    "w": "most",
+    "start": 12.214,
+    "end": 12.493
+   }
+  ],
+  "text": "real estate most"
+ },
+ {
+  "start": 12.493,
+  "end": 13.538,
+  "words": [
+   {
+    "w": "clients",
+    "start": 12.493,
+    "end": 12.981
+   },
+   {
+    "w": "never",
+    "start": 12.981,
+    "end": 13.329
+   },
+   {
+    "w": "see.",
+    "start": 13.329,
+    "end": 13.538
+   }
+  ],
+  "text": "clients never see."
+ },
+ {
+  "start": 13.538,
+  "end": 13.957,
+  "words": [
+   {
+    "w": "We",
+    "start": 13.538,
+    "end": 13.678
+   },
+   {
+    "w": "had",
+    "start": 13.678,
+    "end": 13.887
+   },
+   {
+    "w": "a",
+    "start": 13.887,
+    "end": 13.957
+   }
+  ],
+  "text": "We had a"
+ },
+ {
+  "start": 13.957,
+  "end": 15.769,
+  "words": [
+   {
+    "w": "million-dollar",
+    "start": 13.957,
+    "end": 14.863
+   },
+   {
+    "w": "quadplex",
+    "start": 14.863,
+    "end": 15.42
+   },
+   {
+    "w": "under",
+    "start": 15.42,
+    "end": 15.769
+   }
+  ],
+  "text": "million-dollar quadplex under"
+ },
+ {
+  "start": 15.769,
+  "end": 17.302,
+  "words": [
+   {
+    "w": "contract,",
+    "start": 15.769,
+    "end": 16.326
+   },
+   {
+    "w": "negotiated",
+    "start": 16.326,
+    "end": 17.023
+   },
+   {
+    "w": "hard,",
+    "start": 17.023,
+    "end": 17.302
+   }
+  ],
+  "text": "contract, negotiated hard,"
+ },
+ {
+  "start": 17.302,
+  "end": 18.696,
+  "words": [
+   {
+    "w": "extended",
+    "start": 17.302,
+    "end": 17.86
+   },
+   {
+    "w": "due",
+    "start": 17.86,
+    "end": 18.069
+   },
+   {
+    "w": "diligence",
+    "start": 18.069,
+    "end": 18.696
+   }
+  ],
+  "text": "extended due diligence"
+ },
+ {
+  "start": 18.696,
+  "end": 19.533,
+  "words": [
+   {
+    "w": "a",
+    "start": 18.696,
+    "end": 18.766
+   },
+   {
+    "w": "couple",
+    "start": 18.766,
+    "end": 19.184
+   },
+   {
+    "w": "times",
+    "start": 19.184,
+    "end": 19.533
+   }
+  ],
+  "text": "a couple times"
+ },
+ {
+  "start": 19.533,
+  "end": 20.23,
+  "words": [
+   {
+    "w": "to",
+    "start": 19.533,
+    "end": 19.672
+   },
+   {
+    "w": "get",
+    "start": 19.672,
+    "end": 19.881
+   },
+   {
+    "w": "every",
+    "start": 19.881,
+    "end": 20.23
+   }
+  ],
+  "text": "to get every"
+ },
+ {
+  "start": 20.23,
+  "end": 21.066,
+  "words": [
+   {
+    "w": "piece",
+    "start": 20.23,
+    "end": 20.578
+   },
+   {
+    "w": "lined",
+    "start": 20.578,
+    "end": 20.927
+   },
+   {
+    "w": "up,",
+    "start": 20.927,
+    "end": 21.066
+   }
+  ],
+  "text": "piece lined up,"
+ },
+ {
+  "start": 21.066,
+  "end": 21.693,
+  "words": [
+   {
+    "w": "but",
+    "start": 21.066,
+    "end": 21.275
+   },
+   {
+    "w": "it",
+    "start": 21.275,
+    "end": 21.414
+   },
+   {
+    "w": "left",
+    "start": 21.414,
+    "end": 21.693
+   }
+  ],
+  "text": "but it left"
+ },
+ {
+  "start": 21.693,
+  "end": 22.39,
+  "words": [
+   {
+    "w": "us",
+    "start": 21.693,
+    "end": 21.833
+   },
+   {
+    "w": "with",
+    "start": 21.833,
+    "end": 22.111
+   },
+   {
+    "w": "only",
+    "start": 22.111,
+    "end": 22.39
+   }
+  ],
+  "text": "us with only"
+ },
+ {
+  "start": 22.39,
+  "end": 23.157,
+  "words": [
+   {
+    "w": "three",
+    "start": 22.39,
+    "end": 22.739
+   },
+   {
+    "w": "or",
+    "start": 22.739,
+    "end": 22.878
+   },
+   {
+    "w": "four",
+    "start": 22.878,
+    "end": 23.157
+   }
+  ],
+  "text": "three or four"
+ },
+ {
+  "start": 23.157,
+  "end": 23.784,
+  "words": [
+   {
+    "w": "days",
+    "start": 23.157,
+    "end": 23.436
+   },
+   {
+    "w": "on",
+    "start": 23.436,
+    "end": 23.575
+   },
+   {
+    "w": "the",
+    "start": 23.575,
+    "end": 23.784
+   }
+  ],
+  "text": "days on the"
+ },
+ {
+  "start": 23.784,
+  "end": 24.76,
+  "words": [
+   {
+    "w": "appraisal",
+    "start": 23.784,
+    "end": 24.412
+   },
+   {
+    "w": "clock.",
+    "start": 24.412,
+    "end": 24.76
+   }
+  ],
+  "text": "appraisal clock."
+ },
+ {
+  "start": 24.92,
+  "end": 25.693,
+  "words": [
+   {
+    "w": "Now,",
+    "start": 24.92,
+    "end": 25.131
+   },
+   {
+    "w": "I",
+    "start": 25.131,
+    "end": 25.201
+   },
+   {
+    "w": "usually",
+    "start": 25.201,
+    "end": 25.693
+   }
+  ],
+  "text": "Now, I usually"
+ },
+ {
+  "start": 25.693,
+  "end": 26.676,
+  "words": [
+   {
+    "w": "tell",
+    "start": 25.693,
+    "end": 25.974
+   },
+   {
+    "w": "clients",
+    "start": 25.974,
+    "end": 26.466
+   },
+   {
+    "w": "not",
+    "start": 26.466,
+    "end": 26.676
+   }
+  ],
+  "text": "tell clients not"
+ },
+ {
+  "start": 26.676,
+  "end": 27.309,
+  "words": [
+   {
+    "w": "to",
+    "start": 26.676,
+    "end": 26.817
+   },
+   {
+    "w": "order",
+    "start": 26.817,
+    "end": 27.168
+   },
+   {
+    "w": "an",
+    "start": 27.168,
+    "end": 27.309
+   }
+  ],
+  "text": "to order an"
+ },
+ {
+  "start": 27.309,
+  "end": 28.643,
+  "words": [
+   {
+    "w": "appraisal",
+    "start": 27.309,
+    "end": 27.941
+   },
+   {
+    "w": "until",
+    "start": 27.941,
+    "end": 28.292
+   },
+   {
+    "w": "after",
+    "start": 28.292,
+    "end": 28.643
+   }
+  ],
+  "text": "appraisal until after"
+ },
+ {
+  "start": 28.643,
+  "end": 29.768,
+  "words": [
+   {
+    "w": "due",
+    "start": 28.643,
+    "end": 28.854
+   },
+   {
+    "w": "diligence",
+    "start": 28.854,
+    "end": 29.487
+   },
+   {
+    "w": "ends.",
+    "start": 29.487,
+    "end": 29.768
+   }
+  ],
+  "text": "due diligence ends."
+ },
+ {
+  "start": 29.768,
+  "end": 29.978,
+  "words": [
+   {
+    "w": "Why?",
+    "start": 29.768,
+    "end": 29.978
+   }
+  ],
+  "text": "Why?"
+ },
+ {
+  "start": 29.978,
+  "end": 30.962,
+  "words": [
+   {
+    "w": "Because",
+    "start": 29.978,
+    "end": 30.47
+   },
+   {
+    "w": "it",
+    "start": 30.47,
+    "end": 30.611
+   },
+   {
+    "w": "costs",
+    "start": 30.611,
+    "end": 30.962
+   }
+  ],
+  "text": "Because it costs"
+ },
+ {
+  "start": 30.962,
+  "end": 31.664,
+  "words": [
+   {
+    "w": "money,",
+    "start": 30.962,
+    "end": 31.313
+   },
+   {
+    "w": "and",
+    "start": 31.313,
+    "end": 31.524
+   },
+   {
+    "w": "if",
+    "start": 31.524,
+    "end": 31.664
+   }
+  ],
+  "text": "money, and if"
+ },
+ {
+  "start": 31.664,
+  "end": 32.507,
+  "words": [
+   {
+    "w": "the",
+    "start": 31.664,
+    "end": 31.875
+   },
+   {
+    "w": "deal",
+    "start": 31.875,
+    "end": 32.156
+   },
+   {
+    "w": "falls",
+    "start": 32.156,
+    "end": 32.507
+   }
+  ],
+  "text": "the deal falls"
+ },
+ {
+  "start": 32.507,
+  "end": 33.21,
+  "words": [
+   {
+    "w": "apart",
+    "start": 32.507,
+    "end": 32.859
+   },
+   {
+    "w": "in",
+    "start": 32.859,
+    "end": 32.999
+   },
+   {
+    "w": "due",
+    "start": 32.999,
+    "end": 33.21
+   }
+  ],
+  "text": "apart in due"
+ },
+ {
+  "start": 33.21,
+  "end": 34.264,
+  "words": [
+   {
+    "w": "diligence,",
+    "start": 33.21,
+    "end": 33.842
+   },
+   {
+    "w": "we",
+    "start": 33.842,
+    "end": 33.983
+   },
+   {
+    "w": "just",
+    "start": 33.983,
+    "end": 34.264
+   }
+  ],
+  "text": "diligence, we just"
+ },
+ {
+  "start": 34.264,
+  "end": 35.458,
+  "words": [
+   {
+    "w": "saved",
+    "start": 34.264,
+    "end": 34.615
+   },
+   {
+    "w": "them",
+    "start": 34.615,
+    "end": 34.896
+   },
+   {
+    "w": "hundreds",
+    "start": 34.896,
+    "end": 35.458
+   }
+  ],
+  "text": "saved them hundreds"
+ },
+ {
+  "start": 35.458,
+  "end": 36.09,
+  "words": [
+   {
+    "w": "of",
+    "start": 35.458,
+    "end": 35.599
+   },
+   {
+    "w": "dollars.",
+    "start": 35.599,
+    "end": 36.09
+   }
+  ],
+  "text": "of dollars."
+ },
+ {
+  "start": 36.09,
+  "end": 37.074,
+  "words": [
+   {
+    "w": "But",
+    "start": 36.09,
+    "end": 36.301
+   },
+   {
+    "w": "something",
+    "start": 36.301,
+    "end": 36.934
+   },
+   {
+    "w": "in",
+    "start": 36.934,
+    "end": 37.074
+   }
+  ],
+  "text": "But something in"
+ },
+ {
+  "start": 37.074,
+  "end": 37.706,
+  "words": [
+   {
+    "w": "my",
+    "start": 37.074,
+    "end": 37.215
+   },
+   {
+    "w": "gut",
+    "start": 37.215,
+    "end": 37.425
+   },
+   {
+    "w": "said,",
+    "start": 37.425,
+    "end": 37.706
+   }
+  ],
+  "text": "my gut said,"
+ },
+ {
+  "start": 37.706,
+  "end": 38.83,
+  "words": [
+   {
+    "w": "throw",
+    "start": 37.706,
+    "end": 38.058
+   },
+   {
+    "w": "an",
+    "start": 38.058,
+    "end": 38.198
+   },
+   {
+    "w": "appraisal",
+    "start": 38.198,
+    "end": 38.83
+   }
+  ],
+  "text": "throw an appraisal"
+ },
+ {
+  "start": 38.83,
+  "end": 40.025,
+  "words": [
+   {
+    "w": "extension",
+    "start": 38.83,
+    "end": 39.463
+   },
+   {
+    "w": "into",
+    "start": 39.463,
+    "end": 39.744
+   },
+   {
+    "w": "this",
+    "start": 39.744,
+    "end": 40.025
+   }
+  ],
+  "text": "extension into this"
+ },
+ {
+  "start": 40.025,
+  "end": 41.149,
+  "words": [
+   {
+    "w": "amendment",
+    "start": 40.025,
+    "end": 40.657
+   },
+   {
+    "w": "too,",
+    "start": 40.657,
+    "end": 40.868
+   },
+   {
+    "w": "just",
+    "start": 40.868,
+    "end": 41.149
+   }
+  ],
+  "text": "amendment too, just"
+ },
+ {
+  "start": 41.149,
+  "end": 41.781,
+  "words": [
+   {
+    "w": "in",
+    "start": 41.149,
+    "end": 41.289
+   },
+   {
+    "w": "case",
+    "start": 41.289,
+    "end": 41.57
+   },
+   {
+    "w": "the",
+    "start": 41.57,
+    "end": 41.781
+   }
+  ],
+  "text": "in case the"
+ },
+ {
+  "start": 41.781,
+  "end": 42.624,
+  "words": [
+   {
+    "w": "other",
+    "start": 41.781,
+    "end": 42.132
+   },
+   {
+    "w": "agent",
+    "start": 42.132,
+    "end": 42.484
+   },
+   {
+    "w": "is",
+    "start": 42.484,
+    "end": 42.624
+   }
+  ],
+  "text": "other agent is"
+ },
+ {
+  "start": 42.624,
+  "end": 43.256,
+  "words": [
+   {
+    "w": "not",
+    "start": 42.624,
+    "end": 42.835
+   },
+   {
+    "w": "open",
+    "start": 42.835,
+    "end": 43.116
+   },
+   {
+    "w": "to",
+    "start": 43.116,
+    "end": 43.256
+   }
+  ],
+  "text": "not open to"
+ },
+ {
+  "start": 43.256,
+  "end": 44.24,
+  "words": [
+   {
+    "w": "doing",
+    "start": 43.256,
+    "end": 43.608
+   },
+   {
+    "w": "this",
+    "start": 43.608,
+    "end": 43.889
+   },
+   {
+    "w": "later.",
+    "start": 43.889,
+    "end": 44.24
+   }
+  ],
+  "text": "doing this later."
+ },
+ {
+  "start": 55.7,
+  "end": 56.745,
+  "words": [
+   {
+    "w": "Due",
+    "start": 55.7,
+    "end": 55.896
+   },
+   {
+    "w": "diligence",
+    "start": 55.896,
+    "end": 56.484
+   },
+   {
+    "w": "ends",
+    "start": 56.484,
+    "end": 56.745
+   }
+  ],
+  "text": "Due diligence ends"
+ },
+ {
+  "start": 56.745,
+  "end": 57.333,
+  "words": [
+   {
+    "w": "at",
+    "start": 56.745,
+    "end": 56.876
+   },
+   {
+    "w": "eight",
+    "start": 56.876,
+    "end": 57.203
+   },
+   {
+    "w": "PM,",
+    "start": 57.203,
+    "end": 57.333
+   }
+  ],
+  "text": "at eight PM,"
+ },
+ {
+  "start": 57.333,
+  "end": 58.118,
+  "words": [
+   {
+    "w": "and",
+    "start": 57.333,
+    "end": 57.529
+   },
+   {
+    "w": "I'm",
+    "start": 57.529,
+    "end": 57.66
+   },
+   {
+    "w": "sitting",
+    "start": 57.66,
+    "end": 58.118
+   }
+  ],
+  "text": "and I'm sitting"
+ },
+ {
+  "start": 58.118,
+  "end": 58.902,
+  "words": [
+   {
+    "w": "there",
+    "start": 58.118,
+    "end": 58.444
+   },
+   {
+    "w": "at",
+    "start": 58.444,
+    "end": 58.575
+   },
+   {
+    "w": "seven",
+    "start": 58.575,
+    "end": 58.902
+   }
+  ],
+  "text": "there at seven"
+ },
+ {
+  "start": 58.902,
+  "end": 60.274,
+  "words": [
+   {
+    "w": "thirty,",
+    "start": 58.902,
+    "end": 59.294
+   },
+   {
+    "w": "finger",
+    "start": 59.294,
+    "end": 59.686
+   },
+   {
+    "w": "literally",
+    "start": 59.686,
+    "end": 60.274
+   }
+  ],
+  "text": "thirty, finger literally"
+ },
+ {
+  "start": 60.274,
+  "end": 61.254,
+  "words": [
+   {
+    "w": "hovering",
+    "start": 60.274,
+    "end": 60.796
+   },
+   {
+    "w": "over",
+    "start": 60.796,
+    "end": 61.058
+   },
+   {
+    "w": "the",
+    "start": 61.058,
+    "end": 61.254
+   }
+  ],
+  "text": "hovering over the"
+ },
+ {
+  "start": 61.254,
+  "end": 61.973,
+  "words": [
+   {
+    "w": "button",
+    "start": 61.254,
+    "end": 61.646
+   },
+   {
+    "w": "on",
+    "start": 61.646,
+    "end": 61.776
+   },
+   {
+    "w": "the",
+    "start": 61.776,
+    "end": 61.973
+   }
+  ],
+  "text": "button on the"
+ },
+ {
+  "start": 61.973,
+  "end": 63.083,
+  "words": [
+   {
+    "w": "termination",
+    "start": 61.973,
+    "end": 62.691
+   },
+   {
+    "w": "notice.",
+    "start": 62.691,
+    "end": 63.083
+   }
+  ],
+  "text": "termination notice."
+ },
+ {
+  "start": 63.083,
+  "end": 63.737,
+  "words": [
+   {
+    "w": "And",
+    "start": 63.083,
+    "end": 63.279
+   },
+   {
+    "w": "right",
+    "start": 63.279,
+    "end": 63.606
+   },
+   {
+    "w": "in",
+    "start": 63.606,
+    "end": 63.737
+   }
+  ],
+  "text": "And right in"
+ },
+ {
+  "start": 63.737,
+  "end": 64.651,
+  "words": [
+   {
+    "w": "the",
+    "start": 63.737,
+    "end": 63.933
+   },
+   {
+    "w": "final",
+    "start": 63.933,
+    "end": 64.259
+   },
+   {
+    "w": "thirty",
+    "start": 64.259,
+    "end": 64.651
+   }
+  ],
+  "text": "the final thirty"
+ },
+ {
+  "start": 64.651,
+  "end": 65.893,
+  "words": [
+   {
+    "w": "minutes,",
+    "start": 64.651,
+    "end": 65.109
+   },
+   {
+    "w": "the",
+    "start": 65.109,
+    "end": 65.305
+   },
+   {
+    "w": "amendment",
+    "start": 65.305,
+    "end": 65.893
+   }
+  ],
+  "text": "minutes, the amendment"
+ },
+ {
+  "start": 65.893,
+  "end": 66.938,
+  "words": [
+   {
+    "w": "comes",
+    "start": 65.893,
+    "end": 66.22
+   },
+   {
+    "w": "through",
+    "start": 66.22,
+    "end": 66.677
+   },
+   {
+    "w": "with",
+    "start": 66.677,
+    "end": 66.938
+   }
+  ],
+  "text": "comes through with"
+ },
+ {
+  "start": 66.938,
+  "end": 68.31,
+  "words": [
+   {
+    "w": "the",
+    "start": 66.938,
+    "end": 67.134
+   },
+   {
+    "w": "appraisal",
+    "start": 67.134,
+    "end": 67.722
+   },
+   {
+    "w": "extension",
+    "start": 67.722,
+    "end": 68.31
+   }
+  ],
+  "text": "the appraisal extension"
+ },
+ {
+  "start": 68.31,
+  "end": 68.833,
+  "words": [
+   {
+    "w": "included.",
+    "start": 68.31,
+    "end": 68.833
+   }
+  ],
+  "text": "included."
+ },
+ {
+  "start": 68.833,
+  "end": 70.14,
+  "words": [
+   {
+    "w": "The",
+    "start": 68.833,
+    "end": 69.029
+   },
+   {
+    "w": "amendment",
+    "start": 69.029,
+    "end": 69.617
+   },
+   {
+    "w": "actually",
+    "start": 69.617,
+    "end": 70.14
+   }
+  ],
+  "text": "The amendment actually"
+ },
+ {
+  "start": 70.14,
+  "end": 70.989,
+  "words": [
+   {
+    "w": "came",
+    "start": 70.14,
+    "end": 70.401
+   },
+   {
+    "w": "through",
+    "start": 70.401,
+    "end": 70.859
+   },
+   {
+    "w": "at",
+    "start": 70.859,
+    "end": 70.989
+   }
+  ],
+  "text": "came through at"
+ },
+ {
+  "start": 70.989,
+  "end": 72.1,
+  "words": [
+   {
+    "w": "seven",
+    "start": 70.989,
+    "end": 71.316
+   },
+   {
+    "w": "fifty-eight",
+    "start": 71.316,
+    "end": 71.969
+   },
+   {
+    "w": "PM.",
+    "start": 71.969,
+    "end": 72.1
+   }
+  ],
+  "text": "seven fifty-eight PM."
+ },
+ {
+  "start": 72.24,
+  "end": 72.733,
+  "words": [
+   {
+    "w": "If",
+    "start": 72.24,
+    "end": 72.35
+   },
+   {
+    "w": "we",
+    "start": 72.35,
+    "end": 72.459
+   },
+   {
+    "w": "hadn't",
+    "start": 72.459,
+    "end": 72.733
+   }
+  ],
+  "text": "If we hadn't"
+ },
+ {
+  "start": 72.733,
+  "end": 73.445,
+  "words": [
+   {
+    "w": "pushed",
+    "start": 72.733,
+    "end": 73.061
+   },
+   {
+    "w": "for",
+    "start": 73.061,
+    "end": 73.226
+   },
+   {
+    "w": "that",
+    "start": 73.226,
+    "end": 73.445
+   }
+  ],
+  "text": "pushed for that"
+ },
+ {
+  "start": 73.445,
+  "end": 74.54,
+  "words": [
+   {
+    "w": "appraisal",
+    "start": 73.445,
+    "end": 73.938
+   },
+   {
+    "w": "contingency...",
+    "start": 73.938,
+    "end": 74.54
+   }
+  ],
+  "text": "appraisal contingency..."
+ },
+ {
+  "start": 74.78,
+  "end": 75.354,
+  "words": [
+   {
+    "w": "If",
+    "start": 74.78,
+    "end": 74.908
+   },
+   {
+    "w": "we",
+    "start": 74.908,
+    "end": 75.035
+   },
+   {
+    "w": "hadn't",
+    "start": 75.035,
+    "end": 75.354
+   }
+  ],
+  "text": "If we hadn't"
+ },
+ {
+  "start": 75.354,
+  "end": 76.183,
+  "words": [
+   {
+    "w": "pushed",
+    "start": 75.354,
+    "end": 75.737
+   },
+   {
+    "w": "for",
+    "start": 75.737,
+    "end": 75.928
+   },
+   {
+    "w": "that",
+    "start": 75.928,
+    "end": 76.183
+   }
+  ],
+  "text": "pushed for that"
+ },
+ {
+  "start": 76.183,
+  "end": 77.586,
+  "words": [
+   {
+    "w": "appraisal",
+    "start": 76.183,
+    "end": 76.757
+   },
+   {
+    "w": "extension,",
+    "start": 76.757,
+    "end": 77.331
+   },
+   {
+    "w": "they",
+    "start": 77.331,
+    "end": 77.586
+   }
+  ],
+  "text": "appraisal extension, they"
+ },
+ {
+  "start": 77.586,
+  "end": 78.415,
+  "words": [
+   {
+    "w": "would",
+    "start": 77.586,
+    "end": 77.905
+   },
+   {
+    "w": "have",
+    "start": 77.905,
+    "end": 78.16
+   },
+   {
+    "w": "held",
+    "start": 78.16,
+    "end": 78.415
+   }
+  ],
+  "text": "would have held"
+ },
+ {
+  "start": 78.415,
+  "end": 78.989,
+  "words": [
+   {
+    "w": "our",
+    "start": 78.415,
+    "end": 78.606
+   },
+   {
+    "w": "feet",
+    "start": 78.606,
+    "end": 78.861
+   },
+   {
+    "w": "to",
+    "start": 78.861,
+    "end": 78.989
+   }
+  ],
+  "text": "our feet to"
+ },
+ {
+  "start": 78.989,
+  "end": 79.627,
+  "words": [
+   {
+    "w": "the",
+    "start": 78.989,
+    "end": 79.18
+   },
+   {
+    "w": "fire,",
+    "start": 79.18,
+    "end": 79.435
+   },
+   {
+    "w": "and",
+    "start": 79.435,
+    "end": 79.627
+   }
+  ],
+  "text": "the fire, and"
+ },
+ {
+  "start": 79.627,
+  "end": 80.583,
+  "words": [
+   {
+    "w": "if",
+    "start": 79.627,
+    "end": 79.754
+   },
+   {
+    "w": "that",
+    "start": 79.754,
+    "end": 80.009
+   },
+   {
+    "w": "appraisal",
+    "start": 80.009,
+    "end": 80.583
+   }
+  ],
+  "text": "if that appraisal"
+ },
+ {
+  "start": 80.583,
+  "end": 81.157,
+  "words": [
+   {
+    "w": "came",
+    "start": 80.583,
+    "end": 80.838
+   },
+   {
+    "w": "in",
+    "start": 80.838,
+    "end": 80.966
+   },
+   {
+    "w": "low,",
+    "start": 80.966,
+    "end": 81.157
+   }
+  ],
+  "text": "came in low,"
+ },
+ {
+  "start": 81.157,
+  "end": 82.114,
+  "words": [
+   {
+    "w": "our",
+    "start": 81.157,
+    "end": 81.348
+   },
+   {
+    "w": "clients",
+    "start": 81.348,
+    "end": 81.795
+   },
+   {
+    "w": "would",
+    "start": 81.795,
+    "end": 82.114
+   }
+  ],
+  "text": "our clients would"
+ },
+ {
+  "start": 82.114,
+  "end": 82.943,
+  "words": [
+   {
+    "w": "have",
+    "start": 82.114,
+    "end": 82.369
+   },
+   {
+    "w": "been",
+    "start": 82.369,
+    "end": 82.624
+   },
+   {
+    "w": "stuck",
+    "start": 82.624,
+    "end": 82.943
+   }
+  ],
+  "text": "have been stuck"
+ },
+ {
+  "start": 82.943,
+  "end": 83.772,
+  "words": [
+   {
+    "w": "holding",
+    "start": 82.943,
+    "end": 83.389
+   },
+   {
+    "w": "the",
+    "start": 83.389,
+    "end": 83.58
+   },
+   {
+    "w": "bag",
+    "start": 83.58,
+    "end": 83.772
+   }
+  ],
+  "text": "holding the bag"
+ },
+ {
+  "start": 83.772,
+  "end": 84.346,
+  "words": [
+   {
+    "w": "with",
+    "start": 83.772,
+    "end": 84.027
+   },
+   {
+    "w": "no",
+    "start": 84.027,
+    "end": 84.154
+   },
+   {
+    "w": "way",
+    "start": 84.154,
+    "end": 84.346
+   }
+  ],
+  "text": "with no way"
+ },
+ {
+  "start": 84.346,
+  "end": 84.728,
+  "words": [
+   {
+    "w": "out",
+    "start": 84.346,
+    "end": 84.537
+   },
+   {
+    "w": "on",
+    "start": 84.537,
+    "end": 84.664
+   },
+   {
+    "w": "a",
+    "start": 84.664,
+    "end": 84.728
+   }
+  ],
+  "text": "out on a"
+ },
+ {
+  "start": 84.728,
+  "end": 85.812,
+  "words": [
+   {
+    "w": "million-dollar",
+    "start": 84.728,
+    "end": 85.557
+   },
+   {
+    "w": "deal.",
+    "start": 85.557,
+    "end": 85.812
+   }
+  ],
+  "text": "million-dollar deal."
+ },
+ {
+  "start": 85.812,
+  "end": 86.386,
+  "words": [
+   {
+    "w": "This",
+    "start": 85.812,
+    "end": 86.067
+   },
+   {
+    "w": "is",
+    "start": 86.067,
+    "end": 86.195
+   },
+   {
+    "w": "why",
+    "start": 86.195,
+    "end": 86.386
+   }
+  ],
+  "text": "This is why"
+ },
+ {
+  "start": 86.386,
+  "end": 87.279,
+  "words": [
+   {
+    "w": "you",
+    "start": 86.386,
+    "end": 86.578
+   },
+   {
+    "w": "need",
+    "start": 86.578,
+    "end": 86.833
+   },
+   {
+    "w": "someone",
+    "start": 86.833,
+    "end": 87.279
+   }
+  ],
+  "text": "you need someone"
+ },
+ {
+  "start": 87.279,
+  "end": 88.427,
+  "words": [
+   {
+    "w": "managing",
+    "start": 87.279,
+    "end": 87.789
+   },
+   {
+    "w": "every",
+    "start": 87.789,
+    "end": 88.108
+   },
+   {
+    "w": "piece",
+    "start": 88.108,
+    "end": 88.427
+   }
+  ],
+  "text": "managing every piece"
+ },
+ {
+  "start": 88.427,
+  "end": 89.128,
+  "words": [
+   {
+    "w": "of",
+    "start": 88.427,
+    "end": 88.554
+   },
+   {
+    "w": "the",
+    "start": 88.554,
+    "end": 88.746
+   },
+   {
+    "w": "puzzle,",
+    "start": 88.746,
+    "end": 89.128
+   }
+  ],
+  "text": "of the puzzle,"
+ },
+ {
+  "start": 89.128,
+  "end": 90.021,
+  "words": [
+   {
+    "w": "not",
+    "start": 89.128,
+    "end": 89.32
+   },
+   {
+    "w": "just",
+    "start": 89.32,
+    "end": 89.575
+   },
+   {
+    "w": "opening",
+    "start": 89.575,
+    "end": 90.021
+   }
+  ],
+  "text": "not just opening"
+ },
+ {
+  "start": 90.021,
+  "end": 90.34,
+  "words": [
+   {
+    "w": "doors.",
+    "start": 90.021,
+    "end": 90.34
+   }
+  ],
+  "text": "doors."
+ },
+ {
+  "start": 90.48,
+  "end": 91.535,
+  "words": [
+   {
+    "w": "If",
+    "start": 90.48,
+    "end": 90.642
+   },
+   {
+    "w": "you're",
+    "start": 90.642,
+    "end": 91.048
+   },
+   {
+    "w": "buying",
+    "start": 91.048,
+    "end": 91.535
+   }
+  ],
+  "text": "If you're buying"
+ },
+ {
+  "start": 91.535,
+  "end": 93.158,
+  "words": [
+   {
+    "w": "investment",
+    "start": 91.535,
+    "end": 92.346
+   },
+   {
+    "w": "real",
+    "start": 92.346,
+    "end": 92.671
+   },
+   {
+    "w": "estate",
+    "start": 92.671,
+    "end": 93.158
+   }
+  ],
+  "text": "investment real estate"
+ },
+ {
+  "start": 93.158,
+  "end": 94.051,
+  "words": [
+   {
+    "w": "in",
+    "start": 93.158,
+    "end": 93.32
+   },
+   {
+    "w": "Atlanta,",
+    "start": 93.32,
+    "end": 93.888
+   },
+   {
+    "w": "in",
+    "start": 93.888,
+    "end": 94.051
+   }
+  ],
+  "text": "in Atlanta, in"
+ },
+ {
+  "start": 94.051,
+  "end": 95.187,
+  "words": [
+   {
+    "w": "Texas,",
+    "start": 94.051,
+    "end": 94.456
+   },
+   {
+    "w": "in",
+    "start": 94.456,
+    "end": 94.619
+   },
+   {
+    "w": "Florida,",
+    "start": 94.619,
+    "end": 95.187
+   }
+  ],
+  "text": "Texas, in Florida,"
+ },
+ {
+  "start": 95.187,
+  "end": 95.998,
+  "words": [
+   {
+    "w": "and",
+    "start": 95.187,
+    "end": 95.43
+   },
+   {
+    "w": "you",
+    "start": 95.43,
+    "end": 95.674
+   },
+   {
+    "w": "want",
+    "start": 95.674,
+    "end": 95.998
+   }
+  ],
+  "text": "and you want"
+ },
+ {
+  "start": 95.998,
+  "end": 97.053,
+  "words": [
+   {
+    "w": "someone",
+    "start": 95.998,
+    "end": 96.566
+   },
+   {
+    "w": "in",
+    "start": 96.566,
+    "end": 96.729
+   },
+   {
+    "w": "your",
+    "start": 96.729,
+    "end": 97.053
+   }
+  ],
+  "text": "someone in your"
+ },
+ {
+  "start": 97.053,
+  "end": 98.514,
+  "words": [
+   {
+    "w": "corner",
+    "start": 97.053,
+    "end": 97.54
+   },
+   {
+    "w": "who's",
+    "start": 97.54,
+    "end": 97.865
+   },
+   {
+    "w": "thinking",
+    "start": 97.865,
+    "end": 98.514
+   }
+  ],
+  "text": "corner who's thinking"
+ },
+ {
+  "start": 98.514,
+  "end": 99.65,
+  "words": [
+   {
+    "w": "five",
+    "start": 98.514,
+    "end": 98.838
+   },
+   {
+    "w": "steps",
+    "start": 98.838,
+    "end": 99.244
+   },
+   {
+    "w": "ahead,",
+    "start": 99.244,
+    "end": 99.65
+   }
+  ],
+  "text": "five steps ahead,"
+ },
+ {
+  "start": 99.65,
+  "end": 100.218,
+  "words": [
+   {
+    "w": "DM",
+    "start": 99.65,
+    "end": 99.812
+   },
+   {
+    "w": "me",
+    "start": 99.812,
+    "end": 99.974
+   },
+   {
+    "w": "the",
+    "start": 99.974,
+    "end": 100.218
+   }
+  ],
+  "text": "DM me the"
+ },
+ {
+  "start": 100.218,
+  "end": 101.192,
+  "words": [
+   {
+    "w": "word",
+    "start": 100.218,
+    "end": 100.543
+   },
+   {
+    "w": "puzzle",
+    "start": 100.543,
+    "end": 101.029
+   },
+   {
+    "w": "or",
+    "start": 101.029,
+    "end": 101.192
+   }
+  ],
+  "text": "word puzzle or"
+ },
+ {
+  "start": 101.192,
+  "end": 101.841,
+  "words": [
+   {
+    "w": "tap",
+    "start": 101.192,
+    "end": 101.435
+   },
+   {
+    "w": "on",
+    "start": 101.435,
+    "end": 101.597
+   },
+   {
+    "w": "the",
+    "start": 101.597,
+    "end": 101.841
+   }
+  ],
+  "text": "tap on the"
+ },
+ {
+  "start": 101.841,
+  "end": 102.49,
+  "words": [
+   {
+    "w": "link",
+    "start": 101.841,
+    "end": 102.166
+   },
+   {
+    "w": "in",
+    "start": 102.166,
+    "end": 102.328
+   },
+   {
+    "w": "my",
+    "start": 102.328,
+    "end": 102.49
+   }
+  ],
+  "text": "link in my"
+ },
+ {
+  "start": 102.49,
+  "end": 102.734,
+  "words": [
+   {
+    "w": "bio.",
+    "start": 102.49,
+    "end": 102.734
+   }
+  ],
+  "text": "bio."
+ },
+ {
+  "start": 102.734,
+  "end": 103.951,
+  "words": [
+   {
+    "w": "Let's",
+    "start": 102.734,
+    "end": 103.058
+   },
+   {
+    "w": "protect",
+    "start": 103.058,
+    "end": 103.626
+   },
+   {
+    "w": "your",
+    "start": 103.626,
+    "end": 103.951
+   }
+  ],
+  "text": "Let's protect your"
+ },
+ {
+  "start": 103.951,
+  "end": 104.6,
+  "words": [
+   {
+    "w": "next",
+    "start": 103.951,
+    "end": 104.275
+   },
+   {
+    "w": "deal.",
+    "start": 104.275,
+    "end": 104.6
+   }
+  ],
+  "text": "next deal."
+ }
+]

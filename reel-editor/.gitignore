@@ -13,3 +13,8 @@ media/*.MOV
 media/*.MP4
 media/*.wav
 media/*.m4a
+
+# staged A-roll (large)
+public/*.mp4
+public/*.mov
+stills/
