@@ -2,7 +2,9 @@ import "./index.css";
 import { Composition } from "remotion";
 import { MyComposition } from "./Composition";
 import { AppraisalReel } from "./AppraisalReel";
+import { EkaboReel } from "./EkaboReel";
 import { FPS, TOTAL_SECONDS } from "./reel-data";
+import { FPS as EKABO_FPS, TOTAL_SECONDS as EKABO_SECONDS } from "./ekabo-data";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -12,6 +14,14 @@ export const RemotionRoot: React.FC = () => {
         component={AppraisalReel}
         durationInFrames={Math.round(TOTAL_SECONDS * FPS)}
         fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="EkaboReel"
+        component={EkaboReel}
+        durationInFrames={Math.round(EKABO_SECONDS * EKABO_FPS)}
+        fps={EKABO_FPS}
         width={1080}
         height={1920}
       />

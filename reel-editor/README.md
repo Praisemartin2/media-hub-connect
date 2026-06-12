@@ -39,3 +39,27 @@ npx remotion render AppraisalReel out/AppraisalReel.mp4  # final render (with au
   `OffthreadVideo` punch-ins at the relevant caption times.
 - **Music bed** — no royalty-free track was available offline. Add one to
   `public/` and mount an `<Audio>` with volume ducking under the VO.
+
+## EkaboReel — "Why real estate beats saving" (30s, b-roll driven)
+
+A second composition (`id="EkaboReel"`) built entirely from AI-generated assets
+(Higgsfield): 5 cinematic b-roll clips under an Inworld TTS voiceover + Sonilo
+music bed, with the same cult-brand look (karaoke captions, title cards, CTA to
+`@ekabohome`). Files: `src/EkaboReel.tsx`, `src/ekabo-data.ts`,
+`src/ekabo-captions.json` (built by `scripts/build_ekabo_captions.py`).
+
+It renders today in **fallback mode** (animated branded background, no media) so
+the layout/timing are verifiable — see `renders/EkaboReel_preview.mp4`.
+
+**To finish (needs the generated media in `public/`):** this requires outbound
+access to Higgsfield's CDN, which the GitHub-only web network policy blocks (see
+https://code.claude.com/docs/en/claude-code-on-the-web). On an environment whose
+policy allows it (or locally):
+
+1. Drop the 5 clips in `public/broll/`: `re_skyline.mp4`, `re_cash.mp4`,
+   `re_house.mp4`, `re_keys.mp4`, `re_interior.mp4`.
+2. Drop the audio in `public/`: `ekabo-vo.mp3` (full VO), `ekabo-music.mp3` (~30s).
+3. Set `ASSETS_READY = true` in `src/ekabo-data.ts`.
+4. `npx remotion render EkaboReel renders/EkaboReel.mp4`
+5. Refine `ekabo-captions.json` against the real VO timing if needed
+   (`scripts/build_ekabo_captions.py` distributes words across each line window).

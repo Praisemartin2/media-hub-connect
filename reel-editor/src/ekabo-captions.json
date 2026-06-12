@@ -1,0 +1,424 @@
+[
+ {
+  "start": 0.4,
+  "end": 2.2,
+  "text": "Here's the truth nobody tells you.",
+  "words": [
+   {
+    "w": "Here's",
+    "start": 0.4,
+    "end": 0.786
+   },
+   {
+    "w": "the",
+    "start": 0.786,
+    "end": 0.979
+   },
+   {
+    "w": "truth",
+    "start": 0.979,
+    "end": 1.3
+   },
+   {
+    "w": "nobody",
+    "start": 1.3,
+    "end": 1.686
+   },
+   {
+    "w": "tells",
+    "start": 1.686,
+    "end": 2.007
+   },
+   {
+    "w": "you.",
+    "start": 2.007,
+    "end": 2.2
+   }
+  ]
+ },
+ {
+  "start": 2.3,
+  "end": 4.6,
+  "text": "Saving money is just going broke slowly.",
+  "words": [
+   {
+    "w": "Saving",
+    "start": 2.3,
+    "end": 2.718
+   },
+   {
+    "w": "money",
+    "start": 2.718,
+    "end": 3.067
+   },
+   {
+    "w": "is",
+    "start": 3.067,
+    "end": 3.206
+   },
+   {
+    "w": "just",
+    "start": 3.206,
+    "end": 3.485
+   },
+   {
+    "w": "going",
+    "start": 3.485,
+    "end": 3.833
+   },
+   {
+    "w": "broke",
+    "start": 3.833,
+    "end": 4.182
+   },
+   {
+    "w": "slowly.",
+    "start": 4.182,
+    "end": 4.6
+   }
+  ]
+ },
+ {
+  "start": 4.8,
+  "end": 7.5,
+  "text": "Every year, inflation quietly eats your cash.",
+  "words": [
+   {
+    "w": "Every",
+    "start": 4.8,
+    "end": 5.165
+   },
+   {
+    "w": "year,",
+    "start": 5.165,
+    "end": 5.457
+   },
+   {
+    "w": "inflation",
+    "start": 5.457,
+    "end": 6.114
+   },
+   {
+    "w": "quietly",
+    "start": 6.114,
+    "end": 6.624
+   },
+   {
+    "w": "eats",
+    "start": 6.624,
+    "end": 6.916
+   },
+   {
+    "w": "your",
+    "start": 6.916,
+    "end": 7.208
+   },
+   {
+    "w": "cash.",
+    "start": 7.208,
+    "end": 7.5
+   }
+  ]
+ },
+ {
+  "start": 8.6,
+  "end": 10.7,
+  "text": "Real estate pays you three ways at once.",
+  "words": [
+   {
+    "w": "Real",
+    "start": 8.6,
+    "end": 8.862
+   },
+   {
+    "w": "estate",
+    "start": 8.862,
+    "end": 9.256
+   },
+   {
+    "w": "pays",
+    "start": 9.256,
+    "end": 9.519
+   },
+   {
+    "w": "you",
+    "start": 9.519,
+    "end": 9.716
+   },
+   {
+    "w": "three",
+    "start": 9.716,
+    "end": 10.044
+   },
+   {
+    "w": "ways",
+    "start": 10.044,
+    "end": 10.306
+   },
+   {
+    "w": "at",
+    "start": 10.306,
+    "end": 10.437
+   },
+   {
+    "w": "once.",
+    "start": 10.437,
+    "end": 10.7
+   }
+  ]
+ },
+ {
+  "start": 10.9,
+  "end": 12.8,
+  "text": "Your tenants cover the mortgage.",
+  "words": [
+   {
+    "w": "Your",
+    "start": 10.9,
+    "end": 11.181
+   },
+   {
+    "w": "tenants",
+    "start": 11.181,
+    "end": 11.674
+   },
+   {
+    "w": "cover",
+    "start": 11.674,
+    "end": 12.026
+   },
+   {
+    "w": "the",
+    "start": 12.026,
+    "end": 12.237
+   },
+   {
+    "w": "mortgage.",
+    "start": 12.237,
+    "end": 12.8
+   }
+  ]
+ },
+ {
+  "start": 13.0,
+  "end": 15.0,
+  "text": "The property climbs in value.",
+  "words": [
+   {
+    "w": "The",
+    "start": 13.0,
+    "end": 13.25
+   },
+   {
+    "w": "property",
+    "start": 13.25,
+    "end": 13.917
+   },
+   {
+    "w": "climbs",
+    "start": 13.917,
+    "end": 14.417
+   },
+   {
+    "w": "in",
+    "start": 14.417,
+    "end": 14.583
+   },
+   {
+    "w": "value.",
+    "start": 14.583,
+    "end": 15.0
+   }
+  ]
+ },
+ {
+  "start": 15.2,
+  "end": 17.8,
+  "text": "And your equity grows while you sleep.",
+  "words": [
+   {
+    "w": "And",
+    "start": 15.2,
+    "end": 15.452
+   },
+   {
+    "w": "your",
+    "start": 15.452,
+    "end": 15.787
+   },
+   {
+    "w": "equity",
+    "start": 15.787,
+    "end": 16.29
+   },
+   {
+    "w": "grows",
+    "start": 16.29,
+    "end": 16.71
+   },
+   {
+    "w": "while",
+    "start": 16.71,
+    "end": 17.129
+   },
+   {
+    "w": "you",
+    "start": 17.129,
+    "end": 17.381
+   },
+   {
+    "w": "sleep.",
+    "start": 17.381,
+    "end": 17.8
+   }
+  ]
+ },
+ {
+  "start": 18.0,
+  "end": 20.8,
+  "text": "Cash sits still. Real estate goes to work.",
+  "words": [
+   {
+    "w": "Cash",
+    "start": 18.0,
+    "end": 18.339
+   },
+   {
+    "w": "sits",
+    "start": 18.339,
+    "end": 18.679
+   },
+   {
+    "w": "still.",
+    "start": 18.679,
+    "end": 19.103
+   },
+   {
+    "w": "Real",
+    "start": 19.103,
+    "end": 19.442
+   },
+   {
+    "w": "estate",
+    "start": 19.442,
+    "end": 19.952
+   },
+   {
+    "w": "goes",
+    "start": 19.952,
+    "end": 20.291
+   },
+   {
+    "w": "to",
+    "start": 20.291,
+    "end": 20.461
+   },
+   {
+    "w": "work.",
+    "start": 20.461,
+    "end": 20.8
+   }
+  ]
+ },
+ {
+  "start": 21.0,
+  "end": 23.2,
+  "text": "So stop saving for a rainy day.",
+  "words": [
+   {
+    "w": "So",
+    "start": 21.0,
+    "end": 21.183
+   },
+   {
+    "w": "stop",
+    "start": 21.183,
+    "end": 21.55
+   },
+   {
+    "w": "saving",
+    "start": 21.55,
+    "end": 22.1
+   },
+   {
+    "w": "for",
+    "start": 22.1,
+    "end": 22.375
+   },
+   {
+    "w": "a",
+    "start": 22.375,
+    "end": 22.467
+   },
+   {
+    "w": "rainy",
+    "start": 22.467,
+    "end": 22.925
+   },
+   {
+    "w": "day.",
+    "start": 22.925,
+    "end": 23.2
+   }
+  ]
+ },
+ {
+  "start": 24.5,
+  "end": 25.5,
+  "text": "Start owning the umbrella.",
+  "words": [
+   {
+    "w": "Start",
+    "start": 24.5,
+    "end": 24.727
+   },
+   {
+    "w": "owning",
+    "start": 24.727,
+    "end": 25.0
+   },
+   {
+    "w": "the",
+    "start": 25.0,
+    "end": 25.136
+   },
+   {
+    "w": "umbrella.",
+    "start": 25.136,
+    "end": 25.5
+   }
+  ]
+ },
+ {
+  "start": 25.9,
+  "end": 28.6,
+  "text": "Follow Ekabo Home for more.",
+  "words": [
+   {
+    "w": "Follow",
+    "start": 25.9,
+    "end": 26.636
+   },
+   {
+    "w": "Ekabo",
+    "start": 26.636,
+    "end": 27.25
+   },
+   {
+    "w": "Home",
+    "start": 27.25,
+    "end": 27.741
+   },
+   {
+    "w": "for",
+    "start": 27.741,
+    "end": 28.109
+   },
+   {
+    "w": "more.",
+    "start": 28.109,
+    "end": 28.6
+   }
+  ]
+ }
+]
