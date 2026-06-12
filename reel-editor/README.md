@@ -51,14 +51,24 @@ music bed, with the same cult-brand look (karaoke captions, title cards, CTA to
 It renders today in **fallback mode** (animated branded background, no media) so
 the layout/timing are verifiable — see `renders/EkaboReel_preview.mp4`.
 
-**To finish (needs the generated media in `public/`):** this requires outbound
+**To finish (needs the generated media in `public/`):** the 5 b-roll clips are
+already generated and stored in Higgsfield; finishing just requires outbound
 access to Higgsfield's CDN, which the GitHub-only web network policy blocks (see
-https://code.claude.com/docs/en/claude-code-on-the-web). On an environment whose
-policy allows it (or locally):
+https://code.claude.com/docs/en/claude-code-on-the-web). Add this host to the
+environment's network egress allowlist (changes take effect on a fresh
+environment/session):
 
-1. Drop the 5 clips in `public/broll/`: `re_skyline.mp4`, `re_cash.mp4`,
-   `re_house.mp4`, `re_keys.mp4`, `re_interior.mp4`.
-2. Drop the audio in `public/`: `ekabo-vo.mp3` (full VO), `ekabo-music.mp3` (~30s).
+    d8j0ntlcm91z4.cloudfront.net
+
+Then, from `reel-editor/`:
+
+1. `bash scripts/fetch_ekabo_assets.sh` — pulls the 5 clips into `public/broll/`
+   (`re_skyline/re_cash/re_house/re_keys/re_interior.mp4`). It hard-fails if the
+   host is still blocked (rejects the 403 text body).
+2. Generate the audio via the Higgsfield MCP and drop into `public/`:
+   `ekabo-vo.mp3` (Inworld TTS, full script in `ekabo-data.ts` `SCRIPT`) and
+   `ekabo-music.mp3` (Sonilo music, ~30s). These weren't generated yet — do this
+   in the egress-enabled session so the VO can be measured against the timeline.
 3. Set `ASSETS_READY = true` in `src/ekabo-data.ts`.
 4. `npx remotion render EkaboReel renders/EkaboReel.mp4`
 5. Refine `ekabo-captions.json` against the real VO timing if needed
