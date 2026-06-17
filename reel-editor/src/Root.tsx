@@ -4,9 +4,11 @@ import { MyComposition } from "./Composition";
 import { AppraisalReel } from "./AppraisalReel";
 import { EkaboReel } from "./EkaboReel";
 import { HomeRedFlagsCarousel } from "./HomeRedFlagsCarousel";
+import { NewsCarousel } from "./NewsCarousel";
 import { FPS, TOTAL_SECONDS } from "./reel-data";
 import { FPS as EKABO_FPS, TOTAL_SECONDS as EKABO_SECONDS } from "./ekabo-data";
 import { SLIDES, CAROUSEL_W, CAROUSEL_H } from "./carousel-data";
+import { POST_A, POST_B, NEWS_W, NEWS_H } from "./news-carousel-data";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -34,6 +36,24 @@ export const RemotionRoot: React.FC = () => {
         fps={1}
         width={CAROUSEL_W}
         height={CAROUSEL_H}
+      />
+      <Composition
+        id="NewsPostA"
+        component={NewsCarousel}
+        durationInFrames={POST_A.length}
+        fps={1}
+        width={NEWS_W}
+        height={NEWS_H}
+        defaultProps={{ post: "A" }}
+      />
+      <Composition
+        id="NewsPostB"
+        component={NewsCarousel}
+        durationInFrames={POST_B.length}
+        fps={1}
+        width={NEWS_W}
+        height={NEWS_H}
+        defaultProps={{ post: "B" }}
       />
       <Composition
         id="MyComp"
