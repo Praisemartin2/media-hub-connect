@@ -1,6 +1,7 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 import { POSTS, NewsSlide, Bullet, COLORS } from "./news-carousel-data";
+import { NewsPhotoCover } from "./NewsPhotoCover";
 
 const FONT = '"Helvetica Neue", Helvetica, "Arial Black", Arial, sans-serif';
 const PAD = 92;
@@ -248,48 +249,78 @@ const Stats: React.FC<{ s: Extract<NewsSlide, { type: "stats" }>; n: number; tot
   </AbsoluteFill>
 );
 
-const Cta: React.FC<{ s: Extract<NewsSlide, { type: "cta" }>; total: number }> = ({ s, total }) => (
-  <AbsoluteFill style={{ background: s.bg, padding: PAD, justifyContent: "center" }}>
+const PhotoCta: React.FC<{ s: Extract<NewsSlide, { type: "cta" }>; post: string; total: number }> = ({ s, post, total }) => (
+  <AbsoluteFill style={{ background: COLORS.ink }}>
+    <Img src={staticFile(`news-photos/post${post}-accent.jpg`)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+    <AbsoluteFill style={{ background: alpha(COLORS.cobalt, 0.22) }} />
+    <AbsoluteFill
+      style={{
+        background: `linear-gradient(to top, ${alpha(COLORS.ink, 0.95)} 0%, ${alpha(COLORS.ink, 0.7)} 40%, ${alpha(
+          COLORS.ink,
+          0.18
+        )} 72%)`,
+      }}
+    />
     <div style={{ position: "absolute", top: PAD, left: PAD }}>
-      <Pill bg={s.fg} fg={s.bg}>
+      <Pill bg={COLORS.rust} fg={COLORS.cream}>
         {s.kicker}
       </Pill>
     </div>
-    <PagePill fg={s.fg} n={total} total={total} />
     <div
       style={{
+        position: "absolute",
+        top: PAD,
+        right: PAD,
         fontFamily: FONT,
-        fontWeight: 900,
-        fontStyle: "italic",
-        fontSize: 118,
-        lineHeight: 0.96,
-        letterSpacing: -3,
-        color: s.fg,
+        fontWeight: 800,
+        fontSize: 28,
+        color: COLORS.cream,
+        border: `2px solid ${alpha(COLORS.cream, 0.6)}`,
+        borderRadius: 100,
+        padding: "8px 20px",
+        background: alpha(COLORS.ink, 0.25),
       }}
     >
-      {s.title.map((l, i) => (
-        <div key={i}>{l}</div>
-      ))}
+      {total} / {total}
     </div>
-    <div
-      style={{
-        marginTop: 34,
-        fontFamily: FONT,
-        fontWeight: 700,
-        fontSize: 42,
-        lineHeight: 1.22,
-        color: s.fg,
-        maxWidth: 820,
-        marginBottom: 52,
-      }}
-    >
-      {s.body}
-    </div>
-    <Pill bg={COLORS.cobalt} fg={COLORS.cream} size={38}>
-      {s.pill}
-    </Pill>
-    <div style={{ marginTop: 22, fontFamily: FONT, fontWeight: 700, fontSize: 30, color: s.fg, opacity: 0.92 }}>
-      {s.pillSub}
+    <div style={{ position: "absolute", left: PAD, right: PAD, bottom: 110 }}>
+      <div style={{ height: 8, width: 120, background: COLORS.rust, marginBottom: 24 }} />
+      <div
+        style={{
+          fontFamily: FONT,
+          fontWeight: 900,
+          fontStyle: "italic",
+          fontSize: 100,
+          lineHeight: 0.96,
+          letterSpacing: -3,
+          color: COLORS.white,
+          textShadow: "0 6px 30px rgba(0,0,0,0.5)",
+        }}
+      >
+        {s.title.map((l, i) => (
+          <div key={i}>{l}</div>
+        ))}
+      </div>
+      <div
+        style={{
+          marginTop: 28,
+          fontFamily: FONT,
+          fontWeight: 700,
+          fontSize: 40,
+          lineHeight: 1.22,
+          color: COLORS.cream,
+          maxWidth: 840,
+          marginBottom: 40,
+        }}
+      >
+        {s.body}
+      </div>
+      <Pill bg={COLORS.cobalt} fg={COLORS.cream} size={38}>
+        {s.pill}
+      </Pill>
+      <div style={{ marginTop: 20, fontFamily: FONT, fontWeight: 700, fontSize: 30, color: COLORS.cream, opacity: 0.92 }}>
+        {s.pillSub}
+      </div>
     </div>
   </AbsoluteFill>
 );
@@ -300,8 +331,8 @@ export const NewsCarousel: React.FC<{ post: string }> = ({ post }) => {
   const s = slides[Math.min(frame, slides.length - 1)];
   const total = slides.length;
   const n = frame + 1;
-  if (s.type === "cover") return <Cover s={s} total={total} />;
+  if (s.type === "cover") return <NewsPhotoCover post={post} variant="a" />;
   if (s.type === "points") return <Points s={s} n={n} total={total} />;
   if (s.type === "stats") return <Stats s={s} n={n} total={total} />;
-  return <Cta s={s} total={total} />;
+  return <PhotoCta s={s} post={post} total={total} />;
 };
