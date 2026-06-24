@@ -6,6 +6,7 @@ import { EkaboReel } from "./EkaboReel";
 import { HomeRedFlagsCarousel } from "./HomeRedFlagsCarousel";
 import { NewsCarousel } from "./NewsCarousel";
 import { NewsPhotoCover } from "./NewsPhotoCover";
+import { RealEstateJourney } from "./RealEstateJourney";
 import { FPS, TOTAL_SECONDS } from "./reel-data";
 import { FPS as EKABO_FPS, TOTAL_SECONDS as EKABO_SECONDS } from "./ekabo-data";
 import { SLIDES, CAROUSEL_W, CAROUSEL_H } from "./carousel-data";
@@ -64,6 +65,14 @@ export const RemotionRoot: React.FC = () => {
         width={NEWS_W}
         height={NEWS_H}
         defaultProps={{ post: "A", variant: "a" }}
+      />
+      <Composition
+        id="RealEstateJourney"
+        component={RealEstateJourney}
+        durationInFrames={1}
+        fps={1}
+        width={1080}
+        height={1350}
       />
       <Composition
         id="MyComp"
