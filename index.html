@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/images/cofy-logo.png" />
-    <link rel="apple-touch-icon" href="/images/cofy-logo.png" />
+    <link rel="icon" type="image/png" href="%BASE_URL%images/cofy-logo.png" />
+    <link rel="apple-touch-icon" href="%BASE_URL%images/cofy-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#13205a" />
     <title>Creating Opportunities for Youth Inc. (COFY)</title>
@@ -19,7 +19,7 @@
       content="Transformational education and support empowering youth with developmental delays and their families to thrive."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/images/cofy-logo.png" />
+    <meta property="og:image" content="%BASE_URL%images/cofy-logo.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Creating Opportunities for Youth Inc. (COFY)" />
@@ -27,7 +27,18 @@
       name="twitter:description"
       content="Transformational education and support empowering youth with developmental delays and their families to thrive."
     />
-    <meta name="twitter:image" content="/images/cofy-logo.png" />
+    <meta name="twitter:image" content="%BASE_URL%images/cofy-logo.png" />
+
+    <!-- GitHub Pages SPA: restore the deep-link path saved by 404.html -->
+    <script>
+      (function () {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </head>
 
   <body>
