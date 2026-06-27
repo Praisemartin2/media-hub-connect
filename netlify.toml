@@ -1,0 +1,17 @@
+# Netlify deployment config for the COFY website (Vite + React SPA).
+# Connect this repo at https://app.netlify.com and it deploys with no extra setup.
+# Served from the domain root, so the default Vite base ("/") is correct
+# (GITHUB_PAGES is intentionally not set here).
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# SPA fallback: let the React router handle all client-side routes.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
