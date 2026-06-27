@@ -7,6 +7,8 @@ import { HomeRedFlagsCarousel } from "./HomeRedFlagsCarousel";
 import { NewsCarousel } from "./NewsCarousel";
 import { NewsPhotoCover } from "./NewsPhotoCover";
 import { RealEstateJourney } from "./RealEstateJourney";
+import { SubjectToReel } from "./SubjectToReel";
+import { FPS as ST_FPS, DURATION_SECONDS as ST_SECONDS } from "./subjectto-data";
 import { FPS, TOTAL_SECONDS } from "./reel-data";
 import { FPS as EKABO_FPS, TOTAL_SECONDS as EKABO_SECONDS } from "./ekabo-data";
 import { SLIDES, CAROUSEL_W, CAROUSEL_H } from "./carousel-data";
@@ -65,6 +67,14 @@ export const RemotionRoot: React.FC = () => {
         width={NEWS_W}
         height={NEWS_H}
         defaultProps={{ post: "A", variant: "a" }}
+      />
+      <Composition
+        id="SubjectToReel"
+        component={SubjectToReel}
+        durationInFrames={Math.round(ST_SECONDS * ST_FPS)}
+        fps={ST_FPS}
+        width={1080}
+        height={1920}
       />
       <Composition
         id="RealEstateJourney"
