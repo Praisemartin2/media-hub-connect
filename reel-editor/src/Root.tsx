@@ -9,6 +9,8 @@ import { NewsPhotoCover } from "./NewsPhotoCover";
 import { RealEstateJourney } from "./RealEstateJourney";
 import { SubjectToReel } from "./SubjectToReel";
 import { FPS as ST_FPS, DURATION_SECONDS as ST_SECONDS } from "./subjectto-data";
+import { IMG2071Reel } from "./IMG2071Reel";
+import { FPS as IM_FPS, DURATION_SECONDS as IM_SECONDS } from "./img2071-data";
 import { FPS, TOTAL_SECONDS } from "./reel-data";
 import { FPS as EKABO_FPS, TOTAL_SECONDS as EKABO_SECONDS } from "./ekabo-data";
 import { SLIDES, CAROUSEL_W, CAROUSEL_H } from "./carousel-data";
@@ -73,6 +75,14 @@ export const RemotionRoot: React.FC = () => {
         component={SubjectToReel}
         durationInFrames={Math.round(ST_SECONDS * ST_FPS)}
         fps={ST_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="IMG2071Reel"
+        component={IMG2071Reel}
+        durationInFrames={Math.round(IM_SECONDS * IM_FPS)}
+        fps={IM_FPS}
         width={1080}
         height={1920}
       />

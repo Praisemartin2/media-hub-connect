@@ -1,0 +1,2292 @@
+[
+ {
+  "start": 0.52,
+  "end": 1.79,
+  "text": "So a big pet",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.52,
+    "end": 0.837
+   },
+   {
+    "w": "a",
+    "start": 0.837,
+    "end": 1.155
+   },
+   {
+    "w": "big",
+    "start": 1.155,
+    "end": 1.472
+   },
+   {
+    "w": "pet",
+    "start": 1.472,
+    "end": 1.79
+   }
+  ]
+ },
+ {
+  "start": 1.79,
+  "end": 3.059,
+  "text": "peeve of mine is",
+  "words": [
+   {
+    "w": "peeve",
+    "start": 1.79,
+    "end": 2.107
+   },
+   {
+    "w": "of",
+    "start": 2.107,
+    "end": 2.424
+   },
+   {
+    "w": "mine",
+    "start": 2.424,
+    "end": 2.742
+   },
+   {
+    "w": "is",
+    "start": 2.742,
+    "end": 3.059
+   }
+  ]
+ },
+ {
+  "start": 3.059,
+  "end": 4.19,
+  "text": "when we're working with",
+  "words": [
+   {
+    "w": "when",
+    "start": 3.059,
+    "end": 3.342
+   },
+   {
+    "w": "we're",
+    "start": 3.342,
+    "end": 3.624
+   },
+   {
+    "w": "working",
+    "start": 3.624,
+    "end": 3.907
+   },
+   {
+    "w": "with",
+    "start": 3.907,
+    "end": 4.19
+   }
+  ]
+ },
+ {
+  "start": 4.19,
+  "end": 5.32,
+  "text": "a realtor on the",
+  "words": [
+   {
+    "w": "a",
+    "start": 4.19,
+    "end": 4.472
+   },
+   {
+    "w": "realtor",
+    "start": 4.472,
+    "end": 4.755
+   },
+   {
+    "w": "on",
+    "start": 4.755,
+    "end": 5.037
+   },
+   {
+    "w": "the",
+    "start": 5.037,
+    "end": 5.32
+   }
+  ]
+ },
+ {
+  "start": 5.32,
+  "end": 6.94,
+  "text": "other side and they",
+  "words": [
+   {
+    "w": "other",
+    "start": 5.32,
+    "end": 5.725
+   },
+   {
+    "w": "side",
+    "start": 5.725,
+    "end": 6.13
+   },
+   {
+    "w": "and",
+    "start": 6.13,
+    "end": 6.535
+   },
+   {
+    "w": "they",
+    "start": 6.535,
+    "end": 6.94
+   }
+  ]
+ },
+ {
+  "start": 6.94,
+  "end": 8.56,
+  "text": "themselves multiple times say",
+  "words": [
+   {
+    "w": "themselves",
+    "start": 6.94,
+    "end": 7.345
+   },
+   {
+    "w": "multiple",
+    "start": 7.345,
+    "end": 7.75
+   },
+   {
+    "w": "times",
+    "start": 7.75,
+    "end": 8.155
+   },
+   {
+    "w": "say",
+    "start": 8.155,
+    "end": 8.56
+   }
+  ]
+ },
+ {
+  "start": 8.56,
+  "end": 9.49,
+  "text": "I've never done a",
+  "words": [
+   {
+    "w": "I've",
+    "start": 8.56,
+    "end": 8.793
+   },
+   {
+    "w": "never",
+    "start": 8.793,
+    "end": 9.025
+   },
+   {
+    "w": "done",
+    "start": 9.025,
+    "end": 9.258
+   },
+   {
+    "w": "a",
+    "start": 9.258,
+    "end": 9.49
+   }
+  ]
+ },
+ {
+  "start": 9.49,
+  "end": 10.42,
+  "text": "creative deal like this",
+  "words": [
+   {
+    "w": "creative",
+    "start": 9.49,
+    "end": 9.723
+   },
+   {
+    "w": "deal",
+    "start": 9.723,
+    "end": 9.955
+   },
+   {
+    "w": "like",
+    "start": 9.955,
+    "end": 10.188
+   },
+   {
+    "w": "this",
+    "start": 10.188,
+    "end": 10.42
+   }
+  ]
+ },
+ {
+  "start": 10.42,
+  "end": 11.34,
+  "text": "before to get a",
+  "words": [
+   {
+    "w": "before",
+    "start": 10.42,
+    "end": 10.65
+   },
+   {
+    "w": "to",
+    "start": 10.65,
+    "end": 10.88
+   },
+   {
+    "w": "get",
+    "start": 10.88,
+    "end": 11.11
+   },
+   {
+    "w": "a",
+    "start": 11.11,
+    "end": 11.34
+   }
+  ]
+ },
+ {
+  "start": 11.34,
+  "end": 12.485,
+  "text": "house sold. We're helping",
+  "words": [
+   {
+    "w": "house",
+    "start": 11.34,
+    "end": 11.57
+   },
+   {
+    "w": "sold.",
+    "start": 11.57,
+    "end": 11.8
+   },
+   {
+    "w": "We're",
+    "start": 11.96,
+    "end": 12.223
+   },
+   {
+    "w": "helping",
+    "start": 12.223,
+    "end": 12.485
+   }
+  ]
+ },
+ {
+  "start": 12.485,
+  "end": 13.535,
+  "text": "the buyers and yet",
+  "words": [
+   {
+    "w": "the",
+    "start": 12.485,
+    "end": 12.748
+   },
+   {
+    "w": "buyers",
+    "start": 12.748,
+    "end": 13.01
+   },
+   {
+    "w": "and",
+    "start": 13.01,
+    "end": 13.273
+   },
+   {
+    "w": "yet",
+    "start": 13.273,
+    "end": 13.535
+   }
+  ]
+ },
+ {
+  "start": 13.535,
+  "end": 14.545,
+  "text": "they try to lead",
+  "words": [
+   {
+    "w": "they",
+    "start": 13.535,
+    "end": 13.797
+   },
+   {
+    "w": "try",
+    "start": 13.798,
+    "end": 14.06
+   },
+   {
+    "w": "to",
+    "start": 14.06,
+    "end": 14.303
+   },
+   {
+    "w": "lead",
+    "start": 14.303,
+    "end": 14.545
+   }
+  ]
+ },
+ {
+  "start": 14.545,
+  "end": 15.515,
+  "text": "the way with all",
+  "words": [
+   {
+    "w": "the",
+    "start": 14.545,
+    "end": 14.787
+   },
+   {
+    "w": "way",
+    "start": 14.787,
+    "end": 15.03
+   },
+   {
+    "w": "with",
+    "start": 15.03,
+    "end": 15.273
+   },
+   {
+    "w": "all",
+    "start": 15.273,
+    "end": 15.515
+   }
+  ]
+ },
+ {
+  "start": 15.515,
+  "end": 17.68,
+  "text": "these random amendments and",
+  "words": [
+   {
+    "w": "these",
+    "start": 15.515,
+    "end": 15.758
+   },
+   {
+    "w": "random",
+    "start": 15.758,
+    "end": 16.0
+   },
+   {
+    "w": "amendments",
+    "start": 16.74,
+    "end": 17.21
+   },
+   {
+    "w": "and",
+    "start": 17.21,
+    "end": 17.68
+   }
+  ]
+ },
+ {
+  "start": 17.68,
+  "end": 19.56,
+  "text": "additional language that starts",
+  "words": [
+   {
+    "w": "additional",
+    "start": 17.68,
+    "end": 18.15
+   },
+   {
+    "w": "language",
+    "start": 18.15,
+    "end": 18.62
+   },
+   {
+    "w": "that",
+    "start": 18.62,
+    "end": 19.09
+   },
+   {
+    "w": "starts",
+    "start": 19.09,
+    "end": 19.56
+   }
+  ]
+ },
+ {
+  "start": 19.56,
+  "end": 20.9,
+  "text": "to convolute the deal.",
+  "words": [
+   {
+    "w": "to",
+    "start": 19.56,
+    "end": 20.03
+   },
+   {
+    "w": "convolute",
+    "start": 20.03,
+    "end": 20.5
+   },
+   {
+    "w": "the",
+    "start": 20.5,
+    "end": 20.7
+   },
+   {
+    "w": "deal.",
+    "start": 20.7,
+    "end": 20.9
+   }
+  ]
+ },
+ {
+  "start": 21.2,
+  "end": 22.21,
+  "text": "It drives me crazy",
+  "words": [
+   {
+    "w": "It",
+    "start": 21.2,
+    "end": 21.453
+   },
+   {
+    "w": "drives",
+    "start": 21.453,
+    "end": 21.705
+   },
+   {
+    "w": "me",
+    "start": 21.705,
+    "end": 21.957
+   },
+   {
+    "w": "crazy",
+    "start": 21.957,
+    "end": 22.21
+   }
+  ]
+ },
+ {
+  "start": 22.21,
+  "end": 23.22,
+  "text": "but this is what",
+  "words": [
+   {
+    "w": "but",
+    "start": 22.21,
+    "end": 22.463
+   },
+   {
+    "w": "this",
+    "start": 22.462,
+    "end": 22.715
+   },
+   {
+    "w": "is",
+    "start": 22.715,
+    "end": 22.968
+   },
+   {
+    "w": "what",
+    "start": 22.967,
+    "end": 23.22
+   }
+  ]
+ },
+ {
+  "start": 23.22,
+  "end": 24.35,
+  "text": "you see uh kind",
+  "words": [
+   {
+    "w": "you",
+    "start": 23.22,
+    "end": 23.502
+   },
+   {
+    "w": "see",
+    "start": 23.502,
+    "end": 23.785
+   },
+   {
+    "w": "uh",
+    "start": 23.785,
+    "end": 24.067
+   },
+   {
+    "w": "kind",
+    "start": 24.067,
+    "end": 24.35
+   }
+  ]
+ },
+ {
+  "start": 24.35,
+  "end": 25.48,
+  "text": "of on the back",
+  "words": [
+   {
+    "w": "of",
+    "start": 24.35,
+    "end": 24.633
+   },
+   {
+    "w": "on",
+    "start": 24.633,
+    "end": 24.915
+   },
+   {
+    "w": "the",
+    "start": 24.915,
+    "end": 25.197
+   },
+   {
+    "w": "back",
+    "start": 25.198,
+    "end": 25.48
+   }
+  ]
+ },
+ {
+  "start": 25.48,
+  "end": 26.42,
+  "text": "end that we try",
+  "words": [
+   {
+    "w": "end",
+    "start": 25.48,
+    "end": 25.715
+   },
+   {
+    "w": "that",
+    "start": 25.715,
+    "end": 25.95
+   },
+   {
+    "w": "we",
+    "start": 25.95,
+    "end": 26.185
+   },
+   {
+    "w": "try",
+    "start": 26.185,
+    "end": 26.42
+   }
+  ]
+ },
+ {
+  "start": 26.42,
+  "end": 27.36,
+  "text": "to save our clients",
+  "words": [
+   {
+    "w": "to",
+    "start": 26.42,
+    "end": 26.655
+   },
+   {
+    "w": "save",
+    "start": 26.655,
+    "end": 26.89
+   },
+   {
+    "w": "our",
+    "start": 26.89,
+    "end": 27.125
+   },
+   {
+    "w": "clients",
+    "start": 27.125,
+    "end": 27.36
+   }
+  ]
+ },
+ {
+  "start": 27.36,
+  "end": 29.317,
+  "text": "from. My question to",
+  "words": [
+   {
+    "w": "from.",
+    "start": 27.36,
+    "end": 27.7
+   },
+   {
+    "w": "My",
+    "start": 28.08,
+    "end": 28.492
+   },
+   {
+    "w": "question",
+    "start": 28.492,
+    "end": 28.905
+   },
+   {
+    "w": "to",
+    "start": 28.905,
+    "end": 29.317
+   }
+  ]
+ },
+ {
+  "start": 29.317,
+  "end": 30.968,
+  "text": "those realtors is if",
+  "words": [
+   {
+    "w": "those",
+    "start": 29.317,
+    "end": 29.73
+   },
+   {
+    "w": "realtors",
+    "start": 29.73,
+    "end": 30.142
+   },
+   {
+    "w": "is",
+    "start": 30.142,
+    "end": 30.555
+   },
+   {
+    "w": "if",
+    "start": 30.555,
+    "end": 30.968
+   }
+  ]
+ },
+ {
+  "start": 30.967,
+  "end": 32.467,
+  "text": "you've never danced salsa",
+  "words": [
+   {
+    "w": "you've",
+    "start": 30.967,
+    "end": 31.38
+   },
+   {
+    "w": "never",
+    "start": 31.38,
+    "end": 31.742
+   },
+   {
+    "w": "danced",
+    "start": 31.742,
+    "end": 32.105
+   },
+   {
+    "w": "salsa",
+    "start": 32.105,
+    "end": 32.467
+   }
+  ]
+ },
+ {
+  "start": 32.468,
+  "end": 33.917,
+  "text": "before and you're in",
+  "words": [
+   {
+    "w": "before",
+    "start": 32.468,
+    "end": 32.83
+   },
+   {
+    "w": "and",
+    "start": 32.83,
+    "end": 33.192
+   },
+   {
+    "w": "you're",
+    "start": 33.193,
+    "end": 33.555
+   },
+   {
+    "w": "in",
+    "start": 33.555,
+    "end": 33.917
+   }
+  ]
+ },
+ {
+  "start": 33.918,
+  "end": 35.75,
+  "text": "a salsa and with",
+  "words": [
+   {
+    "w": "a",
+    "start": 33.918,
+    "end": 34.28
+   },
+   {
+    "w": "salsa",
+    "start": 34.28,
+    "end": 34.77
+   },
+   {
+    "w": "and",
+    "start": 34.77,
+    "end": 35.26
+   },
+   {
+    "w": "with",
+    "start": 35.26,
+    "end": 35.75
+   }
+  ]
+ },
+ {
+  "start": 35.75,
+  "end": 37.71,
+  "text": "the salsa instructor my",
+  "words": [
+   {
+    "w": "the",
+    "start": 35.75,
+    "end": 36.24
+   },
+   {
+    "w": "salsa",
+    "start": 36.24,
+    "end": 36.73
+   },
+   {
+    "w": "instructor",
+    "start": 36.73,
+    "end": 37.22
+   },
+   {
+    "w": "my",
+    "start": 37.22,
+    "end": 37.71
+   }
+  ]
+ },
+ {
+  "start": 37.71,
+  "end": 39.002,
+  "text": "question to these realtors",
+  "words": [
+   {
+    "w": "question",
+    "start": 37.71,
+    "end": 38.2
+   },
+   {
+    "w": "to",
+    "start": 38.2,
+    "end": 38.468
+   },
+   {
+    "w": "these",
+    "start": 38.468,
+    "end": 38.735
+   },
+   {
+    "w": "realtors",
+    "start": 38.735,
+    "end": 39.002
+   }
+  ]
+ },
+ {
+  "start": 39.003,
+  "end": 40.073,
+  "text": "is if you've never",
+  "words": [
+   {
+    "w": "is",
+    "start": 39.003,
+    "end": 39.27
+   },
+   {
+    "w": "if",
+    "start": 39.27,
+    "end": 39.538
+   },
+   {
+    "w": "you've",
+    "start": 39.538,
+    "end": 39.805
+   },
+   {
+    "w": "never",
+    "start": 39.805,
+    "end": 40.073
+   }
+  ]
+ },
+ {
+  "start": 40.073,
+  "end": 41.225,
+  "text": "danced salsa before and",
+  "words": [
+   {
+    "w": "danced",
+    "start": 40.073,
+    "end": 40.34
+   },
+   {
+    "w": "salsa",
+    "start": 40.34,
+    "end": 40.635
+   },
+   {
+    "w": "before",
+    "start": 40.635,
+    "end": 40.93
+   },
+   {
+    "w": "and",
+    "start": 40.93,
+    "end": 41.225
+   }
+  ]
+ },
+ {
+  "start": 41.225,
+  "end": 42.405,
+  "text": "you're in a salsa",
+  "words": [
+   {
+    "w": "you're",
+    "start": 41.225,
+    "end": 41.52
+   },
+   {
+    "w": "in",
+    "start": 41.52,
+    "end": 41.815
+   },
+   {
+    "w": "a",
+    "start": 41.815,
+    "end": 42.11
+   },
+   {
+    "w": "salsa",
+    "start": 42.11,
+    "end": 42.405
+   }
+  ]
+ },
+ {
+  "start": 42.405,
+  "end": 43.63,
+  "text": "class why would you",
+  "words": [
+   {
+    "w": "class",
+    "start": 42.405,
+    "end": 42.7
+   },
+   {
+    "w": "why",
+    "start": 42.7,
+    "end": 43.01
+   },
+   {
+    "w": "would",
+    "start": 43.01,
+    "end": 43.32
+   },
+   {
+    "w": "you",
+    "start": 43.32,
+    "end": 43.63
+   }
+  ]
+ },
+ {
+  "start": 43.63,
+  "end": 44.87,
+  "text": "not follow the instructor's",
+  "words": [
+   {
+    "w": "not",
+    "start": 43.63,
+    "end": 43.94
+   },
+   {
+    "w": "follow",
+    "start": 43.94,
+    "end": 44.25
+   },
+   {
+    "w": "the",
+    "start": 44.25,
+    "end": 44.56
+   },
+   {
+    "w": "instructor's",
+    "start": 44.56,
+    "end": 44.87
+   }
+  ]
+ },
+ {
+  "start": 44.87,
+  "end": 46.317,
+  "text": "lead? Why would you",
+  "words": [
+   {
+    "w": "lead?",
+    "start": 44.87,
+    "end": 45.18
+   },
+   {
+    "w": "Why",
+    "start": 45.8,
+    "end": 45.972
+   },
+   {
+    "w": "would",
+    "start": 45.972,
+    "end": 46.145
+   },
+   {
+    "w": "you",
+    "start": 46.145,
+    "end": 46.317
+   }
+  ]
+ },
+ {
+  "start": 46.317,
+  "end": 47.008,
+  "text": "then try to lead",
+  "words": [
+   {
+    "w": "then",
+    "start": 46.317,
+    "end": 46.49
+   },
+   {
+    "w": "try",
+    "start": 46.49,
+    "end": 46.662
+   },
+   {
+    "w": "to",
+    "start": 46.663,
+    "end": 46.835
+   },
+   {
+    "w": "lead",
+    "start": 46.835,
+    "end": 47.008
+   }
+  ]
+ },
+ {
+  "start": 47.008,
+  "end": 47.915,
+  "text": "the instructor and tell",
+  "words": [
+   {
+    "w": "the",
+    "start": 47.008,
+    "end": 47.18
+   },
+   {
+    "w": "instructor",
+    "start": 47.18,
+    "end": 47.425
+   },
+   {
+    "w": "and",
+    "start": 47.425,
+    "end": 47.67
+   },
+   {
+    "w": "tell",
+    "start": 47.67,
+    "end": 47.915
+   }
+  ]
+ },
+ {
+  "start": 47.915,
+  "end": 48.895,
+  "text": "them hey I've been",
+  "words": [
+   {
+    "w": "them",
+    "start": 47.915,
+    "end": 48.16
+   },
+   {
+    "w": "hey",
+    "start": 48.16,
+    "end": 48.405
+   },
+   {
+    "w": "I've",
+    "start": 48.405,
+    "end": 48.65
+   },
+   {
+    "w": "been",
+    "start": 48.65,
+    "end": 48.895
+   }
+  ]
+ },
+ {
+  "start": 48.895,
+  "end": 50.145,
+  "text": "doing this game for",
+  "words": [
+   {
+    "w": "doing",
+    "start": 48.895,
+    "end": 49.14
+   },
+   {
+    "w": "this",
+    "start": 49.14,
+    "end": 49.475
+   },
+   {
+    "w": "game",
+    "start": 49.475,
+    "end": 49.81
+   },
+   {
+    "w": "for",
+    "start": 49.81,
+    "end": 50.145
+   }
+  ]
+ },
+ {
+  "start": 50.145,
+  "end": 51.485,
+  "text": "this many years and",
+  "words": [
+   {
+    "w": "this",
+    "start": 50.145,
+    "end": 50.48
+   },
+   {
+    "w": "many",
+    "start": 50.48,
+    "end": 50.815
+   },
+   {
+    "w": "years",
+    "start": 50.815,
+    "end": 51.15
+   },
+   {
+    "w": "and",
+    "start": 51.15,
+    "end": 51.485
+   }
+  ]
+ },
+ {
+  "start": 51.485,
+  "end": 52.405,
+  "text": "so I I should",
+  "words": [
+   {
+    "w": "so",
+    "start": 51.485,
+    "end": 51.82
+   },
+   {
+    "w": "I",
+    "start": 51.82,
+    "end": 52.015
+   },
+   {
+    "w": "I",
+    "start": 52.015,
+    "end": 52.21
+   },
+   {
+    "w": "should",
+    "start": 52.21,
+    "end": 52.405
+   }
+  ]
+ },
+ {
+  "start": 52.405,
+  "end": 53.185,
+  "text": "be the one leading",
+  "words": [
+   {
+    "w": "be",
+    "start": 52.405,
+    "end": 52.6
+   },
+   {
+    "w": "the",
+    "start": 52.6,
+    "end": 52.795
+   },
+   {
+    "w": "one",
+    "start": 52.795,
+    "end": 52.99
+   },
+   {
+    "w": "leading",
+    "start": 52.99,
+    "end": 53.185
+   }
+  ]
+ },
+ {
+  "start": 53.185,
+  "end": 54.39,
+  "text": "this. That's one of",
+  "words": [
+   {
+    "w": "this.",
+    "start": 53.185,
+    "end": 53.38
+   },
+   {
+    "w": "That's",
+    "start": 53.58,
+    "end": 53.85
+   },
+   {
+    "w": "one",
+    "start": 53.85,
+    "end": 54.12
+   },
+   {
+    "w": "of",
+    "start": 54.12,
+    "end": 54.39
+   }
+  ]
+ },
+ {
+  "start": 54.39,
+  "end": 55.47,
+  "text": "the pet peeves but",
+  "words": [
+   {
+    "w": "the",
+    "start": 54.39,
+    "end": 54.66
+   },
+   {
+    "w": "pet",
+    "start": 54.66,
+    "end": 54.93
+   },
+   {
+    "w": "peeves",
+    "start": 54.93,
+    "end": 55.2
+   },
+   {
+    "w": "but",
+    "start": 55.2,
+    "end": 55.47
+   }
+  ]
+ },
+ {
+  "start": 55.47,
+  "end": 56.573,
+  "text": "long story short the",
+  "words": [
+   {
+    "w": "long",
+    "start": 55.47,
+    "end": 55.74
+   },
+   {
+    "w": "story",
+    "start": 55.74,
+    "end": 56.017
+   },
+   {
+    "w": "short",
+    "start": 56.017,
+    "end": 56.295
+   },
+   {
+    "w": "the",
+    "start": 56.295,
+    "end": 56.573
+   }
+  ]
+ },
+ {
+  "start": 56.573,
+  "end": 57.683,
+  "text": "Ekabo Home Team we",
+  "words": [
+   {
+    "w": "Ekabo",
+    "start": 56.573,
+    "end": 56.85
+   },
+   {
+    "w": "Home",
+    "start": 56.85,
+    "end": 57.127
+   },
+   {
+    "w": "Team",
+    "start": 57.127,
+    "end": 57.405
+   },
+   {
+    "w": "we",
+    "start": 57.405,
+    "end": 57.683
+   }
+  ]
+ },
+ {
+  "start": 57.683,
+  "end": 59.448,
+  "text": "do creative deals all",
+  "words": [
+   {
+    "w": "do",
+    "start": 57.683,
+    "end": 57.96
+   },
+   {
+    "w": "creative",
+    "start": 57.96,
+    "end": 58.456
+   },
+   {
+    "w": "deals",
+    "start": 58.456,
+    "end": 58.952
+   },
+   {
+    "w": "all",
+    "start": 58.952,
+    "end": 59.448
+   }
+  ]
+ },
+ {
+  "start": 59.448,
+  "end": 61.055,
+  "text": "day long. We do",
+  "words": [
+   {
+    "w": "day",
+    "start": 59.448,
+    "end": 59.944
+   },
+   {
+    "w": "long.",
+    "start": 59.944,
+    "end": 60.44
+   },
+   {
+    "w": "We",
+    "start": 60.62,
+    "end": 60.837
+   },
+   {
+    "w": "do",
+    "start": 60.837,
+    "end": 61.055
+   }
+  ]
+ },
+ {
+  "start": 61.055,
+  "end": 61.925,
+  "text": "deals that other people",
+  "words": [
+   {
+    "w": "deals",
+    "start": 61.055,
+    "end": 61.273
+   },
+   {
+    "w": "that",
+    "start": 61.273,
+    "end": 61.49
+   },
+   {
+    "w": "other",
+    "start": 61.49,
+    "end": 61.707
+   },
+   {
+    "w": "people",
+    "start": 61.707,
+    "end": 61.925
+   }
+  ]
+ },
+ {
+  "start": 61.925,
+  "end": 62.82,
+  "text": "could not get done.",
+  "words": [
+   {
+    "w": "could",
+    "start": 61.925,
+    "end": 62.142
+   },
+   {
+    "w": "not",
+    "start": 62.142,
+    "end": 62.36
+   },
+   {
+    "w": "get",
+    "start": 62.36,
+    "end": 62.59
+   },
+   {
+    "w": "done.",
+    "start": 62.59,
+    "end": 62.82
+   }
+  ]
+ },
+ {
+  "start": 63.12,
+  "end": 63.78,
+  "text": "The home that we're",
+  "words": [
+   {
+    "w": "The",
+    "start": 63.12,
+    "end": 63.285
+   },
+   {
+    "w": "home",
+    "start": 63.285,
+    "end": 63.45
+   },
+   {
+    "w": "that",
+    "start": 63.45,
+    "end": 63.615
+   },
+   {
+    "w": "we're",
+    "start": 63.615,
+    "end": 63.78
+   }
+  ]
+ },
+ {
+  "start": 63.78,
+  "end": 64.44,
+  "text": "going to close on",
+  "words": [
+   {
+    "w": "going",
+    "start": 63.78,
+    "end": 63.945
+   },
+   {
+    "w": "to",
+    "start": 63.945,
+    "end": 64.11
+   },
+   {
+    "w": "close",
+    "start": 64.11,
+    "end": 64.275
+   },
+   {
+    "w": "on",
+    "start": 64.275,
+    "end": 64.44
+   }
+  ]
+ },
+ {
+  "start": 64.44,
+  "end": 65.3,
+  "text": "is a duplex that's",
+  "words": [
+   {
+    "w": "is",
+    "start": 64.44,
+    "end": 64.655
+   },
+   {
+    "w": "a",
+    "start": 64.655,
+    "end": 64.87
+   },
+   {
+    "w": "duplex",
+    "start": 64.87,
+    "end": 65.085
+   },
+   {
+    "w": "that's",
+    "start": 65.085,
+    "end": 65.3
+   }
+  ]
+ },
+ {
+  "start": 65.3,
+  "end": 66.16,
+  "text": "been sitting for over",
+  "words": [
+   {
+    "w": "been",
+    "start": 65.3,
+    "end": 65.515
+   },
+   {
+    "w": "sitting",
+    "start": 65.515,
+    "end": 65.73
+   },
+   {
+    "w": "for",
+    "start": 65.73,
+    "end": 65.945
+   },
+   {
+    "w": "over",
+    "start": 65.945,
+    "end": 66.16
+   }
+  ]
+ },
+ {
+  "start": 66.16,
+  "end": 67.42,
+  "text": "200 days because it",
+  "words": [
+   {
+    "w": "200",
+    "start": 66.16,
+    "end": 66.475
+   },
+   {
+    "w": "days",
+    "start": 66.475,
+    "end": 66.79
+   },
+   {
+    "w": "because",
+    "start": 66.79,
+    "end": 67.105
+   },
+   {
+    "w": "it",
+    "start": 67.105,
+    "end": 67.42
+   }
+  ]
+ },
+ {
+  "start": 67.42,
+  "end": 68.68,
+  "text": "needs a good amount",
+  "words": [
+   {
+    "w": "needs",
+    "start": 67.42,
+    "end": 67.735
+   },
+   {
+    "w": "a",
+    "start": 67.735,
+    "end": 68.05
+   },
+   {
+    "w": "good",
+    "start": 68.05,
+    "end": 68.365
+   },
+   {
+    "w": "amount",
+    "start": 68.365,
+    "end": 68.68
+   }
+  ]
+ },
+ {
+  "start": 68.68,
+  "end": 69.751,
+  "text": "of work. We figured",
+  "words": [
+   {
+    "w": "of",
+    "start": 68.68,
+    "end": 68.87
+   },
+   {
+    "w": "work.",
+    "start": 68.87,
+    "end": 69.06
+   },
+   {
+    "w": "We",
+    "start": 69.18,
+    "end": 69.466
+   },
+   {
+    "w": "figured",
+    "start": 69.466,
+    "end": 69.751
+   }
+  ]
+ },
+ {
+  "start": 69.751,
+  "end": 70.894,
+  "text": "out a win-win structure",
+  "words": [
+   {
+    "w": "out",
+    "start": 69.751,
+    "end": 70.037
+   },
+   {
+    "w": "a",
+    "start": 70.037,
+    "end": 70.323
+   },
+   {
+    "w": "win-win",
+    "start": 70.323,
+    "end": 70.609
+   },
+   {
+    "w": "structure",
+    "start": 70.609,
+    "end": 70.894
+   }
+  ]
+ },
+ {
+  "start": 70.894,
+  "end": 72.208,
+  "text": "to where all the",
+  "words": [
+   {
+    "w": "to",
+    "start": 70.894,
+    "end": 71.18
+   },
+   {
+    "w": "where",
+    "start": 71.18,
+    "end": 71.523
+   },
+   {
+    "w": "all",
+    "start": 71.523,
+    "end": 71.865
+   },
+   {
+    "w": "the",
+    "start": 71.865,
+    "end": 72.208
+   }
+  ]
+ },
+ {
+  "start": 72.208,
+  "end": 73.578,
+  "text": "work's getting done and",
+  "words": [
+   {
+    "w": "work's",
+    "start": 72.208,
+    "end": 72.55
+   },
+   {
+    "w": "getting",
+    "start": 72.55,
+    "end": 72.893
+   },
+   {
+    "w": "done",
+    "start": 72.892,
+    "end": 73.235
+   },
+   {
+    "w": "and",
+    "start": 73.235,
+    "end": 73.578
+   }
+  ]
+ },
+ {
+  "start": 73.578,
+  "end": 74.993,
+  "text": "covered by the deal",
+  "words": [
+   {
+    "w": "covered",
+    "start": 73.578,
+    "end": 73.92
+   },
+   {
+    "w": "by",
+    "start": 73.92,
+    "end": 74.278
+   },
+   {
+    "w": "the",
+    "start": 74.278,
+    "end": 74.635
+   },
+   {
+    "w": "deal",
+    "start": 74.635,
+    "end": 74.993
+   }
+  ]
+ },
+ {
+  "start": 74.993,
+  "end": 76.422,
+  "text": "itself meaning our client's",
+  "words": [
+   {
+    "w": "itself",
+    "start": 74.993,
+    "end": 75.35
+   },
+   {
+    "w": "meaning",
+    "start": 75.35,
+    "end": 75.707
+   },
+   {
+    "w": "our",
+    "start": 75.707,
+    "end": 76.065
+   },
+   {
+    "w": "client's",
+    "start": 76.065,
+    "end": 76.422
+   }
+  ]
+ },
+ {
+  "start": 76.422,
+  "end": 77.275,
+  "text": "going to get a",
+  "words": [
+   {
+    "w": "going",
+    "start": 76.422,
+    "end": 76.78
+   },
+   {
+    "w": "to",
+    "start": 76.78,
+    "end": 76.945
+   },
+   {
+    "w": "get",
+    "start": 76.945,
+    "end": 77.11
+   },
+   {
+    "w": "a",
+    "start": 77.11,
+    "end": 77.275
+   }
+  ]
+ },
+ {
+  "start": 77.275,
+  "end": 77.935,
+  "text": "brand new roof on",
+  "words": [
+   {
+    "w": "brand",
+    "start": 77.275,
+    "end": 77.44
+   },
+   {
+    "w": "new",
+    "start": 77.44,
+    "end": 77.605
+   },
+   {
+    "w": "roof",
+    "start": 77.605,
+    "end": 77.77
+   },
+   {
+    "w": "on",
+    "start": 77.77,
+    "end": 77.935
+   }
+  ]
+ },
+ {
+  "start": 77.935,
+  "end": 79.263,
+  "text": "the house, brand new",
+  "words": [
+   {
+    "w": "the",
+    "start": 77.935,
+    "end": 78.1
+   },
+   {
+    "w": "house,",
+    "start": 78.1,
+    "end": 78.487
+   },
+   {
+    "w": "brand",
+    "start": 78.487,
+    "end": 78.875
+   },
+   {
+    "w": "new",
+    "start": 78.875,
+    "end": 79.263
+   }
+  ]
+ },
+ {
+  "start": 79.263,
+  "end": 80.812,
+  "text": "HVAC units in both",
+  "words": [
+   {
+    "w": "HVAC",
+    "start": 79.263,
+    "end": 79.65
+   },
+   {
+    "w": "units",
+    "start": 79.65,
+    "end": 80.038
+   },
+   {
+    "w": "in",
+    "start": 80.037,
+    "end": 80.425
+   },
+   {
+    "w": "both",
+    "start": 80.425,
+    "end": 80.812
+   }
+  ]
+ },
+ {
+  "start": 80.812,
+  "end": 82.016,
+  "text": "units and furnaces in",
+  "words": [
+   {
+    "w": "units",
+    "start": 80.812,
+    "end": 81.2
+   },
+   {
+    "w": "and",
+    "start": 81.2,
+    "end": 81.472
+   },
+   {
+    "w": "furnaces",
+    "start": 81.472,
+    "end": 81.744
+   },
+   {
+    "w": "in",
+    "start": 81.744,
+    "end": 82.016
+   }
+  ]
+ },
+ {
+  "start": 82.016,
+  "end": 83.615,
+  "text": "both units. They're going",
+  "words": [
+   {
+    "w": "both",
+    "start": 82.016,
+    "end": 82.288
+   },
+   {
+    "w": "units.",
+    "start": 82.288,
+    "end": 82.56
+   },
+   {
+    "w": "They're",
+    "start": 82.98,
+    "end": 83.297
+   },
+   {
+    "w": "going",
+    "start": 83.297,
+    "end": 83.615
+   }
+  ]
+ },
+ {
+  "start": 83.615,
+  "end": 84.885,
+  "text": "to get updated kitchens,",
+  "words": [
+   {
+    "w": "to",
+    "start": 83.615,
+    "end": 83.933
+   },
+   {
+    "w": "get",
+    "start": 83.933,
+    "end": 84.25
+   },
+   {
+    "w": "updated",
+    "start": 84.25,
+    "end": 84.567
+   },
+   {
+    "w": "kitchens,",
+    "start": 84.567,
+    "end": 84.885
+   }
+  ]
+ },
+ {
+  "start": 84.885,
+  "end": 86.708,
+  "text": "updated bathrooms, fresh paint",
+  "words": [
+   {
+    "w": "updated",
+    "start": 84.885,
+    "end": 85.202
+   },
+   {
+    "w": "bathrooms,",
+    "start": 85.203,
+    "end": 85.52
+   },
+   {
+    "w": "fresh",
+    "start": 86.18,
+    "end": 86.444
+   },
+   {
+    "w": "paint",
+    "start": 86.444,
+    "end": 86.708
+   }
+  ]
+ },
+ {
+  "start": 86.708,
+  "end": 87.75,
+  "text": "on the inside. They're",
+  "words": [
+   {
+    "w": "on",
+    "start": 86.708,
+    "end": 86.972
+   },
+   {
+    "w": "the",
+    "start": 86.972,
+    "end": 87.236
+   },
+   {
+    "w": "inside.",
+    "start": 87.236,
+    "end": 87.5
+   },
+   {
+    "w": "They're",
+    "start": 87.6,
+    "end": 87.75
+   }
+  ]
+ },
+ {
+  "start": 87.75,
+  "end": 88.35,
+  "text": "going to get a",
+  "words": [
+   {
+    "w": "going",
+    "start": 87.75,
+    "end": 87.9
+   },
+   {
+    "w": "to",
+    "start": 87.9,
+    "end": 88.05
+   },
+   {
+    "w": "get",
+    "start": 88.05,
+    "end": 88.2
+   },
+   {
+    "w": "a",
+    "start": 88.2,
+    "end": 88.35
+   }
+  ]
+ },
+ {
+  "start": 88.35,
+  "end": 89.225,
+  "text": "portion of their furnishing",
+  "words": [
+   {
+    "w": "portion",
+    "start": 88.35,
+    "end": 88.5
+   },
+   {
+    "w": "of",
+    "start": 88.5,
+    "end": 88.65
+   },
+   {
+    "w": "their",
+    "start": 88.65,
+    "end": 88.8
+   },
+   {
+    "w": "furnishing",
+    "start": 88.8,
+    "end": 89.225
+   }
+  ]
+ },
+ {
+  "start": 89.225,
+  "end": 90.925,
+  "text": "cost covered all within",
+  "words": [
+   {
+    "w": "cost",
+    "start": 89.225,
+    "end": 89.65
+   },
+   {
+    "w": "covered",
+    "start": 89.65,
+    "end": 90.075
+   },
+   {
+    "w": "all",
+    "start": 90.075,
+    "end": 90.5
+   },
+   {
+    "w": "within",
+    "start": 90.5,
+    "end": 90.925
+   }
+  ]
+ },
+ {
+  "start": 90.925,
+  "end": 92.386,
+  "text": "the deal because of",
+  "words": [
+   {
+    "w": "the",
+    "start": 90.925,
+    "end": 91.35
+   },
+   {
+    "w": "deal",
+    "start": 91.35,
+    "end": 91.775
+   },
+   {
+    "w": "because",
+    "start": 91.775,
+    "end": 92.2
+   },
+   {
+    "w": "of",
+    "start": 92.2,
+    "end": 92.386
+   }
+  ]
+ },
+ {
+  "start": 92.386,
+  "end": 93.129,
+  "text": "the way that we",
+  "words": [
+   {
+    "w": "the",
+    "start": 92.386,
+    "end": 92.571
+   },
+   {
+    "w": "way",
+    "start": 92.571,
+    "end": 92.757
+   },
+   {
+    "w": "that",
+    "start": 92.757,
+    "end": 92.943
+   },
+   {
+    "w": "we",
+    "start": 92.943,
+    "end": 93.129
+   }
+  ]
+ },
+ {
+  "start": 93.129,
+  "end": 94.705,
+  "text": "worked it. So long",
+  "words": [
+   {
+    "w": "worked",
+    "start": 93.129,
+    "end": 93.314
+   },
+   {
+    "w": "it.",
+    "start": 93.314,
+    "end": 93.5
+   },
+   {
+    "w": "So",
+    "start": 94.14,
+    "end": 94.422
+   },
+   {
+    "w": "long",
+    "start": 94.422,
+    "end": 94.705
+   }
+  ]
+ },
+ {
+  "start": 94.705,
+  "end": 95.835,
+  "text": "story short a little",
+  "words": [
+   {
+    "w": "story",
+    "start": 94.705,
+    "end": 94.987
+   },
+   {
+    "w": "short",
+    "start": 94.987,
+    "end": 95.27
+   },
+   {
+    "w": "a",
+    "start": 95.27,
+    "end": 95.553
+   },
+   {
+    "w": "little",
+    "start": 95.553,
+    "end": 95.835
+   }
+  ]
+ },
+ {
+  "start": 95.835,
+  "end": 97.015,
+  "text": "bit of venting on",
+  "words": [
+   {
+    "w": "bit",
+    "start": 95.835,
+    "end": 96.118
+   },
+   {
+    "w": "of",
+    "start": 96.118,
+    "end": 96.4
+   },
+   {
+    "w": "venting",
+    "start": 96.4,
+    "end": 96.708
+   },
+   {
+    "w": "on",
+    "start": 96.708,
+    "end": 97.015
+   }
+  ]
+ },
+ {
+  "start": 97.015,
+  "end": 98.245,
+  "text": "the creative piece but",
+  "words": [
+   {
+    "w": "the",
+    "start": 97.015,
+    "end": 97.323
+   },
+   {
+    "w": "creative",
+    "start": 97.323,
+    "end": 97.63
+   },
+   {
+    "w": "piece",
+    "start": 97.63,
+    "end": 97.938
+   },
+   {
+    "w": "but",
+    "start": 97.938,
+    "end": 98.245
+   }
+  ]
+ },
+ {
+  "start": 98.245,
+  "end": 99.35,
+  "text": "I do enjoy putting",
+  "words": [
+   {
+    "w": "I",
+    "start": 98.245,
+    "end": 98.553
+   },
+   {
+    "w": "do",
+    "start": 98.552,
+    "end": 98.86
+   },
+   {
+    "w": "enjoy",
+    "start": 98.86,
+    "end": 99.105
+   },
+   {
+    "w": "putting",
+    "start": 99.105,
+    "end": 99.35
+   }
+  ]
+ },
+ {
+  "start": 99.35,
+  "end": 100.33,
+  "text": "these together and the",
+  "words": [
+   {
+    "w": "these",
+    "start": 99.35,
+    "end": 99.595
+   },
+   {
+    "w": "together",
+    "start": 99.595,
+    "end": 99.84
+   },
+   {
+    "w": "and",
+    "start": 99.84,
+    "end": 100.085
+   },
+   {
+    "w": "the",
+    "start": 100.085,
+    "end": 100.33
+   }
+  ]
+ },
+ {
+  "start": 100.33,
+  "end": 101.515,
+  "text": "Ekabo Home Team does",
+  "words": [
+   {
+    "w": "Ekabo",
+    "start": 100.33,
+    "end": 100.575
+   },
+   {
+    "w": "Home",
+    "start": 100.575,
+    "end": 100.82
+   },
+   {
+    "w": "Team",
+    "start": 100.82,
+    "end": 101.167
+   },
+   {
+    "w": "does",
+    "start": 101.167,
+    "end": 101.515
+   }
+  ]
+ },
+ {
+  "start": 101.515,
+  "end": 102.905,
+  "text": "it differently than most",
+  "words": [
+   {
+    "w": "it",
+    "start": 101.515,
+    "end": 101.862
+   },
+   {
+    "w": "differently",
+    "start": 101.862,
+    "end": 102.21
+   },
+   {
+    "w": "than",
+    "start": 102.21,
+    "end": 102.557
+   },
+   {
+    "w": "most",
+    "start": 102.557,
+    "end": 102.905
+   }
+  ]
+ },
+ {
+  "start": 102.905,
+  "end": 103.78,
+  "text": "realtors out there.",
+  "words": [
+   {
+    "w": "realtors",
+    "start": 102.905,
+    "end": 103.252
+   },
+   {
+    "w": "out",
+    "start": 103.252,
+    "end": 103.6
+   },
+   {
+    "w": "there.",
+    "start": 103.6,
+    "end": 103.78
+   }
+  ]
+ }
+]
