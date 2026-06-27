@@ -21,4 +21,6 @@ stills/
 
 # large derived A-roll (regenerate via scripts/silence_cut.py)
 public/appraisal.mp4
-reel-editor/renders/IMG2071Reel.mp4
+
+# full-res render exceeds GitHub's 100MB file limit; keep only the 720p copy
+renders/IMG2071Reel.mp4
