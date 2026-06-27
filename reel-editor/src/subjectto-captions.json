@@ -1,1 +1,1693 @@
-[]
+[
+ {
+  "start": 0.4,
+  "end": 1.54,
+  "text": "subject two financing. And",
+  "words": [
+   {
+    "w": "subject",
+    "start": 0.4,
+    "end": 0.685
+   },
+   {
+    "w": "two",
+    "start": 0.685,
+    "end": 0.97
+   },
+   {
+    "w": "financing.",
+    "start": 0.97,
+    "end": 1.255
+   },
+   {
+    "w": "And",
+    "start": 1.255,
+    "end": 1.54
+   }
+  ]
+ },
+ {
+  "start": 1.54,
+  "end": 2.681,
+  "text": "this is when the",
+  "words": [
+   {
+    "w": "this",
+    "start": 1.54,
+    "end": 1.826
+   },
+   {
+    "w": "is",
+    "start": 1.826,
+    "end": 2.111
+   },
+   {
+    "w": "when",
+    "start": 2.111,
+    "end": 2.396
+   },
+   {
+    "w": "the",
+    "start": 2.396,
+    "end": 2.681
+   }
+  ]
+ },
+ {
+  "start": 2.681,
+  "end": 3.821,
+  "text": "seller still has a",
+  "words": [
+   {
+    "w": "seller",
+    "start": 2.681,
+    "end": 2.966
+   },
+   {
+    "w": "still",
+    "start": 2.966,
+    "end": 3.251
+   },
+   {
+    "w": "has",
+    "start": 3.251,
+    "end": 3.536
+   },
+   {
+    "w": "a",
+    "start": 3.536,
+    "end": 3.821
+   }
+  ]
+ },
+ {
+  "start": 3.821,
+  "end": 4.962,
+  "text": "significant loan on the",
+  "words": [
+   {
+    "w": "significant",
+    "start": 3.821,
+    "end": 4.106
+   },
+   {
+    "w": "loan",
+    "start": 4.106,
+    "end": 4.391
+   },
+   {
+    "w": "on",
+    "start": 4.391,
+    "end": 4.677
+   },
+   {
+    "w": "the",
+    "start": 4.677,
+    "end": 4.962
+   }
+  ]
+ },
+ {
+  "start": 4.962,
+  "end": 6.102,
+  "text": "property. But they're trying",
+  "words": [
+   {
+    "w": "property.",
+    "start": 4.962,
+    "end": 5.247
+   },
+   {
+    "w": "But",
+    "start": 5.247,
+    "end": 5.532
+   },
+   {
+    "w": "they're",
+    "start": 5.532,
+    "end": 5.817
+   },
+   {
+    "w": "trying",
+    "start": 5.817,
+    "end": 6.102
+   }
+  ]
+ },
+ {
+  "start": 6.102,
+  "end": 7.242,
+  "text": "to sell it and",
+  "words": [
+   {
+    "w": "to",
+    "start": 6.102,
+    "end": 6.387
+   },
+   {
+    "w": "sell",
+    "start": 6.387,
+    "end": 6.672
+   },
+   {
+    "w": "it",
+    "start": 6.672,
+    "end": 6.957
+   },
+   {
+    "w": "and",
+    "start": 6.957,
+    "end": 7.242
+   }
+  ]
+ },
+ {
+  "start": 7.242,
+  "end": 8.383,
+  "text": "they're not getting the",
+  "words": [
+   {
+    "w": "they're",
+    "start": 7.242,
+    "end": 7.528
+   },
+   {
+    "w": "not",
+    "start": 7.528,
+    "end": 7.813
+   },
+   {
+    "w": "getting",
+    "start": 7.813,
+    "end": 8.098
+   },
+   {
+    "w": "the",
+    "start": 8.098,
+    "end": 8.383
+   }
+  ]
+ },
+ {
+  "start": 8.383,
+  "end": 9.523,
+  "text": "number that they're looking",
+  "words": [
+   {
+    "w": "number",
+    "start": 8.383,
+    "end": 8.668
+   },
+   {
+    "w": "that",
+    "start": 8.668,
+    "end": 8.953
+   },
+   {
+    "w": "they're",
+    "start": 8.953,
+    "end": 9.238
+   },
+   {
+    "w": "looking",
+    "start": 9.238,
+    "end": 9.523
+   }
+  ]
+ },
+ {
+  "start": 9.523,
+  "end": 10.664,
+  "text": "for. Ideally it works",
+  "words": [
+   {
+    "w": "for.",
+    "start": 9.523,
+    "end": 9.808
+   },
+   {
+    "w": "Ideally",
+    "start": 9.808,
+    "end": 10.093
+   },
+   {
+    "w": "it",
+    "start": 10.093,
+    "end": 10.379
+   },
+   {
+    "w": "works",
+    "start": 10.379,
+    "end": 10.664
+   }
+  ]
+ },
+ {
+  "start": 10.664,
+  "end": 11.804,
+  "text": "if that seller just",
+  "words": [
+   {
+    "w": "if",
+    "start": 10.664,
+    "end": 10.949
+   },
+   {
+    "w": "that",
+    "start": 10.949,
+    "end": 11.234
+   },
+   {
+    "w": "seller",
+    "start": 11.234,
+    "end": 11.519
+   },
+   {
+    "w": "just",
+    "start": 11.519,
+    "end": 11.804
+   }
+  ]
+ },
+ {
+  "start": 11.804,
+  "end": 12.944,
+  "text": "wants to get out",
+  "words": [
+   {
+    "w": "wants",
+    "start": 11.804,
+    "end": 12.089
+   },
+   {
+    "w": "to",
+    "start": 12.089,
+    "end": 12.374
+   },
+   {
+    "w": "get",
+    "start": 12.374,
+    "end": 12.659
+   },
+   {
+    "w": "out",
+    "start": 12.659,
+    "end": 12.944
+   }
+  ]
+ },
+ {
+  "start": 12.944,
+  "end": 14.085,
+  "text": "of the deal. Right",
+  "words": [
+   {
+    "w": "of",
+    "start": 12.944,
+    "end": 13.23
+   },
+   {
+    "w": "the",
+    "start": 13.23,
+    "end": 13.515
+   },
+   {
+    "w": "deal.",
+    "start": 13.515,
+    "end": 13.8
+   },
+   {
+    "w": "Right",
+    "start": 13.8,
+    "end": 14.085
+   }
+  ]
+ },
+ {
+  "start": 14.085,
+  "end": 15.225,
+  "text": "they're a little more",
+  "words": [
+   {
+    "w": "they're",
+    "start": 14.085,
+    "end": 14.37
+   },
+   {
+    "w": "a",
+    "start": 14.37,
+    "end": 14.655
+   },
+   {
+    "w": "little",
+    "start": 14.655,
+    "end": 14.94
+   },
+   {
+    "w": "more",
+    "start": 14.94,
+    "end": 15.225
+   }
+  ]
+ },
+ {
+  "start": 15.225,
+  "end": 16.366,
+  "text": "open to going this",
+  "words": [
+   {
+    "w": "open",
+    "start": 15.225,
+    "end": 15.51
+   },
+   {
+    "w": "to",
+    "start": 15.51,
+    "end": 15.795
+   },
+   {
+    "w": "going",
+    "start": 15.795,
+    "end": 16.081
+   },
+   {
+    "w": "this",
+    "start": 16.081,
+    "end": 16.366
+   }
+  ]
+ },
+ {
+  "start": 16.366,
+  "end": 17.506,
+  "text": "pathway or if they",
+  "words": [
+   {
+    "w": "pathway",
+    "start": 16.366,
+    "end": 16.651
+   },
+   {
+    "w": "or",
+    "start": 16.651,
+    "end": 16.936
+   },
+   {
+    "w": "if",
+    "start": 16.936,
+    "end": 17.221
+   },
+   {
+    "w": "they",
+    "start": 17.221,
+    "end": 17.506
+   }
+  ]
+ },
+ {
+  "start": 17.506,
+  "end": 18.646,
+  "text": "have equity in the",
+  "words": [
+   {
+    "w": "have",
+    "start": 17.506,
+    "end": 17.791
+   },
+   {
+    "w": "equity",
+    "start": 17.791,
+    "end": 18.076
+   },
+   {
+    "w": "in",
+    "start": 18.076,
+    "end": 18.361
+   },
+   {
+    "w": "the",
+    "start": 18.361,
+    "end": 18.646
+   }
+  ]
+ },
+ {
+  "start": 18.646,
+  "end": 19.787,
+  "text": "deal and they trust",
+  "words": [
+   {
+    "w": "deal",
+    "start": 18.646,
+    "end": 18.932
+   },
+   {
+    "w": "and",
+    "start": 18.932,
+    "end": 19.217
+   },
+   {
+    "w": "they",
+    "start": 19.217,
+    "end": 19.502
+   },
+   {
+    "w": "trust",
+    "start": 19.502,
+    "end": 19.787
+   }
+  ]
+ },
+ {
+  "start": 19.787,
+  "end": 20.927,
+  "text": "you to be able",
+  "words": [
+   {
+    "w": "you",
+    "start": 19.787,
+    "end": 20.072
+   },
+   {
+    "w": "to",
+    "start": 20.072,
+    "end": 20.357
+   },
+   {
+    "w": "be",
+    "start": 20.357,
+    "end": 20.642
+   },
+   {
+    "w": "able",
+    "start": 20.642,
+    "end": 20.927
+   }
+  ]
+ },
+ {
+  "start": 20.927,
+  "end": 22.068,
+  "text": "to execute on this.",
+  "words": [
+   {
+    "w": "to",
+    "start": 20.927,
+    "end": 21.212
+   },
+   {
+    "w": "execute",
+    "start": 21.212,
+    "end": 21.497
+   },
+   {
+    "w": "on",
+    "start": 21.497,
+    "end": 21.783
+   },
+   {
+    "w": "this.",
+    "start": 21.783,
+    "end": 22.068
+   }
+  ]
+ },
+ {
+  "start": 22.068,
+  "end": 23.208,
+  "text": "And so I actually",
+  "words": [
+   {
+    "w": "And",
+    "start": 22.068,
+    "end": 22.353
+   },
+   {
+    "w": "so",
+    "start": 22.353,
+    "end": 22.638
+   },
+   {
+    "w": "I",
+    "start": 22.638,
+    "end": 22.923
+   },
+   {
+    "w": "actually",
+    "start": 22.923,
+    "end": 23.208
+   }
+  ]
+ },
+ {
+  "start": 23.208,
+  "end": 24.348,
+  "text": "have completed one of",
+  "words": [
+   {
+    "w": "have",
+    "start": 23.208,
+    "end": 23.493
+   },
+   {
+    "w": "completed",
+    "start": 23.493,
+    "end": 23.778
+   },
+   {
+    "w": "one",
+    "start": 23.778,
+    "end": 24.063
+   },
+   {
+    "w": "of",
+    "start": 24.063,
+    "end": 24.348
+   }
+  ]
+ },
+ {
+  "start": 24.348,
+  "end": 25.489,
+  "text": "these myself. I did",
+  "words": [
+   {
+    "w": "these",
+    "start": 24.348,
+    "end": 24.634
+   },
+   {
+    "w": "myself.",
+    "start": 24.634,
+    "end": 24.919
+   },
+   {
+    "w": "I",
+    "start": 24.919,
+    "end": 25.204
+   },
+   {
+    "w": "did",
+    "start": 25.204,
+    "end": 25.489
+   }
+  ]
+ },
+ {
+  "start": 25.489,
+  "end": 26.629,
+  "text": "it back in 2024",
+  "words": [
+   {
+    "w": "it",
+    "start": 25.489,
+    "end": 25.774
+   },
+   {
+    "w": "back",
+    "start": 25.774,
+    "end": 26.059
+   },
+   {
+    "w": "in",
+    "start": 26.059,
+    "end": 26.344
+   },
+   {
+    "w": "2024",
+    "start": 26.344,
+    "end": 26.629
+   }
+  ]
+ },
+ {
+  "start": 26.629,
+  "end": 27.77,
+  "text": "and it was with",
+  "words": [
+   {
+    "w": "and",
+    "start": 26.629,
+    "end": 26.914
+   },
+   {
+    "w": "it",
+    "start": 26.914,
+    "end": 27.199
+   },
+   {
+    "w": "was",
+    "start": 27.199,
+    "end": 27.485
+   },
+   {
+    "w": "with",
+    "start": 27.485,
+    "end": 27.77
+   }
+  ]
+ },
+ {
+  "start": 27.77,
+  "end": 28.91,
+  "text": "a short term rental",
+  "words": [
+   {
+    "w": "a",
+    "start": 27.77,
+    "end": 28.055
+   },
+   {
+    "w": "short",
+    "start": 28.055,
+    "end": 28.34
+   },
+   {
+    "w": "term",
+    "start": 28.34,
+    "end": 28.625
+   },
+   {
+    "w": "rental",
+    "start": 28.625,
+    "end": 28.91
+   }
+  ]
+ },
+ {
+  "start": 28.91,
+  "end": 30.05,
+  "text": "that we were already",
+  "words": [
+   {
+    "w": "that",
+    "start": 28.91,
+    "end": 29.195
+   },
+   {
+    "w": "we",
+    "start": 29.195,
+    "end": 29.48
+   },
+   {
+    "w": "were",
+    "start": 29.48,
+    "end": 29.765
+   },
+   {
+    "w": "already",
+    "start": 29.765,
+    "end": 30.05
+   }
+  ]
+ },
+ {
+  "start": 30.05,
+  "end": 31.191,
+  "text": "managing. This owner had",
+  "words": [
+   {
+    "w": "managing.",
+    "start": 30.05,
+    "end": 30.336
+   },
+   {
+    "w": "This",
+    "start": 30.336,
+    "end": 30.621
+   },
+   {
+    "w": "owner",
+    "start": 30.621,
+    "end": 30.906
+   },
+   {
+    "w": "had",
+    "start": 30.906,
+    "end": 31.191
+   }
+  ]
+ },
+ {
+  "start": 31.191,
+  "end": 32.331,
+  "text": "bought a bunch of",
+  "words": [
+   {
+    "w": "bought",
+    "start": 31.191,
+    "end": 31.476
+   },
+   {
+    "w": "a",
+    "start": 31.476,
+    "end": 31.761
+   },
+   {
+    "w": "bunch",
+    "start": 31.761,
+    "end": 32.046
+   },
+   {
+    "w": "of",
+    "start": 32.046,
+    "end": 32.331
+   }
+  ]
+ },
+ {
+  "start": 32.331,
+  "end": 33.472,
+  "text": "properties to flip. And",
+  "words": [
+   {
+    "w": "properties",
+    "start": 32.331,
+    "end": 32.616
+   },
+   {
+    "w": "to",
+    "start": 32.616,
+    "end": 32.901
+   },
+   {
+    "w": "flip.",
+    "start": 32.901,
+    "end": 33.187
+   },
+   {
+    "w": "And",
+    "start": 33.187,
+    "end": 33.472
+   }
+  ]
+ },
+ {
+  "start": 33.472,
+  "end": 34.612,
+  "text": "as we know the",
+  "words": [
+   {
+    "w": "as",
+    "start": 33.472,
+    "end": 33.757
+   },
+   {
+    "w": "we",
+    "start": 33.757,
+    "end": 34.042
+   },
+   {
+    "w": "know",
+    "start": 34.042,
+    "end": 34.327
+   },
+   {
+    "w": "the",
+    "start": 34.327,
+    "end": 34.612
+   }
+  ]
+ },
+ {
+  "start": 34.612,
+  "end": 35.752,
+  "text": "market kind of turned",
+  "words": [
+   {
+    "w": "market",
+    "start": 34.612,
+    "end": 34.897
+   },
+   {
+    "w": "kind",
+    "start": 34.897,
+    "end": 35.182
+   },
+   {
+    "w": "of",
+    "start": 35.182,
+    "end": 35.467
+   },
+   {
+    "w": "turned",
+    "start": 35.467,
+    "end": 35.752
+   }
+  ]
+ },
+ {
+  "start": 35.752,
+  "end": 36.893,
+  "text": "back in 2023 when",
+  "words": [
+   {
+    "w": "back",
+    "start": 35.752,
+    "end": 36.038
+   },
+   {
+    "w": "in",
+    "start": 36.038,
+    "end": 36.323
+   },
+   {
+    "w": "2023",
+    "start": 36.323,
+    "end": 36.608
+   },
+   {
+    "w": "when",
+    "start": 36.608,
+    "end": 36.893
+   }
+  ]
+ },
+ {
+  "start": 36.893,
+  "end": 38.033,
+  "text": "interest rates were so",
+  "words": [
+   {
+    "w": "interest",
+    "start": 36.893,
+    "end": 37.178
+   },
+   {
+    "w": "rates",
+    "start": 37.178,
+    "end": 37.463
+   },
+   {
+    "w": "were",
+    "start": 37.463,
+    "end": 37.748
+   },
+   {
+    "w": "so",
+    "start": 37.748,
+    "end": 38.033
+   }
+  ]
+ },
+ {
+  "start": 38.033,
+  "end": 39.174,
+  "text": "high and it started",
+  "words": [
+   {
+    "w": "high",
+    "start": 38.033,
+    "end": 38.318
+   },
+   {
+    "w": "and",
+    "start": 38.318,
+    "end": 38.603
+   },
+   {
+    "w": "it",
+    "start": 38.603,
+    "end": 38.889
+   },
+   {
+    "w": "started",
+    "start": 38.889,
+    "end": 39.174
+   }
+  ]
+ },
+ {
+  "start": 39.174,
+  "end": 40.314,
+  "text": "to really drive down",
+  "words": [
+   {
+    "w": "to",
+    "start": 39.174,
+    "end": 39.459
+   },
+   {
+    "w": "really",
+    "start": 39.459,
+    "end": 39.744
+   },
+   {
+    "w": "drive",
+    "start": 39.744,
+    "end": 40.029
+   },
+   {
+    "w": "down",
+    "start": 40.029,
+    "end": 40.314
+   }
+  ]
+ },
+ {
+  "start": 40.314,
+  "end": 41.454,
+  "text": "values. And this was",
+  "words": [
+   {
+    "w": "values.",
+    "start": 40.314,
+    "end": 40.599
+   },
+   {
+    "w": "And",
+    "start": 40.599,
+    "end": 40.884
+   },
+   {
+    "w": "this",
+    "start": 40.884,
+    "end": 41.169
+   },
+   {
+    "w": "was",
+    "start": 41.169,
+    "end": 41.454
+   }
+  ]
+ },
+ {
+  "start": 41.454,
+  "end": 42.595,
+  "text": "in a fringe neighborhood.",
+  "words": [
+   {
+    "w": "in",
+    "start": 41.454,
+    "end": 41.74
+   },
+   {
+    "w": "a",
+    "start": 41.74,
+    "end": 42.025
+   },
+   {
+    "w": "fringe",
+    "start": 42.025,
+    "end": 42.31
+   },
+   {
+    "w": "neighborhood.",
+    "start": 42.31,
+    "end": 42.595
+   }
+  ]
+ },
+ {
+  "start": 42.595,
+  "end": 43.735,
+  "text": "It wasn't an A",
+  "words": [
+   {
+    "w": "It",
+    "start": 42.595,
+    "end": 42.88
+   },
+   {
+    "w": "wasn't",
+    "start": 42.88,
+    "end": 43.165
+   },
+   {
+    "w": "an",
+    "start": 43.165,
+    "end": 43.45
+   },
+   {
+    "w": "A",
+    "start": 43.45,
+    "end": 43.735
+   }
+  ]
+ },
+ {
+  "start": 43.735,
+  "end": 44.876,
+  "text": "or a B plus",
+  "words": [
+   {
+    "w": "or",
+    "start": 43.735,
+    "end": 44.02
+   },
+   {
+    "w": "a",
+    "start": 44.02,
+    "end": 44.305
+   },
+   {
+    "w": "B",
+    "start": 44.305,
+    "end": 44.591
+   },
+   {
+    "w": "plus",
+    "start": 44.591,
+    "end": 44.876
+   }
+  ]
+ },
+ {
+  "start": 44.876,
+  "end": 46.016,
+  "text": "neighborhood where the values",
+  "words": [
+   {
+    "w": "neighborhood",
+    "start": 44.876,
+    "end": 45.161
+   },
+   {
+    "w": "where",
+    "start": 45.161,
+    "end": 45.446
+   },
+   {
+    "w": "the",
+    "start": 45.446,
+    "end": 45.731
+   },
+   {
+    "w": "values",
+    "start": 45.731,
+    "end": 46.016
+   }
+  ]
+ },
+ {
+  "start": 46.016,
+  "end": 47.156,
+  "text": "would stay up. It",
+  "words": [
+   {
+    "w": "would",
+    "start": 46.016,
+    "end": 46.301
+   },
+   {
+    "w": "stay",
+    "start": 46.301,
+    "end": 46.586
+   },
+   {
+    "w": "up.",
+    "start": 46.586,
+    "end": 46.871
+   },
+   {
+    "w": "It",
+    "start": 46.871,
+    "end": 47.156
+   }
+  ]
+ },
+ {
+  "start": 47.156,
+  "end": 48.297,
+  "text": "was something like a",
+  "words": [
+   {
+    "w": "was",
+    "start": 47.156,
+    "end": 47.442
+   },
+   {
+    "w": "something",
+    "start": 47.442,
+    "end": 47.727
+   },
+   {
+    "w": "like",
+    "start": 47.727,
+    "end": 48.012
+   },
+   {
+    "w": "a",
+    "start": 48.012,
+    "end": 48.297
+   }
+  ]
+ },
+ {
+  "start": 48.297,
+  "end": 49.437,
+  "text": "C plus area where",
+  "words": [
+   {
+    "w": "C",
+    "start": 48.297,
+    "end": 48.582
+   },
+   {
+    "w": "plus",
+    "start": 48.582,
+    "end": 48.867
+   },
+   {
+    "w": "area",
+    "start": 48.867,
+    "end": 49.152
+   },
+   {
+    "w": "where",
+    "start": 49.152,
+    "end": 49.437
+   }
+  ]
+ },
+ {
+  "start": 49.437,
+  "end": 50.578,
+  "text": "the values really fluctuate",
+  "words": [
+   {
+    "w": "the",
+    "start": 49.437,
+    "end": 49.722
+   },
+   {
+    "w": "values",
+    "start": 49.722,
+    "end": 50.007
+   },
+   {
+    "w": "really",
+    "start": 50.007,
+    "end": 50.293
+   },
+   {
+    "w": "fluctuate",
+    "start": 50.293,
+    "end": 50.578
+   }
+  ]
+ },
+ {
+  "start": 50.578,
+  "end": 51.718,
+  "text": "especially when the market",
+  "words": [
+   {
+    "w": "especially",
+    "start": 50.578,
+    "end": 50.863
+   },
+   {
+    "w": "when",
+    "start": 50.863,
+    "end": 51.148
+   },
+   {
+    "w": "the",
+    "start": 51.148,
+    "end": 51.433
+   },
+   {
+    "w": "market",
+    "start": 51.433,
+    "end": 51.718
+   }
+  ]
+ },
+ {
+  "start": 51.718,
+  "end": 52.858,
+  "text": "starts to get a",
+  "words": [
+   {
+    "w": "starts",
+    "start": 51.718,
+    "end": 52.003
+   },
+   {
+    "w": "to",
+    "start": 52.003,
+    "end": 52.288
+   },
+   {
+    "w": "get",
+    "start": 52.288,
+    "end": 52.573
+   },
+   {
+    "w": "a",
+    "start": 52.573,
+    "end": 52.858
+   }
+  ]
+ },
+ {
+  "start": 52.858,
+  "end": 53.999,
+  "text": "little bit shaky because",
+  "words": [
+   {
+    "w": "little",
+    "start": 52.858,
+    "end": 53.144
+   },
+   {
+    "w": "bit",
+    "start": 53.144,
+    "end": 53.429
+   },
+   {
+    "w": "shaky",
+    "start": 53.429,
+    "end": 53.714
+   },
+   {
+    "w": "because",
+    "start": 53.714,
+    "end": 53.999
+   }
+  ]
+ },
+ {
+  "start": 53.999,
+  "end": 55.139,
+  "text": "people aren't banging on",
+  "words": [
+   {
+    "w": "people",
+    "start": 53.999,
+    "end": 54.284
+   },
+   {
+    "w": "aren't",
+    "start": 54.284,
+    "end": 54.569
+   },
+   {
+    "w": "banging",
+    "start": 54.569,
+    "end": 54.854
+   },
+   {
+    "w": "on",
+    "start": 54.854,
+    "end": 55.139
+   }
+  ]
+ },
+ {
+  "start": 55.139,
+  "end": 56.28,
+  "text": "the door to be",
+  "words": [
+   {
+    "w": "the",
+    "start": 55.139,
+    "end": 55.424
+   },
+   {
+    "w": "door",
+    "start": 55.424,
+    "end": 55.709
+   },
+   {
+    "w": "to",
+    "start": 55.709,
+    "end": 55.995
+   },
+   {
+    "w": "be",
+    "start": 55.995,
+    "end": 56.28
+   }
+  ]
+ },
+ {
+  "start": 56.28,
+  "end": 57.42,
+  "text": "in that neighborhood. And",
+  "words": [
+   {
+    "w": "in",
+    "start": 56.28,
+    "end": 56.565
+   },
+   {
+    "w": "that",
+    "start": 56.565,
+    "end": 56.85
+   },
+   {
+    "w": "neighborhood.",
+    "start": 56.85,
+    "end": 57.135
+   },
+   {
+    "w": "And",
+    "start": 57.135,
+    "end": 57.42
+   }
+  ]
+ },
+ {
+  "start": 57.42,
+  "end": 58.56,
+  "text": "so the numbers were",
+  "words": [
+   {
+    "w": "so",
+    "start": 57.42,
+    "end": 57.705
+   },
+   {
+    "w": "the",
+    "start": 57.705,
+    "end": 57.99
+   },
+   {
+    "w": "numbers",
+    "start": 57.99,
+    "end": 58.275
+   },
+   {
+    "w": "were",
+    "start": 58.275,
+    "end": 58.56
+   }
+  ]
+ },
+ {
+  "start": 58.56,
+  "end": 59.701,
+  "text": "basically break even for",
+  "words": [
+   {
+    "w": "basically",
+    "start": 58.56,
+    "end": 58.846
+   },
+   {
+    "w": "break",
+    "start": 58.846,
+    "end": 59.131
+   },
+   {
+    "w": "even",
+    "start": 59.131,
+    "end": 59.416
+   },
+   {
+    "w": "for",
+    "start": 59.416,
+    "end": 59.701
+   }
+  ]
+ },
+ {
+  "start": 59.701,
+  "end": 60.841,
+  "text": "him. And when there",
+  "words": [
+   {
+    "w": "him.",
+    "start": 59.701,
+    "end": 59.986
+   },
+   {
+    "w": "And",
+    "start": 59.986,
+    "end": 60.271
+   },
+   {
+    "w": "when",
+    "start": 60.271,
+    "end": 60.556
+   },
+   {
+    "w": "there",
+    "start": 60.556,
+    "end": 60.841
+   }
+  ]
+ },
+ {
+  "start": 60.841,
+  "end": 61.982,
+  "text": "was fixes that came",
+  "words": [
+   {
+    "w": "was",
+    "start": 60.841,
+    "end": 61.126
+   },
+   {
+    "w": "fixes",
+    "start": 61.126,
+    "end": 61.411
+   },
+   {
+    "w": "that",
+    "start": 61.411,
+    "end": 61.697
+   },
+   {
+    "w": "came",
+    "start": 61.697,
+    "end": 61.982
+   }
+  ]
+ },
+ {
+  "start": 61.982,
+  "end": 63.122,
+  "text": "in that came out",
+  "words": [
+   {
+    "w": "in",
+    "start": 61.982,
+    "end": 62.267
+   },
+   {
+    "w": "that",
+    "start": 62.267,
+    "end": 62.552
+   },
+   {
+    "w": "came",
+    "start": 62.552,
+    "end": 62.837
+   },
+   {
+    "w": "out",
+    "start": 62.837,
+    "end": 63.122
+   }
+  ]
+ },
+ {
+  "start": 63.122,
+  "end": 64.262,
+  "text": "of his pocket because",
+  "words": [
+   {
+    "w": "of",
+    "start": 63.122,
+    "end": 63.407
+   },
+   {
+    "w": "his",
+    "start": 63.407,
+    "end": 63.692
+   },
+   {
+    "w": "pocket",
+    "start": 63.692,
+    "end": 63.977
+   },
+   {
+    "w": "because",
+    "start": 63.977,
+    "end": 64.262
+   }
+  ]
+ },
+ {
+  "start": 64.262,
+  "end": 65.403,
+  "text": "he was paying us",
+  "words": [
+   {
+    "w": "he",
+    "start": 64.262,
+    "end": 64.548
+   },
+   {
+    "w": "was",
+    "start": 64.548,
+    "end": 64.833
+   },
+   {
+    "w": "paying",
+    "start": 64.833,
+    "end": 65.118
+   },
+   {
+    "w": "us",
+    "start": 65.118,
+    "end": 65.403
+   }
+  ]
+ },
+ {
+  "start": 65.403,
+  "end": 66.543,
+  "text": "the 20% management fee",
+  "words": [
+   {
+    "w": "the",
+    "start": 65.403,
+    "end": 65.688
+   },
+   {
+    "w": "20%",
+    "start": 65.688,
+    "end": 65.973
+   },
+   {
+    "w": "management",
+    "start": 65.973,
+    "end": 66.258
+   },
+   {
+    "w": "fee",
+    "start": 66.258,
+    "end": 66.543
+   }
+  ]
+ },
+ {
+  "start": 66.543,
+  "end": 67.684,
+  "text": "to be fully hands",
+  "words": [
+   {
+    "w": "to",
+    "start": 66.543,
+    "end": 66.828
+   },
+   {
+    "w": "be",
+    "start": 66.828,
+    "end": 67.113
+   },
+   {
+    "w": "fully",
+    "start": 67.113,
+    "end": 67.399
+   },
+   {
+    "w": "hands",
+    "start": 67.399,
+    "end": 67.684
+   }
+  ]
+ },
+ {
+  "start": 67.684,
+  "end": 68.824,
+  "text": "off. And so when",
+  "words": [
+   {
+    "w": "off.",
+    "start": 67.684,
+    "end": 67.969
+   },
+   {
+    "w": "And",
+    "start": 67.969,
+    "end": 68.254
+   },
+   {
+    "w": "so",
+    "start": 68.254,
+    "end": 68.539
+   },
+   {
+    "w": "when",
+    "start": 68.539,
+    "end": 68.824
+   }
+  ]
+ },
+ {
+  "start": 68.824,
+  "end": 69.964,
+  "text": "you look at that",
+  "words": [
+   {
+    "w": "you",
+    "start": 68.824,
+    "end": 69.109
+   },
+   {
+    "w": "look",
+    "start": 69.109,
+    "end": 69.394
+   },
+   {
+    "w": "at",
+    "start": 69.394,
+    "end": 69.679
+   },
+   {
+    "w": "that",
+    "start": 69.679,
+    "end": 69.964
+   }
+  ]
+ },
+ {
+  "start": 69.964,
+  "end": 71.105,
+  "text": "piece he was fully",
+  "words": [
+   {
+    "w": "piece",
+    "start": 69.964,
+    "end": 70.25
+   },
+   {
+    "w": "he",
+    "start": 70.25,
+    "end": 70.535
+   },
+   {
+    "w": "was",
+    "start": 70.535,
+    "end": 70.82
+   },
+   {
+    "w": "fully",
+    "start": 70.82,
+    "end": 71.105
+   }
+  ]
+ },
+ {
+  "start": 71.105,
+  "end": 71.675,
+  "text": "hands off",
+  "words": [
+   {
+    "w": "hands",
+    "start": 71.105,
+    "end": 71.39
+   },
+   {
+    "w": "off",
+    "start": 71.39,
+    "end": 71.675
+   }
+  ]
+ }
+]

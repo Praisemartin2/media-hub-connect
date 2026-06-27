@@ -14,11 +14,11 @@ export const SRC = "source/source.mp4";
 
 // Placeholder until ffprobe in the fresh session. Set to the real A-roll length
 // (after silence-cut) and re-render.
-export const DURATION_SECONDS = 60;
+export const DURATION_SECONDS = 77.07;
 
 // Flip true once public/source/source.mp4 exists. When false the reel renders on
 // a branded background so the layout is verifiable without the footage.
-export const ASSETS_READY = false;
+export const ASSETS_READY = true;
 
 // Opening hook (absolute seconds — always near the start).
 export const HOOK = {
@@ -32,16 +32,16 @@ export const HOOK = {
 // total duration. Alternate cobalt <-> cream; rust reserved for the punchline.
 export type TitleCard = { atFrac: number; dur: number; bg: string; fg: string; lines: string[] };
 export const TITLE_CARDS: TitleCard[] = [
-  { atFrac: 0.1, dur: 0.9, bg: COLORS.cream, fg: COLORS.cobalt, lines: ["WHAT IS", "SUBJECT-TO?"] },
-  { atFrac: 0.34, dur: 0.9, bg: COLORS.cobalt, fg: COLORS.cream, lines: ["MY FIRST", "DEAL · 2024"] },
-  { atFrac: 0.55, dur: 0.9, bg: COLORS.cobalt, fg: COLORS.cream, lines: ["THE MARKET", "TURNED"] },
-  { atFrac: 0.72, dur: 0.9, bg: COLORS.cream, fg: COLORS.cobalt, lines: ["A C+", "NEIGHBORHOOD"] },
-  { atFrac: 0.86, dur: 1.0, bg: COLORS.rust, fg: COLORS.cream, lines: ["BASICALLY", "BREAK-EVEN"] },
+  { atFrac: 0.04, dur: 0.9, bg: COLORS.cream, fg: COLORS.cobalt, lines: ["WHAT IS", "SUBJECT-TO?"] },
+  { atFrac: 0.342, dur: 0.9, bg: COLORS.cobalt, fg: COLORS.cream, lines: ["MY FIRST", "DEAL · 2024"] },
+  { atFrac: 0.46, dur: 0.9, bg: COLORS.cobalt, fg: COLORS.cream, lines: ["THE MARKET", "TURNED"] },
+  { atFrac: 0.545, dur: 0.9, bg: COLORS.cream, fg: COLORS.cobalt, lines: ["A C+", "NEIGHBORHOOD"] },
+  { atFrac: 0.764, dur: 1.0, bg: COLORS.rust, fg: COLORS.cream, lines: ["BASICALLY", "BREAK-EVEN"] },
 ];
 
 // Closing CTA card.
 export const CTA = {
-  startFrac: 0.93,
+  startFrac: 0.95,
   kicker: "WANT THE PLAYBOOK?",
   big: ["DM me", "‘SUBJECT’"],
   sub: "or tap the link in my bio",
@@ -51,7 +51,7 @@ export const CTA = {
 // seconds. Uses clips already in public/broll/.
 export type Broll = { atFrac: number; dur: number; src: string };
 export const BROLL: Broll[] = [
-  { atFrac: 0.07, dur: 1.6, src: "broll/quadplex.mp4" },   // "a significant loan on the property"
-  { atFrac: 0.4, dur: 1.6, src: "broll/clock.mp4" },       // "the market turned ... interest rates so high"
-  { atFrac: 0.78, dur: 1.6, src: "broll/contract.mp4" },   // "20% management fee ... break even"
+  { atFrac: 0.12, dur: 1.6, src: "broll/quadplex.mp4" },   // "a significant loan on the property"
+  { atFrac: 0.5, dur: 1.6, src: "broll/clock.mp4" },       // after "the market turned ... rates so high"
+  { atFrac: 0.68, dur: 1.6, src: "broll/contract.mp4" },   // "20% management fee" before break-even card
 ];
