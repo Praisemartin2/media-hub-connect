@@ -35,7 +35,8 @@ export const CTA = {
 // B-roll punch-ins (repo real-estate clips; swap for Higgsfield once allowlisted).
 export type Broll = { atFrac: number; dur: number; src: string };
 export const BROLL: Broll[] = [
-  { atFrac: 0.13, dur: 1.6, src: "broll/quadplex.mp4" },  // income the property brings in
-  { atFrac: 0.45, dur: 1.6, src: "broll/contract.mp4" },  // coverage / reserves / loan terms
-  { atFrac: 0.8, dur: 1.6, src: "broll/quadplex.mp4" },   // type of property you're buying
+  { atFrac: 0.13, dur: 1.8, src: "broll/dscr_property.mp4" }, // income the property brings in
+  { atFrac: 0.4, dur: 1.8, src: "broll/dscr_income.mp4" },    // cover the mortgage / reserves
+  { atFrac: 0.62, dur: 1.8, src: "broll/dscr_loan.mp4" },     // DSCR loans / terms / credit
+  { atFrac: 0.82, dur: 1.8, src: "broll/dscr_keys.mp4" },     // type of property / closing
 ];
