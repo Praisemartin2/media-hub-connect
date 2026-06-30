@@ -1,1589 +1,1589 @@
 [
  {
   "start": 0.4,
-  "end": 1.66,
+  "end": 1.513,
   "text": "They're not going to",
   "words": [
    {
     "w": "They're",
     "start": 0.4,
-    "end": 0.715
+    "end": 0.678
    },
    {
     "w": "not",
-    "start": 0.715,
-    "end": 1.03
+    "start": 0.678,
+    "end": 0.956
    },
    {
     "w": "going",
-    "start": 1.03,
-    "end": 1.345
+    "start": 0.956,
+    "end": 1.234
    },
    {
     "w": "to",
-    "start": 1.345,
-    "end": 1.66
+    "start": 1.234,
+    "end": 1.513
    }
   ]
  },
  {
-  "start": 1.66,
-  "end": 2.919,
+  "start": 1.513,
+  "end": 2.625,
   "text": "look at your W-2.",
   "words": [
    {
     "w": "look",
-    "start": 1.66,
-    "end": 1.974
+    "start": 1.513,
+    "end": 1.791
    },
    {
     "w": "at",
-    "start": 1.974,
-    "end": 2.289
+    "start": 1.791,
+    "end": 2.069
    },
    {
     "w": "your",
-    "start": 2.289,
-    "end": 2.604
+    "start": 2.069,
+    "end": 2.347
    },
    {
     "w": "W-2.",
-    "start": 2.604,
-    "end": 2.919
+    "start": 2.347,
+    "end": 2.625
    }
   ]
  },
  {
-  "start": 2.919,
-  "end": 4.179,
+  "start": 2.625,
+  "end": 3.738,
   "text": "It's not like hey",
   "words": [
    {
     "w": "It's",
-    "start": 2.919,
-    "end": 3.234
+    "start": 2.625,
+    "end": 2.903
    },
    {
     "w": "not",
-    "start": 3.234,
-    "end": 3.549
+    "start": 2.903,
+    "end": 3.181
    },
    {
     "w": "like",
-    "start": 3.549,
-    "end": 3.864
+    "start": 3.181,
+    "end": 3.459
    },
    {
     "w": "hey",
-    "start": 3.864,
-    "end": 4.179
+    "start": 3.459,
+    "end": 3.738
    }
   ]
  },
  {
-  "start": 4.179,
-  "end": 5.438,
+  "start": 3.738,
+  "end": 4.85,
   "text": "can you pay for",
   "words": [
    {
     "w": "can",
-    "start": 4.179,
-    "end": 4.494
+    "start": 3.738,
+    "end": 4.016
    },
    {
     "w": "you",
-    "start": 4.494,
-    "end": 4.809
+    "start": 4.016,
+    "end": 4.294
    },
    {
     "w": "pay",
-    "start": 4.809,
-    "end": 5.123
+    "start": 4.294,
+    "end": 4.572
    },
    {
     "w": "for",
-    "start": 5.123,
-    "end": 5.438
+    "start": 4.572,
+    "end": 4.85
    }
   ]
  },
  {
-  "start": 5.438,
-  "end": 6.698,
+  "start": 4.85,
+  "end": 5.963,
   "text": "this thing over time",
   "words": [
    {
     "w": "this",
-    "start": 5.438,
-    "end": 5.753
+    "start": 4.85,
+    "end": 5.128
    },
    {
     "w": "thing",
-    "start": 5.753,
-    "end": 6.068
+    "start": 5.128,
+    "end": 5.406
    },
    {
     "w": "over",
-    "start": 6.068,
-    "end": 6.383
+    "start": 5.406,
+    "end": 5.684
    },
    {
     "w": "time",
-    "start": 6.383,
-    "end": 6.698
+    "start": 5.684,
+    "end": 5.963
    }
   ]
  },
  {
-  "start": 6.698,
-  "end": 7.957,
+  "start": 5.963,
+  "end": 7.075,
   "text": "What they're going to",
   "words": [
    {
     "w": "What",
-    "start": 6.698,
-    "end": 7.013
+    "start": 5.963,
+    "end": 6.241
    },
    {
     "w": "they're",
-    "start": 7.013,
-    "end": 7.328
+    "start": 6.241,
+    "end": 6.519
    },
    {
     "w": "going",
-    "start": 7.328,
-    "end": 7.643
+    "start": 6.519,
+    "end": 6.797
    },
    {
     "w": "to",
-    "start": 7.643,
-    "end": 7.957
+    "start": 6.797,
+    "end": 7.075
    }
   ]
  },
  {
-  "start": 7.957,
-  "end": 9.217,
+  "start": 7.075,
+  "end": 8.188,
   "text": "look at is your",
   "words": [
    {
     "w": "look",
-    "start": 7.957,
-    "end": 8.272
+    "start": 7.075,
+    "end": 7.353
    },
    {
     "w": "at",
-    "start": 8.272,
-    "end": 8.587
+    "start": 7.353,
+    "end": 7.631
    },
    {
     "w": "is",
-    "start": 8.587,
-    "end": 8.902
+    "start": 7.631,
+    "end": 7.909
    },
    {
     "w": "your",
-    "start": 8.902,
-    "end": 9.217
+    "start": 7.909,
+    "end": 8.188
    }
   ]
  },
  {
-  "start": 9.217,
-  "end": 10.477,
+  "start": 8.188,
+  "end": 9.3,
   "text": "overall debt service coverage",
   "words": [
    {
     "w": "overall",
-    "start": 9.217,
-    "end": 9.532
+    "start": 8.188,
+    "end": 8.466
    },
    {
     "w": "debt",
-    "start": 9.532,
-    "end": 9.847
+    "start": 8.466,
+    "end": 8.744
    },
    {
     "w": "service",
-    "start": 9.847,
-    "end": 10.162
+    "start": 8.744,
+    "end": 9.022
    },
    {
     "w": "coverage",
-    "start": 10.162,
-    "end": 10.477
+    "start": 9.022,
+    "end": 9.3
    }
   ]
  },
  {
-  "start": 10.477,
-  "end": 11.736,
+  "start": 9.3,
+  "end": 10.413,
   "text": "ratio. Right Hey how",
   "words": [
    {
     "w": "ratio.",
-    "start": 10.477,
-    "end": 10.791
+    "start": 9.3,
+    "end": 9.578
    },
    {
     "w": "Right",
-    "start": 10.791,
-    "end": 11.106
+    "start": 9.578,
+    "end": 9.856
    },
    {
     "w": "Hey",
-    "start": 11.106,
-    "end": 11.421
+    "start": 9.856,
+    "end": 10.135
    },
    {
     "w": "how",
-    "start": 11.421,
-    "end": 11.736
+    "start": 10.135,
+    "end": 10.413
    }
   ]
  },
  {
-  "start": 11.736,
-  "end": 12.996,
+  "start": 10.413,
+  "end": 11.525,
   "text": "much income is this",
   "words": [
    {
     "w": "much",
-    "start": 11.736,
-    "end": 12.051
+    "start": 10.413,
+    "end": 10.691
    },
    {
     "w": "income",
-    "start": 12.051,
-    "end": 12.366
+    "start": 10.691,
+    "end": 10.969
    },
    {
     "w": "is",
-    "start": 12.366,
-    "end": 12.681
+    "start": 10.969,
+    "end": 11.247
    },
    {
     "w": "this",
-    "start": 12.681,
-    "end": 12.996
+    "start": 11.247,
+    "end": 11.525
    }
   ]
  },
  {
-  "start": 12.996,
-  "end": 14.255,
+  "start": 11.525,
+  "end": 12.638,
   "text": "property bringing in or",
   "words": [
    {
     "w": "property",
-    "start": 12.996,
-    "end": 13.311
+    "start": 11.525,
+    "end": 11.803
    },
    {
     "w": "bringing",
-    "start": 13.311,
-    "end": 13.626
+    "start": 11.803,
+    "end": 12.081
    },
    {
     "w": "in",
-    "start": 13.626,
-    "end": 13.94
+    "start": 12.081,
+    "end": 12.36
    },
    {
     "w": "or",
-    "start": 13.94,
-    "end": 14.255
+    "start": 12.36,
+    "end": 12.638
    }
   ]
  },
  {
-  "start": 14.255,
-  "end": 15.515,
+  "start": 12.638,
+  "end": 13.75,
   "text": "what is the projected",
   "words": [
    {
     "w": "what",
-    "start": 14.255,
-    "end": 14.57
+    "start": 12.638,
+    "end": 12.916
    },
    {
     "w": "is",
-    "start": 14.57,
-    "end": 14.885
+    "start": 12.916,
+    "end": 13.194
    },
    {
     "w": "the",
-    "start": 14.885,
-    "end": 15.2
+    "start": 13.194,
+    "end": 13.472
    },
    {
     "w": "projected",
-    "start": 15.2,
-    "end": 15.515
+    "start": 13.472,
+    "end": 13.75
    }
   ]
  },
  {
-  "start": 15.515,
-  "end": 16.774,
+  "start": 13.75,
+  "end": 14.863,
   "text": "income that this property",
   "words": [
    {
     "w": "income",
-    "start": 15.515,
-    "end": 15.83
+    "start": 13.75,
+    "end": 14.028
    },
    {
     "w": "that",
-    "start": 15.83,
-    "end": 16.145
+    "start": 14.028,
+    "end": 14.306
    },
    {
     "w": "this",
-    "start": 16.145,
-    "end": 16.46
+    "start": 14.306,
+    "end": 14.585
    },
    {
     "w": "property",
-    "start": 16.46,
-    "end": 16.774
+    "start": 14.585,
+    "end": 14.863
    }
   ]
  },
  {
-  "start": 16.774,
-  "end": 18.034,
+  "start": 14.863,
+  "end": 15.975,
   "text": "is going to bring",
   "words": [
    {
     "w": "is",
-    "start": 16.774,
-    "end": 17.089
+    "start": 14.863,
+    "end": 15.141
    },
    {
     "w": "going",
-    "start": 17.089,
-    "end": 17.404
+    "start": 15.141,
+    "end": 15.419
    },
    {
     "w": "to",
-    "start": 17.404,
-    "end": 17.719
+    "start": 15.419,
+    "end": 15.697
    },
    {
     "w": "bring",
-    "start": 17.719,
-    "end": 18.034
+    "start": 15.697,
+    "end": 15.975
    }
   ]
  },
  {
-  "start": 18.034,
-  "end": 19.294,
+  "start": 15.975,
+  "end": 17.088,
   "text": "in and can it",
   "words": [
    {
     "w": "in",
-    "start": 18.034,
-    "end": 18.349
+    "start": 15.975,
+    "end": 16.253
    },
    {
     "w": "and",
-    "start": 18.349,
-    "end": 18.664
+    "start": 16.253,
+    "end": 16.531
    },
    {
     "w": "can",
-    "start": 18.664,
-    "end": 18.979
+    "start": 16.531,
+    "end": 16.81
    },
    {
     "w": "it",
-    "start": 18.979,
-    "end": 19.294
+    "start": 16.81,
+    "end": 17.088
    }
   ]
  },
  {
-  "start": 19.294,
-  "end": 20.553,
+  "start": 17.088,
+  "end": 18.2,
   "text": "cover the mortgage plus",
   "words": [
    {
     "w": "cover",
-    "start": 19.294,
-    "end": 19.609
+    "start": 17.088,
+    "end": 17.366
    },
    {
     "w": "the",
-    "start": 19.609,
-    "end": 19.923
+    "start": 17.366,
+    "end": 17.644
    },
    {
     "w": "mortgage",
-    "start": 19.923,
-    "end": 20.238
+    "start": 17.644,
+    "end": 17.922
    },
    {
     "w": "plus",
-    "start": 20.238,
-    "end": 20.553
+    "start": 17.922,
+    "end": 18.2
    }
   ]
  },
  {
-  "start": 20.553,
-  "end": 21.813,
+  "start": 18.2,
+  "end": 19.313,
   "text": "some Typically they want",
   "words": [
    {
     "w": "some",
-    "start": 20.553,
-    "end": 20.868
+    "start": 18.2,
+    "end": 18.478
    },
    {
     "w": "Typically",
-    "start": 20.868,
-    "end": 21.183
+    "start": 18.478,
+    "end": 18.757
    },
    {
     "w": "they",
-    "start": 21.183,
-    "end": 21.498
+    "start": 18.757,
+    "end": 19.035
    },
    {
     "w": "want",
-    "start": 21.498,
-    "end": 21.813
+    "start": 19.035,
+    "end": 19.313
    }
   ]
  },
  {
-  "start": 21.813,
-  "end": 23.072,
+  "start": 19.313,
+  "end": 20.425,
   "text": "to see a minimum",
   "words": [
    {
     "w": "to",
-    "start": 21.813,
-    "end": 22.128
+    "start": 19.313,
+    "end": 19.591
    },
    {
     "w": "see",
-    "start": 22.128,
-    "end": 22.443
+    "start": 19.591,
+    "end": 19.869
    },
    {
     "w": "a",
-    "start": 22.443,
-    "end": 22.757
+    "start": 19.869,
+    "end": 20.147
    },
    {
     "w": "minimum",
-    "start": 22.757,
-    "end": 23.072
+    "start": 20.147,
+    "end": 20.425
    }
   ]
  },
  {
-  "start": 23.072,
-  "end": 24.332,
+  "start": 20.425,
+  "end": 21.538,
   "text": "of 1.2 coverage meaning",
   "words": [
    {
     "w": "of",
-    "start": 23.072,
-    "end": 23.387
+    "start": 20.425,
+    "end": 20.703
    },
    {
     "w": "1.2",
-    "start": 23.387,
-    "end": 23.702
+    "start": 20.703,
+    "end": 20.982
    },
    {
     "w": "coverage",
-    "start": 23.702,
-    "end": 24.017
+    "start": 20.982,
+    "end": 21.26
    },
    {
     "w": "meaning",
-    "start": 24.017,
-    "end": 24.332
+    "start": 21.26,
+    "end": 21.538
    }
   ]
  },
  {
-  "start": 24.332,
-  "end": 25.591,
+  "start": 21.538,
+  "end": 22.65,
   "text": "if the mortgage is",
   "words": [
    {
     "w": "if",
-    "start": 24.332,
-    "end": 24.647
+    "start": 21.538,
+    "end": 21.816
    },
    {
     "w": "the",
-    "start": 24.647,
-    "end": 24.962
+    "start": 21.816,
+    "end": 22.094
    },
    {
     "w": "mortgage",
-    "start": 24.962,
-    "end": 25.277
+    "start": 22.094,
+    "end": 22.372
    },
    {
     "w": "is",
-    "start": 25.277,
-    "end": 25.591
+    "start": 22.372,
+    "end": 22.65
    }
   ]
  },
  {
-  "start": 25.591,
-  "end": 26.851,
+  "start": 22.65,
+  "end": 23.763,
   "text": "a one it's 0.2",
   "words": [
    {
     "w": "a",
-    "start": 25.591,
-    "end": 25.906
+    "start": 22.65,
+    "end": 22.928
    },
    {
     "w": "one",
-    "start": 25.906,
-    "end": 26.221
+    "start": 22.928,
+    "end": 23.207
    },
    {
     "w": "it's",
-    "start": 26.221,
-    "end": 26.536
+    "start": 23.207,
+    "end": 23.485
    },
    {
     "w": "0.2",
-    "start": 26.536,
-    "end": 26.851
+    "start": 23.485,
+    "end": 23.763
    }
   ]
  },
  {
-  "start": 26.851,
-  "end": 28.111,
+  "start": 23.763,
+  "end": 24.875,
   "text": "over covering the mortgage.",
   "words": [
    {
     "w": "over",
-    "start": 26.851,
-    "end": 27.166
+    "start": 23.763,
+    "end": 24.041
    },
    {
     "w": "covering",
-    "start": 27.166,
-    "end": 27.481
+    "start": 24.041,
+    "end": 24.319
    },
    {
     "w": "the",
-    "start": 27.481,
-    "end": 27.796
+    "start": 24.319,
+    "end": 24.597
    },
    {
     "w": "mortgage.",
-    "start": 27.796,
-    "end": 28.111
+    "start": 24.597,
+    "end": 24.875
    }
   ]
  },
  {
-  "start": 28.111,
-  "end": 29.37,
+  "start": 24.875,
+  "end": 25.988,
   "text": "So you have a",
   "words": [
    {
     "w": "So",
-    "start": 28.111,
-    "end": 28.426
+    "start": 24.875,
+    "end": 25.153
    },
    {
     "w": "you",
-    "start": 28.426,
-    "end": 28.74
+    "start": 25.153,
+    "end": 25.432
    },
    {
     "w": "have",
-    "start": 28.74,
-    "end": 29.055
+    "start": 25.432,
+    "end": 25.71
    },
    {
     "w": "a",
-    "start": 29.055,
-    "end": 29.37
+    "start": 25.71,
+    "end": 25.988
    }
   ]
  },
  {
-  "start": 29.37,
-  "end": 30.63,
+  "start": 25.988,
+  "end": 27.1,
   "text": "little wiggle room there.",
   "words": [
    {
     "w": "little",
-    "start": 29.37,
-    "end": 29.685
+    "start": 25.988,
+    "end": 26.266
    },
    {
     "w": "wiggle",
-    "start": 29.685,
-    "end": 30.0
+    "start": 26.266,
+    "end": 26.544
    },
    {
     "w": "room",
-    "start": 30.0,
-    "end": 30.315
+    "start": 26.544,
+    "end": 26.822
    },
    {
     "w": "there.",
-    "start": 30.315,
-    "end": 30.63
+    "start": 26.822,
+    "end": 27.1
    }
   ]
  },
  {
-  "start": 30.63,
-  "end": 31.889,
+  "start": 27.1,
+  "end": 28.213,
   "text": "But they're definitely going",
   "words": [
    {
     "w": "But",
-    "start": 30.63,
-    "end": 30.945
+    "start": 27.1,
+    "end": 27.379
    },
    {
     "w": "they're",
-    "start": 30.945,
-    "end": 31.26
+    "start": 27.379,
+    "end": 27.657
    },
    {
     "w": "definitely",
-    "start": 31.26,
-    "end": 31.574
+    "start": 27.657,
+    "end": 27.935
    },
    {
     "w": "going",
-    "start": 31.574,
-    "end": 31.889
+    "start": 27.935,
+    "end": 28.213
    }
   ]
  },
  {
-  "start": 31.889,
-  "end": 33.149,
+  "start": 28.213,
+  "end": 29.325,
   "text": "to want to see",
   "words": [
    {
     "w": "to",
-    "start": 31.889,
-    "end": 32.204
+    "start": 28.213,
+    "end": 28.491
    },
    {
     "w": "want",
-    "start": 32.204,
-    "end": 32.519
+    "start": 28.491,
+    "end": 28.769
    },
    {
     "w": "to",
-    "start": 32.519,
-    "end": 32.834
+    "start": 28.769,
+    "end": 29.047
    },
    {
     "w": "see",
-    "start": 32.834,
-    "end": 33.149
+    "start": 29.047,
+    "end": 29.325
    }
   ]
  },
  {
-  "start": 33.149,
-  "end": 34.409,
+  "start": 29.325,
+  "end": 30.438,
   "text": "some reserves as well",
   "words": [
    {
     "w": "some",
-    "start": 33.149,
-    "end": 33.464
+    "start": 29.325,
+    "end": 29.604
    },
    {
     "w": "reserves",
-    "start": 33.464,
-    "end": 33.779
+    "start": 29.604,
+    "end": 29.882
    },
    {
     "w": "as",
-    "start": 33.779,
-    "end": 34.094
+    "start": 29.882,
+    "end": 30.16
    },
    {
     "w": "well",
-    "start": 34.094,
-    "end": 34.409
+    "start": 30.16,
+    "end": 30.438
    }
   ]
  },
  {
-  "start": 34.409,
-  "end": 35.668,
+  "start": 30.438,
+  "end": 31.55,
   "text": "on that piece. Now",
   "words": [
    {
     "w": "on",
-    "start": 34.409,
-    "end": 34.723
+    "start": 30.438,
+    "end": 30.716
    },
    {
     "w": "that",
-    "start": 34.723,
-    "end": 35.038
+    "start": 30.716,
+    "end": 30.994
    },
    {
     "w": "piece.",
-    "start": 35.038,
-    "end": 35.353
+    "start": 30.994,
+    "end": 31.272
    },
    {
     "w": "Now",
-    "start": 35.353,
-    "end": 35.668
+    "start": 31.272,
+    "end": 31.55
    }
   ]
  },
  {
-  "start": 35.668,
-  "end": 36.928,
+  "start": 31.55,
+  "end": 32.663,
   "text": "when it comes to",
   "words": [
    {
     "w": "when",
-    "start": 35.668,
-    "end": 35.983
+    "start": 31.55,
+    "end": 31.829
    },
    {
     "w": "it",
-    "start": 35.983,
-    "end": 36.298
+    "start": 31.829,
+    "end": 32.107
    },
    {
     "w": "comes",
-    "start": 36.298,
-    "end": 36.613
+    "start": 32.107,
+    "end": 32.385
    },
    {
     "w": "to",
-    "start": 36.613,
-    "end": 36.928
+    "start": 32.385,
+    "end": 32.663
    }
   ]
  },
  {
-  "start": 36.928,
-  "end": 38.187,
+  "start": 32.663,
+  "end": 33.775,
   "text": "DSCR loans especially in",
   "words": [
    {
     "w": "DSCR",
-    "start": 36.928,
-    "end": 37.243
+    "start": 32.663,
+    "end": 32.941
    },
    {
     "w": "loans",
-    "start": 37.243,
-    "end": 37.557
+    "start": 32.941,
+    "end": 33.219
    },
    {
     "w": "especially",
-    "start": 37.557,
-    "end": 37.872
+    "start": 33.219,
+    "end": 33.497
    },
    {
     "w": "in",
-    "start": 37.872,
-    "end": 38.187
+    "start": 33.497,
+    "end": 33.775
    }
   ]
  },
  {
-  "start": 38.187,
-  "end": 39.447,
+  "start": 33.775,
+  "end": 34.888,
   "text": "the residential space they've",
   "words": [
    {
     "w": "the",
-    "start": 38.187,
-    "end": 38.502
+    "start": 33.775,
+    "end": 34.054
    },
    {
     "w": "residential",
-    "start": 38.502,
-    "end": 38.817
+    "start": 34.054,
+    "end": 34.332
    },
    {
     "w": "space",
-    "start": 38.817,
-    "end": 39.132
+    "start": 34.332,
+    "end": 34.61
    },
    {
     "w": "they've",
-    "start": 39.132,
-    "end": 39.447
+    "start": 34.61,
+    "end": 34.888
    }
   ]
  },
  {
-  "start": 39.447,
-  "end": 40.706,
+  "start": 34.888,
+  "end": 36.001,
   "text": "gotten popular over the",
   "words": [
    {
     "w": "gotten",
-    "start": 39.447,
-    "end": 39.762
+    "start": 34.888,
+    "end": 35.166
    },
    {
     "w": "popular",
-    "start": 39.762,
-    "end": 40.077
+    "start": 35.166,
+    "end": 35.444
    },
    {
     "w": "over",
-    "start": 40.077,
-    "end": 40.391
+    "start": 35.444,
+    "end": 35.722
    },
    {
     "w": "the",
-    "start": 40.391,
-    "end": 40.706
+    "start": 35.722,
+    "end": 36.001
    }
   ]
  },
  {
-  "start": 40.706,
-  "end": 41.966,
+  "start": 36.001,
+  "end": 37.113,
   "text": "past few years. This",
   "words": [
    {
     "w": "past",
-    "start": 40.706,
-    "end": 41.021
+    "start": 36.001,
+    "end": 36.279
    },
    {
     "w": "few",
-    "start": 41.021,
-    "end": 41.336
+    "start": 36.279,
+    "end": 36.557
    },
    {
     "w": "years.",
-    "start": 41.336,
-    "end": 41.651
+    "start": 36.557,
+    "end": 36.835
    },
    {
     "w": "This",
-    "start": 41.651,
-    "end": 41.966
+    "start": 36.835,
+    "end": 37.113
    }
   ]
  },
  {
-  "start": 41.966,
-  "end": 43.226,
+  "start": 37.113,
+  "end": 38.226,
   "text": "does not mean that",
   "words": [
    {
     "w": "does",
-    "start": 41.966,
-    "end": 42.281
+    "start": 37.113,
+    "end": 37.391
    },
    {
     "w": "not",
-    "start": 42.281,
-    "end": 42.596
+    "start": 37.391,
+    "end": 37.669
    },
    {
     "w": "mean",
-    "start": 42.596,
-    "end": 42.911
+    "start": 37.669,
+    "end": 37.947
    },
    {
     "w": "that",
-    "start": 42.911,
-    "end": 43.226
+    "start": 37.947,
+    "end": 38.226
    }
   ]
  },
  {
-  "start": 43.226,
-  "end": 44.485,
+  "start": 38.226,
+  "end": 39.338,
   "text": "you can just have",
   "words": [
    {
     "w": "you",
-    "start": 43.226,
-    "end": 43.54
+    "start": 38.226,
+    "end": 38.504
    },
    {
     "w": "can",
-    "start": 43.54,
-    "end": 43.855
+    "start": 38.504,
+    "end": 38.782
    },
    {
     "w": "just",
-    "start": 43.855,
-    "end": 44.17
+    "start": 38.782,
+    "end": 39.06
    },
    {
     "w": "have",
-    "start": 44.17,
-    "end": 44.485
+    "start": 39.06,
+    "end": 39.338
    }
   ]
  },
  {
-  "start": 44.485,
-  "end": 45.745,
+  "start": 39.338,
+  "end": 40.451,
   "text": "any type of credit",
   "words": [
    {
     "w": "any",
-    "start": 44.485,
-    "end": 44.8
+    "start": 39.338,
+    "end": 39.616
    },
    {
     "w": "type",
-    "start": 44.8,
-    "end": 45.115
+    "start": 39.616,
+    "end": 39.894
    },
    {
     "w": "of",
-    "start": 45.115,
-    "end": 45.43
+    "start": 39.894,
+    "end": 40.172
    },
    {
     "w": "credit",
-    "start": 45.43,
-    "end": 45.745
+    "start": 40.172,
+    "end": 40.451
    }
   ]
  },
  {
-  "start": 45.745,
-  "end": 47.004,
+  "start": 40.451,
+  "end": 41.563,
   "text": "and get a good",
   "words": [
    {
     "w": "and",
-    "start": 45.745,
-    "end": 46.06
+    "start": 40.451,
+    "end": 40.729
    },
    {
     "w": "get",
-    "start": 46.06,
-    "end": 46.374
+    "start": 40.729,
+    "end": 41.007
    },
    {
     "w": "a",
-    "start": 46.374,
-    "end": 46.689
+    "start": 41.007,
+    "end": 41.285
    },
    {
     "w": "good",
-    "start": 46.689,
-    "end": 47.004
+    "start": 41.285,
+    "end": 41.563
    }
   ]
  },
  {
-  "start": 47.004,
-  "end": 48.264,
+  "start": 41.563,
+  "end": 42.676,
   "text": "DSCR loan. Ideally you",
   "words": [
    {
     "w": "DSCR",
-    "start": 47.004,
-    "end": 47.319
+    "start": 41.563,
+    "end": 41.841
    },
    {
     "w": "loan.",
-    "start": 47.319,
-    "end": 47.634
+    "start": 41.841,
+    "end": 42.119
    },
    {
     "w": "Ideally",
-    "start": 47.634,
-    "end": 47.949
+    "start": 42.119,
+    "end": 42.397
    },
    {
     "w": "you",
-    "start": 47.949,
-    "end": 48.264
+    "start": 42.397,
+    "end": 42.676
    }
   ]
  },
  {
-  "start": 48.264,
-  "end": 49.523,
+  "start": 42.676,
+  "end": 43.788,
   "text": "want to have a",
   "words": [
    {
     "w": "want",
-    "start": 48.264,
-    "end": 48.579
+    "start": 42.676,
+    "end": 42.954
    },
    {
     "w": "to",
-    "start": 48.579,
-    "end": 48.894
+    "start": 42.954,
+    "end": 43.232
    },
    {
     "w": "have",
-    "start": 48.894,
-    "end": 49.209
+    "start": 43.232,
+    "end": 43.51
    },
    {
     "w": "a",
-    "start": 49.209,
-    "end": 49.523
+    "start": 43.51,
+    "end": 43.788
    }
   ]
  },
  {
-  "start": 49.523,
-  "end": 50.783,
+  "start": 43.788,
+  "end": 44.901,
   "text": "minimum of 620. Ideally",
   "words": [
    {
     "w": "minimum",
-    "start": 49.523,
-    "end": 49.838
+    "start": 43.788,
+    "end": 44.066
    },
    {
     "w": "of",
-    "start": 49.838,
-    "end": 50.153
+    "start": 44.066,
+    "end": 44.344
    },
    {
     "w": "620.",
-    "start": 50.153,
-    "end": 50.468
+    "start": 44.344,
+    "end": 44.623
    },
    {
     "w": "Ideally",
-    "start": 50.468,
-    "end": 50.783
+    "start": 44.623,
+    "end": 44.901
    }
   ]
  },
  {
-  "start": 50.783,
-  "end": 52.043,
+  "start": 44.901,
+  "end": 46.013,
   "text": "a 680 or 700",
   "words": [
    {
     "w": "a",
-    "start": 50.783,
-    "end": 51.098
+    "start": 44.901,
+    "end": 45.179
    },
    {
     "w": "680",
-    "start": 51.098,
-    "end": 51.413
+    "start": 45.179,
+    "end": 45.457
    },
    {
     "w": "or",
-    "start": 51.413,
-    "end": 51.728
+    "start": 45.457,
+    "end": 45.735
    },
    {
     "w": "700",
-    "start": 51.728,
-    "end": 52.043
+    "start": 45.735,
+    "end": 46.013
    }
   ]
  },
  {
-  "start": 52.043,
-  "end": 53.302,
+  "start": 46.013,
+  "end": 47.126,
   "text": "plus will get you",
   "words": [
    {
     "w": "plus",
-    "start": 52.043,
-    "end": 52.357
+    "start": 46.013,
+    "end": 46.291
    },
    {
     "w": "will",
-    "start": 52.357,
-    "end": 52.672
+    "start": 46.291,
+    "end": 46.569
    },
    {
     "w": "get",
-    "start": 52.672,
-    "end": 52.987
+    "start": 46.569,
+    "end": 46.848
    },
    {
     "w": "you",
-    "start": 52.987,
-    "end": 53.302
+    "start": 46.848,
+    "end": 47.126
    }
   ]
  },
  {
-  "start": 53.302,
-  "end": 54.562,
+  "start": 47.126,
+  "end": 48.238,
   "text": "into better DSCR loans",
   "words": [
    {
     "w": "into",
-    "start": 53.302,
-    "end": 53.617
+    "start": 47.126,
+    "end": 47.404
    },
    {
     "w": "better",
-    "start": 53.617,
-    "end": 53.932
+    "start": 47.404,
+    "end": 47.682
    },
    {
     "w": "DSCR",
-    "start": 53.932,
-    "end": 54.247
+    "start": 47.682,
+    "end": 47.96
    },
    {
     "w": "loans",
-    "start": 54.247,
-    "end": 54.562
+    "start": 47.96,
+    "end": 48.238
    }
   ]
  },
  {
-  "start": 54.562,
-  "end": 55.821,
+  "start": 48.238,
+  "end": 49.351,
   "text": "because there's some where",
   "words": [
    {
     "w": "because",
-    "start": 54.562,
-    "end": 54.877
+    "start": 48.238,
+    "end": 48.516
    },
    {
     "w": "there's",
-    "start": 54.877,
-    "end": 55.191
+    "start": 48.516,
+    "end": 48.794
    },
    {
     "w": "some",
-    "start": 55.191,
-    "end": 55.506
+    "start": 48.794,
+    "end": 49.073
    },
    {
     "w": "where",
-    "start": 55.506,
-    "end": 55.821
+    "start": 49.073,
+    "end": 49.351
    }
   ]
  },
  {
-  "start": 55.821,
-  "end": 57.081,
+  "start": 49.351,
+  "end": 50.463,
   "text": "it's a DSCR loan",
   "words": [
    {
     "w": "it's",
-    "start": 55.821,
-    "end": 56.136
+    "start": 49.351,
+    "end": 49.629
    },
    {
     "w": "a",
-    "start": 56.136,
-    "end": 56.451
+    "start": 49.629,
+    "end": 49.907
    },
    {
     "w": "DSCR",
-    "start": 56.451,
-    "end": 56.766
+    "start": 49.907,
+    "end": 50.185
    },
    {
     "w": "loan",
-    "start": 56.766,
-    "end": 57.081
+    "start": 50.185,
+    "end": 50.463
    }
   ]
  },
  {
-  "start": 57.081,
-  "end": 58.34,
+  "start": 50.463,
+  "end": 51.576,
   "text": "but you've got to",
   "words": [
    {
     "w": "but",
-    "start": 57.081,
-    "end": 57.396
+    "start": 50.463,
+    "end": 50.741
    },
    {
     "w": "you've",
-    "start": 57.396,
-    "end": 57.711
+    "start": 50.741,
+    "end": 51.019
    },
    {
     "w": "got",
-    "start": 57.711,
-    "end": 58.026
+    "start": 51.019,
+    "end": 51.298
    },
    {
     "w": "to",
-    "start": 58.026,
-    "end": 58.34
+    "start": 51.298,
+    "end": 51.576
    }
   ]
  },
  {
-  "start": 58.34,
-  "end": 59.6,
+  "start": 51.576,
+  "end": 52.688,
   "text": "put down 25%. And",
   "words": [
    {
     "w": "put",
-    "start": 58.34,
-    "end": 58.655
+    "start": 51.576,
+    "end": 51.854
    },
    {
     "w": "down",
-    "start": 58.655,
-    "end": 58.97
+    "start": 51.854,
+    "end": 52.132
    },
    {
     "w": "25%.",
-    "start": 58.97,
-    "end": 59.285
+    "start": 52.132,
+    "end": 52.41
    },
    {
     "w": "And",
-    "start": 59.285,
-    "end": 59.6
+    "start": 52.41,
+    "end": 52.688
    }
   ]
  },
  {
-  "start": 59.6,
-  "end": 60.86,
+  "start": 52.688,
+  "end": 53.801,
   "text": "there's others where if",
   "words": [
    {
     "w": "there's",
-    "start": 59.6,
-    "end": 59.915
+    "start": 52.688,
+    "end": 52.966
    },
    {
     "w": "others",
-    "start": 59.915,
-    "end": 60.23
+    "start": 52.966,
+    "end": 53.244
    },
    {
     "w": "where",
-    "start": 60.23,
-    "end": 60.545
+    "start": 53.244,
+    "end": 53.523
    },
    {
     "w": "if",
-    "start": 60.545,
-    "end": 60.86
+    "start": 53.523,
+    "end": 53.801
    }
   ]
  },
  {
-  "start": 60.86,
-  "end": 62.119,
+  "start": 53.801,
+  "end": 54.913,
   "text": "you have excellent credit",
   "words": [
    {
     "w": "you",
-    "start": 60.86,
-    "end": 61.174
+    "start": 53.801,
+    "end": 54.079
    },
    {
     "w": "have",
-    "start": 61.174,
-    "end": 61.489
+    "start": 54.079,
+    "end": 54.357
    },
    {
     "w": "excellent",
-    "start": 61.489,
-    "end": 61.804
+    "start": 54.357,
+    "end": 54.635
    },
    {
     "w": "credit",
-    "start": 61.804,
-    "end": 62.119
+    "start": 54.635,
+    "end": 54.913
    }
   ]
  },
  {
-  "start": 62.119,
-  "end": 63.379,
+  "start": 54.913,
+  "end": 56.026,
   "text": "you can put down",
   "words": [
    {
     "w": "you",
-    "start": 62.119,
-    "end": 62.434
+    "start": 54.913,
+    "end": 55.191
    },
    {
     "w": "can",
-    "start": 62.434,
-    "end": 62.749
+    "start": 55.191,
+    "end": 55.47
    },
    {
     "w": "put",
-    "start": 62.749,
-    "end": 63.064
+    "start": 55.47,
+    "end": 55.748
    },
    {
     "w": "down",
-    "start": 63.064,
-    "end": 63.379
+    "start": 55.748,
+    "end": 56.026
    }
   ]
  },
  {
-  "start": 63.379,
-  "end": 64.638,
+  "start": 56.026,
+  "end": 57.138,
   "text": "as little as 15%",
   "words": [
    {
     "w": "as",
-    "start": 63.379,
-    "end": 63.694
+    "start": 56.026,
+    "end": 56.304
    },
    {
     "w": "little",
-    "start": 63.694,
-    "end": 64.009
+    "start": 56.304,
+    "end": 56.582
    },
    {
     "w": "as",
-    "start": 64.009,
-    "end": 64.323
+    "start": 56.582,
+    "end": 56.86
    },
    {
     "w": "15%",
-    "start": 64.323,
-    "end": 64.638
+    "start": 56.86,
+    "end": 57.138
    }
   ]
  },
  {
-  "start": 64.638,
-  "end": 65.898,
+  "start": 57.138,
+  "end": 58.251,
   "text": "depending on the type",
   "words": [
    {
     "w": "depending",
-    "start": 64.638,
-    "end": 64.953
+    "start": 57.138,
+    "end": 57.416
    },
    {
     "w": "on",
-    "start": 64.953,
-    "end": 65.268
+    "start": 57.416,
+    "end": 57.695
    },
    {
     "w": "the",
-    "start": 65.268,
-    "end": 65.583
+    "start": 57.695,
+    "end": 57.973
    },
    {
     "w": "type",
-    "start": 65.583,
-    "end": 65.898
+    "start": 57.973,
+    "end": 58.251
    }
   ]
  },
  {
-  "start": 65.898,
-  "end": 67.157,
+  "start": 58.251,
+  "end": 59.363,
   "text": "of property you're buying",
   "words": [
    {
     "w": "of",
-    "start": 65.898,
-    "end": 66.213
+    "start": 58.251,
+    "end": 58.529
    },
    {
     "w": "property",
-    "start": 66.213,
-    "end": 66.528
+    "start": 58.529,
+    "end": 58.807
    },
    {
     "w": "you're",
-    "start": 66.528,
-    "end": 66.843
+    "start": 58.807,
+    "end": 59.085
    },
    {
     "w": "buying",
-    "start": 66.843,
-    "end": 67.157
+    "start": 59.085,
+    "end": 59.363
    }
   ]
  },
  {
-  "start": 67.157,
-  "end": 68.417,
+  "start": 59.363,
+  "end": 60.476,
   "text": "with that debt service",
   "words": [
    {
     "w": "with",
-    "start": 67.157,
-    "end": 67.472
+    "start": 59.363,
+    "end": 59.641
    },
    {
     "w": "that",
-    "start": 67.472,
-    "end": 67.787
+    "start": 59.641,
+    "end": 59.92
    },
    {
     "w": "debt",
-    "start": 67.787,
-    "end": 68.102
+    "start": 59.92,
+    "end": 60.198
    },
    {
     "w": "service",
-    "start": 68.102,
-    "end": 68.417
+    "start": 60.198,
+    "end": 60.476
    }
   ]
  },
  {
-  "start": 68.417,
-  "end": 69.677,
+  "start": 60.476,
+  "end": 61.588,
   "text": "coverage ratio alone. And",
   "words": [
    {
     "w": "coverage",
-    "start": 68.417,
-    "end": 68.732
+    "start": 60.476,
+    "end": 60.754
    },
    {
     "w": "ratio",
-    "start": 68.732,
-    "end": 69.047
+    "start": 60.754,
+    "end": 61.032
    },
    {
     "w": "alone.",
-    "start": 69.047,
-    "end": 69.362
+    "start": 61.032,
+    "end": 61.31
    },
    {
     "w": "And",
-    "start": 69.362,
-    "end": 69.677
+    "start": 61.31,
+    "end": 61.588
    }
   ]
  },
  {
-  "start": 69.677,
-  "end": 70.936,
+  "start": 61.588,
+  "end": 62.701,
   "text": "so that's the DSCR",
   "words": [
    {
     "w": "so",
-    "start": 69.677,
-    "end": 69.991
+    "start": 61.588,
+    "end": 61.866
    },
    {
     "w": "that's",
-    "start": 69.991,
-    "end": 70.306
+    "start": 61.866,
+    "end": 62.145
    },
    {
     "w": "the",
-    "start": 70.306,
-    "end": 70.621
+    "start": 62.145,
+    "end": 62.423
    },
    {
     "w": "DSCR",
-    "start": 70.621,
-    "end": 70.936
+    "start": 62.423,
+    "end": 62.701
    }
   ]
  },
  {
-  "start": 70.936,
-  "end": 72.196,
+  "start": 62.701,
+  "end": 63.813,
   "text": "for buy-and-hold investors who",
   "words": [
    {
     "w": "for",
-    "start": 70.936,
-    "end": 71.251
+    "start": 62.701,
+    "end": 62.979
    },
    {
     "w": "buy-and-hold",
-    "start": 71.251,
-    "end": 71.566
+    "start": 62.979,
+    "end": 63.257
    },
    {
     "w": "investors",
-    "start": 71.566,
-    "end": 71.881
+    "start": 63.257,
+    "end": 63.535
    },
    {
     "w": "who",
-    "start": 71.881,
-    "end": 72.196
+    "start": 63.535,
+    "end": 63.813
    }
   ]
  },
  {
-  "start": 72.196,
-  "end": 73.455,
+  "start": 63.813,
+  "end": 64.926,
   "text": "don't show enough personal",
   "words": [
    {
     "w": "don't",
-    "start": 72.196,
-    "end": 72.511
+    "start": 63.813,
+    "end": 64.092
    },
    {
     "w": "show",
-    "start": 72.511,
-    "end": 72.826
+    "start": 64.092,
+    "end": 64.37
    },
    {
     "w": "enough",
-    "start": 72.826,
-    "end": 73.14
+    "start": 64.37,
+    "end": 64.648
    },
    {
     "w": "personal",
-    "start": 73.14,
-    "end": 73.455
+    "start": 64.648,
+    "end": 64.926
    }
   ]
  },
  {
-  "start": 73.455,
-  "end": 74.4,
+  "start": 64.926,
+  "end": 65.76,
   "text": "income on paper.",
   "words": [
    {
     "w": "income",
-    "start": 73.455,
-    "end": 73.77
+    "start": 64.926,
+    "end": 65.204
    },
    {
     "w": "on",
-    "start": 73.77,
-    "end": 74.085
+    "start": 65.204,
+    "end": 65.482
    },
    {
     "w": "paper.",
-    "start": 74.085,
-    "end": 74.4
+    "start": 65.482,
+    "end": 65.76
    }
   ]
  }

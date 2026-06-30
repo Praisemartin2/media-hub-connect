@@ -6,9 +6,9 @@ import { COLORS } from "./reel-data";
 export { COLORS };
 
 export const FPS = 30;
-export const SRC = "source/source_full.mp4"; // full-quality original from fetch_drive_video.sh
-export const DURATION_SECONDS = 80; // placeholder; set from ffprobe in the fresh session
-export const ASSETS_READY = false;  // flip true once source_full.mp4 is present
+export const SRC = "source/source_full.mp4"; // 1080x1920, 30fps, 70.71s talking-head A-roll
+export const DURATION_SECONDS = 70.71;
+export const ASSETS_READY = true;
 
 export const HOOK = {
   start: 0.3,
@@ -31,3 +31,11 @@ export const CTA = {
   big: ["DM us", "‘DSCR’"],
   sub: "Ekabo Home Team · @ekabohome",
 };
+
+// B-roll punch-ins (repo real-estate clips; swap for Higgsfield once allowlisted).
+export type Broll = { atFrac: number; dur: number; src: string };
+export const BROLL: Broll[] = [
+  { atFrac: 0.13, dur: 1.6, src: "broll/quadplex.mp4" },  // income the property brings in
+  { atFrac: 0.45, dur: 1.6, src: "broll/contract.mp4" },  // coverage / reserves / loan terms
+  { atFrac: 0.8, dur: 1.6, src: "broll/quadplex.mp4" },   // type of property you're buying
+];

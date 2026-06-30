@@ -9,24 +9,53 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { COLORS, TITLE_CARDS, HOOK, CTA, ASSETS_READY, SRC } from "./dscr-data";
+import { COLORS, TITLE_CARDS, HOOK, CTA, BROLL, ASSETS_READY, SRC } from "./dscr-data";
 import captions from "./dscr-captions.json";
 
 const FONT = '"Helvetica Neue", Helvetica, "Arial Black", Arial, sans-serif';
 const SCRIM =
   "linear-gradient(to top, rgba(17,17,17,0.60) 0%, rgba(17,17,17,0.16) 22%, rgba(17,17,17,0) 38%)";
+const GRADE = "contrast(1.06) saturate(1.05) brightness(1.03) sepia(0.06) hue-rotate(-6deg)";
 
 type Word = { w: string; start: number; end: number };
 type Cap = { start: number; end: number; text: string; words: Word[] };
 const CAPS = captions as Cap[];
 
-// A-roll: user's already-edited footage. NO color filter (preserve their look).
+// A-roll talking head with warm editorial grade.
 const Aroll: React.FC = () => (
   <AbsoluteFill>
-    <OffthreadVideo src={staticFile(SRC)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+    <OffthreadVideo src={staticFile(SRC)} style={{ width: "100%", height: "100%", objectFit: "cover", filter: GRADE }} />
+    <AbsoluteFill style={{ boxShadow: "inset 0 0 320px rgba(76,34,12,0.30)", pointerEvents: "none" }} />
     <AbsoluteFill style={{ background: SCRIM }} />
   </AbsoluteFill>
 );
+
+// B-roll punch-ins
+const BrollClip: React.FC<{ src: string }> = ({ src }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const s = spring({ frame, fps, config: { damping: 200 }, durationInFrames: 6 });
+  const scale = interpolate(s, [0, 1], [1.08, 1]);
+  return (
+    <AbsoluteFill style={{ backgroundColor: COLORS.ink }}>
+      <OffthreadVideo src={staticFile(src)} muted style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${scale})`, filter: GRADE }} />
+      <AbsoluteFill style={{ background: SCRIM }} />
+    </AbsoluteFill>
+  );
+};
+
+const BrollLayer: React.FC = () => {
+  const { fps, durationInFrames } = useVideoConfig();
+  return (
+    <>
+      {BROLL.map((b, i) => (
+        <Sequence key={i} from={Math.round(b.atFrac * durationInFrames)} durationInFrames={Math.round(b.dur * fps)}>
+          <BrollClip src={b.src} />
+        </Sequence>
+      ))}
+    </>
+  );
+};
 
 const BrandedBg: React.FC = () => {
   const frame = useCurrentFrame();
@@ -143,6 +172,7 @@ export const DSCRReel: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.ink }}>
       {ASSETS_READY ? <Aroll /> : <BrandedBg />}
+      {ASSETS_READY && <BrollLayer />}
       <Captions />
       <Sequence from={Math.round(HOOK.start * fps)} durationInFrames={Math.round((HOOK.end - HOOK.start) * fps)}>
         <Hook />
