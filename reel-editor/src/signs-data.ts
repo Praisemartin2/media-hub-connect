@@ -6,7 +6,7 @@ export { COLORS };
 
 export const W = 1080;
 export const H = 1350;
-export const ASSETS_READY = false; // flip true once public/signs/s*.png exist
+export const ASSETS_READY = true; // flip true once public/signs/s*.png exist
 
 export type Slide =
   | { type: "cover"; photo: string; kicker: string; sub: string[]; tag: string }
