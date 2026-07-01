@@ -7,6 +7,8 @@ import { HomeRedFlagsCarousel } from "./HomeRedFlagsCarousel";
 import { NewsCarousel } from "./NewsCarousel";
 import { NewsPhotoCover } from "./NewsPhotoCover";
 import { RealEstateJourney } from "./RealEstateJourney";
+import { FourReasons } from "./FourReasons";
+import { SLIDES as REASON_SLIDES, W as REASON_W, H as REASON_H } from "./reasons-data";
 import { SubjectToReel } from "./SubjectToReel";
 import { FPS as ST_FPS, DURATION_SECONDS as ST_SECONDS } from "./subjectto-data";
 import { IMG2071Reel } from "./IMG2071Reel";
@@ -95,6 +97,14 @@ export const RemotionRoot: React.FC = () => {
         fps={IM_FPS}
         width={1080}
         height={1920}
+      />
+      <Composition
+        id="FourReasons"
+        component={FourReasons}
+        durationInFrames={REASON_SLIDES.length}
+        fps={1}
+        width={REASON_W}
+        height={REASON_H}
       />
       <Composition
         id="RealEstateJourney"
