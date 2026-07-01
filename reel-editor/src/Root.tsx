@@ -9,6 +9,8 @@ import { NewsPhotoCover } from "./NewsPhotoCover";
 import { RealEstateJourney } from "./RealEstateJourney";
 import { FourReasons } from "./FourReasons";
 import { SLIDES as REASON_SLIDES, W as REASON_W, H as REASON_H } from "./reasons-data";
+import { NeighborhoodSigns } from "./NeighborhoodSigns";
+import { SLIDES as SIGN_SLIDES, W as SIGN_W, H as SIGN_H } from "./signs-data";
 import { SubjectToReel } from "./SubjectToReel";
 import { FPS as ST_FPS, DURATION_SECONDS as ST_SECONDS } from "./subjectto-data";
 import { IMG2071Reel } from "./IMG2071Reel";
@@ -97,6 +99,14 @@ export const RemotionRoot: React.FC = () => {
         fps={IM_FPS}
         width={1080}
         height={1920}
+      />
+      <Composition
+        id="NeighborhoodSigns"
+        component={NeighborhoodSigns}
+        durationInFrames={SIGN_SLIDES.length}
+        fps={1}
+        width={SIGN_W}
+        height={SIGN_H}
       />
       <Composition
         id="FourReasons"
