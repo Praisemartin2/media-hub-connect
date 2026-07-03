@@ -28,10 +28,11 @@ const T = {
   blue: "hsl(var(--brand-blue))",
   blueDark: "hsl(var(--brand-blue-dark))",
   blueDeep: "hsl(var(--brand-blue-deep))",
-  blueLight: "hsl(var(--brand-blue-light))",
+  // On the light sky background, former "light" fills flip dark for contrast
+  blueLight: "hsl(var(--brand-blue))",
   yellow: "hsl(var(--brand-yellow))",
-  yellowLight: "hsl(var(--brand-yellow-light))",
-  cream: "hsl(var(--brand-cream))",
+  yellowLight: "hsl(var(--brand-yellow))",
+  cream: "hsl(var(--brand-blue-dark))",
   white: "hsl(0 0% 100%)",
 };
 
@@ -325,8 +326,8 @@ export function Illustration({ variant, className, label }: IllustrationProps) {
     >
       <defs>
         <linearGradient id={`sky-${variant}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={T.blueDeep} />
-          <stop offset="100%" stopColor={T.blueDark} />
+          <stop offset="0%" stopColor="hsl(0 0% 100%)" />
+          <stop offset="100%" stopColor="hsl(var(--brand-sky))" />
         </linearGradient>
       </defs>
       <rect width={400} height={250} fill={`url(#sky-${variant})`} />
