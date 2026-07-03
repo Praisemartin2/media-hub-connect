@@ -58,6 +58,14 @@ export function Footer() {
                   Get Involved
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/accessibility"
+                  className="text-white/75 transition-colors hover:text-white"
+                >
+                  Accessibility
+                </Link>
+              </li>
             </ul>
           </div>
 

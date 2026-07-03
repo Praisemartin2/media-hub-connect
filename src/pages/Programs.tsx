@@ -5,6 +5,7 @@ import { Reveal } from "@/components/shared/Reveal";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/shared/SEO";
 import { programs } from "@/data/programs";
+import { Illustration } from "@/components/art/Illustration";
 
 const Programs = () => {
   return (
@@ -27,14 +28,16 @@ const Programs = () => {
                 id={program.slug}
                 className="card-lift grid gap-8 overflow-hidden rounded-3xl border border-border bg-card p-7 lg:grid-cols-[1fr_1.4fr] lg:p-10"
               >
-                <div className="flex flex-col justify-center rounded-2xl bg-gradient-to-br from-primary to-brand-blue-dark p-8 text-white">
-                  <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 backdrop-blur">
+                <div className="relative flex flex-col justify-center overflow-hidden rounded-2xl bg-brand-blue-deep p-8 text-white">
+                  <div className="absolute inset-0 opacity-90"><Illustration variant={program.art} label="" /></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-deep/90 via-brand-blue-deep/40 to-transparent" aria-hidden />
+                  <span className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 backdrop-blur">
                     <program.icon className="h-8 w-8" />
                   </span>
-                  <h2 className="mt-6 font-display text-2xl font-bold sm:text-3xl">
+                  <h2 className="relative mt-6 font-display text-2xl font-bold sm:text-3xl">
                     {program.title}
                   </h2>
-                  <p className="mt-3 text-white/80">{program.summary}</p>
+                  <p className="relative mt-3 text-white/85">{program.summary}</p>
                 </div>
                 <div className="flex flex-col justify-center">
                   <p className="text-lg leading-relaxed text-muted-foreground">
@@ -48,12 +51,15 @@ const Programs = () => {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-7">
+                  <div className="mt-7 flex flex-wrap gap-3">
                     <Button asChild className="rounded-full font-semibold">
-                      <Link to="/get-involved">
-                        Support this program
+                      <Link to={`/programs/${program.slug}`}>
+                        Visit program page
                         <ArrowRight className="ml-1 h-4 w-4" />
                       </Link>
+                    </Button>
+                    <Button asChild variant="outline" className="rounded-full font-semibold">
+                      <Link to="/get-involved">Support this program</Link>
                     </Button>
                   </div>
                 </div>

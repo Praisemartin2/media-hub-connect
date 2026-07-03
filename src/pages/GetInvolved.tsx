@@ -186,7 +186,7 @@ const GetInvolved = () => {
       </section>
 
       {/* Other ways */}
-      <section className="bg-brand-cream py-20 lg:py-28">
+      <section id="volunteer" className="scroll-mt-20 bg-brand-cream py-20 lg:py-28">
         <div className="container-cofy">
           <SectionHeading
             eyebrow="More Ways to Help"

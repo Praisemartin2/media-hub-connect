@@ -10,6 +10,7 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 import { Logo } from "./Logo";
+import { SearchDialog } from "./SearchDialog";
 import { navLinks, site } from "@/data/site";
 
 export function Header() {
@@ -69,6 +70,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
+          <SearchDialog />
           <Button asChild variant="ghost" size="sm" className="font-semibold">
             <a href={site.phoneHref}>
               <Phone className="mr-1.5 h-4 w-4" />
@@ -85,6 +87,7 @@ export function Header() {
 
         {/* Mobile */}
         <div className="flex items-center gap-2 lg:hidden">
+          <SearchDialog />
           <Button asChild size="sm" className="rounded-full font-semibold">
             <Link to="/get-involved">
               <Heart className="mr-1 h-4 w-4" />

@@ -10,8 +10,10 @@ export type MediaItem = {
   readTime?: string;
   duration?: string; // for vlogs
   category: string;
-  /** Tailwind gradient classes used for the thumbnail */
+  /** Tailwind gradient classes used for the thumbnail (fallback) */
   gradient: string;
+  /** Brand illustration variant for the thumbnail */
+  art: import("@/components/art/Illustration").ArtVariant;
   featured?: boolean;
 };
 
@@ -27,6 +29,7 @@ export const mediaItems: MediaItem[] = [
     duration: "8:42",
     category: "Daily Vlog",
     gradient: "from-brand-blue to-brand-blue-dark",
+    art: "library",
     featured: true,
   },
   {
@@ -40,6 +43,7 @@ export const mediaItems: MediaItem[] = [
     readTime: "6 min read",
     category: "Programs",
     gradient: "from-brand-yellow to-brand-yellow-light",
+    art: "disability",
   },
   {
     id: "news-scholarship",
@@ -52,6 +56,7 @@ export const mediaItems: MediaItem[] = [
     readTime: "3 min read",
     category: "Announcement",
     gradient: "from-brand-blue-dark to-brand-blue-deep",
+    art: "scholarship",
   },
   {
     id: "vlog-park-day",
@@ -64,6 +69,7 @@ export const mediaItems: MediaItem[] = [
     duration: "11:05",
     category: "Daily Vlog",
     gradient: "from-brand-blue to-brand-yellow",
+    art: "park",
   },
   {
     id: "blog-family-advocacy",
@@ -76,6 +82,7 @@ export const mediaItems: MediaItem[] = [
     readTime: "8 min read",
     category: "Family Resources",
     gradient: "from-brand-blue-light to-brand-blue",
+    art: "family",
   },
   {
     id: "news-partnership",
@@ -88,6 +95,7 @@ export const mediaItems: MediaItem[] = [
     readTime: "4 min read",
     category: "Partnership",
     gradient: "from-brand-yellow-light to-brand-yellow",
+    art: "books",
   },
   {
     id: "vlog-mentor-spotlight",
@@ -100,6 +108,7 @@ export const mediaItems: MediaItem[] = [
     duration: "9:18",
     category: "Daily Vlog",
     gradient: "from-brand-blue-deep to-brand-blue",
+    art: "mentorship",
   },
   {
     id: "blog-inclusive-play",
@@ -112,6 +121,7 @@ export const mediaItems: MediaItem[] = [
     readTime: "5 min read",
     category: "Insights",
     gradient: "from-brand-yellow to-brand-blue",
+    art: "park",
   },
   {
     id: "news-volunteer-drive",
@@ -124,6 +134,7 @@ export const mediaItems: MediaItem[] = [
     readTime: "2 min read",
     category: "Community",
     gradient: "from-brand-blue to-brand-blue-light",
+    art: "volunteers",
   },
 ];
 

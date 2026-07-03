@@ -2,6 +2,7 @@ import { Play, Clock, ArrowUpRight, Newspaper, PenLine, Video } from "lucide-rea
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { formatDateShort } from "@/lib/format";
+import { Illustration } from "@/components/art/Illustration";
 import type { MediaItem, MediaType } from "@/data/media";
 
 const typeIcon: Record<MediaType, typeof Video> = {
@@ -33,7 +34,9 @@ export function MediaCard({ item, featured = false }: { item: MediaItem; feature
           featured ? "min-h-56 lg:w-1/2" : "aspect-[16/10]",
         )}
       >
-        <div className="absolute inset-0 bg-grid-soft opacity-30 mix-blend-overlay" aria-hidden />
+        <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
+          <Illustration variant={item.art} label="" />
+        </div>
         <Badge className="absolute left-4 top-4 gap-1.5 border-0 bg-white/90 font-semibold text-primary backdrop-blur">
           <Icon className="h-3.5 w-3.5" />
           {typeLabel[item.type]}
