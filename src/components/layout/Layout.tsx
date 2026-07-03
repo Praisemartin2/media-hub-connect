@@ -14,9 +14,16 @@ function ScrollToTop() {
 export function Layout() {
   return (
     <div className="flex min-h-screen flex-col">
+      {/* WCAG skip link */}
+      <a
+        href="#main-content"
+        className="sr-only z-[60] rounded-full bg-secondary px-5 py-2.5 font-semibold text-secondary-foreground focus:not-sr-only focus:absolute focus:left-4 focus:top-4"
+      >
+        Skip to main content
+      </a>
       <ScrollToTop />
       <Header />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <Outlet />
       </main>
       <Footer />

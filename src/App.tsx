@@ -7,10 +7,12 @@ import { Layout } from "@/components/layout/Layout";
 import Index from "./pages/Index.tsx";
 import About from "./pages/About.tsx";
 import Programs from "./pages/Programs.tsx";
+import ProgramDetail from "./pages/ProgramDetail.tsx";
 import Media from "./pages/Media.tsx";
 import Events from "./pages/Events.tsx";
 import GetInvolved from "./pages/GetInvolved.tsx";
 import Contact from "./pages/Contact.tsx";
+import Accessibility from "./pages/Accessibility.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,10 +28,12 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/programs" element={<Programs />} />
+            <Route path="/programs/:slug" element={<ProgramDetail />} />
             <Route path="/media" element={<Media />} />
             <Route path="/events" element={<Events />} />
             <Route path="/get-involved" element={<GetInvolved />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/accessibility" element={<Accessibility />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -8,6 +8,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import type { ArtVariant } from "@/components/art/Illustration";
+
 export type Program = {
   slug: string;
   title: string;
@@ -15,6 +17,14 @@ export type Program = {
   summary: string;
   description: string;
   highlights: string[];
+  /** Brand illustration variant for hero/cards */
+  art: ArtVariant;
+  /** Headline impact stat for the program page */
+  stat: { value: number; suffix: string; label: string };
+  /** A voice from the program */
+  quote: { text: string; name: string; role: string };
+  /** Plain-language "how you can help" line */
+  engage: string;
 };
 
 export const programs: Program[] = [
@@ -31,6 +41,14 @@ export const programs: Program[] = [
       "Family advocacy & navigation support",
       "Inclusive social and life-skills sessions",
     ],
+    art: "disability",
+    stat: { value: 120, suffix: "+", label: "families supported each year" },
+    quote: {
+      text: "For the first time, my son sees himself as capable. That changes everything.",
+      name: "Maria T.",
+      role: "Parent",
+    },
+    engage: "Sponsor a family's support plan or volunteer as a session helper.",
   },
   {
     slug: "educational-opportunities",
@@ -45,6 +63,14 @@ export const programs: Program[] = [
       "Tutoring and homework support",
       "Digital learning access",
     ],
+    art: "education",
+    stat: { value: 1200, suffix: "+", label: "books and learning resources shared" },
+    quote: {
+      text: "The first book that was truly hers changed how my daughter feels about reading.",
+      name: "Denise W.",
+      role: "Parent",
+    },
+    engage: "Donate books and supplies, or fund a child's learning kit.",
   },
   {
     slug: "international-outreach",
@@ -59,6 +85,14 @@ export const programs: Program[] = [
       "Global education partnerships",
       "Mentorship across borders",
     ],
+    art: "outreach",
+    stat: { value: 48, suffix: "", label: "scholarships awarded to students in need" },
+    quote: {
+      text: "The scholarship kept me in school when my family could not. I will pay it forward.",
+      name: "Samuel A.",
+      role: "Scholarship Recipient",
+    },
+    engage: "Fund a scholarship or connect us with a partner school abroad.",
   },
   {
     slug: "mentorship",
@@ -73,6 +107,14 @@ export const programs: Program[] = [
       "Confidence & social skills",
       "Flexible, youth-led pacing",
     ],
+    art: "mentorship",
+    stat: { value: 40, suffix: "+", label: "trained mentors showing up every week" },
+    quote: {
+      text: "My mentor showed up for me every single week. Now I set goals I actually reach.",
+      name: "Jamal R.",
+      role: "Youth Participant",
+    },
+    engage: "Become a mentor — a few hours a week changes a life (training provided).",
   },
 ];
 

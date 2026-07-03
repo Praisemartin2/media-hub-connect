@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Heart, HandHeart, Users2, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Hero } from "@/components/home/Hero";
+import { VideoHero } from "@/components/home/VideoHero";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Reveal } from "@/components/shared/Reveal";
 import { MediaCard } from "@/components/cards/MediaCard";
@@ -23,10 +23,10 @@ const Index = () => {
         title="Creating Opportunities for Youth Inc. — COFY"
         description="COFY provides transformational education and support to youth with developmental delays and their families — empowering them to thrive."
       />
-      <Hero />
+      <VideoHero />
 
       {/* Values / mission strip */}
-      <section className="py-20 lg:py-28">
+      <section id="mission" className="scroll-mt-20 py-20 lg:py-28">
         <div className="container-cofy">
           <SectionHeading
             eyebrow="Who We Are"
@@ -77,7 +77,7 @@ const Index = () => {
             {programs.map((program, i) => (
               <Reveal key={program.slug} delay={i * 80}>
                 <Link
-                  to="/programs"
+                  to={`/programs/${program.slug}`}
                   className="card-lift group flex h-full items-start gap-5 rounded-2xl border border-border bg-card p-7"
                 >
                   <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-brand-blue-dark text-white shadow-md">
