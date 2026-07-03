@@ -58,6 +58,17 @@ export function VideoHero() {
         ) : (
           <Illustration variant="hero" label="" className="h-full w-full" />
         )}
+
+        {videoOk && (
+          <button
+            type="button"
+            onClick={togglePlay}
+            aria-label={playing ? "Pause background video" : "Play background video"}
+            className="absolute bottom-5 right-5 z-10 flex h-11 w-11 items-center justify-center border border-white/40 bg-black/40 text-white backdrop-blur transition-colors hover:bg-black/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+          >
+            {playing ? <Pause className="h-5 w-5" /> : <Play className="ml-0.5 h-5 w-5" />}
+          </button>
+        )}
       </div>
       <div
         className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
