@@ -29,7 +29,7 @@ const Media = () => {
         description="Daily vlogs, blogs and news from Creating Opportunities for Youth. Go behind the scenes and stay up to date with our community."
       />
       <PageHero
-        eyebrow="Media Hub"
+        eyebrow="Stories"
         title="Daily vlogs, stories & the latest news"
         description="One home for everything happening at COFY — fresh vlogs, helpful blogs and community news, updated all the time."
       >
@@ -39,16 +39,16 @@ const Media = () => {
             return (
               <div
                 key={t}
-                className="flex items-center gap-3 rounded-lg border border-white/15 bg-white/10 px-4 py-3 backdrop-blur"
+                className="flex items-center gap-3 border border-border bg-card px-4 py-3"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
                   <meta.icon className="h-5 w-5" />
                 </span>
                 <span className="text-left">
-                  <span className="block text-sm font-bold text-white">
+                  <span className="block font-display text-lg font-medium text-foreground">
                     {meta.label}
                   </span>
-                  <span className="block text-xs text-white/70">{meta.blurb}</span>
+                  <span className="block font-serif text-sm text-muted-foreground">{meta.blurb}</span>
                 </span>
               </div>
             );
