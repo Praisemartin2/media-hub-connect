@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/shared/Reveal";
 import { StatCounter } from "@/components/shared/StatCounter";
 import { SEO } from "@/components/shared/SEO";
-import { Illustration } from "@/components/art/Illustration";
+import { photos, plateFallback } from "@/data/photos";
 import { MediaCard } from "@/components/cards/MediaCard";
 import { programs } from "@/data/programs";
 import { mediaItems } from "@/data/media";
@@ -33,7 +33,14 @@ const ProgramDetail = () => {
       {/* Full-bleed hero */}
       <section className="relative isolate flex min-h-[62svh] items-end overflow-hidden bg-brand-blue-deep text-white">
         <div className="absolute inset-0">
-          <Illustration variant={program.art} label="" />
+          <img
+            src={photos[program.art as keyof typeof photos]?.min ?? plateFallback(program.art as never)}
+            alt=""
+            className="h-full w-full object-cover"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = plateFallback(program.art as never);
+            }}
+          />
         </div>
         <div
           className="absolute inset-0 bg-gradient-to-t from-brand-blue-deep via-brand-blue-deep/50 to-transparent"

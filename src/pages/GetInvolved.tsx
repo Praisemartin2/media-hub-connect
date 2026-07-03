@@ -97,12 +97,12 @@ const GetInvolved = () => {
           {/* Donation card */}
           <Reveal>
             <div className="rounded-lg border border-border bg-card p-7 shadow-xl shadow-primary/5 sm:p-9">
-              <div className="mb-6 flex rounded-full bg-muted p-1.5">
+              <div className="mb-6 flex border border-border bg-muted p-1">
                 <button
                   onClick={() => setMonthly(false)}
                   className={cn(
-                    "flex-1 rounded-full py-2.5 text-sm font-semibold transition-all",
-                    !monthly ? "bg-primary text-white shadow" : "text-foreground/60",
+                    "flex-1 py-2.5 font-display text-lg font-medium transition-all",
+                    !monthly ? "bg-primary text-white" : "text-foreground/60",
                   )}
                 >
                   One-time
@@ -110,8 +110,8 @@ const GetInvolved = () => {
                 <button
                   onClick={() => setMonthly(true)}
                   className={cn(
-                    "flex-1 rounded-full py-2.5 text-sm font-semibold transition-all",
-                    monthly ? "bg-primary text-white shadow" : "text-foreground/60",
+                    "flex-1 py-2.5 font-display text-lg font-medium transition-all",
+                    monthly ? "bg-primary text-white" : "text-foreground/60",
                   )}
                 >
                   Monthly
