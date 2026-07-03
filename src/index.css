@@ -135,6 +135,13 @@
   ::selection {
     @apply bg-secondary text-secondary-foreground;
   }
+
+  /* Keep background-video captions subtle and legible */
+  video::cue {
+    font-size: 0.9rem;
+    background: hsl(var(--brand-blue-deep) / 0.8);
+    color: hsl(0 0% 100%);
+  }
 }
 
 @layer components {
