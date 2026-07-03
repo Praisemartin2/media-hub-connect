@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Target, Eye, Heart, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { PhotoImg } from "@/components/shared/PhotoImg";
 import { Reveal } from "@/components/shared/Reveal";
 import { StatCounter } from "@/components/shared/StatCounter";
 import { Button } from "@/components/ui/button";
@@ -175,14 +176,7 @@ const About = () => {
           <Reveal>
             <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
               <div className="bg-brand-sky p-5 sm:p-8">
-                <img
-                  src={`${import.meta.env.BASE_URL}media/photos/mentorship.png`}
-                  alt="Illustration representing mentorship and leadership at COFY"
-                  width={1200}
-                  height={750}
-                  loading="lazy"
-                  className="w-full object-cover"
-                />
+                <PhotoImg id="mentorship" className="w-full object-cover" />
               </div>
               <div>
                 <p className="eyebrow font-display">President, Founder & CEO</p>

@@ -13,10 +13,8 @@ import { testimonials } from "@/data/testimonials";
 import { site } from "@/data/site";
 import { formatDate, isUpcoming } from "@/lib/format";
 import { SEO } from "@/components/shared/SEO";
+import { PhotoImg } from "@/components/shared/PhotoImg";
 import { toast } from "sonner";
-
-const base = import.meta.env.BASE_URL;
-const photo = (art: string) => `${base}media/photos/${art}.png`;
 
 const [featureProgram, ...cardPrograms] = programs;
 
@@ -37,13 +35,7 @@ const Index = () => {
         <div className="container-cofy grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <div className="bg-brand-sky p-5 sm:p-8">
-              <img
-                src={photo("community")}
-                alt="Illustration of families and mentors gathered on a sunlit path"
-                width={1200}
-                height={750}
-                className="w-full object-cover"
-              />
+              <PhotoImg id="community" loading="eager" className="w-full object-cover" />
             </div>
           </Reveal>
           <Reveal delay={100}>
@@ -91,13 +83,7 @@ const Index = () => {
           </Reveal>
           <Reveal delay={100}>
             <div className="bg-white p-5 sm:p-8">
-              <img
-                src={photo(featureProgram.art)}
-                alt={`${featureProgram.title} — COFY project`}
-                width={1200}
-                height={750}
-                className="w-full object-cover"
-              />
+              <PhotoImg id="disability" className="w-full object-cover" />
             </div>
           </Reveal>
         </div>
@@ -111,12 +97,8 @@ const Index = () => {
               <Reveal key={p.slug} delay={i * 80}>
                 <Link to={`/programs/${p.slug}`} className="group block">
                   <div className="overflow-hidden">
-                    <img
-                      src={photo(p.art)}
-                      alt={`${p.title} — COFY project`}
-                      width={1200}
-                      height={750}
-                      loading="lazy"
+                    <PhotoImg
+                      id={p.art as "education" | "outreach" | "mentorship"}
                       className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                   </div>
