@@ -15,6 +15,7 @@ import { Reveal } from "@/components/shared/Reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SEO } from "@/components/shared/SEO";
+import { PhotoImg } from "@/components/shared/PhotoImg";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -202,14 +203,7 @@ const GetInvolved = () => {
             </p>
           </div>
           <div className="bg-white p-5 sm:p-8">
-            <img
-              src={`${import.meta.env.BASE_URL}media/photos/books.png`}
-              alt="Illustration of a tall stack of colorful books"
-              width={1200}
-              height={750}
-              loading="lazy"
-              className="w-full object-cover"
-            />
+            <PhotoImg id="books" className="w-full object-cover" />
           </div>
         </div>
       </section>

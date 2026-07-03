@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Heart, ArrowRight, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Illustration } from "@/components/art/Illustration";
+import { heroFilm } from "@/data/photos";
 
 /**
  * Full-viewport hero: background film with a huge two-tone condensed
@@ -14,7 +15,9 @@ export function VideoHero() {
   const [playing, setPlaying] = useState(true);
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  const videoSrc = `${import.meta.env.BASE_URL}media/hero-video.webm`;
+  const localSrc = `${import.meta.env.BASE_URL}media/hero-video.webm`;
+  const [srcIndex, setSrcIndex] = useState(0);
+  const sources = [heroFilm, localSrc];
   const posterSrc = `${import.meta.env.BASE_URL}media/hero-poster.png`;
   const captionSrc = `${import.meta.env.BASE_URL}media/hero-video.vtt`;
 
@@ -42,7 +45,7 @@ export function VideoHero() {
         {videoOk ? (
           <video
             ref={videoRef}
-            src={videoSrc}
+            src={sources[srcIndex]}
             poster={posterSrc}
             className="h-full w-full object-cover"
             autoPlay={!reducedMotion}
@@ -50,8 +53,8 @@ export function VideoHero() {
             loop
             playsInline
             preload="metadata"
-            onError={() => setVideoOk(false)}
-            aria-label="COFY brand film: a golden path rises toward a glowing lightbulb"
+            onError={() => (srcIndex < sources.length - 1 ? setSrcIndex(srcIndex + 1) : setVideoOk(false))}
+            aria-label="Film of children of varied abilities learning with caring mentors in a sunlit library"
           >
             <track kind="captions" src={captionSrc} srcLang="en" label="English" default />
           </video>
