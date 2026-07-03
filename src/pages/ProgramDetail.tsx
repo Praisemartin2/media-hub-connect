@@ -30,41 +30,37 @@ const ProgramDetail = () => {
         description={program.summary}
       />
 
-      {/* Full-bleed hero */}
-      <section className="relative isolate flex min-h-[62svh] items-end overflow-hidden bg-brand-blue-deep text-white">
-        <div className="absolute inset-0">
+      {/* Light header + photo band */}
+      <section className="border-b border-border bg-background">
+        <div className="container-cofy pb-10 pt-12 lg:pt-16">
+          <Link
+            to="/programs"
+            className="mb-8 inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            All Projects
+          </Link>
+          <div className="flex items-center gap-4">
+            <span className="flex h-14 w-14 items-center justify-center bg-secondary text-secondary-foreground">
+              <program.icon className="h-7 w-7" />
+            </span>
+            <h1 className="font-display text-4xl font-medium tracking-tight sm:text-6xl lg:text-7xl">
+              {program.title}
+            </h1>
+          </div>
+          <p className="mt-5 max-w-2xl font-serif text-xl leading-relaxed text-muted-foreground">
+            {program.summary}
+          </p>
+        </div>
+        <div className="h-[42svh] min-h-[300px] w-full overflow-hidden lg:h-[56svh]">
           <img
             src={photos[program.art as keyof typeof photos]?.min ?? plateFallback(program.art as never)}
-            alt=""
+            alt={photos[program.art as keyof typeof photos]?.alt ?? ""}
             className="h-full w-full object-cover"
             onError={(e) => {
               (e.currentTarget as HTMLImageElement).src = plateFallback(program.art as never);
             }}
           />
-        </div>
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-brand-blue-deep via-brand-blue-deep/50 to-transparent"
-          aria-hidden
-        />
-        <div className="container-cofy relative pb-14 pt-32">
-          <Link
-            to="/programs"
-            className="mb-5 inline-flex items-center gap-1.5 text-sm font-semibold text-white/75 transition-colors hover:text-white"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            All Programs
-          </Link>
-          <div className="flex items-center gap-4">
-            <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-secondary text-secondary-foreground shadow-lg">
-              <program.icon className="h-7 w-7" />
-            </span>
-            <h1 className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-              {program.title}
-            </h1>
-          </div>
-          <p className="mt-4 max-w-2xl text-lg text-white/85 sm:text-xl">
-            {program.summary}
-          </p>
         </div>
       </section>
 
@@ -120,12 +116,12 @@ const ProgramDetail = () => {
       <section className="bg-brand-cream py-16 lg:py-20">
         <div className="container-cofy">
           <Reveal>
-            <div className="flex flex-col items-start justify-between gap-6 rounded-lg bg-brand-blue-deep p-8 text-white sm:p-12 lg:flex-row lg:items-center">
+            <div className="flex flex-col items-start justify-between gap-6 bg-brand-sky p-8 sm:p-12 lg:flex-row lg:items-center">
               <div className="max-w-2xl">
-                <h2 className="font-display text-2xl font-bold sm:text-3xl">
+                <h2 className="font-display text-3xl font-medium sm:text-4xl">
                   How you can help
                 </h2>
-                <p className="mt-3 text-lg text-white/85">{program.engage}</p>
+                <p className="mt-3 font-serif text-lg text-foreground/80">{program.engage}</p>
               </div>
               <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
                 <Button
@@ -142,7 +138,6 @@ const ProgramDetail = () => {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="rounded-none border-white/35 bg-white/5 px-7 font-semibold text-white hover:bg-white/15 hover:text-white"
                 >
                   <Link to="/contact">
                     Ask a question

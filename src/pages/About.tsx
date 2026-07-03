@@ -30,7 +30,7 @@ const About = () => {
           <Reveal>
             <div className="relative">
               <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-secondary/20" aria-hidden />
-              <div className="relative overflow-hidden rounded-[2rem] bg-brand-blue-deep p-10">
+              <div className="relative overflow-hidden bg-primary p-10">
                 <div className="absolute inset-0 bg-hero-radial opacity-70" aria-hidden />
                 <img
                   src={logo}
