@@ -33,9 +33,9 @@ export const programs: Program[] = [
     title: "Disability Support",
     icon: Accessibility,
     summary:
-      "Empowering families with special-needs children to reach their full potential.",
+      "Empowering families with special needs children through resources and opportunities for growth.",
     description:
-      "Our flagship program walks alongside youth with developmental delays and their families. Through advocacy, one-on-one support services and strengths-based education, we help every young person build the skills and confidence to thrive in the real world.",
+      "Our disability support program empowers families with special needs children by providing resources and opportunities for growth. Our dedicated Educators and Service Providers ensure every child receives the support they need to reach their full potential through advocacy, services and education. With your support, we bring hope to families and create brighter futures for special needs children.",
     highlights: [
       "Individualized, strengths-based care plans",
       "Family advocacy & navigation support",
@@ -52,16 +52,16 @@ export const programs: Program[] = [
   },
   {
     slug: "educational-opportunities",
-    title: "Educational Opportunities",
+    title: "Empowering Youth through Education",
     icon: BookOpen,
     summary:
-      "Equal access to books and learning resources for every child.",
+      "Opportunities for Educators, Youth with disabilities, and their caretakers.",
     description:
-      "We believe a great education should never depend on a zip code or income. Our funding program puts books, supplies and learning tools directly into the hands of children who need them most — closing gaps and opening doors.",
+      "Our mission is to create opportunities for Educators, Youth with disabilities, and their caretakers. We offer webinars, panel discussions, courses, and educational resources to support their learning journey, especially for those in need.",
     highlights: [
-      "Free books & learning materials",
-      "Tutoring and homework support",
-      "Digital learning access",
+      "Webinars & panel discussions",
+      "Courses for educators and caretakers",
+      "Educational resources for youth in need",
     ],
     art: "education",
     stat: { value: 1200, suffix: "+", label: "books and learning resources shared" },
@@ -74,16 +74,16 @@ export const programs: Program[] = [
   },
   {
     slug: "international-outreach",
-    title: "International Outreach",
+    title: "Funding Learning Opportunities",
     icon: Globe2,
     summary:
-      "Education outreaches and scholarships for students in need worldwide.",
+      "Equal educational opportunities for all children — with access to books and learning resources.",
     description:
-      "COFY's heart reaches beyond our community. We partner on education outreaches abroad and award scholarships to determined students who simply need an opportunity to keep learning and growing.",
+      "Our funding program helps provide equal educational opportunities to all children, with a focus on access to books and learning resources. By donating, you can bridge the gap between urban and rural areas in Africa and give children the tools they need to succeed. Join us in creating brighter futures for youth and families in need. Every donation counts.",
     highlights: [
-      "Need-based scholarships",
-      "Global education partnerships",
-      "Mentorship across borders",
+      "Access to books & learning resources",
+      "Bridging urban and rural areas in Africa",
+      "Every donation counts",
     ],
     art: "outreach",
     stat: { value: 48, suffix: "", label: "scholarships awarded to students in need" },
@@ -96,16 +96,16 @@ export const programs: Program[] = [
   },
   {
     slug: "mentorship",
-    title: "Mentorship & Life Skills",
+    title: "Academic & Life Skills",
     icon: Users,
     summary:
-      "Caring mentors guiding youth toward independence and confidence.",
+      "Helping youth transition into college, career, and independent living.",
     description:
-      "Every young person deserves someone in their corner. Our mentors meet youth where they are — online, at home, at the library or in the park — to build life skills, set goals and celebrate every win along the way.",
+      "COFY supports youth and young adults with academic and life skills to enable them to transition into college, career, and independent living. Our curriculum covers social skills, self-advocacy, health and wellness, self-management, independent living, and leadership.",
     highlights: [
-      "Goal-setting & coaching",
-      "Confidence & social skills",
-      "Flexible, youth-led pacing",
+      "Social skills & self-advocacy",
+      "Health, wellness & self-management",
+      "Independent living & leadership",
     ],
     art: "mentorship",
     stat: { value: 40, suffix: "+", label: "trained mentors showing up every week" },

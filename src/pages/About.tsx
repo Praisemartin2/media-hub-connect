@@ -37,7 +37,7 @@ const About = () => {
                   className="relative mx-auto w-1/2 rounded-3xl shadow-2xl ring-1 ring-white/20"
                 />
                 <p className="relative mt-8 text-center font-display text-xl font-bold text-white">
-                  "Creating Opportunities for Youth"
+                  "Helping Together." (2 Corinthians 1:11)
                 </p>
                 <p className="relative mt-2 text-center text-sm text-white/70">
                   Transformational education & support since day one.
@@ -54,9 +54,7 @@ const About = () => {
                 </span>
                 <h3 className="mt-4 font-display text-2xl font-bold">Our Mission</h3>
                 <p className="mt-2 leading-relaxed text-muted-foreground">
-                  To provide transformational education and support to those who
-                  need it most — empowering youth with developmental delays and
-                  their families to thrive in the real world.
+                  {site.aboutIntro}
                 </p>
               </div>
             </Reveal>

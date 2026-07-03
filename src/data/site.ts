@@ -3,9 +3,14 @@ import { Facebook, Instagram, Youtube, Linkedin, type LucideIcon } from "lucide-
 export const site = {
   name: "Creating Opportunities for Youth Inc.",
   shortName: "COFY inc.",
-  tagline: "Creating Opportunities for Youth",
+  tagline: "Helping Together.",
+  taglineRef: "(2 Corinthians 1:11)",
   mission:
-    "We provide transformational education and support to those who need it most — empowering youth with developmental delays and their families to thrive in the real world.",
+    "We support youth with special needs and their families through educational programs and service providers.",
+  aboutIntro:
+    "COFY is a registered nonprofit, non-governmental organization in the state of New Jersey. COFY is a community-based organization that strives to support youth with developmental delays and their families, helping them to thrive in the real world. We provide treatment plans and care based on the strengths and needs of individuals.",
+  aboutSkills:
+    "COFY supports youth and young adults with academic and life skills to enable them to transition into college, career, and independent living. Our curriculum covers social skills, self-advocacy, health and wellness, self-management, independent living, and leadership.",
   email: "cofyincorporated@gmail.com",
   phone: "(732) 844-9392",
   phoneHref: "tel:+17328449392",
@@ -15,9 +20,9 @@ export const site = {
 
 export const navLinks = [
   { label: "Home", to: "/" },
-  { label: "About", to: "/about" },
-  { label: "Programs", to: "/programs" },
-  { label: "Media Hub", to: "/media" },
+  { label: "Mission", to: "/about" },
+  { label: "Projects", to: "/programs" },
+  { label: "Blog", to: "/media" },
   { label: "Events", to: "/events" },
   { label: "Contact", to: "/contact" },
 ];
