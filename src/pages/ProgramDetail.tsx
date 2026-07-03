@@ -48,7 +48,7 @@ const ProgramDetail = () => {
             All Programs
           </Link>
           <div className="flex items-center gap-4">
-            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary text-secondary-foreground shadow-lg">
+            <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-secondary text-secondary-foreground shadow-lg">
               <program.icon className="h-7 w-7" />
             </span>
             <h1 className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
@@ -85,7 +85,7 @@ const ProgramDetail = () => {
 
           <div className="space-y-6">
             <Reveal delay={80}>
-              <div className="rounded-3xl bg-primary p-8 text-center text-white">
+              <div className="rounded-lg bg-primary p-8 text-center text-white">
                 <p className="font-display text-5xl font-extrabold text-secondary">
                   <StatCounter value={program.stat.value} suffix={program.stat.suffix} />
                 </p>
@@ -93,7 +93,7 @@ const ProgramDetail = () => {
               </div>
             </Reveal>
             <Reveal delay={140}>
-              <figure className="rounded-3xl border border-border bg-card p-8">
+              <figure className="rounded-lg border border-border bg-card p-8">
                 <Quote className="h-8 w-8 text-secondary" />
                 <blockquote className="mt-3 text-lg leading-relaxed">
                   "{program.quote.text}"
@@ -113,7 +113,7 @@ const ProgramDetail = () => {
       <section className="bg-brand-cream py-16 lg:py-20">
         <div className="container-cofy">
           <Reveal>
-            <div className="flex flex-col items-start justify-between gap-6 rounded-3xl bg-brand-blue-deep p-8 text-white sm:p-12 lg:flex-row lg:items-center">
+            <div className="flex flex-col items-start justify-between gap-6 rounded-lg bg-brand-blue-deep p-8 text-white sm:p-12 lg:flex-row lg:items-center">
               <div className="max-w-2xl">
                 <h2 className="font-display text-2xl font-bold sm:text-3xl">
                   How you can help
@@ -124,7 +124,7 @@ const ProgramDetail = () => {
                 <Button
                   asChild
                   size="lg"
-                  className="rounded-full bg-secondary px-7 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
+                  className="rounded-none bg-secondary px-7 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
                 >
                   <Link to="/get-involved">
                     <Heart className="mr-1 h-5 w-5" />
@@ -135,7 +135,7 @@ const ProgramDetail = () => {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="rounded-full border-white/35 bg-white/5 px-7 font-semibold text-white hover:bg-white/15 hover:text-white"
+                  className="rounded-none border-white/35 bg-white/5 px-7 font-semibold text-white hover:bg-white/15 hover:text-white"
                 >
                   <Link to="/contact">
                     Ask a question
@@ -155,7 +155,7 @@ const ProgramDetail = () => {
             <h2 className="font-display text-2xl font-bold sm:text-3xl">
               Stories from our community
             </h2>
-            <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Button asChild variant="outline" className="rounded-none font-semibold">
               <Link to="/media">
                 Media Hub
                 <ArrowRight className="ml-1 h-4 w-4" />
@@ -183,9 +183,9 @@ const ProgramDetail = () => {
               <Link
                 key={p.slug}
                 to={`/programs/${p.slug}`}
-                className="card-lift group flex items-center gap-4 rounded-2xl border border-border bg-card p-5"
+                className="card-lift group flex items-center gap-4 rounded-lg border border-border bg-card p-5"
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <p.icon className="h-5 w-5" />
                 </span>
                 <span className="font-display font-bold transition-colors group-hover:text-primary">

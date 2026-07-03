@@ -49,7 +49,7 @@ const Events = () => {
       <section className="py-16 lg:py-24">
         <div className="container-cofy">
           {/* Tab switcher */}
-          <div className="mb-10 inline-flex rounded-full border border-border bg-card p-1.5">
+          <div className="mb-10 inline-flex rounded-none border border-border bg-card p-1">
             {([
               { key: "upcoming", label: "Upcoming", icon: CalendarDays },
               { key: "past", label: "Past Events", icon: History },
@@ -59,7 +59,7 @@ const Events = () => {
                 onClick={() => setTab(t.key)}
                 aria-pressed={tab === t.key}
                 className={cn(
-                  "inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all",
+                  "inline-flex items-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold transition-all",
                   tab === t.key
                     ? "bg-primary text-white shadow-md shadow-primary/25"
                     : "text-foreground/65 hover:text-primary",

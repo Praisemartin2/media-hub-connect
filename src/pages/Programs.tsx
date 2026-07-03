@@ -26,12 +26,12 @@ const Programs = () => {
             <Reveal key={program.slug} delay={i * 60}>
               <div
                 id={program.slug}
-                className="card-lift grid gap-8 overflow-hidden rounded-3xl border border-border bg-card p-7 lg:grid-cols-[1fr_1.4fr] lg:p-10"
+                className="card-lift grid gap-8 overflow-hidden rounded-lg border border-border bg-card p-7 lg:grid-cols-[1fr_1.4fr] lg:p-10"
               >
-                <div className="relative flex flex-col justify-center overflow-hidden rounded-2xl bg-brand-blue-deep p-8 text-white">
+                <div className="relative flex flex-col justify-center overflow-hidden rounded-lg bg-brand-blue-deep p-8 text-white">
                   <div className="absolute inset-0 opacity-90"><Illustration variant={program.art} label="" /></div>
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-deep/90 via-brand-blue-deep/40 to-transparent" aria-hidden />
-                  <span className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 backdrop-blur">
+                  <span className="relative flex h-16 w-16 items-center justify-center rounded-lg bg-white/15 backdrop-blur">
                     <program.icon className="h-8 w-8" />
                   </span>
                   <h2 className="relative mt-6 font-display text-2xl font-bold sm:text-3xl">
@@ -52,13 +52,13 @@ const Programs = () => {
                     ))}
                   </ul>
                   <div className="mt-7 flex flex-wrap gap-3">
-                    <Button asChild className="rounded-full font-semibold">
+                    <Button asChild className="rounded-none font-semibold">
                       <Link to={`/programs/${program.slug}`}>
                         Visit program page
                         <ArrowRight className="ml-1 h-4 w-4" />
                       </Link>
                     </Button>
-                    <Button asChild variant="outline" className="rounded-full font-semibold">
+                    <Button asChild variant="outline" className="rounded-none font-semibold">
                       <Link to="/get-involved">Support this program</Link>
                     </Button>
                   </div>
@@ -72,7 +72,7 @@ const Programs = () => {
       {/* CTA */}
       <section className="container-cofy">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl bg-brand-blue-deep px-8 py-14 text-center text-white sm:px-16">
+          <div className="relative overflow-hidden rounded-lg bg-brand-blue-deep px-8 py-14 text-center text-white sm:px-16">
             <div className="absolute inset-0 bg-hero-radial" aria-hidden />
             <div className="relative mx-auto max-w-2xl">
               <h2 className="font-display text-3xl font-extrabold sm:text-4xl">
@@ -84,7 +84,7 @@ const Programs = () => {
               <Button
                 asChild
                 size="lg"
-                className="mt-8 rounded-full bg-secondary px-7 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
+                className="mt-8 rounded-none bg-secondary px-7 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
               >
                 <Link to="/get-involved">
                   <Heart className="mr-1 h-5 w-5" />

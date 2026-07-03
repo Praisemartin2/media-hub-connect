@@ -44,7 +44,7 @@ const Index = () => {
             <Button
               asChild
               size="lg"
-              className="mt-9 rounded-full px-8 font-semibold"
+              className="mt-9 rounded-none px-8 font-semibold"
             >
               <Link to="/about">
                 Our Vision
@@ -72,7 +72,7 @@ const Index = () => {
                   <Link
                     to={`/programs/${program.slug}`}
                     className={cn(
-                      "group block overflow-hidden rounded-3xl",
+                      "group block overflow-hidden rounded-lg",
                       i % 2 === 1 && "lg:order-2",
                     )}
                   >
@@ -86,7 +86,7 @@ const Index = () => {
                     />
                   </Link>
                   <div className={cn(i % 2 === 1 && "lg:order-1")}>
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                       <program.icon className="h-6 w-6" />
                     </span>
                     <h3 className="mt-5 font-display text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
@@ -96,7 +96,7 @@ const Index = () => {
                       {program.description}
                     </p>
                     <div className="mt-7 flex flex-wrap gap-3">
-                      <Button asChild className="rounded-full font-semibold">
+                      <Button asChild className="rounded-none font-semibold">
                         <Link to={`/programs/${program.slug}`}>
                           Learn More
                           <ArrowRight className="ml-1 h-4 w-4" />
@@ -105,7 +105,7 @@ const Index = () => {
                       <Button
                         asChild
                         variant="outline"
-                        className="rounded-full font-semibold"
+                        className="rounded-none font-semibold"
                       >
                         <Link to="/get-involved">Donate</Link>
                       </Button>
@@ -165,7 +165,7 @@ const Index = () => {
               className="md:mb-0"
             />
             <Reveal>
-              <Button asChild variant="outline" className="rounded-full font-semibold">
+              <Button asChild variant="outline" className="rounded-none font-semibold">
                 <Link to="/media">
                   Visit the Blog
                   <ArrowRight className="ml-1 h-4 w-4" />
@@ -194,7 +194,7 @@ const Index = () => {
               className="md:mb-0"
             />
             <Reveal>
-              <Button asChild variant="outline" className="rounded-full font-semibold">
+              <Button asChild variant="outline" className="rounded-none font-semibold">
                 <Link to="/events">
                   See all events
                   <ArrowRight className="ml-1 h-4 w-4" />
@@ -215,7 +215,7 @@ const Index = () => {
       {/* CTA */}
       <section className="container-cofy py-20">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl bg-brand-blue-deep px-8 py-16 text-center text-white sm:px-16">
+          <div className="relative overflow-hidden rounded-lg bg-brand-blue-deep px-8 py-16 text-center text-white sm:px-16">
             <div className="absolute inset-0 bg-hero-radial" aria-hidden />
             <div className="relative mx-auto max-w-2xl">
               <h2 className="font-display text-3xl font-extrabold sm:text-4xl">
@@ -228,7 +228,7 @@ const Index = () => {
                 <Button
                   asChild
                   size="lg"
-                  className="rounded-full bg-secondary px-7 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
+                  className="rounded-none bg-secondary px-7 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
                 >
                   <Link to="/get-involved">
                     <Heart className="mr-1 h-5 w-5" />
@@ -239,7 +239,7 @@ const Index = () => {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="rounded-full border-white/30 bg-white/5 px-7 font-semibold text-white hover:bg-white/15 hover:text-white"
+                  className="rounded-none border-white/30 bg-white/5 px-7 font-semibold text-white hover:bg-white/15 hover:text-white"
                 >
                   <Link to="/get-involved#volunteer">
                     <HandHeart className="mr-1 h-5 w-5" />

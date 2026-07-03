@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, ArrowRight, Pause, Play, ChevronDown } from "lucide-react";
+import { Heart, ArrowRight, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Illustration } from "@/components/art/Illustration";
-import logo from "@/assets/cofy-logo.png";
 
 /**
- * Obama.org-style full-bleed video hero, adapted to COFY's brand and
- * accessibility bar. Plays public/media/hero-video.mp4 when present
- * (muted, looping, captioned); until then it shows the animated brand
- * illustration poster. Motion is disabled for prefers-reduced-motion.
+ * Editorial type-first hero: massive statement typography on a white
+ * canvas, followed by a full-bleed media band (muted looping video with
+ * captions and a pause control; illustrated poster fallback).
  */
 export function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -40,9 +38,56 @@ export function VideoHero() {
   };
 
   return (
-    <section className="relative isolate flex min-h-[92svh] items-end overflow-hidden bg-brand-blue-deep text-white">
-      {/* Media layer */}
-      <div className="absolute inset-0" aria-hidden={videoOk ? undefined : true}>
+    <section className="bg-background">
+      {/* Statement */}
+      <div className="container-cofy pb-14 pt-16 sm:pt-24 lg:pb-20 lg:pt-28">
+        <p className="eyebrow animate-fade-up">
+          Creating Opportunities for Youth Inc.
+        </p>
+        <h1 className="mt-6 max-w-5xl animate-fade-up font-display text-6xl font-black leading-[0.95] tracking-[-0.03em] text-foreground sm:text-8xl lg:text-[7.5rem]">
+          Helping{" "}
+          <span className="relative inline-block text-primary">
+            Together
+            <span
+              className="absolute -bottom-1 left-0 h-[0.08em] w-full bg-secondary"
+              aria-hidden
+            />
+          </span>
+          .
+        </h1>
+        <p className="mt-4 animate-fade-up text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          (2 Corinthians 1:11)
+        </p>
+
+        <div className="mt-10 flex animate-fade-up flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <p className="max-w-xl text-xl leading-relaxed text-muted-foreground sm:text-2xl">
+            We support youth with special needs and their families through
+            educational programs and service providers.
+          </p>
+          <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+            <Button asChild size="lg" className="rounded-none px-8 text-base font-bold">
+              <Link to="/get-involved">
+                <Heart className="mr-1.5 h-5 w-5" />
+                Donate
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="rounded-none border-foreground/25 px-8 text-base font-bold hover:bg-foreground hover:text-background"
+            >
+              <Link to="/get-involved#volunteer">
+                Get Involved
+                <ArrowRight className="ml-1.5 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Full-bleed media band */}
+      <div className="relative h-[58svh] min-h-[380px] w-full overflow-hidden bg-brand-blue-deep lg:h-[72svh]">
         {videoOk ? (
           <video
             ref={videoRef}
@@ -55,87 +100,25 @@ export function VideoHero() {
             playsInline
             preload="metadata"
             onError={() => setVideoOk(false)}
-            aria-label="Youth and mentors learning and playing together at COFY programs"
+            aria-label="COFY brand film: a golden path rises toward a glowing lightbulb"
           >
             <track kind="captions" src={captionSrc} srcLang="en" label="English" default />
           </video>
         ) : (
           <Illustration variant="hero" label="" className="h-full w-full" />
         )}
+
+        {videoOk && (
+          <button
+            type="button"
+            onClick={togglePlay}
+            aria-label={playing ? "Pause background video" : "Play background video"}
+            className="absolute bottom-5 right-5 z-10 flex h-11 w-11 items-center justify-center border border-white/40 bg-black/40 text-white backdrop-blur transition-colors hover:bg-black/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+          >
+            {playing ? <Pause className="h-5 w-5" /> : <Play className="ml-0.5 h-5 w-5" />}
+          </button>
+        )}
       </div>
-
-      {/* Legibility scrim */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-brand-blue-deep via-brand-blue-deep/55 to-brand-blue-deep/20"
-        aria-hidden
-      />
-
-      {/* Content */}
-      <div className="container-cofy relative pb-20 pt-36 lg:pb-28">
-        <div className="max-w-3xl">
-          <img
-            src={logo}
-            alt="Creating Opportunities for Youth Inc. logo"
-            width={72}
-            height={72}
-            className="mb-7 h-16 w-16 rounded-2xl shadow-2xl ring-1 ring-white/25 sm:h-[72px] sm:w-[72px]"
-          />
-          <h1 className="font-display text-5xl font-extrabold leading-[1.02] tracking-tight sm:text-7xl lg:text-8xl">
-            Helping <span className="italic text-secondary">Together</span>.
-          </h1>
-          <p className="mt-3 text-base font-medium tracking-wide text-white/70">
-            (2 Corinthians 1:11)
-          </p>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl">
-            We support youth with special needs and their families through
-            educational programs and service providers.
-          </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full bg-secondary px-8 text-base font-bold text-secondary-foreground shadow-lg shadow-black/25 hover:bg-brand-yellow-light"
-            >
-              <Link to="/get-involved">
-                <Heart className="mr-1 h-5 w-5" />
-                Donate
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="rounded-full border-white/35 bg-white/5 px-8 text-base font-semibold text-white backdrop-blur hover:bg-white/15 hover:text-white"
-            >
-              <Link to="/get-involved#volunteer">
-                Get Involved
-                <ArrowRight className="ml-1 h-5 w-5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* Video pause control (WCAG 2.2.2) */}
-      {videoOk && (
-        <button
-          type="button"
-          onClick={togglePlay}
-          aria-label={playing ? "Pause background video" : "Play background video"}
-          className="absolute bottom-6 right-6 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/35 text-white backdrop-blur transition-colors hover:bg-black/55 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
-        >
-          {playing ? <Pause className="h-5 w-5" /> : <Play className="ml-0.5 h-5 w-5" />}
-        </button>
-      )}
-
-      {/* Scroll cue */}
-      <a
-        href="#mission"
-        aria-label="Scroll to our mission"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-white/70 transition-colors hover:text-white lg:block"
-      >
-        <ChevronDown className="h-7 w-7 animate-bounce motion-reduce:animate-none" />
-      </a>
     </section>
   );
 }

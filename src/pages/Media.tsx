@@ -39,9 +39,9 @@ const Media = () => {
             return (
               <div
                 key={t}
-                className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur"
+                className="flex items-center gap-3 rounded-lg border border-white/15 bg-white/10 px-4 py-3 backdrop-blur"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-secondary-foreground">
+                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
                   <meta.icon className="h-5 w-5" />
                 </span>
                 <span className="text-left">
@@ -84,7 +84,7 @@ const Media = () => {
                 onClick={() => setFilter(f.value)}
                 aria-pressed={filter === f.value}
                 className={cn(
-                  "rounded-full px-5 py-2.5 text-sm font-semibold transition-all",
+                  "rounded-none px-5 py-2.5 text-sm font-semibold transition-all",
                   filter === f.value
                     ? "bg-primary text-white shadow-md shadow-primary/25"
                     : "border border-border bg-card text-foreground/70 hover:border-primary/40 hover:text-primary",

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -14,7 +14,7 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 226 47% 16%;
+    --foreground: 225 45% 10%;
 
     --card: 0 0% 100%;
     --card-foreground: 226 47% 16%;
@@ -22,8 +22,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 226 47% 16%;
 
-    /* Royal cobalt blue — the dominant brand color */
-    --primary: 224 71% 34%;
+    /* Bright action blue — links, buttons, accents */
+    --primary: 220 92% 50%;
     --primary-foreground: 0 0% 100%;
 
     /* Golden yellow — the brand accent */
@@ -41,12 +41,12 @@
 
     --border: 222 24% 90%;
     --input: 222 24% 90%;
-    --ring: 224 71% 34%;
+    --ring: 220 92% 50%;
 
-    --radius: 0.85rem;
+    --radius: 0.25rem;
 
     /* Brand scale tokens */
-    --brand-blue: 224 71% 34%;
+    --brand-blue: 220 92% 50%;
     --brand-blue-dark: 226 64% 22%;
     --brand-blue-deep: 227 70% 15%;
     --brand-blue-light: 222 64% 95%;
@@ -159,14 +159,14 @@
     @apply absolute -bottom-2 left-0 h-1.5 w-2/3 rounded-full bg-secondary;
   }
 
-  /* Brand chip / eyebrow label */
+  /* Editorial eyebrow label */
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full bg-secondary/15 px-4 py-1.5 text-sm font-semibold uppercase tracking-wide text-primary;
+    @apply inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-primary;
   }
 
   /* Card lift on hover */
   .card-lift {
-    @apply transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10;
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-foreground/5;
   }
 }
 
