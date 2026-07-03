@@ -37,9 +37,9 @@ export const programs: Program[] = [
     description:
       "Our disability support program empowers families with special needs children by providing resources and opportunities for growth. Our dedicated Educators and Service Providers ensure every child receives the support they need to reach their full potential through advocacy, services and education. With your support, we bring hope to families and create brighter futures for special needs children.",
     highlights: [
-      "Individualized, strengths-based care plans",
-      "Family advocacy & navigation support",
-      "Inclusive social and life-skills sessions",
+      "Excellent care — tailored treatment plans built on each person's strengths and needs",
+      "Whole-person support — emotional and mental well-being, not just physical needs",
+      "Satisfaction — we seek family feedback and use it to improve our programs",
     ],
     art: "disability",
     stat: { value: 120, suffix: "+", label: "families supported each year" },
@@ -48,7 +48,7 @@ export const programs: Program[] = [
       name: "Maria T.",
       role: "Parent",
     },
-    engage: "Sponsor a family's support plan or volunteer as a session helper.",
+    engage: "Live your best life — sponsor a family's support plan or volunteer with our service providers.",
   },
   {
     slug: "educational-opportunities",
@@ -57,11 +57,11 @@ export const programs: Program[] = [
     summary:
       "Opportunities for Educators, Youth with disabilities, and their caretakers.",
     description:
-      "Our mission is to create opportunities for Educators, Youth with disabilities, and their caretakers. We offer webinars, panel discussions, courses, and educational resources to support their learning journey, especially for those in need.",
+      "Education is the key to unlocking future opportunities. We provide high-quality, transformational education to youth aged 5–21 through research-based identification and intervention methods — plus webinars, panel discussions, courses and resources for Educators, Youth with disabilities, and their caretakers.",
     highlights: [
-      "Webinars & panel discussions",
-      "Courses for educators and caretakers",
-      "Educational resources for youth in need",
+      "Vocational training, college prep, mentoring & professional development for educators",
+      "Quarterly educational webinars for teachers, parents and caregivers",
+      "All events and services free of charge to recipients",
     ],
     art: "education",
     stat: { value: 1200, suffix: "+", label: "books and learning resources shared" },
@@ -79,14 +79,14 @@ export const programs: Program[] = [
     summary:
       "Equal educational opportunities for all children — with access to books and learning resources.",
     description:
-      "Our funding program helps provide equal educational opportunities to all children, with a focus on access to books and learning resources. By donating, you can bridge the gap between urban and rural areas in Africa and give children the tools they need to succeed. Join us in creating brighter futures for youth and families in need. Every donation counts.",
+      "5,000 Books for Life: in partnership with BookSmiles.org, we are working to bring 5,000 books to rural communities in Africa. Access to books and learning resources is essential for children to reach their full potential — your donation purchases and distributes books to schools and libraries that need them most. Every donation, no matter the size, makes a difference. Send a Smile today!",
     highlights: [
-      "Access to books & learning resources",
-      "Bridging urban and rural areas in Africa",
-      "Every donation counts",
+      "5,000 books for rural communities in Africa",
+      "In partnership with BookSmiles.org",
+      "Every donation counts — no matter the size",
     ],
     art: "outreach",
-    stat: { value: 48, suffix: "", label: "scholarships awarded to students in need" },
+    stat: { value: 5000, suffix: "", label: "books for rural communities in Africa" },
     quote: {
       text: "The scholarship kept me in school when my family could not. I will pay it forward.",
       name: "Samuel A.",

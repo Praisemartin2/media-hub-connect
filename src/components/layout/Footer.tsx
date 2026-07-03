@@ -6,6 +6,7 @@ const columns = [
   {
     title: "Contact",
     items: [
+      { label: site.address },
       { label: site.email, href: `mailto:${site.email}` },
       { label: site.phone, href: site.phoneHref },
       { label: "Serving youth online, at homes, churches, public libraries and parks" },

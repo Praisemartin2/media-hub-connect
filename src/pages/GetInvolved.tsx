@@ -185,6 +185,35 @@ const GetInvolved = () => {
         </div>
       </section>
 
+      {/* 5,000 Books for Life campaign */}
+      <section className="relative overflow-hidden bg-primary py-16 text-white lg:py-20">
+        <div className="container-cofy grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
+          <div>
+            <p className="eyebrow font-display text-white/80">Featured Campaign</p>
+            <h2 className="mt-2 font-display text-4xl font-medium tracking-tight sm:text-5xl">
+              5,000 Books for Life
+            </h2>
+            <p className="mt-5 max-w-2xl font-serif text-lg leading-relaxed text-white/90">
+              In partnership with BookSmiles.org, we're bringing 5,000 books to
+              rural communities in Africa. Your contribution goes toward
+              purchasing and distributing books to schools and libraries that
+              need them most. Every donation, no matter the size, makes a
+              difference. Send a Smile today!
+            </p>
+          </div>
+          <div className="bg-white p-5 sm:p-8">
+            <img
+              src={`${import.meta.env.BASE_URL}media/photos/books.png`}
+              alt="Illustration of a tall stack of colorful books"
+              width={1200}
+              height={750}
+              loading="lazy"
+              className="w-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Other ways */}
       <section id="volunteer" className="scroll-mt-20 bg-brand-cream py-20 lg:py-28">
         <div className="container-cofy">
