@@ -54,8 +54,8 @@ const Contact = () => {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
               {contactCards.map((c, i) => {
                 const Inner = (
-                  <div className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-primary/40">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div className="flex items-start gap-4 rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary/40">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                       <c.icon className="h-6 w-6" />
                     </span>
                     <div>
@@ -83,7 +83,7 @@ const Contact = () => {
             </div>
 
             <Reveal delay={150}>
-              <div className="mt-6 rounded-2xl border border-border bg-card p-5">
+              <div className="mt-6 rounded-lg border border-border bg-card p-5">
                 <p className="text-sm font-medium text-muted-foreground">
                   Follow our journey
                 </p>
@@ -116,7 +116,7 @@ const Contact = () => {
                 });
                 form.reset();
               }}
-              className="rounded-3xl border border-border bg-card p-7 shadow-xl shadow-primary/5 sm:p-9"
+              className="rounded-lg border border-border bg-card p-7 shadow-xl shadow-primary/5 sm:p-9"
             >
               <h2 className="font-display text-2xl font-bold">Send us a message</h2>
               <p className="mt-1.5 text-muted-foreground">
@@ -148,7 +148,7 @@ const Contact = () => {
               <Button
                 type="submit"
                 size="lg"
-                className="mt-6 w-full rounded-full font-semibold sm:w-auto sm:px-10"
+                className="mt-6 w-full rounded-none font-semibold sm:w-auto sm:px-10"
               >
                 <Send className="mr-1 h-4 w-4" />
                 Send message

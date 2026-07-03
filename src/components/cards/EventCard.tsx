@@ -10,14 +10,14 @@ export function EventCard({ event, past = false }: { event: COFYEvent; past?: bo
   return (
     <article
       className={cn(
-        "card-lift group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6",
+        "card-lift group relative flex flex-col gap-4 overflow-hidden rounded-lg border border-border bg-card p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6",
         past && "opacity-95",
       )}
     >
       {/* Date chip */}
       <div
         className={cn(
-          "flex h-20 w-20 shrink-0 flex-col items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-md",
+          "flex h-20 w-20 shrink-0 flex-col items-center justify-center rounded-lg bg-gradient-to-br text-white shadow-md",
           event.gradient,
         )}
       >
@@ -72,7 +72,7 @@ export function EventCard({ event, past = false }: { event: COFYEvent; past?: bo
         <div className="shrink-0 sm:self-center">
           <Button
             asChild
-            className="rounded-full font-semibold shadow-sm shadow-primary/20"
+            className="rounded-none font-semibold shadow-sm shadow-primary/20"
           >
             <a href={event.registerUrl ?? "#"}>
               Register

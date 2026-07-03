@@ -22,7 +22,7 @@ const NotFound = () => {
         <img
           src={logo}
           alt="COFY inc. logo"
-          className="mx-auto mb-8 h-20 w-20 rounded-2xl shadow-2xl ring-1 ring-white/20"
+          className="mx-auto mb-8 h-20 w-20 rounded-lg shadow-2xl ring-1 ring-white/20"
         />
         <p className="font-display text-7xl font-extrabold text-secondary">404</p>
         <h1 className="mt-4 font-display text-2xl font-bold">
@@ -46,7 +46,7 @@ const NotFound = () => {
             asChild
             size="lg"
             variant="outline"
-            className="rounded-full border-white/30 bg-white/5 font-semibold text-white hover:bg-white/15 hover:text-white"
+            className="rounded-none border-white/30 bg-white/5 font-semibold text-white hover:bg-white/15 hover:text-white"
           >
             <Link to="/media">
               <Compass className="mr-1 h-5 w-5" />

@@ -82,7 +82,7 @@ const GetInvolved = () => {
               {Object.entries(impactByAmount).map(([amt, impact]) => (
                 <div
                   key={amt}
-                  className="flex items-center gap-3 rounded-xl border border-border bg-card p-4"
+                  className="flex items-center gap-3 rounded-lg border border-border bg-card p-4"
                 >
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary/20 font-display font-bold text-primary">
                     ${amt}
@@ -95,7 +95,7 @@ const GetInvolved = () => {
 
           {/* Donation card */}
           <Reveal>
-            <div className="rounded-3xl border border-border bg-card p-7 shadow-xl shadow-primary/5 sm:p-9">
+            <div className="rounded-lg border border-border bg-card p-7 shadow-xl shadow-primary/5 sm:p-9">
               <div className="mb-6 flex rounded-full bg-muted p-1.5">
                 <button
                   onClick={() => setMonthly(false)}
@@ -126,7 +126,7 @@ const GetInvolved = () => {
                       setCustom("");
                     }}
                     className={cn(
-                      "rounded-xl border-2 py-4 font-display text-lg font-bold transition-all",
+                      "rounded-lg border-2 py-4 font-display text-lg font-bold transition-all",
                       !custom && selected === amt
                         ? "border-primary bg-primary/5 text-primary"
                         : "border-border text-foreground hover:border-primary/40",
@@ -157,7 +157,7 @@ const GetInvolved = () => {
               </div>
 
               {amount > 0 && impactByAmount[amount] && (
-                <p className="mt-4 flex items-start gap-2 rounded-xl bg-secondary/15 p-3 text-sm text-foreground">
+                <p className="mt-4 flex items-start gap-2 rounded-lg bg-secondary/15 p-3 text-sm text-foreground">
                   <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                   {impactByAmount[amount]}
                 </p>
@@ -171,7 +171,7 @@ const GetInvolved = () => {
                     { description: "This demo doesn't process real payments yet." },
                   )
                 }
-                className="mt-6 w-full rounded-full bg-secondary text-base font-bold text-secondary-foreground hover:bg-brand-yellow-light"
+                className="mt-6 w-full rounded-none bg-secondary text-base font-bold text-secondary-foreground hover:bg-brand-yellow-light"
               >
                 <Heart className="mr-1 h-5 w-5" />
                 Donate ${amount || 0}
@@ -195,8 +195,8 @@ const GetInvolved = () => {
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {ways.map((way, i) => (
               <Reveal key={way.title} delay={i * 80}>
-                <div className="card-lift h-full rounded-2xl border border-border bg-card p-7">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <div className="card-lift h-full rounded-lg border border-border bg-card p-7">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <way.icon className="h-7 w-7" />
                   </span>
                   <h3 className="mt-5 font-display text-lg font-bold">
@@ -212,7 +212,7 @@ const GetInvolved = () => {
 
           {/* Volunteer signup */}
           <Reveal>
-            <div className="mt-12 overflow-hidden rounded-3xl bg-primary p-8 text-white sm:p-12">
+            <div className="mt-12 overflow-hidden rounded-lg bg-primary p-8 text-white sm:p-12">
               <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
                 <div>
                   <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm font-semibold">
@@ -246,7 +246,7 @@ const GetInvolved = () => {
                     });
                     form.reset();
                   }}
-                  className="rounded-2xl bg-white p-6 text-foreground"
+                  className="rounded-lg bg-white p-6 text-foreground"
                 >
                   <h4 className="font-display text-lg font-bold">
                     Express interest
@@ -261,7 +261,7 @@ const GetInvolved = () => {
                     />
                     <Button
                       type="submit"
-                      className="w-full rounded-full font-semibold"
+                      className="w-full rounded-none font-semibold"
                     >
                       <HandHeart className="mr-1 h-4 w-4" />
                       I want to volunteer

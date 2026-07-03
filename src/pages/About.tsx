@@ -34,7 +34,7 @@ const About = () => {
                 <img
                   src={logo}
                   alt="COFY inc. logo"
-                  className="relative mx-auto w-1/2 rounded-3xl shadow-2xl ring-1 ring-white/20"
+                  className="relative mx-auto w-1/2 rounded-lg shadow-2xl ring-1 ring-white/20"
                 />
                 <p className="relative mt-8 text-center font-display text-xl font-bold text-white">
                   "Helping Together." (2 Corinthians 1:11)
@@ -48,8 +48,8 @@ const About = () => {
 
           <div className="space-y-8">
             <Reveal>
-              <div className="rounded-2xl border border-border bg-card p-7">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="rounded-lg border border-border bg-card p-7">
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Target className="h-6 w-6" />
                 </span>
                 <h3 className="mt-4 font-display text-2xl font-bold">Our Mission</h3>
@@ -59,8 +59,8 @@ const About = () => {
               </div>
             </Reveal>
             <Reveal delay={100}>
-              <div className="rounded-2xl border border-border bg-card p-7">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary/20 text-primary">
+              <div className="rounded-lg border border-border bg-card p-7">
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-secondary/20 text-primary">
                   <Eye className="h-6 w-6" />
                 </span>
                 <h3 className="mt-4 font-display text-2xl font-bold">Our Vision</h3>
@@ -85,8 +85,8 @@ const About = () => {
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value, i) => (
               <Reveal key={value.title} delay={i * 80}>
-                <div className="card-lift h-full rounded-2xl border border-border bg-card p-7 text-center">
-                  <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-white">
+                <div className="card-lift h-full rounded-lg border border-border bg-card p-7 text-center">
+                  <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-lg bg-primary text-white">
                     <value.icon className="h-7 w-7" />
                   </span>
                   <h3 className="mt-5 font-display text-lg font-bold">
@@ -143,7 +143,7 @@ const About = () => {
               {impactStats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-border bg-gradient-to-br from-card to-brand-cream p-7 text-center"
+                  className="rounded-lg border border-border bg-gradient-to-br from-card to-brand-cream p-7 text-center"
                 >
                   <p className="font-display text-4xl font-extrabold text-primary">
                     <StatCounter value={stat.value} suffix={stat.suffix} />
@@ -161,7 +161,7 @@ const About = () => {
       {/* CTA */}
       <section className="container-cofy">
         <Reveal>
-          <div className="flex flex-col items-center justify-between gap-6 rounded-3xl bg-primary px-8 py-12 text-center text-white sm:flex-row sm:text-left">
+          <div className="flex flex-col items-center justify-between gap-6 rounded-lg bg-primary px-8 py-12 text-center text-white sm:flex-row sm:text-left">
             <div>
               <h2 className="font-display text-2xl font-bold sm:text-3xl">
                 Want to be part of the story?
@@ -173,7 +173,7 @@ const About = () => {
             <Button
               asChild
               size="lg"
-              className="shrink-0 rounded-full bg-secondary px-7 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
+              className="shrink-0 rounded-none bg-secondary px-7 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
             >
               <Link to="/get-involved">
                 <Heart className="mr-1 h-5 w-5" />

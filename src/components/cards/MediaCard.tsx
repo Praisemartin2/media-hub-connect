@@ -22,7 +22,7 @@ export function MediaCard({ item, featured = false }: { item: MediaItem; feature
   return (
     <article
       className={cn(
-        "card-lift group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card",
+        "card-lift group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card",
         featured && "lg:flex-row",
       )}
     >

@@ -45,8 +45,8 @@ const Accessibility = () => {
           <div className="grid gap-6 sm:grid-cols-2">
             {commitments.map((c, i) => (
               <Reveal key={c.title} delay={i * 70}>
-                <div className="card-lift h-full rounded-2xl border border-border bg-card p-7">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <div className="card-lift h-full rounded-lg border border-border bg-card p-7">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <c.icon className="h-6 w-6" />
                   </span>
                   <h2 className="mt-4 font-display text-xl font-bold">{c.title}</h2>
@@ -57,9 +57,9 @@ const Accessibility = () => {
           </div>
 
           <Reveal delay={150}>
-            <div className="mt-12 rounded-3xl bg-brand-cream p-8 sm:p-10">
+            <div className="mt-12 rounded-lg bg-brand-cream p-8 sm:p-10">
               <div className="flex items-start gap-4">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-secondary text-secondary-foreground">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
                   <AccessibilityIcon className="h-6 w-6" />
                 </span>
                 <div>
