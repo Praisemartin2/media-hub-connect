@@ -19,12 +19,11 @@ export const site = {
 };
 
 export const navLinks = [
-  { label: "Home", to: "/" },
   { label: "Mission", to: "/about" },
+  { label: "What's On", to: "/events" },
   { label: "Projects", to: "/programs" },
-  { label: "Blog", to: "/media" },
-  { label: "Events", to: "/events" },
-  { label: "Contact", to: "/contact" },
+  { label: "Stories", to: "/media" },
+  { label: "Support Us", to: "/get-involved" },
 ];
 
 export const socials: { label: string; href: string; icon: LucideIcon }[] = [

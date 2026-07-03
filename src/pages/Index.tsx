@@ -1,29 +1,28 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Heart, HandHeart, Quote } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { VideoHero } from "@/components/home/VideoHero";
-import { SectionHeading } from "@/components/shared/SectionHeading";
+import { KineticMission } from "@/components/home/KineticMission";
+import { Sunburst } from "@/components/shared/Sunburst";
 import { Reveal } from "@/components/shared/Reveal";
-import { StatCounter } from "@/components/shared/StatCounter";
 import { MediaCard } from "@/components/cards/MediaCard";
-import { EventCard } from "@/components/cards/EventCard";
 import { programs } from "@/data/programs";
 import { mediaItems } from "@/data/media";
 import { events } from "@/data/events";
 import { testimonials } from "@/data/testimonials";
-import { impactStats, site } from "@/data/site";
-import { isUpcoming } from "@/lib/format";
+import { site } from "@/data/site";
+import { formatDate, isUpcoming } from "@/lib/format";
 import { SEO } from "@/components/shared/SEO";
-import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 const base = import.meta.env.BASE_URL;
+const photo = (art: string) => `${base}media/photos/${art}.png`;
 
-/** Photo plate for each program (public/media/photos/<art>.png). */
-const programPhoto = (art: string) => `${base}media/photos/${art}.png`;
+const [featureProgram, ...cardPrograms] = programs;
 
 const Index = () => {
-  const latestMedia = mediaItems.slice(0, 3);
-  const upcoming = events.filter((e) => isUpcoming(e.date)).slice(0, 2);
+  const stories = mediaItems.slice(0, 3);
+  const nextEvents = events.filter((e) => isUpcoming(e.date)).slice(0, 3);
 
   return (
     <>
@@ -33,223 +32,267 @@ const Index = () => {
       />
       <VideoHero />
 
-      {/* Mission — editorial two-column */}
-      <section id="mission" className="scroll-mt-20 border-b border-border py-20 lg:py-28">
-        <div className="container-cofy grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+      {/* 2 — Split feature: who we are */}
+      <section id="mission" className="scroll-mt-24 py-20 lg:py-28">
+        <div className="container-cofy grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal>
-            <h2 className="font-display text-3xl font-extrabold leading-[1.12] tracking-tight sm:text-4xl lg:text-[2.9rem]">
-              We support youth with special needs and their families through
-              educational programs and service providers.
+            <div className="bg-brand-sky p-5 sm:p-8">
+              <img
+                src={photo("community")}
+                alt="Illustration of families and mentors gathered on a sunlit path"
+                width={1200}
+                height={750}
+                className="w-full object-cover"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <h2 className="font-display text-5xl font-medium leading-none tracking-tight sm:text-6xl">
+              Who we are
             </h2>
-            <Button
-              asChild
-              size="lg"
-              className="mt-9 rounded-none px-8 font-semibold"
-            >
+            <p className="mt-6 font-serif text-lg leading-relaxed text-foreground/75">
+              {site.aboutIntro}
+            </p>
+            <p className="mt-4 font-serif text-lg leading-relaxed text-foreground/75">
+              {site.aboutSkills}
+            </p>
+            <Button asChild variant="outline" className="mt-8">
               <Link to="/about">
                 Our Vision
                 <ArrowRight className="ml-1 h-5 w-5" />
               </Link>
             </Button>
           </Reveal>
+        </div>
+      </section>
+
+      {/* 3 — Cobalt feature block: flagship program */}
+      <section className="relative overflow-hidden bg-primary py-20 text-white lg:py-28">
+        <Sunburst className="absolute -top-6 right-8 w-56 text-white/25" />
+        <div className="container-cofy grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <Reveal>
+            <p className="eyebrow mb-4 font-display text-white/80">Featured Project</p>
+            <h2 className="font-display text-5xl font-medium leading-none tracking-tight sm:text-6xl">
+              {featureProgram.title}
+            </h2>
+            <p className="mt-6 max-w-xl font-serif text-lg leading-relaxed text-white/90">
+              {featureProgram.description}
+            </p>
+            <Button
+              asChild
+              variant="outline"
+              className="mt-8 border-white text-white hover:bg-white hover:text-primary"
+            >
+              <Link to={`/programs/${featureProgram.slug}`}>
+                Learn more
+                <ArrowRight className="ml-1 h-5 w-5" />
+              </Link>
+            </Button>
+          </Reveal>
           <Reveal delay={100}>
-            <div className="space-y-6 text-lg leading-relaxed text-muted-foreground lg:pt-2">
-              <p>{site.aboutIntro}</p>
-              <p>{site.aboutSkills}</p>
+            <div className="bg-white p-5 sm:p-8">
+              <img
+                src={photo(featureProgram.art)}
+                alt={`${featureProgram.title} — COFY project`}
+                width={1200}
+                height={750}
+                className="w-full object-cover"
+              />
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Programs — alternating photo/text editorial rows */}
+      {/* 4 — 3-up program cards */}
       <section className="py-20 lg:py-28">
         <div className="container-cofy">
-          <SectionHeading align="left" eyebrow="What We Do" title="Our projects" />
-          <div className="mt-14 space-y-20 lg:space-y-28">
-            {programs.map((program, i) => (
-              <Reveal key={program.slug}>
-                <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-                  <Link
-                    to={`/programs/${program.slug}`}
-                    className={cn(
-                      "group block overflow-hidden rounded-lg",
-                      i % 2 === 1 && "lg:order-2",
-                    )}
-                  >
+          <div className="grid gap-10 md:grid-cols-3">
+            {cardPrograms.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 80}>
+                <Link to={`/programs/${p.slug}`} className="group block">
+                  <div className="overflow-hidden">
                     <img
-                      src={programPhoto(program.art)}
-                      alt={`${program.title} — COFY program`}
+                      src={photo(p.art)}
+                      alt={`${p.title} — COFY project`}
                       width={1200}
                       height={750}
                       loading="lazy"
-                      className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     />
-                  </Link>
-                  <div className={cn(i % 2 === 1 && "lg:order-1")}>
-                    <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <program.icon className="h-6 w-6" />
-                    </span>
-                    <h3 className="mt-5 font-display text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
-                      {program.title}
-                    </h3>
-                    <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                      {program.description}
-                    </p>
-                    <div className="mt-7 flex flex-wrap gap-3">
-                      <Button asChild className="rounded-none font-semibold">
-                        <Link to={`/programs/${program.slug}`}>
-                          Learn More
-                          <ArrowRight className="ml-1 h-4 w-4" />
-                        </Link>
-                      </Button>
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="rounded-none font-semibold"
-                      >
-                        <Link to="/get-involved">Donate</Link>
-                      </Button>
-                    </div>
                   </div>
-                </div>
+                  <p className="eyebrow mt-5 font-display text-foreground/60">Projects</p>
+                  <h3 className="mt-2 font-display text-3xl font-medium leading-tight tracking-tight group-hover:text-primary">
+                    {p.title}
+                  </h3>
+                  <p className="mt-3 font-serif leading-relaxed text-foreground/70">
+                    {p.summary}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-2 font-display text-lg text-primary">
+                    Learn more
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Impact stats */}
-      <section className="border-y border-border bg-brand-blue-deep py-14 text-white">
-        <div className="container-cofy grid grid-cols-2 gap-8 lg:grid-cols-4">
-          {impactStats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="font-display text-4xl font-extrabold text-secondary sm:text-5xl">
-                <StatCounter value={stat.value} suffix={stat.suffix} />
-              </p>
-              <p className="mt-1.5 text-sm text-white/75">{stat.label}</p>
-            </div>
-          ))}
+      {/* 5 — Kinetic mission statement */}
+      <KineticMission />
+
+      {/* 6 — Sky-blue Latest block + story cards */}
+      <section className="bg-brand-sky py-20 lg:py-24">
+        <div className="container-cofy">
+          <div className="relative overflow-hidden">
+            <Sunburst className="absolute -top-4 right-0 w-48 text-black/20" />
+            <p className="eyebrow font-display text-foreground/70">Latest</p>
+            <h2 className="mt-2 max-w-3xl font-display text-5xl font-medium leading-none tracking-tight sm:text-6xl">
+              Stories from our community
+            </h2>
+          </div>
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {stories.map((item, i) => (
+              <Reveal key={item.id} delay={i * 80}>
+                <MediaCard item={item} />
+              </Reveal>
+            ))}
+          </div>
+          <div className="mt-10">
+            <Button asChild variant="outline">
+              <Link to="/media">
+                View all stories
+                <ArrowRight className="ml-1 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
-      {/* Reviews */}
-      <section className="py-20 lg:py-28">
+      {/* 7 — Newsletter (cream, two-column, underline inputs) */}
+      <section className="bg-brand-cream py-20 lg:py-28">
+        <div className="container-cofy grid gap-12 lg:grid-cols-2 lg:gap-24">
+          <Reveal>
+            <h2 className="font-display text-5xl font-medium leading-none tracking-tight sm:text-6xl">
+              Be an insider
+            </h2>
+            <p className="mt-6 max-w-md font-serif text-lg leading-relaxed text-foreground/75">
+              Get vlogs, stories and event news from COFY in your inbox — and
+              be the first to hear about workshops and volunteer days.
+            </p>
+          </Reveal>
+          <Reveal delay={100}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                toast.success("You're an insider!", {
+                  description: "Thanks for joining the COFY community.",
+                });
+                form.reset();
+              }}
+              className="space-y-8"
+            >
+              <div className="grid gap-8 sm:grid-cols-2">
+                <label className="block">
+                  <span className="font-display text-lg">First name</span>
+                  <input
+                    required
+                    name="firstName"
+                    autoComplete="given-name"
+                    className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
+                  />
+                </label>
+                <label className="block">
+                  <span className="font-display text-lg">Last name</span>
+                  <input
+                    required
+                    name="lastName"
+                    autoComplete="family-name"
+                    className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
+                  />
+                </label>
+              </div>
+              <label className="block">
+                <span className="font-display text-lg">Email</span>
+                <input
+                  required
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
+                />
+              </label>
+              <Button type="submit" size="lg">
+                Submit
+                <ArrowRight className="ml-1 h-5 w-5" />
+              </Button>
+            </form>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 8 — Yellow Projects block + reviews */}
+      <section className="relative overflow-hidden bg-secondary py-20 text-secondary-foreground lg:py-24">
+        <Sunburst className="absolute -top-4 left-8 w-48 text-black/20" />
         <div className="container-cofy">
-          <SectionHeading eyebrow="Reviews" title="What our community says" />
-          <div className="mx-auto mt-14 grid max-w-5xl gap-10 md:grid-cols-2">
+          <p className="eyebrow font-display text-black/60">Reviews</p>
+          <h2 className="mt-2 max-w-3xl font-display text-5xl font-medium leading-none tracking-tight sm:text-6xl">
+            Empowering the next generation
+          </h2>
+          <div className="mt-12 grid gap-10 md:grid-cols-2">
             {testimonials.map((t, i) => (
               <Reveal key={t.name} delay={i * 90}>
-                <figure className="flex h-full flex-col border-l-4 border-secondary pl-7">
-                  <Quote className="h-8 w-8 text-secondary" aria-hidden />
-                  <blockquote className="mt-4 flex-1 text-xl leading-relaxed text-foreground">
+                <figure className="border-l-4 border-black pl-6">
+                  <blockquote className="font-serif text-xl leading-relaxed">
                     "{t.quote}"
                   </blockquote>
-                  <figcaption className="mt-6 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                  <figcaption className="mt-4 font-display text-lg uppercase tracking-wide">
                     — {t.name}, {t.role}
                   </figcaption>
                 </figure>
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Blog preview */}
-      <section className="border-t border-border py-20 lg:py-28">
-        <div className="container-cofy">
-          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <SectionHeading
-              align="left"
-              eyebrow="Blog"
-              title="Vlogs, stories & news"
-              className="md:mb-0"
-            />
-            <Reveal>
-              <Button asChild variant="outline" className="rounded-none font-semibold">
-                <Link to="/media">
-                  Visit the Blog
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
-            </Reveal>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {latestMedia.map((item, i) => (
-              <Reveal key={item.id} delay={i * 80}>
-                <MediaCard item={item} />
-              </Reveal>
-            ))}
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Button asChild variant="outline" className="border-black text-black hover:bg-black hover:text-white">
+              <Link to="/programs">
+                View all projects
+                <ArrowRight className="ml-1 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="border-black text-black hover:bg-black hover:text-white">
+              <Link to="/events">
+                What's on{nextEvents[0] ? ` — next: ${formatDate(nextEvents[0].date, { month: "short", day: "numeric", year: undefined })}` : ""}
+                <ArrowRight className="ml-1 h-5 w-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Events preview */}
-      <section className="border-t border-border bg-brand-cream py-20 lg:py-28">
-        <div className="container-cofy">
-          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <SectionHeading
-              align="left"
-              eyebrow="What's Next"
-              title="Upcoming events"
-              className="md:mb-0"
-            />
-            <Reveal>
-              <Button asChild variant="outline" className="rounded-none font-semibold">
-                <Link to="/events">
-                  See all events
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
-            </Reveal>
-          </div>
-          <div className="mt-12 grid gap-5">
-            {upcoming.map((event, i) => (
-              <Reveal key={event.id} delay={i * 80}>
-                <EventCard event={event} />
-              </Reveal>
-            ))}
-          </div>
+      {/* 9 — DONATE TODAY banner (cobalt) */}
+      <section className="relative overflow-hidden bg-primary py-24 text-center text-white lg:py-32">
+        <Sunburst className="absolute -top-8 left-1/2 w-72 -translate-x-1/2 text-white/20" />
+        <div className="container-cofy relative">
+          <h2 className="font-display text-6xl font-medium uppercase leading-[0.9] tracking-[-0.01em] sm:text-8xl lg:text-[8.5rem]">
+            Donate Today
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl font-serif text-xl leading-relaxed text-white/90">
+            Join us in creating brighter futures for youth and families in
+            need. Every donation counts.
+          </p>
+          <Button
+            asChild
+            size="lg"
+            className="mt-9 border-white bg-white text-primary hover:bg-transparent hover:text-white"
+          >
+            <Link to="/get-involved">
+              <Heart className="mr-1 h-5 w-5" />
+              Donate
+            </Link>
+          </Button>
         </div>
-      </section>
-
-      {/* CTA */}
-      <section className="container-cofy py-20">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-lg bg-brand-blue-deep px-8 py-16 text-center text-white sm:px-16">
-            <div className="absolute inset-0 bg-hero-radial" aria-hidden />
-            <div className="relative mx-auto max-w-2xl">
-              <h2 className="font-display text-3xl font-extrabold sm:text-4xl">
-                Join us in creating brighter futures
-              </h2>
-              <p className="mt-4 text-lg text-white/80">
-                For youth and families in need — every donation counts.
-              </p>
-              <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                <Button
-                  asChild
-                  size="lg"
-                  className="rounded-none bg-secondary px-7 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
-                >
-                  <Link to="/get-involved">
-                    <Heart className="mr-1 h-5 w-5" />
-                    Donate
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="rounded-none border-white/30 bg-white/5 px-7 font-semibold text-white hover:bg-white/15 hover:text-white"
-                >
-                  <Link to="/get-involved#volunteer">
-                    <HandHeart className="mr-1 h-5 w-5" />
-                    Volunteer
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Reveal>
       </section>
     </>
   );
