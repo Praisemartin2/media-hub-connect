@@ -32,9 +32,9 @@ export const photos: Record<PhotoKey, { min: string; raw: string; alt: string }>
     alt: "Children's hands share an open picture book surrounded by school supplies",
   },
   outreach: {
-    min: `${CDN}/hf_20260703_043838_7a384574-d456-4f0b-a1a5-248a1ebcd1a9_min.webp`,
-    raw: `${CDN}/hf_20260703_043838_7a384574-d456-4f0b-a1a5-248a1ebcd1a9.png`,
-    alt: "Joyful schoolchildren in bright uniforms receive donated books at an outdoor outreach event",
+    min: `${CDN}/hf_20260703_124902_ec051e14-8780-4f08-9b87-5924b23762ed_min.webp`,
+    raw: `${CDN}/hf_20260703_124902_ec051e14-8780-4f08-9b87-5924b23762ed.png`,
+    alt: "COFY team volunteers in branded shirts hand out books to a lively crowd of children and families at a village outreach in Nigeria",
   },
   mentorship: {
     min: `${CDN}/hf_20260703_043839_c593d0aa-5cf8-4975-900b-21edb77248c8_min.webp`,
