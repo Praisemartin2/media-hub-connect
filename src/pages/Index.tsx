@@ -205,6 +205,39 @@ const Index = () => {
                   className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
                 />
               </label>
+              <div className="grid gap-8 sm:grid-cols-2">
+                <label className="block">
+                  <span className="font-display text-lg">
+                    Zip Code <span className="text-sm text-muted-foreground">(optional)</span>
+                  </span>
+                  <input
+                    name="zip"
+                    inputMode="numeric"
+                    autoComplete="postal-code"
+                    className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
+                  />
+                </label>
+                <label className="block">
+                  <span className="font-display text-lg">
+                    Phone <span className="text-sm text-muted-foreground">(optional)</span>
+                  </span>
+                  <input
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
+                  />
+                </label>
+              </div>
+              <p className="font-serif text-sm leading-relaxed text-muted-foreground">
+                By sharing your phone number you agree to receive occasional
+                text updates from COFY. Message and data rates may apply;
+                reply STOP to opt out.
+              </p>
+              <label className="flex items-start gap-3 font-serif">
+                <input required type="checkbox" name="terms" className="mt-1 h-5 w-5 accent-primary" />
+                <span>Yes, I agree to the Terms of Service.</span>
+              </label>
               <Button type="submit" size="lg">
                 Submit
                 <ArrowRight className="ml-1 h-5 w-5" />
@@ -214,25 +247,32 @@ const Index = () => {
         </div>
       </section>
 
-      {/* 8 — Yellow Projects block + reviews */}
+      {/* 8 — Yellow Programs block + program cards (spec section 8) */}
       <section className="relative overflow-hidden bg-secondary py-20 text-secondary-foreground lg:py-24">
         <Sunburst className="absolute -top-4 left-8 w-48 text-black/20" />
         <div className="container-cofy">
-          <p className="eyebrow font-display text-black/60">Reviews</p>
+          <p className="eyebrow font-display text-black/60">Programs</p>
           <h2 className="mt-2 max-w-3xl font-display text-5xl font-medium leading-none tracking-tight sm:text-6xl">
             Empowering the next generation
           </h2>
-          <div className="mt-12 grid gap-10 md:grid-cols-2">
-            {testimonials.map((t, i) => (
-              <Reveal key={t.name} delay={i * 90}>
-                <figure className="border-l-4 border-black pl-6">
-                  <blockquote className="font-serif text-xl leading-relaxed">
-                    "{t.quote}"
-                  </blockquote>
-                  <figcaption className="mt-4 font-display text-lg uppercase tracking-wide">
-                    — {t.name}, {t.role}
-                  </figcaption>
-                </figure>
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {cardPrograms.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 80}>
+                <Link to={`/programs/${p.slug}`} className="group block bg-white p-4">
+                  <div className="overflow-hidden">
+                    <PhotoImg
+                      id={p.art as "education" | "outreach" | "mentorship"}
+                      className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                  </div>
+                  <h3 className="mt-4 font-display text-2xl font-medium leading-tight tracking-tight text-foreground group-hover:text-primary">
+                    {p.title}
+                  </h3>
+                  <span className="mb-1 mt-2 inline-flex items-center gap-2 font-display text-lg text-primary">
+                    Learn more
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -249,6 +289,30 @@ const Index = () => {
                 <ArrowRight className="ml-1 h-5 w-5" />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="border-t border-border bg-background py-20 lg:py-24">
+        <div className="container-cofy">
+          <p className="eyebrow font-display">Reviews</p>
+          <h2 className="mt-2 max-w-3xl font-display text-5xl font-medium leading-none tracking-tight sm:text-6xl">
+            What our community says
+          </h2>
+          <div className="mt-12 grid gap-10 md:grid-cols-2">
+            {testimonials.map((t, i) => (
+              <Reveal key={t.name} delay={i * 90}>
+                <figure className="border-l-4 border-secondary pl-6">
+                  <blockquote className="font-serif text-xl leading-relaxed">
+                    "{t.quote}"
+                  </blockquote>
+                  <figcaption className="mt-4 font-display text-lg uppercase tracking-wide text-muted-foreground">
+                    — {t.name}, {t.role}
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
