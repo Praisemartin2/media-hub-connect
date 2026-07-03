@@ -15,7 +15,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["'Source Serif 4'", "Georgia", "serif"],
+        display: ["Oswald", "'Arial Narrow'", "ui-sans-serif", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -32,6 +33,7 @@ export default {
           "yellow-light": "hsl(var(--brand-yellow-light))",
           "yellow-soft": "hsl(var(--brand-yellow-soft))",
           cream: "hsl(var(--brand-cream))",
+          sky: "hsl(var(--brand-sky))",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
