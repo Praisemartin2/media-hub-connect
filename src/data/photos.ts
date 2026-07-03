@@ -10,6 +10,7 @@
 
 const CDN =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev";
+const LOCAL = `${import.meta.env.BASE_URL}media/photos`;
 
 export type PhotoKey =
   | "disability"
@@ -22,9 +23,9 @@ export type PhotoKey =
 
 export const photos: Record<PhotoKey, { min: string; raw: string; alt: string }> = {
   disability: {
-    min: `${CDN}/hf_20260703_043813_8d4c39d4-aa6f-43b6-8d4b-0d43c02aba59_min.webp`,
-    raw: `${CDN}/hf_20260703_043813_8d4c39d4-aa6f-43b6-8d4b-0d43c02aba59.png`,
-    alt: "A caring teacher kneels beside a smiling boy in a wheelchair at a bright learning-center table",
+    min: `${LOCAL}/real-team-nigeria.jpg`,
+    raw: `${LOCAL}/real-team-nigeria.jpg`,
+    alt: "COFY team members with community members during an outreach visit in Nigeria",
   },
   education: {
     min: `${CDN}/hf_20260703_043836_416f23c2-62ca-4641-aeb5-4f6c30d6ef74_min.webp`,
@@ -32,9 +33,9 @@ export const photos: Record<PhotoKey, { min: string; raw: string; alt: string }>
     alt: "Children's hands share an open picture book surrounded by school supplies",
   },
   outreach: {
-    min: `${CDN}/hf_20260703_124902_ec051e14-8780-4f08-9b87-5924b23762ed_min.webp`,
-    raw: `${CDN}/hf_20260703_124902_ec051e14-8780-4f08-9b87-5924b23762ed.png`,
-    alt: "COFY team volunteers in branded shirts hand out books to a lively crowd of children and families at a village outreach in Nigeria",
+    min: `${LOCAL}/real-outreach-distribution.jpg`,
+    raw: `${LOCAL}/real-outreach-distribution.jpg`,
+    alt: "Children gather around the COFY team during a distribution at an outreach in Abuja, Nigeria",
   },
   mentorship: {
     min: `${CDN}/hf_20260703_043839_c593d0aa-5cf8-4975-900b-21edb77248c8_min.webp`,
@@ -42,9 +43,9 @@ export const photos: Record<PhotoKey, { min: string; raw: string; alt: string }>
     alt: "A teenager and a mentor laugh together over a notebook on a park bench at golden hour",
   },
   community: {
-    min: `${CDN}/hf_20260703_043841_1e9ac394-8318-4d74-897d-9d62ce51c885_min.webp`,
-    raw: `${CDN}/hf_20260703_043841_1e9ac394-8318-4d74-897d-9d62ce51c885.png`,
-    alt: "Families, children of varied abilities and volunteers gather smiling in a sunlit park",
+    min: `${LOCAL}/real-outreach-gathering.jpg`,
+    raw: `${LOCAL}/real-outreach-gathering.jpg`,
+    alt: "A large gathering of children and families at a COFY community outreach in Nigeria",
   },
   books: {
     min: `${CDN}/hf_20260703_043843_0545de1c-d9a7-4c3b-ac30-aeb5c2a63af0_min.webp`,
