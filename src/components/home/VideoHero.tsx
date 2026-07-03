@@ -17,7 +17,8 @@ export function VideoHero() {
   const [playing, setPlaying] = useState(true);
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  const videoSrc = `${import.meta.env.BASE_URL}media/hero-video.mp4`;
+  const videoSrc = `${import.meta.env.BASE_URL}media/hero-video.webm`;
+  const posterSrc = `${import.meta.env.BASE_URL}media/hero-poster.png`;
   const captionSrc = `${import.meta.env.BASE_URL}media/hero-video.vtt`;
 
   useEffect(() => {
@@ -46,6 +47,7 @@ export function VideoHero() {
           <video
             ref={videoRef}
             src={videoSrc}
+            poster={posterSrc}
             className="h-full w-full object-cover"
             autoPlay={!reducedMotion}
             muted
