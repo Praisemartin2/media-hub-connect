@@ -24,8 +24,8 @@ const contactCards = [
   },
   {
     icon: MapPin,
-    label: "Where we serve",
-    value: "Online & across the community",
+    label: "Address",
+    value: site.address,
   },
   {
     icon: Clock,
@@ -124,16 +124,16 @@ const Contact = () => {
               </p>
               <div className="mt-6 grid gap-5 sm:grid-cols-2">
                 <div className="space-y-1.5">
-                  <Label htmlFor="name">Full name</Label>
-                  <Input id="name" required placeholder="Jane Doe" />
+                  <Label htmlFor="firstName">First Name</Label>
+                  <Input id="firstName" required autoComplete="given-name" placeholder="Jane" />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" required placeholder="jane@email.com" />
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input id="lastName" required autoComplete="family-name" placeholder="Doe" />
                 </div>
                 <div className="space-y-1.5 sm:col-span-2">
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" placeholder="How can we help?" />
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" required autoComplete="email" placeholder="jane@email.com" />
                 </div>
                 <div className="space-y-1.5 sm:col-span-2">
                   <Label htmlFor="message">Message</Label>

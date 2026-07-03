@@ -15,6 +15,7 @@ export const site = {
   phone: "(732) 844-9392",
   phoneHref: "tel:+17328449392",
   website: "www.cofyouth.org",
+  address: "7 Woodbridge Ave, Sewaren, NJ 07077",
   serves: ["Online", "Homes", "Churches", "Public Libraries", "Parks"],
 };
 
@@ -34,8 +35,8 @@ export const socials: { label: string; href: string; icon: LucideIcon }[] = [
 ];
 
 export const impactStats = [
-  { value: 350, suffix: "+", label: "Youth & families supported" },
-  { value: 1200, suffix: "+", label: "Learning resources shared" },
-  { value: 48, suffix: "", label: "Scholarships awarded" },
-  { value: 5, suffix: "", label: "Community venues served" },
+  { value: 5000, suffix: "", label: "Books for rural communities in Africa" },
+  { value: 100, suffix: "%", label: "Events & services free of charge" },
+  { value: 4, suffix: "", label: "Educational webinars every year" },
+  { value: 17, suffix: "", label: "Ages served — youth 5 to 21" },
 ];
