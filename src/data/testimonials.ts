@@ -8,23 +8,16 @@ export type Testimonial = {
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "COFY didn't just support my son — they believed in him. For the first time, he sees himself as capable. That changes everything.",
-    name: "Maria T.",
-    role: "Parent",
-    initials: "MT",
+      'The workshop was excellent. I enjoyed the topic "differentiation" as each child should be catered for regardless of how low a child may be.',
+    name: "Shantel L.",
+    role: "Workshop Attendee",
+    initials: "SL",
   },
   {
     quote:
-      "The mentorship program gave me confidence I never knew I had. My mentor showed up for me every single week.",
-    name: "Jamal R.",
-    role: "Youth Participant",
-    initials: "JR",
-  },
-  {
-    quote:
-      "As a volunteer, I came to give and ended up receiving so much more. This community is something special.",
-    name: "Daniel K.",
-    role: "Mentor & Volunteer",
-    initials: "DK",
+      "Very educative and edifying. The facilitators are very knowledgeable in their areas of specialization. The classes were very interesting.",
+    name: "Ekundayo O.",
+    role: "Anglican Girls Grammar School, Gudu, Abuja",
+    initials: "EO",
   },
 ];

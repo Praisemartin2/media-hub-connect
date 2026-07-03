@@ -80,14 +80,15 @@ export function VideoHero() {
             height={72}
             className="mb-7 h-16 w-16 rounded-2xl shadow-2xl ring-1 ring-white/25 sm:h-[72px] sm:w-[72px]"
           />
-          <h1 className="font-display text-4xl font-extrabold leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl">
-            Every young person can{" "}
-            <span className="text-secondary">thrive</span>.
+          <h1 className="font-display text-5xl font-extrabold leading-[1.02] tracking-tight sm:text-7xl lg:text-8xl">
+            Helping <span className="italic text-secondary">Together</span>.
           </h1>
+          <p className="mt-3 text-base font-medium tracking-wide text-white/70">
+            (2 Corinthians 1:11)
+          </p>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl">
-            COFY gives youth with developmental delays — and their families —
-            the education, support and belief they need to thrive in the real
-            world.
+            We support youth with special needs and their families through
+            educational programs and service providers.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button

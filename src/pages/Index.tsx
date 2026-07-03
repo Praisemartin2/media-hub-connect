@@ -1,17 +1,25 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Heart, HandHeart, Users2, Quote } from "lucide-react";
+import { ArrowRight, Heart, HandHeart, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { VideoHero } from "@/components/home/VideoHero";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Reveal } from "@/components/shared/Reveal";
+import { StatCounter } from "@/components/shared/StatCounter";
 import { MediaCard } from "@/components/cards/MediaCard";
 import { EventCard } from "@/components/cards/EventCard";
-import { values, programs } from "@/data/programs";
+import { programs } from "@/data/programs";
 import { mediaItems } from "@/data/media";
 import { events } from "@/data/events";
 import { testimonials } from "@/data/testimonials";
+import { impactStats, site } from "@/data/site";
 import { isUpcoming } from "@/lib/format";
 import { SEO } from "@/components/shared/SEO";
+import { cn } from "@/lib/utils";
+
+const base = import.meta.env.BASE_URL;
+
+/** Photo plate for each program (public/media/photos/<art>.png). */
+const programPhoto = (art: string) => `${base}media/photos/${art}.png`;
 
 const Index = () => {
   const latestMedia = mediaItems.slice(0, 3);
@@ -20,32 +28,89 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="Creating Opportunities for Youth Inc. — COFY"
-        description="COFY provides transformational education and support to youth with developmental delays and their families — empowering them to thrive."
+        title="Creating Opportunities for Youth Inc. (COFY) — Helping Together"
+        description={site.mission}
       />
       <VideoHero />
 
-      {/* Values / mission strip */}
-      <section id="mission" className="scroll-mt-20 py-20 lg:py-28">
+      {/* Mission — editorial two-column */}
+      <section id="mission" className="scroll-mt-20 border-b border-border py-20 lg:py-28">
+        <div className="container-cofy grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+          <Reveal>
+            <h2 className="font-display text-3xl font-extrabold leading-[1.12] tracking-tight sm:text-4xl lg:text-[2.9rem]">
+              We support youth with special needs and their families through
+              educational programs and service providers.
+            </h2>
+            <Button
+              asChild
+              size="lg"
+              className="mt-9 rounded-full px-8 font-semibold"
+            >
+              <Link to="/about">
+                Our Vision
+                <ArrowRight className="ml-1 h-5 w-5" />
+              </Link>
+            </Button>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="space-y-6 text-lg leading-relaxed text-muted-foreground lg:pt-2">
+              <p>{site.aboutIntro}</p>
+              <p>{site.aboutSkills}</p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Programs — alternating photo/text editorial rows */}
+      <section className="py-20 lg:py-28">
         <div className="container-cofy">
-          <SectionHeading
-            eyebrow="Who We Are"
-            title="Support that meets every young person where they are"
-            description="From the library to the living room, online to the park — we build opportunity around each child's strengths."
-          />
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((value, i) => (
-              <Reveal key={value.title} delay={i * 80}>
-                <div className="card-lift h-full rounded-2xl border border-border bg-card p-7">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                    <value.icon className="h-7 w-7" />
-                  </span>
-                  <h3 className="mt-5 font-display text-lg font-bold">
-                    {value.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {value.description}
-                  </p>
+          <SectionHeading align="left" eyebrow="What We Do" title="Our projects" />
+          <div className="mt-14 space-y-20 lg:space-y-28">
+            {programs.map((program, i) => (
+              <Reveal key={program.slug}>
+                <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+                  <Link
+                    to={`/programs/${program.slug}`}
+                    className={cn(
+                      "group block overflow-hidden rounded-3xl",
+                      i % 2 === 1 && "lg:order-2",
+                    )}
+                  >
+                    <img
+                      src={programPhoto(program.art)}
+                      alt={`${program.title} — COFY program`}
+                      width={1200}
+                      height={750}
+                      loading="lazy"
+                      className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </Link>
+                  <div className={cn(i % 2 === 1 && "lg:order-1")}>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                      <program.icon className="h-6 w-6" />
+                    </span>
+                    <h3 className="mt-5 font-display text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
+                      {program.title}
+                    </h3>
+                    <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+                      {program.description}
+                    </p>
+                    <div className="mt-7 flex flex-wrap gap-3">
+                      <Button asChild className="rounded-full font-semibold">
+                        <Link to={`/programs/${program.slug}`}>
+                          Learn More
+                          <ArrowRight className="ml-1 h-4 w-4" />
+                        </Link>
+                      </Button>
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="rounded-full font-semibold"
+                      >
+                        <Link to="/get-involved">Donate</Link>
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -53,70 +118,56 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Programs preview */}
-      <section className="bg-brand-cream py-20 lg:py-28">
+      {/* Impact stats */}
+      <section className="border-y border-border bg-brand-blue-deep py-14 text-white">
+        <div className="container-cofy grid grid-cols-2 gap-8 lg:grid-cols-4">
+          {impactStats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <p className="font-display text-4xl font-extrabold text-secondary sm:text-5xl">
+                <StatCounter value={stat.value} suffix={stat.suffix} />
+              </p>
+              <p className="mt-1.5 text-sm text-white/75">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="py-20 lg:py-28">
         <div className="container-cofy">
-          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <SectionHeading
-              align="left"
-              eyebrow="What We Do"
-              title="Programs built around opportunity"
-              description="Every program removes a barrier between a young person and the future they deserve."
-              className="md:mb-0"
-            />
-            <Reveal>
-              <Button asChild variant="outline" className="rounded-full font-semibold">
-                <Link to="/programs">
-                  View all programs
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
-            </Reveal>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {programs.map((program, i) => (
-              <Reveal key={program.slug} delay={i * 80}>
-                <Link
-                  to={`/programs/${program.slug}`}
-                  className="card-lift group flex h-full items-start gap-5 rounded-2xl border border-border bg-card p-7"
-                >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-brand-blue-dark text-white shadow-md">
-                    <program.icon className="h-7 w-7" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-xl font-bold transition-colors group-hover:text-primary">
-                      {program.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      {program.summary}
-                    </p>
-                    <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary">
-                      Learn more
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </Link>
+          <SectionHeading eyebrow="Reviews" title="What our community says" />
+          <div className="mx-auto mt-14 grid max-w-5xl gap-10 md:grid-cols-2">
+            {testimonials.map((t, i) => (
+              <Reveal key={t.name} delay={i * 90}>
+                <figure className="flex h-full flex-col border-l-4 border-secondary pl-7">
+                  <Quote className="h-8 w-8 text-secondary" aria-hidden />
+                  <blockquote className="mt-4 flex-1 text-xl leading-relaxed text-foreground">
+                    "{t.quote}"
+                  </blockquote>
+                  <figcaption className="mt-6 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                    — {t.name}, {t.role}
+                  </figcaption>
+                </figure>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Media hub preview */}
-      <section className="py-20 lg:py-28">
+      {/* Blog preview */}
+      <section className="border-t border-border py-20 lg:py-28">
         <div className="container-cofy">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <SectionHeading
               align="left"
-              eyebrow="Media Hub"
-              title="Vlogs, stories & news from our community"
-              description="Go behind the scenes with daily vlogs, helpful blogs and the latest COFY news."
+              eyebrow="Blog"
+              title="Vlogs, stories & news"
               className="md:mb-0"
             />
             <Reveal>
               <Button asChild variant="outline" className="rounded-full font-semibold">
                 <Link to="/media">
-                  Visit the Media Hub
+                  Visit the Blog
                   <ArrowRight className="ml-1 h-4 w-4" />
                 </Link>
               </Button>
@@ -133,14 +184,13 @@ const Index = () => {
       </section>
 
       {/* Events preview */}
-      <section className="bg-brand-cream py-20 lg:py-28">
+      <section className="border-t border-border bg-brand-cream py-20 lg:py-28">
         <div className="container-cofy">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <SectionHeading
               align="left"
               eyebrow="What's Next"
               title="Upcoming events"
-              description="Join us in person and online — there's a place for everyone."
               className="md:mb-0"
             />
             <Reveal>
@@ -162,54 +212,17 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 lg:py-28">
-        <div className="container-cofy">
-          <SectionHeading
-            eyebrow="Voices of COFY"
-            title="Stories of opportunity, in their words"
-          />
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal key={t.name} delay={i * 90}>
-                <figure className="card-lift flex h-full flex-col rounded-2xl border border-border bg-card p-7">
-                  <Quote className="h-9 w-9 text-secondary" />
-                  <blockquote className="mt-4 flex-1 text-base leading-relaxed text-foreground">
-                    "{t.quote}"
-                  </blockquote>
-                  <figcaption className="mt-6 flex items-center gap-3 border-t border-border pt-5">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary font-display font-bold text-white">
-                      {t.initials}
-                    </span>
-                    <span>
-                      <span className="block font-semibold text-foreground">
-                        {t.name}
-                      </span>
-                      <span className="block text-sm text-muted-foreground">
-                        {t.role}
-                      </span>
-                    </span>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
-      <section className="container-cofy pb-8">
+      <section className="container-cofy py-20">
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl bg-brand-blue-deep px-8 py-16 text-center text-white sm:px-16">
             <div className="absolute inset-0 bg-hero-radial" aria-hidden />
-            <div className="absolute inset-0 bg-grid-soft opacity-10" aria-hidden />
             <div className="relative mx-auto max-w-2xl">
               <h2 className="font-display text-3xl font-extrabold sm:text-4xl">
-                Be the opportunity in a young person's story
+                Join us in creating brighter futures
               </h2>
               <p className="mt-4 text-lg text-white/80">
-                Your gift, your time or your voice can change a life. Join the
-                COFY community today.
+                For youth and families in need — every donation counts.
               </p>
               <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
                 <Button
@@ -219,7 +232,7 @@ const Index = () => {
                 >
                   <Link to="/get-involved">
                     <Heart className="mr-1 h-5 w-5" />
-                    Donate Now
+                    Donate
                   </Link>
                 </Button>
                 <Button
@@ -228,16 +241,12 @@ const Index = () => {
                   variant="outline"
                   className="rounded-full border-white/30 bg-white/5 px-7 font-semibold text-white hover:bg-white/15 hover:text-white"
                 >
-                  <Link to="/get-involved">
+                  <Link to="/get-involved#volunteer">
                     <HandHeart className="mr-1 h-5 w-5" />
                     Volunteer
                   </Link>
                 </Button>
               </div>
-              <p className="mt-6 inline-flex items-center gap-2 text-sm text-white/60">
-                <Users2 className="h-4 w-4" />
-                Join 40+ mentors already making a difference
-              </p>
             </div>
           </div>
         </Reveal>
