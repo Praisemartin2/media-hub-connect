@@ -2,7 +2,7 @@ name: Fetch stock photo candidates
 on:
   push:
     branches: [claude/ekabo-video-editing-styles-wrs455]
-    paths: ['.github/workflows/fetch-stock.yml']
+    paths: ['.github/workflows/fetch-stock.yml', '.github/scripts/fetch_stock.py']
   workflow_dispatch: {}
 permissions:
   contents: write
@@ -12,56 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Search Commons and download candidates
-        run: |
-          set -e
-          mkdir -p stock
-          UA="EkaboHomeBot/1.0 (contact: marketwithpmo@gmail.com)"
-          echo "[]" > stock/index.json
-          n=0
-          for term in "Kangbashi new area" "unfinished building China" "China residential construction cranes" "Evergrande building" "ghost city China"; do
-            resp=$(curl -fsSL -A "$UA" "https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$term")&gsrnamespace=6&gsrlimit=6&prop=imageinfo&iiprop=url%7Cextmetadata%7Csize&iiurlwidth=2000&format=json" || echo '{}')
-            echo "$resp" | python3 -c "
-import json,sys
-d=json.load(sys.stdin)
-pages=(d.get('query') or {}).get('pages') or {}
-out=[]
-for p in pages.values():
-    ii=(p.get('imageinfo') or [{}])[0]
-    url=ii.get('thumburl') or ii.get('url')
-    if not url or not url.lower().split('?')[0].endswith(('.jpg','.jpeg')): continue
-    w=ii.get('width',0); h=ii.get('height',0)
-    if w<1200: continue
-    em=ii.get('extmetadata') or {}
-    lic=(em.get('LicenseShortName') or {}).get('value','')
-    artist=(em.get('Artist') or {}).get('value','')
-    out.append({'title':p.get('title'),'url':url,'license':lic,'artist':artist,'w':w,'h':h})
-print(json.dumps(out))
-" > /tmp/batch.json
-            python3 - "$term" <<'PY'
-import json,sys
-term=sys.argv[1]
-idx=json.load(open('stock/index.json'))
-batch=json.load(open('/tmp/batch.json'))
-seen={e['title'] for e in idx}
-for b in batch:
-    if b['title'] not in seen:
-        b['term']=term; idx.append(b)
-json.dump(idx,open('stock/index.json','w'),indent=1)
-PY
-          done
-          python3 - <<'PY'
-import json,subprocess
-idx=json.load(open('stock/index.json'))
-for i,e in enumerate(idx[:16]):
-    fn=f"stock/cand_{i:02d}.jpg"
-    try:
-        subprocess.run(['curl','-fsSL','-A','EkaboHomeBot/1.0','-o',fn,e['url']],check=True,timeout=120)
-        e['file']=fn
-    except Exception as ex:
-        e['file']=None
-json.dump(idx,open('stock/index.json','w'),indent=1)
-PY
-          ls -la stock/
+        run: python3 .github/scripts/fetch_stock.py
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
