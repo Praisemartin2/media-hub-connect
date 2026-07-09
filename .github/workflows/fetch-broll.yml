@@ -16,16 +16,8 @@ jobs:
           set -e
           mkdir -p broll
           base="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          curl -fsSL -o broll/duplex_street.png    "$base/hf_20260708_004204_f35f1f4c-024f-474b-9a0d-8f4f13fdf7ad.png"
-          curl -fsSL -o broll/fourplex.png         "$base/hf_20260708_004205_4b2e5b49-8591-4654-95a2-6739e86e012e.png"
-          curl -fsSL -o broll/str_livingroom.png   "$base/hf_20260708_004207_c6751293-2440-46e5-a090-ae6dc4f2b84a.png"
-          curl -fsSL -o broll/staging_video.mp4    "$base/hf_20260708_004154_3bb01ebf-a057-4109-853e-14e987ed4df6.mp4"
-          curl -fsSL -o broll/inspection_video.mp4 "$base/hf_20260708_004156_f8563b5f-a22c-4386-a530-6a7c8ba7a807.mp4"
-          curl -fsSL -o broll/townhomes.png        "$base/hf_20260707_012521_b25be76d-e017-42cb-8e84-c8892370d110.png"
-          curl -fsSL -o broll/construction.png     "$base/hf_20260707_012523_a656e6af-561f-4c12-b0c7-205f9cdefdb3.png"
-          curl -fsSL -o broll/handshake.png        "$base/hf_20260707_012524_bebab2ab-9f70-427b-a18c-add4e14a58a3.png"
-          curl -fsSL -o broll/suburban_home.png    "$base/hf_20260707_012526_526aa7d9-414f-4eee-899e-174b11da88ce.png"
-          curl -fsSL -o broll/keys.png             "$base/hf_20260707_012527_4aec9f8e-ff29-4c4b-8919-3daf4181ee40.png"
+          curl -fsSL -o broll/cine_dusk.png  "$base/hf_20260709_000031_82c21060-c55e-4b71-97c4-eab3ba2a827d.png"
+          curl -fsSL -o broll/cine_storm.png "$base/hf_20260709_000054_f258e121-5980-4413-91fe-6206e2b1e8a4.png"
           ls -la broll/
       - name: Commit assets
         run: |
