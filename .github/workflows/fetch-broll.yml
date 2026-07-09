@@ -16,8 +16,8 @@ jobs:
           set -e
           mkdir -p broll
           base="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          curl -fsSL -o broll/cine_dusk.png  "$base/hf_20260709_000031_82c21060-c55e-4b71-97c4-eab3ba2a827d.png"
-          curl -fsSL -o broll/cine_storm.png "$base/hf_20260709_000054_f258e121-5980-4413-91fe-6206e2b1e8a4.png"
+          curl -fsSL -o broll/flag_a.png "$base/hf_20260709_000649_a0543f79-c5ea-4d88-9aa2-cfdca4a6ed6c.png"
+          curl -fsSL -o broll/flag_b.png "$base/hf_20260709_000651_5bd52ee5-d73a-4ba2-a94a-58b426271eb0.png"
           ls -la broll/
       - name: Commit assets
         run: |
