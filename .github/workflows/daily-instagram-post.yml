@@ -1,0 +1,130 @@
+name: Daily Instagram Post
+
+# Runs Claude Code headless every day: researches one youth-opportunity news
+# story from around the world, writes automation/out/post.json, renders a
+# branded 1080x1350 image, commits it to public/ig/, and publishes it to
+# @cofyinc via the Instagram Graph API.
+#
+# Required repo secrets (Settings -> Secrets and variables -> Actions):
+#   ANTHROPIC_API_KEY  - console.anthropic.com API key (powers the research/writing)
+#   IG_USER_ID         - Instagram Professional account ID
+#   IG_ACCESS_TOKEN    - long-lived Instagram Graph API token (instagram_content_publish)
+# If the two IG_* secrets are missing, the run still produces and commits the
+# image + caption (a ready-to-post draft) and just skips the publish step.
+
+on:
+  schedule:
+    - cron: "23 13 * * *" # ~9:23am US Eastern (daylight time)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Generate + commit the post but do not publish to Instagram"
+        type: boolean
+        default: false
+
+concurrency: daily-ig-post
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Require ANTHROPIC_API_KEY
+        env:
+          KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "::error::Add the ANTHROPIC_API_KEY repository secret (console.anthropic.com) to enable the daily post."
+            exit 1
+          fi
+
+      - name: Install brand fonts (Oswald + Inter)
+        run: |
+          mkdir -p ~/.fonts
+          curl -fsSL -o ~/.fonts/Oswald.ttf "https://github.com/google/fonts/raw/main/ofl/oswald/Oswald%5Bwght%5D.ttf" || true
+          curl -fsSL -o ~/.fonts/Inter.ttf "https://github.com/google/fonts/raw/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf" || true
+          fc-cache -f || true
+
+      - name: Install Claude Code + sharp
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          npm install --no-save --no-audit --no-fund sharp
+
+      - name: Research today's story and write the post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          PROMPT="$(cat automation/ig-post-prompt.md)
+
+          Today's date (UTC): $(date -u +%F)"
+          claude -p "$PROMPT" \
+            --allowedTools "WebSearch,WebFetch,Read,Write,Glob,Grep" \
+            --max-turns 50
+
+      - name: Validate post.json
+        run: |
+          node -e '
+            const p = require("./automation/out/post.json");
+            for (const k of ["date","region","headline","summary","source_name","source_url","caption"]) {
+              if (!p[k] || typeof p[k] !== "string") { console.error("post.json missing field: " + k); process.exit(1); }
+            }
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(p.date)) { console.error("bad date: " + p.date); process.exit(1); }
+            if (p.caption.length > 2200) { console.error("caption too long"); process.exit(1); }
+            console.log("post.json OK:", p.date, "-", p.headline);
+          '
+
+      - name: Render the branded image
+        run: node scripts/ig/render-image.mjs automation/out/post.json automation/out/post.png
+
+      - name: Commit image + archive entry to main
+        id: commit
+        run: |
+          DATE=$(node -p "require('./automation/out/post.json').date")
+          mkdir -p public/ig automation/archive
+          cp automation/out/post.png "public/ig/$DATE.png"
+          cp automation/out/post.json "automation/archive/$DATE.json"
+          git config user.name "cofy-daily-post[bot]"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/ig "automation/archive"
+          git commit -m "Daily Instagram post: $DATE" || echo "Nothing new to commit"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to Instagram
+        if: ${{ !inputs.dry_run }}
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IMAGE_URL: https://raw.githubusercontent.com/${{ github.repository }}/main/public/ig/${{ steps.commit.outputs.date }}.png
+        run: |
+          if [ -z "$IG_USER_ID" ] || [ -z "$IG_ACCESS_TOKEN" ]; then
+            echo "::warning::IG_USER_ID / IG_ACCESS_TOKEN secrets not set. The post draft (image + caption) was committed to public/ig/ and automation/archive/ — publish skipped. See docs/instagram-automation.md for setup."
+            exit 0
+          fi
+          node scripts/ig/publish.mjs automation/out/post.json
+
+      - name: Run summary
+        run: |
+          DATE="${{ steps.commit.outputs.date }}"
+          {
+            echo "## Daily Instagram post — $DATE"
+            echo ""
+            echo "**Headline:** $(node -p "require('./automation/archive/$DATE.json').headline")"
+            echo ""
+            echo "**Image:** https://raw.githubusercontent.com/${{ github.repository }}/main/public/ig/$DATE.png"
+            echo ""
+            echo '```'
+            node -p "require('./automation/archive/$DATE.json').caption"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
