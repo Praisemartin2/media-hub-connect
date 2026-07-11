@@ -16,12 +16,14 @@ jobs:
           set -e
           mkdir -p broll
           base="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          curl -fsSL -o broll/flag_homes.png "$base/hf_20260709_001700_afde224a-ad02-4f85-be10-77f34bb029be.png"
-          ls -la broll/
+          mkdir -p clips
+          curl -fsSL -o clips/clip_5k_triplex.mp4 "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/XsNlUjbXcL8/256ffea0-321d-4d7c-bf22-49e5cd4bd403/clips/clip_08.mp4"
+          curl -fsSL -o clips/clip_90pct.mp4 "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/XsNlUjbXcL8/256ffea0-321d-4d7c-bf22-49e5cd4bd403/clips/clip_05.mp4"
+          ls -la clips/
       - name: Commit assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add broll/
+          git add broll/ clips/
           git commit -m "Add generated b-roll assets [skip ci]"
           git push
