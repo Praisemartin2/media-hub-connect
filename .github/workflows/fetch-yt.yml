@@ -11,15 +11,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
       - name: Download source video + subs
         run: |
           set -e
-          pip install -q yt-dlp
+          pip install -q -U yt-dlp
           mkdir -p ytsrc
-          # https://youtu.be/XsNlUjbXcL8 replaced at execution time
-          yt-dlp -f "bv*[height<=1080][ext=mp4]+ba[ext=m4a]/b[ext=mp4]" \
-            --write-auto-subs --sub-langs en --convert-subs srt \
-            -o "ytsrc/source.%(ext)s" "https://youtu.be/XsNlUjbXcL8"
+          ok=0
+          for client in "web_safari,tv" "android,web" "ios" "tv_embedded"; do
+            echo "=== trying player_client=$client ==="
+            if yt-dlp -4 --sleep-requests 1 \
+              --extractor-args "youtube:player_client=$client" \
+              -f "bv*[height<=1080][ext=mp4]+ba[ext=m4a]/b[ext=mp4]/bv*+ba/b" \
+              --write-auto-subs --sub-langs en --convert-subs srt \
+              -o "ytsrc/source.%(ext)s" "https://youtu.be/XsNlUjbXcL8"; then
+              ok=1; break
+            fi
+          done
+          [ "$ok" = "1" ] || { echo "ALL CLIENTS FAILED"; exit 1; }
           ls -la ytsrc/
       - name: Commit
         run: |
