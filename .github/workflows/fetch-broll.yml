@@ -17,8 +17,7 @@ jobs:
           mkdir -p broll
           base="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
           mkdir -p canva
-          curl -fsSL -o canva/luxury_suv2.jpg 'https://export-download.canva.com/Hs8Ts/DAHPGBHs8Ts/-1/0/0001-4680875093563136688.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260711%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260711T052800Z&X-Amz-Expires=46636&X-Amz-Signature=a0d9923772968c470f578687332dea3199af1bfd60751cf6b3db3f590ccd8ce1&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sat%2C%2011%20Jul%202026%2018%3A25%3A16%20GMT'
-          curl -fsSL -o canva/leaving_office2.jpg 'https://export-download.canva.com/rRun4/DAHPGLrRun4/-1/0/0001-8374952685071741116.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260711%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260711T024932Z&X-Amz-Expires=56468&X-Amz-Signature=6e59a40612d2826c2d3bf8310fd048aefc66d6c849f137b292f0b605df6a6d16&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sat%2C%2011%20Jul%202026%2018%3A30%3A40%20GMT'
+          curl -fsSL -o canva/leaving_office_clean.jpg 'https://export-download.canva.com/rRun4/DAHPGLrRun4/-1/0/0001-3342180101256185953.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260711%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260711T034549Z&X-Amz-Expires=51865&X-Amz-Signature=81d1f1710b8162a255bb5383bf044c007b4121d2540e40b3e5f40953c673adac&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sat%2C%2011%20Jul%202026%2018%3A10%3A14%20GMT'
           ls -la canva/
       - name: Commit assets
         run: |
