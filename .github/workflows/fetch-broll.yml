@@ -17,10 +17,7 @@ jobs:
           mkdir -p broll
           base="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
           mkdir -p canva
-          curl -fsSL -o canva/t1.jpg "https://design.canva.ai/NYWzOG25O65n9pj"
-          curl -fsSL -o canva/t2.jpg "https://design.canva.ai/V8jUNPIk5Pzf7Mj"
-          curl -fsSL -o canva/t3.jpg "https://design.canva.ai/b578ugnUGFjolWd"
-          curl -fsSL -o canva/t4.jpg "https://design.canva.ai/HOAA4df4ryyMQ5A"
+          curl -fsSL -o canva/money_split.jpg 'https://export-download.canva.com/HMm1U/DAHPGHHMm1U/-1/0/0001-5050170259606241704.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260711%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260711T132012Z&X-Amz-Expires=18779&X-Amz-Signature=8f0121c9bed30bcbed9a10a0c3c97b403959daa1d20d3b1213e9200d4f2272e6&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sat%2C%2011%20Jul%202026%2018%3A33%3A11%20GMT'
           ls -la canva/
       - name: Commit assets
         run: |
