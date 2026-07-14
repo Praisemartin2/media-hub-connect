@@ -1,0 +1,1121 @@
+{
+ "segments": [
+  {
+   "start": 0.21,
+   "end": 4.23,
+   "text": "The reason most entrepreneurs fail has nothing to do with talent."
+  },
+  {
+   "start": 4.77,
+   "end": 5.31,
+   "text": "It's this."
+  },
+  {
+   "start": 6.61,
+   "end": 10.65,
+   "text": "If you want to succeed at anything, starting a business, becoming an entrepreneur, or leaving"
+  },
+  {
+   "start": 10.65,
+   "end": 14.21,
+   "text": "your W-2, it has to be something that you're passionate about."
+  },
+  {
+   "start": 14.87,
+   "end": 15.25,
+   "text": "Why?"
+  },
+  {
+   "start": 16.47,
+   "end": 16.57,
+   "text": "Longevity."
+  },
+  {
+   "start": 17.51,
+   "end": 21.11,
+   "text": "Warren Buffett didn't become one of the richest investors ever because he had one"
+  },
+  {
+   "start": 21.11,
+   "end": 21.77,
+   "text": "great year."
+  },
+  {
+   "start": 22.09,
+   "end": 26.97,
+   "text": "He became legendary because he believed in his philosophy and he stuck with it for 60"
+  },
+  {
+   "start": 26.97,
+   "end": 31.47,
+   "text": "plus years when the market dropped, when the market excelled, he stuck to that strategy"
+  },
+  {
+   "start": 31.47,
+   "end": 33.71,
+   "text": "and he genuinely loves this stuff."
+  },
+  {
+   "start": 34.17,
+   "end": 35.87,
+   "text": "The same thing is true with entrepreneurship."
+  },
+  {
+   "start": 36.59,
+   "end": 39.31,
+   "text": "The winner isn't the person that's the rookie of the year."
+  },
+  {
+   "start": 39.43,
+   "end": 44.35,
+   "text": "It's the person that gets a little better every single year and refuses to quit the game."
+  },
+  {
+   "start": 44.53,
+   "end": 49.85,
+   "text": "Whether it's an up year, a down year, they find a way to stay in and over time they"
+  },
+  {
+   "start": 49.85,
+   "end": 52.47,
+   "text": "continue to excel and become that winner."
+  },
+  {
+   "start": 53.01,
+   "end": 58.65,
+   "text": "If you're building something you love in real estate, follow, I share what 10 years of staying"
+  },
+  {
+   "start": 58.65,
+   "end": 60.23,
+   "text": "in the game actually looks like."
+  },
+  {
+   "start": 64.76,
+   "end": 70.48,
+   "text": "If you're thinking about making the jump from your W-2, DM me the word game and let's talk"
+  },
+  {
+   "start": 70.48,
+   "end": 72.0,
+   "text": "about building something that lasts."
+  }
+ ],
+ "words": [
+  {
+   "w": "The",
+   "start": 0.21,
+   "end": 0.67
+  },
+  {
+   "w": "reason",
+   "start": 0.67,
+   "end": 0.91
+  },
+  {
+   "w": "most",
+   "start": 0.91,
+   "end": 1.33
+  },
+  {
+   "w": "entrepreneurs",
+   "start": 1.33,
+   "end": 1.95
+  },
+  {
+   "w": "fail",
+   "start": 1.95,
+   "end": 2.43
+  },
+  {
+   "w": "has",
+   "start": 2.43,
+   "end": 2.87
+  },
+  {
+   "w": "nothing",
+   "start": 2.87,
+   "end": 3.29
+  },
+  {
+   "w": "to",
+   "start": 3.29,
+   "end": 3.51
+  },
+  {
+   "w": "do",
+   "start": 3.51,
+   "end": 3.69
+  },
+  {
+   "w": "with",
+   "start": 3.69,
+   "end": 3.85
+  },
+  {
+   "w": "talent.",
+   "start": 3.85,
+   "end": 4.23
+  },
+  {
+   "w": "It's",
+   "start": 4.77,
+   "end": 5.05
+  },
+  {
+   "w": "this.",
+   "start": 5.05,
+   "end": 5.31
+  },
+  {
+   "w": "If",
+   "start": 6.61,
+   "end": 6.69
+  },
+  {
+   "w": "you",
+   "start": 6.69,
+   "end": 6.81
+  },
+  {
+   "w": "want",
+   "start": 6.81,
+   "end": 6.95
+  },
+  {
+   "w": "to",
+   "start": 6.95,
+   "end": 7.07
+  },
+  {
+   "w": "succeed",
+   "start": 7.07,
+   "end": 7.39
+  },
+  {
+   "w": "at",
+   "start": 7.39,
+   "end": 7.57
+  },
+  {
+   "w": "anything,",
+   "start": 7.57,
+   "end": 8.03
+  },
+  {
+   "w": "starting",
+   "start": 8.43,
+   "end": 8.57
+  },
+  {
+   "w": "a",
+   "start": 8.57,
+   "end": 8.77
+  },
+  {
+   "w": "business,",
+   "start": 8.77,
+   "end": 9.03
+  },
+  {
+   "w": "becoming",
+   "start": 9.21,
+   "end": 9.43
+  },
+  {
+   "w": "an",
+   "start": 9.43,
+   "end": 9.61
+  },
+  {
+   "w": "entrepreneur,",
+   "start": 9.61,
+   "end": 9.95
+  },
+  {
+   "w": "or",
+   "start": 10.21,
+   "end": 10.33
+  },
+  {
+   "w": "leaving",
+   "start": 10.33,
+   "end": 10.65
+  },
+  {
+   "w": "your",
+   "start": 10.65,
+   "end": 10.87
+  },
+  {
+   "w": "W",
+   "start": 10.87,
+   "end": 11.05
+  },
+  {
+   "w": "-2,",
+   "start": 11.05,
+   "end": 11.51
+  },
+  {
+   "w": "it",
+   "start": 11.91,
+   "end": 12.15
+  },
+  {
+   "w": "has",
+   "start": 12.15,
+   "end": 12.41
+  },
+  {
+   "w": "to",
+   "start": 12.41,
+   "end": 12.61
+  },
+  {
+   "w": "be",
+   "start": 12.61,
+   "end": 12.77
+  },
+  {
+   "w": "something",
+   "start": 12.77,
+   "end": 12.97
+  },
+  {
+   "w": "that",
+   "start": 12.97,
+   "end": 13.23
+  },
+  {
+   "w": "you're",
+   "start": 13.23,
+   "end": 13.41
+  },
+  {
+   "w": "passionate",
+   "start": 13.41,
+   "end": 13.79
+  },
+  {
+   "w": "about.",
+   "start": 13.79,
+   "end": 14.21
+  },
+  {
+   "w": "Why?",
+   "start": 14.87,
+   "end": 15.25
+  },
+  {
+   "w": "Longevity.",
+   "start": 16.47,
+   "end": 16.57
+  },
+  {
+   "w": "Warren",
+   "start": 17.51,
+   "end": 17.57
+  },
+  {
+   "w": "Buffett",
+   "start": 17.57,
+   "end": 17.83
+  },
+  {
+   "w": "didn't",
+   "start": 17.83,
+   "end": 18.11
+  },
+  {
+   "w": "become",
+   "start": 18.11,
+   "end": 18.39
+  },
+  {
+   "w": "one",
+   "start": 18.39,
+   "end": 18.59
+  },
+  {
+   "w": "of",
+   "start": 18.59,
+   "end": 18.67
+  },
+  {
+   "w": "the",
+   "start": 18.67,
+   "end": 18.77
+  },
+  {
+   "w": "richest",
+   "start": 18.77,
+   "end": 18.99
+  },
+  {
+   "w": "investors",
+   "start": 18.99,
+   "end": 19.45
+  },
+  {
+   "w": "ever",
+   "start": 19.45,
+   "end": 19.89
+  },
+  {
+   "w": "because",
+   "start": 19.89,
+   "end": 20.33
+  },
+  {
+   "w": "he",
+   "start": 20.33,
+   "end": 20.49
+  },
+  {
+   "w": "had",
+   "start": 20.49,
+   "end": 20.71
+  },
+  {
+   "w": "one",
+   "start": 20.71,
+   "end": 21.11
+  },
+  {
+   "w": "great",
+   "start": 21.11,
+   "end": 21.43
+  },
+  {
+   "w": "year.",
+   "start": 21.43,
+   "end": 21.77
+  },
+  {
+   "w": "He",
+   "start": 22.09,
+   "end": 22.23
+  },
+  {
+   "w": "became",
+   "start": 22.23,
+   "end": 22.45
+  },
+  {
+   "w": "legendary",
+   "start": 22.45,
+   "end": 22.93
+  },
+  {
+   "w": "because",
+   "start": 22.93,
+   "end": 23.25
+  },
+  {
+   "w": "he",
+   "start": 23.25,
+   "end": 23.43
+  },
+  {
+   "w": "believed",
+   "start": 23.43,
+   "end": 23.85
+  },
+  {
+   "w": "in",
+   "start": 23.85,
+   "end": 24.07
+  },
+  {
+   "w": "his",
+   "start": 24.07,
+   "end": 24.21
+  },
+  {
+   "w": "philosophy",
+   "start": 24.21,
+   "end": 24.73
+  },
+  {
+   "w": "and",
+   "start": 24.73,
+   "end": 25.49
+  },
+  {
+   "w": "he",
+   "start": 25.49,
+   "end": 25.61
+  },
+  {
+   "w": "stuck",
+   "start": 25.61,
+   "end": 25.87
+  },
+  {
+   "w": "with",
+   "start": 25.87,
+   "end": 26.13
+  },
+  {
+   "w": "it",
+   "start": 26.13,
+   "end": 26.31
+  },
+  {
+   "w": "for",
+   "start": 26.31,
+   "end": 26.49
+  },
+  {
+   "w": "60",
+   "start": 26.49,
+   "end": 26.97
+  },
+  {
+   "w": "plus",
+   "start": 26.97,
+   "end": 27.19
+  },
+  {
+   "w": "years",
+   "start": 27.19,
+   "end": 27.57
+  },
+  {
+   "w": "when",
+   "start": 27.57,
+   "end": 28.19
+  },
+  {
+   "w": "the",
+   "start": 28.19,
+   "end": 28.31
+  },
+  {
+   "w": "market",
+   "start": 28.31,
+   "end": 28.55
+  },
+  {
+   "w": "dropped,",
+   "start": 28.55,
+   "end": 28.93
+  },
+  {
+   "w": "when",
+   "start": 29.33,
+   "end": 29.37
+  },
+  {
+   "w": "the",
+   "start": 29.37,
+   "end": 29.47
+  },
+  {
+   "w": "market",
+   "start": 29.47,
+   "end": 29.73
+  },
+  {
+   "w": "excelled,",
+   "start": 29.73,
+   "end": 30.27
+  },
+  {
+   "w": "he",
+   "start": 30.43,
+   "end": 30.59
+  },
+  {
+   "w": "stuck",
+   "start": 30.59,
+   "end": 30.81
+  },
+  {
+   "w": "to",
+   "start": 30.81,
+   "end": 30.97
+  },
+  {
+   "w": "that",
+   "start": 30.97,
+   "end": 31.09
+  },
+  {
+   "w": "strategy",
+   "start": 31.09,
+   "end": 31.47
+  },
+  {
+   "w": "and",
+   "start": 31.47,
+   "end": 32.05
+  },
+  {
+   "w": "he",
+   "start": 32.05,
+   "end": 32.21
+  },
+  {
+   "w": "genuinely",
+   "start": 32.21,
+   "end": 32.69
+  },
+  {
+   "w": "loves",
+   "start": 32.69,
+   "end": 33.21
+  },
+  {
+   "w": "this",
+   "start": 33.21,
+   "end": 33.45
+  },
+  {
+   "w": "stuff.",
+   "start": 33.45,
+   "end": 33.71
+  },
+  {
+   "w": "The",
+   "start": 34.17,
+   "end": 34.31
+  },
+  {
+   "w": "same",
+   "start": 34.31,
+   "end": 34.59
+  },
+  {
+   "w": "thing",
+   "start": 34.59,
+   "end": 34.81
+  },
+  {
+   "w": "is",
+   "start": 34.81,
+   "end": 34.97
+  },
+  {
+   "w": "true",
+   "start": 34.97,
+   "end": 35.21
+  },
+  {
+   "w": "with",
+   "start": 35.21,
+   "end": 35.39
+  },
+  {
+   "w": "entrepreneurship.",
+   "start": 35.39,
+   "end": 35.87
+  },
+  {
+   "w": "The",
+   "start": 36.59,
+   "end": 36.81
+  },
+  {
+   "w": "winner",
+   "start": 36.81,
+   "end": 36.99
+  },
+  {
+   "w": "isn't",
+   "start": 36.99,
+   "end": 37.27
+  },
+  {
+   "w": "the",
+   "start": 37.27,
+   "end": 37.49
+  },
+  {
+   "w": "person",
+   "start": 37.49,
+   "end": 37.85
+  },
+  {
+   "w": "that's",
+   "start": 37.85,
+   "end": 38.49
+  },
+  {
+   "w": "the",
+   "start": 38.49,
+   "end": 38.61
+  },
+  {
+   "w": "rookie",
+   "start": 38.61,
+   "end": 38.81
+  },
+  {
+   "w": "of",
+   "start": 38.81,
+   "end": 39.03
+  },
+  {
+   "w": "the",
+   "start": 39.03,
+   "end": 39.13
+  },
+  {
+   "w": "year.",
+   "start": 39.13,
+   "end": 39.31
+  },
+  {
+   "w": "It's",
+   "start": 39.43,
+   "end": 39.49
+  },
+  {
+   "w": "the",
+   "start": 39.49,
+   "end": 39.67
+  },
+  {
+   "w": "person",
+   "start": 39.67,
+   "end": 39.93
+  },
+  {
+   "w": "that",
+   "start": 39.93,
+   "end": 40.15
+  },
+  {
+   "w": "gets",
+   "start": 40.15,
+   "end": 40.39
+  },
+  {
+   "w": "a",
+   "start": 40.39,
+   "end": 40.71
+  },
+  {
+   "w": "little",
+   "start": 40.71,
+   "end": 40.91
+  },
+  {
+   "w": "better",
+   "start": 40.91,
+   "end": 41.23
+  },
+  {
+   "w": "every",
+   "start": 41.23,
+   "end": 41.75
+  },
+  {
+   "w": "single",
+   "start": 41.75,
+   "end": 42.03
+  },
+  {
+   "w": "year",
+   "start": 42.03,
+   "end": 42.37
+  },
+  {
+   "w": "and",
+   "start": 42.37,
+   "end": 42.87
+  },
+  {
+   "w": "refuses",
+   "start": 42.87,
+   "end": 43.37
+  },
+  {
+   "w": "to",
+   "start": 43.37,
+   "end": 43.71
+  },
+  {
+   "w": "quit",
+   "start": 43.71,
+   "end": 43.91
+  },
+  {
+   "w": "the",
+   "start": 43.91,
+   "end": 44.11
+  },
+  {
+   "w": "game.",
+   "start": 44.11,
+   "end": 44.35
+  },
+  {
+   "w": "Whether",
+   "start": 44.53,
+   "end": 44.81
+  },
+  {
+   "w": "it's",
+   "start": 44.81,
+   "end": 44.99
+  },
+  {
+   "w": "an",
+   "start": 44.99,
+   "end": 45.11
+  },
+  {
+   "w": "up",
+   "start": 45.11,
+   "end": 45.31
+  },
+  {
+   "w": "year,",
+   "start": 45.31,
+   "end": 45.51
+  },
+  {
+   "w": "a",
+   "start": 45.91,
+   "end": 45.97
+  },
+  {
+   "w": "down",
+   "start": 45.97,
+   "end": 46.19
+  },
+  {
+   "w": "year,",
+   "start": 46.19,
+   "end": 46.47
+  },
+  {
+   "w": "they",
+   "start": 46.69,
+   "end": 46.89
+  },
+  {
+   "w": "find",
+   "start": 46.89,
+   "end": 47.15
+  },
+  {
+   "w": "a",
+   "start": 47.15,
+   "end": 47.31
+  },
+  {
+   "w": "way",
+   "start": 47.31,
+   "end": 47.41
+  },
+  {
+   "w": "to",
+   "start": 47.41,
+   "end": 47.55
+  },
+  {
+   "w": "stay",
+   "start": 47.55,
+   "end": 47.81
+  },
+  {
+   "w": "in",
+   "start": 47.81,
+   "end": 48.13
+  },
+  {
+   "w": "and",
+   "start": 48.13,
+   "end": 48.61
+  },
+  {
+   "w": "over",
+   "start": 48.61,
+   "end": 48.91
+  },
+  {
+   "w": "time",
+   "start": 48.91,
+   "end": 49.37
+  },
+  {
+   "w": "they",
+   "start": 49.37,
+   "end": 49.85
+  },
+  {
+   "w": "continue",
+   "start": 49.85,
+   "end": 50.27
+  },
+  {
+   "w": "to",
+   "start": 50.27,
+   "end": 50.87
+  },
+  {
+   "w": "excel",
+   "start": 50.87,
+   "end": 51.29
+  },
+  {
+   "w": "and",
+   "start": 51.29,
+   "end": 51.61
+  },
+  {
+   "w": "become",
+   "start": 51.61,
+   "end": 51.93
+  },
+  {
+   "w": "that",
+   "start": 51.93,
+   "end": 52.21
+  },
+  {
+   "w": "winner.",
+   "start": 52.21,
+   "end": 52.47
+  },
+  {
+   "w": "If",
+   "start": 53.01,
+   "end": 53.27
+  },
+  {
+   "w": "you're",
+   "start": 53.27,
+   "end": 53.47
+  },
+  {
+   "w": "building",
+   "start": 53.47,
+   "end": 53.69
+  },
+  {
+   "w": "something",
+   "start": 53.69,
+   "end": 54.01
+  },
+  {
+   "w": "you",
+   "start": 54.01,
+   "end": 54.29
+  },
+  {
+   "w": "love",
+   "start": 54.29,
+   "end": 54.53
+  },
+  {
+   "w": "in",
+   "start": 54.53,
+   "end": 54.73
+  },
+  {
+   "w": "real",
+   "start": 54.73,
+   "end": 54.93
+  },
+  {
+   "w": "estate,",
+   "start": 54.93,
+   "end": 55.27
+  },
+  {
+   "w": "follow,",
+   "start": 56.23,
+   "end": 56.23
+  },
+  {
+   "w": "I",
+   "start": 56.85,
+   "end": 57.05
+  },
+  {
+   "w": "share",
+   "start": 57.05,
+   "end": 57.31
+  },
+  {
+   "w": "what",
+   "start": 57.31,
+   "end": 57.51
+  },
+  {
+   "w": "10",
+   "start": 57.51,
+   "end": 57.83
+  },
+  {
+   "w": "years",
+   "start": 57.83,
+   "end": 58.13
+  },
+  {
+   "w": "of",
+   "start": 58.13,
+   "end": 58.35
+  },
+  {
+   "w": "staying",
+   "start": 58.35,
+   "end": 58.65
+  },
+  {
+   "w": "in",
+   "start": 58.65,
+   "end": 58.85
+  },
+  {
+   "w": "the",
+   "start": 58.85,
+   "end": 58.99
+  },
+  {
+   "w": "game",
+   "start": 58.99,
+   "end": 59.25
+  },
+  {
+   "w": "actually",
+   "start": 59.25,
+   "end": 59.71
+  },
+  {
+   "w": "looks",
+   "start": 59.71,
+   "end": 59.97
+  },
+  {
+   "w": "like.",
+   "start": 59.97,
+   "end": 60.23
+  },
+  {
+   "w": "If",
+   "start": 64.76,
+   "end": 64.96
+  },
+  {
+   "w": "you're",
+   "start": 64.96,
+   "end": 65.1
+  },
+  {
+   "w": "thinking",
+   "start": 65.1,
+   "end": 65.26
+  },
+  {
+   "w": "about",
+   "start": 65.26,
+   "end": 65.52
+  },
+  {
+   "w": "making",
+   "start": 65.52,
+   "end": 65.74
+  },
+  {
+   "w": "the",
+   "start": 65.74,
+   "end": 66.0
+  },
+  {
+   "w": "jump",
+   "start": 66.0,
+   "end": 66.24
+  },
+  {
+   "w": "from",
+   "start": 66.24,
+   "end": 66.48
+  },
+  {
+   "w": "your",
+   "start": 66.48,
+   "end": 66.66
+  },
+  {
+   "w": "W",
+   "start": 66.66,
+   "end": 66.88
+  },
+  {
+   "w": "-2,",
+   "start": 66.88,
+   "end": 67.5
+  },
+  {
+   "w": "DM",
+   "start": 68.02,
+   "end": 68.2
+  },
+  {
+   "w": "me",
+   "start": 68.2,
+   "end": 68.46
+  },
+  {
+   "w": "the",
+   "start": 68.46,
+   "end": 68.62
+  },
+  {
+   "w": "word",
+   "start": 68.62,
+   "end": 68.96
+  },
+  {
+   "w": "game",
+   "start": 68.96,
+   "end": 69.5
+  },
+  {
+   "w": "and",
+   "start": 69.5,
+   "end": 70.08
+  },
+  {
+   "w": "let's",
+   "start": 70.08,
+   "end": 70.3
+  },
+  {
+   "w": "talk",
+   "start": 70.3,
+   "end": 70.48
+  },
+  {
+   "w": "about",
+   "start": 70.48,
+   "end": 70.8
+  },
+  {
+   "w": "building",
+   "start": 70.8,
+   "end": 71.08
+  },
+  {
+   "w": "something",
+   "start": 71.08,
+   "end": 71.52
+  },
+  {
+   "w": "that",
+   "start": 71.52,
+   "end": 71.74
+  },
+  {
+   "w": "lasts.",
+   "start": 71.74,
+   "end": 72.0
+  }
+ ]
+}

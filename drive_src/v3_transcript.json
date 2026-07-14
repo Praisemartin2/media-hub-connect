@@ -1,0 +1,1006 @@
+{
+ "segments": [
+  {
+   "start": 0.21,
+   "end": 4.95,
+   "text": "I just gave away the cleaner we use on a 10,000 square foot mansion for free."
+  },
+  {
+   "start": 5.63,
+   "end": 6.21,
+   "text": "Here's why."
+  },
+  {
+   "start": 7.07,
+   "end": 12.71,
+   "text": "An investor within the network that we help mention that their short-term rental cleaner has been dropping the ball lately."
+  },
+  {
+   "start": 13.11,
+   "end": 17.63,
+   "text": "They've been showing up late, missing items, and it's starting to affect their guest stay."
+  },
+  {
+   "start": 18.31,
+   "end": 20.07,
+   "text": "And so we handed them our cleaner."
+  },
+  {
+   "start": 20.39,
+   "end": 22.59,
+   "text": "The same crew that does our best properties."
+  },
+  {
+   "start": 23.19,
+   "end": 29.11,
+   "text": "Most agents and investors try to hide their top contractors, cleaners, HVAC technicians, plumbers,"
+  },
+  {
+   "start": 29.11,
+   "end": 30.63,
+   "text": "and they really gate keep."
+  },
+  {
+   "start": 31.31,
+   "end": 32.99,
+   "text": "We at Acaba Home do the opposite."
+  },
+  {
+   "start": 33.71,
+   "end": 39.19,
+   "text": "Because we're in the field every day, building our portfolios and helping our clients build their portfolios,"
+  },
+  {
+   "start": 39.61,
+   "end": 42.05,
+   "text": "we believe in an abundant mindset."
+  },
+  {
+   "start": 42.55,
+   "end": 47.91,
+   "text": "And so when your portfolio grows, we grow together, and so we give the whole Rolodex to our clients."
+  },
+  {
+   "start": 48.67,
+   "end": 50.25,
+   "text": "Is this something that you're looking for?"
+  },
+  {
+   "start": 50.49,
+   "end": 55.07,
+   "text": "Do you want a whole Rolodex of contractors and not just a realtor to go and buy a house?"
+  },
+  {
+   "start": 55.07,
+   "end": 59.29,
+   "text": "Click that link in the bio, schedule some time to meet, and let's build together."
+  },
+  {
+   "start": 59.79,
+   "end": 61.45,
+   "text": "No gate keeping, just results."
+  }
+ ],
+ "words": [
+  {
+   "w": "I",
+   "start": 0.21,
+   "end": 0.71
+  },
+  {
+   "w": "just",
+   "start": 0.71,
+   "end": 0.91
+  },
+  {
+   "w": "gave",
+   "start": 0.91,
+   "end": 1.11
+  },
+  {
+   "w": "away",
+   "start": 1.11,
+   "end": 1.33
+  },
+  {
+   "w": "the",
+   "start": 1.33,
+   "end": 1.49
+  },
+  {
+   "w": "cleaner",
+   "start": 1.49,
+   "end": 1.81
+  },
+  {
+   "w": "we",
+   "start": 1.81,
+   "end": 1.99
+  },
+  {
+   "w": "use",
+   "start": 1.99,
+   "end": 2.33
+  },
+  {
+   "w": "on",
+   "start": 2.33,
+   "end": 2.53
+  },
+  {
+   "w": "a",
+   "start": 2.53,
+   "end": 2.65
+  },
+  {
+   "w": "10",
+   "start": 2.65,
+   "end": 2.87
+  },
+  {
+   "w": ",000",
+   "start": 2.87,
+   "end": 3.25
+  },
+  {
+   "w": "square",
+   "start": 3.25,
+   "end": 3.43
+  },
+  {
+   "w": "foot",
+   "start": 3.43,
+   "end": 3.67
+  },
+  {
+   "w": "mansion",
+   "start": 3.67,
+   "end": 4.11
+  },
+  {
+   "w": "for",
+   "start": 4.11,
+   "end": 4.67
+  },
+  {
+   "w": "free.",
+   "start": 4.67,
+   "end": 4.95
+  },
+  {
+   "w": "Here's",
+   "start": 5.63,
+   "end": 5.93
+  },
+  {
+   "w": "why.",
+   "start": 5.93,
+   "end": 6.21
+  },
+  {
+   "w": "An",
+   "start": 7.07,
+   "end": 7.09
+  },
+  {
+   "w": "investor",
+   "start": 7.09,
+   "end": 7.55
+  },
+  {
+   "w": "within",
+   "start": 7.55,
+   "end": 7.87
+  },
+  {
+   "w": "the",
+   "start": 7.87,
+   "end": 8.07
+  },
+  {
+   "w": "network",
+   "start": 8.07,
+   "end": 8.41
+  },
+  {
+   "w": "that",
+   "start": 8.41,
+   "end": 8.65
+  },
+  {
+   "w": "we",
+   "start": 8.65,
+   "end": 8.83
+  },
+  {
+   "w": "help",
+   "start": 8.83,
+   "end": 9.17
+  },
+  {
+   "w": "mention",
+   "start": 9.17,
+   "end": 9.83
+  },
+  {
+   "w": "that",
+   "start": 9.83,
+   "end": 10.11
+  },
+  {
+   "w": "their",
+   "start": 10.11,
+   "end": 10.33
+  },
+  {
+   "w": "short",
+   "start": 10.33,
+   "end": 10.57
+  },
+  {
+   "w": "-term",
+   "start": 10.57,
+   "end": 10.75
+  },
+  {
+   "w": "rental",
+   "start": 10.75,
+   "end": 11.03
+  },
+  {
+   "w": "cleaner",
+   "start": 11.03,
+   "end": 11.37
+  },
+  {
+   "w": "has",
+   "start": 11.37,
+   "end": 11.59
+  },
+  {
+   "w": "been",
+   "start": 11.59,
+   "end": 11.75
+  },
+  {
+   "w": "dropping",
+   "start": 11.75,
+   "end": 12.03
+  },
+  {
+   "w": "the",
+   "start": 12.03,
+   "end": 12.23
+  },
+  {
+   "w": "ball",
+   "start": 12.23,
+   "end": 12.43
+  },
+  {
+   "w": "lately.",
+   "start": 12.43,
+   "end": 12.71
+  },
+  {
+   "w": "They've",
+   "start": 13.11,
+   "end": 13.33
+  },
+  {
+   "w": "been",
+   "start": 13.33,
+   "end": 13.39
+  },
+  {
+   "w": "showing",
+   "start": 13.39,
+   "end": 13.61
+  },
+  {
+   "w": "up",
+   "start": 13.61,
+   "end": 13.79
+  },
+  {
+   "w": "late,",
+   "start": 13.79,
+   "end": 14.07
+  },
+  {
+   "w": "missing",
+   "start": 14.41,
+   "end": 14.79
+  },
+  {
+   "w": "items,",
+   "start": 14.79,
+   "end": 15.23
+  },
+  {
+   "w": "and",
+   "start": 15.43,
+   "end": 15.51
+  },
+  {
+   "w": "it's",
+   "start": 15.51,
+   "end": 15.65
+  },
+  {
+   "w": "starting",
+   "start": 15.65,
+   "end": 15.91
+  },
+  {
+   "w": "to",
+   "start": 15.91,
+   "end": 16.13
+  },
+  {
+   "w": "affect",
+   "start": 16.13,
+   "end": 16.59
+  },
+  {
+   "w": "their",
+   "start": 16.59,
+   "end": 17.01
+  },
+  {
+   "w": "guest",
+   "start": 17.01,
+   "end": 17.25
+  },
+  {
+   "w": "stay.",
+   "start": 17.25,
+   "end": 17.63
+  },
+  {
+   "w": "And",
+   "start": 18.31,
+   "end": 18.37
+  },
+  {
+   "w": "so",
+   "start": 18.37,
+   "end": 18.53
+  },
+  {
+   "w": "we",
+   "start": 18.53,
+   "end": 18.73
+  },
+  {
+   "w": "handed",
+   "start": 18.73,
+   "end": 19.05
+  },
+  {
+   "w": "them",
+   "start": 19.05,
+   "end": 19.35
+  },
+  {
+   "w": "our",
+   "start": 19.35,
+   "end": 19.77
+  },
+  {
+   "w": "cleaner.",
+   "start": 19.77,
+   "end": 20.07
+  },
+  {
+   "w": "The",
+   "start": 20.39,
+   "end": 20.51
+  },
+  {
+   "w": "same",
+   "start": 20.51,
+   "end": 20.77
+  },
+  {
+   "w": "crew",
+   "start": 20.77,
+   "end": 21.01
+  },
+  {
+   "w": "that",
+   "start": 21.01,
+   "end": 21.19
+  },
+  {
+   "w": "does",
+   "start": 21.19,
+   "end": 21.47
+  },
+  {
+   "w": "our",
+   "start": 21.47,
+   "end": 21.77
+  },
+  {
+   "w": "best",
+   "start": 21.77,
+   "end": 22.05
+  },
+  {
+   "w": "properties.",
+   "start": 22.05,
+   "end": 22.59
+  },
+  {
+   "w": "Most",
+   "start": 23.19,
+   "end": 23.49
+  },
+  {
+   "w": "agents",
+   "start": 23.49,
+   "end": 23.91
+  },
+  {
+   "w": "and",
+   "start": 23.91,
+   "end": 24.11
+  },
+  {
+   "w": "investors",
+   "start": 24.11,
+   "end": 24.61
+  },
+  {
+   "w": "try",
+   "start": 24.61,
+   "end": 24.91
+  },
+  {
+   "w": "to",
+   "start": 24.91,
+   "end": 25.05
+  },
+  {
+   "w": "hide",
+   "start": 25.05,
+   "end": 25.27
+  },
+  {
+   "w": "their",
+   "start": 25.27,
+   "end": 25.47
+  },
+  {
+   "w": "top",
+   "start": 25.47,
+   "end": 25.69
+  },
+  {
+   "w": "contractors,",
+   "start": 25.69,
+   "end": 26.39
+  },
+  {
+   "w": "cleaners,",
+   "start": 26.91,
+   "end": 27.23
+  },
+  {
+   "w": "HVAC",
+   "start": 27.97,
+   "end": 28.21
+  },
+  {
+   "w": "technicians,",
+   "start": 28.21,
+   "end": 28.63
+  },
+  {
+   "w": "plumbers,",
+   "start": 28.83,
+   "end": 29.11
+  },
+  {
+   "w": "and",
+   "start": 29.11,
+   "end": 29.55
+  },
+  {
+   "w": "they",
+   "start": 29.55,
+   "end": 29.67
+  },
+  {
+   "w": "really",
+   "start": 29.67,
+   "end": 29.99
+  },
+  {
+   "w": "gate",
+   "start": 29.99,
+   "end": 30.35
+  },
+  {
+   "w": "keep.",
+   "start": 30.35,
+   "end": 30.63
+  },
+  {
+   "w": "We",
+   "start": 31.31,
+   "end": 31.51
+  },
+  {
+   "w": "at",
+   "start": 31.51,
+   "end": 31.63
+  },
+  {
+   "w": "Acaba",
+   "start": 31.63,
+   "end": 31.87
+  },
+  {
+   "w": "Home",
+   "start": 31.87,
+   "end": 32.13
+  },
+  {
+   "w": "do",
+   "start": 32.13,
+   "end": 32.39
+  },
+  {
+   "w": "the",
+   "start": 32.39,
+   "end": 32.59
+  },
+  {
+   "w": "opposite.",
+   "start": 32.59,
+   "end": 32.99
+  },
+  {
+   "w": "Because",
+   "start": 33.71,
+   "end": 33.89
+  },
+  {
+   "w": "we're",
+   "start": 33.89,
+   "end": 34.09
+  },
+  {
+   "w": "in",
+   "start": 34.09,
+   "end": 34.17
+  },
+  {
+   "w": "the",
+   "start": 34.17,
+   "end": 34.27
+  },
+  {
+   "w": "field",
+   "start": 34.27,
+   "end": 34.49
+  },
+  {
+   "w": "every",
+   "start": 34.49,
+   "end": 34.79
+  },
+  {
+   "w": "day,",
+   "start": 34.79,
+   "end": 35.15
+  },
+  {
+   "w": "building",
+   "start": 35.53,
+   "end": 35.75
+  },
+  {
+   "w": "our",
+   "start": 35.75,
+   "end": 36.03
+  },
+  {
+   "w": "portfolios",
+   "start": 36.03,
+   "end": 36.43
+  },
+  {
+   "w": "and",
+   "start": 36.43,
+   "end": 36.85
+  },
+  {
+   "w": "helping",
+   "start": 36.85,
+   "end": 37.03
+  },
+  {
+   "w": "our",
+   "start": 37.03,
+   "end": 37.39
+  },
+  {
+   "w": "clients",
+   "start": 37.39,
+   "end": 38.09
+  },
+  {
+   "w": "build",
+   "start": 38.09,
+   "end": 38.39
+  },
+  {
+   "w": "their",
+   "start": 38.39,
+   "end": 38.63
+  },
+  {
+   "w": "portfolios,",
+   "start": 38.63,
+   "end": 39.19
+  },
+  {
+   "w": "we",
+   "start": 39.61,
+   "end": 40.01
+  },
+  {
+   "w": "believe",
+   "start": 40.01,
+   "end": 40.45
+  },
+  {
+   "w": "in",
+   "start": 40.45,
+   "end": 40.87
+  },
+  {
+   "w": "an",
+   "start": 40.87,
+   "end": 40.97
+  },
+  {
+   "w": "abundant",
+   "start": 40.97,
+   "end": 41.47
+  },
+  {
+   "w": "mindset.",
+   "start": 41.47,
+   "end": 42.05
+  },
+  {
+   "w": "And",
+   "start": 42.55,
+   "end": 42.59
+  },
+  {
+   "w": "so",
+   "start": 42.59,
+   "end": 42.75
+  },
+  {
+   "w": "when",
+   "start": 42.75,
+   "end": 42.85
+  },
+  {
+   "w": "your",
+   "start": 42.85,
+   "end": 43.05
+  },
+  {
+   "w": "portfolio",
+   "start": 43.05,
+   "end": 43.43
+  },
+  {
+   "w": "grows,",
+   "start": 43.43,
+   "end": 43.95
+  },
+  {
+   "w": "we",
+   "start": 44.19,
+   "end": 44.45
+  },
+  {
+   "w": "grow",
+   "start": 44.45,
+   "end": 44.63
+  },
+  {
+   "w": "together,",
+   "start": 44.63,
+   "end": 45.03
+  },
+  {
+   "w": "and",
+   "start": 45.29,
+   "end": 45.51
+  },
+  {
+   "w": "so",
+   "start": 45.51,
+   "end": 45.67
+  },
+  {
+   "w": "we",
+   "start": 45.67,
+   "end": 45.85
+  },
+  {
+   "w": "give",
+   "start": 45.85,
+   "end": 46.15
+  },
+  {
+   "w": "the",
+   "start": 46.15,
+   "end": 46.39
+  },
+  {
+   "w": "whole",
+   "start": 46.39,
+   "end": 46.61
+  },
+  {
+   "w": "Rolodex",
+   "start": 46.61,
+   "end": 47.05
+  },
+  {
+   "w": "to",
+   "start": 47.05,
+   "end": 47.35
+  },
+  {
+   "w": "our",
+   "start": 47.35,
+   "end": 47.59
+  },
+  {
+   "w": "clients.",
+   "start": 47.59,
+   "end": 47.91
+  },
+  {
+   "w": "Is",
+   "start": 48.67,
+   "end": 48.75
+  },
+  {
+   "w": "this",
+   "start": 48.75,
+   "end": 48.97
+  },
+  {
+   "w": "something",
+   "start": 48.97,
+   "end": 49.25
+  },
+  {
+   "w": "that",
+   "start": 49.25,
+   "end": 49.51
+  },
+  {
+   "w": "you're",
+   "start": 49.51,
+   "end": 49.71
+  },
+  {
+   "w": "looking",
+   "start": 49.71,
+   "end": 49.93
+  },
+  {
+   "w": "for?",
+   "start": 49.93,
+   "end": 50.25
+  },
+  {
+   "w": "Do",
+   "start": 50.49,
+   "end": 50.67
+  },
+  {
+   "w": "you",
+   "start": 50.67,
+   "end": 50.77
+  },
+  {
+   "w": "want",
+   "start": 50.77,
+   "end": 50.89
+  },
+  {
+   "w": "a",
+   "start": 50.89,
+   "end": 51.03
+  },
+  {
+   "w": "whole",
+   "start": 51.03,
+   "end": 51.23
+  },
+  {
+   "w": "Rolodex",
+   "start": 51.23,
+   "end": 51.69
+  },
+  {
+   "w": "of",
+   "start": 51.69,
+   "end": 51.91
+  },
+  {
+   "w": "contractors",
+   "start": 51.91,
+   "end": 52.37
+  },
+  {
+   "w": "and",
+   "start": 52.37,
+   "end": 52.77
+  },
+  {
+   "w": "not",
+   "start": 52.77,
+   "end": 53.01
+  },
+  {
+   "w": "just",
+   "start": 53.01,
+   "end": 53.21
+  },
+  {
+   "w": "a",
+   "start": 53.21,
+   "end": 53.39
+  },
+  {
+   "w": "realtor",
+   "start": 53.39,
+   "end": 53.87
+  },
+  {
+   "w": "to",
+   "start": 53.87,
+   "end": 54.27
+  },
+  {
+   "w": "go",
+   "start": 54.27,
+   "end": 54.45
+  },
+  {
+   "w": "and",
+   "start": 54.45,
+   "end": 54.55
+  },
+  {
+   "w": "buy",
+   "start": 54.55,
+   "end": 54.71
+  },
+  {
+   "w": "a",
+   "start": 54.71,
+   "end": 54.83
+  },
+  {
+   "w": "house?",
+   "start": 54.83,
+   "end": 55.07
+  },
+  {
+   "w": "Click",
+   "start": 55.07,
+   "end": 55.87
+  },
+  {
+   "w": "that",
+   "start": 55.87,
+   "end": 56.07
+  },
+  {
+   "w": "link",
+   "start": 56.07,
+   "end": 56.27
+  },
+  {
+   "w": "in",
+   "start": 56.27,
+   "end": 56.43
+  },
+  {
+   "w": "the",
+   "start": 56.43,
+   "end": 56.53
+  },
+  {
+   "w": "bio,",
+   "start": 56.53,
+   "end": 56.79
+  },
+  {
+   "w": "schedule",
+   "start": 57.03,
+   "end": 57.17
+  },
+  {
+   "w": "some",
+   "start": 57.17,
+   "end": 57.39
+  },
+  {
+   "w": "time",
+   "start": 57.39,
+   "end": 57.59
+  },
+  {
+   "w": "to",
+   "start": 57.59,
+   "end": 57.77
+  },
+  {
+   "w": "meet,",
+   "start": 57.77,
+   "end": 57.95
+  },
+  {
+   "w": "and",
+   "start": 58.39,
+   "end": 58.43
+  },
+  {
+   "w": "let's",
+   "start": 58.43,
+   "end": 58.69
+  },
+  {
+   "w": "build",
+   "start": 58.69,
+   "end": 58.87
+  },
+  {
+   "w": "together.",
+   "start": 58.87,
+   "end": 59.29
+  },
+  {
+   "w": "No",
+   "start": 59.79,
+   "end": 60.01
+  },
+  {
+   "w": "gate",
+   "start": 60.01,
+   "end": 60.23
+  },
+  {
+   "w": "keeping,",
+   "start": 60.23,
+   "end": 60.61
+  },
+  {
+   "w": "just",
+   "start": 60.95,
+   "end": 61.15
+  },
+  {
+   "w": "results.",
+   "start": 61.15,
+   "end": 61.45
+  }
+ ]
+}
