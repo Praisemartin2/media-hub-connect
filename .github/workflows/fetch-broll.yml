@@ -16,13 +16,17 @@ jobs:
           set -e
           mkdir -p broll
           base="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          mkdir -p canva
-          curl -fsSL -o canva/property_tour2.jpg 'https://export-download.canva.com/hPrzE/DAHPIBhPrzE/-1/0/0001-7610466686146506611.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260711%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260711T233842Z&X-Amz-Expires=8608&X-Amz-Signature=ceb1d4140bed26b68283c0aa4a94041cfdb5a00193ad247bc2c1ea5b86065a8a&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2012%20Jul%202026%2002%3A02%3A10%20GMT'
-          ls -la canva/
+          mkdir -p v1broll
+          curl -fsSL -o v1broll/b1_flip.png    "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260714_012009_2daf0538-9e96-4a33-ab40-5e9ce1842ce0.png"
+          curl -fsSL -o v1broll/b2_rates.png   "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260714_012011_923c541e-6192-4251-add6-eb94dd65d5e4.png"
+          curl -fsSL -o v1broll/b3_luxury.png  "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260714_012012_d23b0719-234d-4a9e-96ca-33b6255de4e0.png"
+          curl -fsSL -o v1broll/b4_wire.png    "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260714_012019_b3241dea-d6b1-4884-ae6c-7a7274281eef.png"
+          curl -fsSL -o v1broll/b5_empty.png   "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260714_012021_665477be-8d54-4f2c-a178-b689e66996ec.png"
+          ls -la v1broll/
       - name: Commit assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add broll/ clips/ canva/
+          git add broll/ clips/ canva/ v1broll/
           git commit -m "Add generated b-roll assets [skip ci]"
           git push
