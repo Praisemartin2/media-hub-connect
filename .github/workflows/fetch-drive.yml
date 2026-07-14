@@ -1,0 +1,42 @@
+name: Fetch Drive videos
+on:
+  push:
+    branches: [claude/ekabo-video-editing-styles-wrs455]
+    paths: ['.github/workflows/fetch-drive.yml']
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download from Drive and re-encode
+        run: |
+          set -e
+          pip install -q gdown
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
+          mkdir -p drive_src
+          declare -A files=(
+            [v1]="1jlJ1_q10VD1Z-05kBUHFInHvFUHjAfKM"
+            [v2]="1jM8n_qQ9TFVAzG8VN0QBP0w3bsUy85yF"
+            [v3]="1hCtX-6HSKJAJ8_DrCL95ezDSZcWg1Z7N"
+            [v4]="1xt-GqCPro5ctfTVOC7tQn6R4Tk7Oz9S3"
+          )
+          for key in v1 v2 v3 v4; do
+            id="${files[$key]}"
+            echo "=== $key ($id) ==="
+            gdown "https://drive.google.com/uc?id=$id" -O "raw_$key.mov" || { echo "gdown failed for $key"; continue; }
+            # re-encode: keep aspect, cap height 1920, H.264 CRF 20, AAC — shrinks under 100MB for commit
+            ffmpeg -v error -i "raw_$key.mov" -vf "scale='min(1080,iw)':'-2'" -c:v libx264 -preset medium -crf 20 -c:a aac -b:a 192k -movflags +faststart "drive_src/$key.mp4"
+            rm -f "raw_$key.mov"
+            ls -la "drive_src/$key.mp4"
+          done
+          ls -la drive_src/
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add drive_src/
+          git commit -m "Add re-encoded Drive source videos [skip ci]" || echo "nothing to commit"
+          git push
