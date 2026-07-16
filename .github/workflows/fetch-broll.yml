@@ -16,17 +16,17 @@ jobs:
           set -e
           mkdir -p broll
           base="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          mkdir -p v2broll
-          curl -fsSL -o v2broll/b1_quit.png    "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260715_002217_9ba7a75c-a45b-4218-a233-446c5bc49201.png"
-          curl -fsSL -o v2broll/b2_buffett.png "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260715_002219_2958175c-e2a8-489d-aea9-c3bb6a5a1a93.png"
-          curl -fsSL -o v2broll/b3_chart.png   "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260715_002221_800c034c-5094-460d-8df8-71c17383207a.png"
-          curl -fsSL -o v2broll/b4_trophy.png  "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260715_002234_efc0ce11-15e2-4788-89b2-4fade6613d4e.png"
-          curl -fsSL -o v2broll/b5_hourglass.png "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260715_002236_5665acba-1711-400a-bb5e-ce88eaf77abf.png"
-          ls -la v2broll/
+          mkdir -p v3broll
+          curl -fsSL -o v3broll/b1_mansion.png "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260716_151738_af8676c4-86bc-4bbe-b545-bdc871e559ca.png"
+          curl -fsSL -o v3broll/b2_messy.png   "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260716_151740_5d808c93-03bb-4570-a620-da1cf1d85a48.png"
+          curl -fsSL -o v3broll/b3_clean.png   "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260716_151750_528e4feb-ca9c-4a00-920c-0b2982f2c9d6.png"
+          curl -fsSL -o v3broll/b4_rolodex.png "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260716_151752_a91b048d-1380-4dbf-967a-fbe5eafb4bb3.png"
+          curl -fsSL -o v3broll/b5_handshake.png "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260716_151753_4386dfe3-9801-4c4e-bf64-66f39f8fd5c6.png"
+          ls -la v3broll/
       - name: Commit assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add broll/ clips/ canva/ v1broll/ v2broll/
+          git add broll/ clips/ canva/ v1broll/ v2broll/ v3broll/
           git commit -m "Add generated b-roll assets [skip ci]"
           git push
