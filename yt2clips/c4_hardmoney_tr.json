@@ -1,0 +1,836 @@
+{
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 3.3,
+   "text": "One thing I would say is hard money costs a lot."
+  },
+  {
+   "start": 3.7,
+   "end": 4.92,
+   "text": "So typically, when you're doing hard money,"
+  },
+  {
+   "start": 5.14,
+   "end": 6.66,
+   "text": "your interest rate's gonna be significantly higher."
+  },
+  {
+   "start": 6.82,
+   "end": 10.02,
+   "text": "Like right now, you're probably between 11, 13%"
+  },
+  {
+   "start": 10.02,
+   "end": 10.74,
+   "text": "on the interest."
+  },
+  {
+   "start": 11.02,
+   "end": 12.32,
+   "text": "It's usually a shorter term loan."
+  },
+  {
+   "start": 12.54,
+   "end": 13.62,
+   "text": "Typically, they'll give you six months."
+  },
+  {
+   "start": 13.88,
+   "end": 14.88,
+   "text": "And then if you go back to them,"
+  },
+  {
+   "start": 14.88,
+   "end": 17.52,
+   "text": "they'll let you renew if you pay some additional points."
+  },
+  {
+   "start": 17.8,
+   "end": 19.36,
+   "text": "And typically, you gotta pay points on the loan."
+  },
+  {
+   "start": 19.68,
+   "end": 21.34,
+   "text": "And so points are essentially"
+  },
+  {
+   "start": 21.34,
+   "end": 23.98,
+   "text": "like one percentage point of the loan."
+  },
+  {
+   "start": 24.1,
+   "end": 26.04,
+   "text": "So if you have a loan for five, 400K, right?"
+  },
+  {
+   "start": 26.22,
+   "end": 27.72,
+   "text": "If you're gonna close that, typically,"
+  },
+  {
+   "start": 27.72,
+   "end": 29.32,
+   "text": "they'll take not only the down payment,"
+  },
+  {
+   "start": 29.32,
+   "end": 31.08,
+   "text": "but also some points on top,"
+  },
+  {
+   "start": 31.34,
+   "end": 32.9,
+   "text": "just to make sure they're getting paid right off the bat."
+  },
+  {
+   "start": 33.06,
+   "end": 34.96,
+   "text": "So the point may be, hey, we're gonna take two points"
+  },
+  {
+   "start": 34.96,
+   "end": 36.88,
+   "text": "off of 400K, which would be $8,000."
+  }
+ ],
+ "words": [
+  {
+   "w": "One",
+   "start": 0.0,
+   "end": 0.16
+  },
+  {
+   "w": "thing",
+   "start": 0.16,
+   "end": 0.32
+  },
+  {
+   "w": "I",
+   "start": 0.32,
+   "end": 0.46
+  },
+  {
+   "w": "would",
+   "start": 0.46,
+   "end": 0.6
+  },
+  {
+   "w": "say",
+   "start": 0.6,
+   "end": 0.96
+  },
+  {
+   "w": "is",
+   "start": 0.96,
+   "end": 1.54
+  },
+  {
+   "w": "hard",
+   "start": 1.54,
+   "end": 1.88
+  },
+  {
+   "w": "money",
+   "start": 1.88,
+   "end": 2.12
+  },
+  {
+   "w": "costs",
+   "start": 2.12,
+   "end": 2.7
+  },
+  {
+   "w": "a",
+   "start": 2.7,
+   "end": 3.08
+  },
+  {
+   "w": "lot.",
+   "start": 3.08,
+   "end": 3.3
+  },
+  {
+   "w": "So",
+   "start": 3.7,
+   "end": 3.7
+  },
+  {
+   "w": "typically,",
+   "start": 3.7,
+   "end": 4.06
+  },
+  {
+   "w": "when",
+   "start": 4.16,
+   "end": 4.24
+  },
+  {
+   "w": "you're",
+   "start": 4.24,
+   "end": 4.34
+  },
+  {
+   "w": "doing",
+   "start": 4.34,
+   "end": 4.52
+  },
+  {
+   "w": "hard",
+   "start": 4.52,
+   "end": 4.7
+  },
+  {
+   "w": "money,",
+   "start": 4.7,
+   "end": 4.92
+  },
+  {
+   "w": "your",
+   "start": 5.14,
+   "end": 5.16
+  },
+  {
+   "w": "interest",
+   "start": 5.16,
+   "end": 5.34
+  },
+  {
+   "w": "rate's",
+   "start": 5.34,
+   "end": 5.64
+  },
+  {
+   "w": "gonna",
+   "start": 5.64,
+   "end": 5.72
+  },
+  {
+   "w": "be",
+   "start": 5.72,
+   "end": 5.88
+  },
+  {
+   "w": "significantly",
+   "start": 5.88,
+   "end": 6.32
+  },
+  {
+   "w": "higher.",
+   "start": 6.32,
+   "end": 6.66
+  },
+  {
+   "w": "Like",
+   "start": 6.82,
+   "end": 6.84
+  },
+  {
+   "w": "right",
+   "start": 6.84,
+   "end": 6.98
+  },
+  {
+   "w": "now,",
+   "start": 6.98,
+   "end": 7.2
+  },
+  {
+   "w": "you're",
+   "start": 7.22,
+   "end": 7.4
+  },
+  {
+   "w": "probably",
+   "start": 7.4,
+   "end": 7.56
+  },
+  {
+   "w": "between",
+   "start": 7.56,
+   "end": 8.0
+  },
+  {
+   "w": "11,",
+   "start": 8.0,
+   "end": 8.96
+  },
+  {
+   "w": "13",
+   "start": 9.2,
+   "end": 9.64
+  },
+  {
+   "w": "%",
+   "start": 9.64,
+   "end": 10.02
+  },
+  {
+   "w": "on",
+   "start": 10.02,
+   "end": 10.26
+  },
+  {
+   "w": "the",
+   "start": 10.26,
+   "end": 10.4
+  },
+  {
+   "w": "interest.",
+   "start": 10.4,
+   "end": 10.74
+  },
+  {
+   "w": "It's",
+   "start": 11.02,
+   "end": 11.12
+  },
+  {
+   "w": "usually",
+   "start": 11.12,
+   "end": 11.34
+  },
+  {
+   "w": "a",
+   "start": 11.34,
+   "end": 11.5
+  },
+  {
+   "w": "shorter",
+   "start": 11.5,
+   "end": 11.74
+  },
+  {
+   "w": "term",
+   "start": 11.74,
+   "end": 12.06
+  },
+  {
+   "w": "loan.",
+   "start": 12.06,
+   "end": 12.32
+  },
+  {
+   "w": "Typically,",
+   "start": 12.54,
+   "end": 12.7
+  },
+  {
+   "w": "they'll",
+   "start": 12.78,
+   "end": 12.94
+  },
+  {
+   "w": "give",
+   "start": 12.94,
+   "end": 13.04
+  },
+  {
+   "w": "you",
+   "start": 13.04,
+   "end": 13.18
+  },
+  {
+   "w": "six",
+   "start": 13.18,
+   "end": 13.36
+  },
+  {
+   "w": "months.",
+   "start": 13.36,
+   "end": 13.62
+  },
+  {
+   "w": "And",
+   "start": 13.88,
+   "end": 13.94
+  },
+  {
+   "w": "then",
+   "start": 13.94,
+   "end": 14.04
+  },
+  {
+   "w": "if",
+   "start": 14.04,
+   "end": 14.12
+  },
+  {
+   "w": "you",
+   "start": 14.12,
+   "end": 14.22
+  },
+  {
+   "w": "go",
+   "start": 14.22,
+   "end": 14.34
+  },
+  {
+   "w": "back",
+   "start": 14.34,
+   "end": 14.52
+  },
+  {
+   "w": "to",
+   "start": 14.52,
+   "end": 14.7
+  },
+  {
+   "w": "them,",
+   "start": 14.7,
+   "end": 14.88
+  },
+  {
+   "w": "they'll",
+   "start": 14.88,
+   "end": 15.06
+  },
+  {
+   "w": "let",
+   "start": 15.06,
+   "end": 15.22
+  },
+  {
+   "w": "you",
+   "start": 15.22,
+   "end": 15.36
+  },
+  {
+   "w": "renew",
+   "start": 15.36,
+   "end": 15.72
+  },
+  {
+   "w": "if",
+   "start": 15.72,
+   "end": 16.04
+  },
+  {
+   "w": "you",
+   "start": 16.04,
+   "end": 16.22
+  },
+  {
+   "w": "pay",
+   "start": 16.22,
+   "end": 16.5
+  },
+  {
+   "w": "some",
+   "start": 16.5,
+   "end": 16.74
+  },
+  {
+   "w": "additional",
+   "start": 16.74,
+   "end": 17.1
+  },
+  {
+   "w": "points.",
+   "start": 17.1,
+   "end": 17.52
+  },
+  {
+   "w": "And",
+   "start": 17.8,
+   "end": 17.88
+  },
+  {
+   "w": "typically,",
+   "start": 17.88,
+   "end": 18.14
+  },
+  {
+   "w": "you",
+   "start": 18.26,
+   "end": 18.32
+  },
+  {
+   "w": "gotta",
+   "start": 18.32,
+   "end": 18.42
+  },
+  {
+   "w": "pay",
+   "start": 18.42,
+   "end": 18.64
+  },
+  {
+   "w": "points",
+   "start": 18.64,
+   "end": 18.96
+  },
+  {
+   "w": "on",
+   "start": 18.96,
+   "end": 19.1
+  },
+  {
+   "w": "the",
+   "start": 19.1,
+   "end": 19.2
+  },
+  {
+   "w": "loan.",
+   "start": 19.2,
+   "end": 19.36
+  },
+  {
+   "w": "And",
+   "start": 19.68,
+   "end": 19.68
+  },
+  {
+   "w": "so",
+   "start": 19.68,
+   "end": 19.86
+  },
+  {
+   "w": "points",
+   "start": 19.86,
+   "end": 20.34
+  },
+  {
+   "w": "are",
+   "start": 20.34,
+   "end": 20.78
+  },
+  {
+   "w": "essentially",
+   "start": 20.78,
+   "end": 21.34
+  },
+  {
+   "w": "like",
+   "start": 21.34,
+   "end": 21.86
+  },
+  {
+   "w": "one",
+   "start": 21.86,
+   "end": 22.56
+  },
+  {
+   "w": "percentage",
+   "start": 22.56,
+   "end": 23.08
+  },
+  {
+   "w": "point",
+   "start": 23.08,
+   "end": 23.44
+  },
+  {
+   "w": "of",
+   "start": 23.44,
+   "end": 23.68
+  },
+  {
+   "w": "the",
+   "start": 23.68,
+   "end": 23.8
+  },
+  {
+   "w": "loan.",
+   "start": 23.8,
+   "end": 23.98
+  },
+  {
+   "w": "So",
+   "start": 24.1,
+   "end": 24.14
+  },
+  {
+   "w": "if",
+   "start": 24.14,
+   "end": 24.2
+  },
+  {
+   "w": "you",
+   "start": 24.2,
+   "end": 24.26
+  },
+  {
+   "w": "have",
+   "start": 24.26,
+   "end": 24.36
+  },
+  {
+   "w": "a",
+   "start": 24.36,
+   "end": 24.44
+  },
+  {
+   "w": "loan",
+   "start": 24.44,
+   "end": 24.6
+  },
+  {
+   "w": "for",
+   "start": 24.6,
+   "end": 24.8
+  },
+  {
+   "w": "five,",
+   "start": 24.8,
+   "end": 25.0
+  },
+  {
+   "w": "400K,",
+   "start": 25.1,
+   "end": 25.58
+  },
+  {
+   "w": "right?",
+   "start": 25.92,
+   "end": 26.04
+  },
+  {
+   "w": "If",
+   "start": 26.22,
+   "end": 26.34
+  },
+  {
+   "w": "you're",
+   "start": 26.34,
+   "end": 26.5
+  },
+  {
+   "w": "gonna",
+   "start": 26.5,
+   "end": 26.56
+  },
+  {
+   "w": "close",
+   "start": 26.56,
+   "end": 26.86
+  },
+  {
+   "w": "that,",
+   "start": 26.86,
+   "end": 27.18
+  },
+  {
+   "w": "typically,",
+   "start": 27.4,
+   "end": 27.72
+  },
+  {
+   "w": "they'll",
+   "start": 27.72,
+   "end": 27.98
+  },
+  {
+   "w": "take",
+   "start": 27.98,
+   "end": 28.22
+  },
+  {
+   "w": "not",
+   "start": 28.22,
+   "end": 28.5
+  },
+  {
+   "w": "only",
+   "start": 28.5,
+   "end": 28.74
+  },
+  {
+   "w": "the",
+   "start": 28.74,
+   "end": 28.84
+  },
+  {
+   "w": "down",
+   "start": 28.84,
+   "end": 29.04
+  },
+  {
+   "w": "payment,",
+   "start": 29.04,
+   "end": 29.32
+  },
+  {
+   "w": "but",
+   "start": 29.32,
+   "end": 29.74
+  },
+  {
+   "w": "also",
+   "start": 29.74,
+   "end": 30.0
+  },
+  {
+   "w": "some",
+   "start": 30.0,
+   "end": 30.3
+  },
+  {
+   "w": "points",
+   "start": 30.3,
+   "end": 30.58
+  },
+  {
+   "w": "on",
+   "start": 30.58,
+   "end": 30.78
+  },
+  {
+   "w": "top,",
+   "start": 30.78,
+   "end": 31.08
+  },
+  {
+   "w": "just",
+   "start": 31.34,
+   "end": 31.36
+  },
+  {
+   "w": "to",
+   "start": 31.36,
+   "end": 31.5
+  },
+  {
+   "w": "make",
+   "start": 31.5,
+   "end": 31.64
+  },
+  {
+   "w": "sure",
+   "start": 31.64,
+   "end": 31.8
+  },
+  {
+   "w": "they're",
+   "start": 31.8,
+   "end": 31.96
+  },
+  {
+   "w": "getting",
+   "start": 31.96,
+   "end": 32.08
+  },
+  {
+   "w": "paid",
+   "start": 32.08,
+   "end": 32.32
+  },
+  {
+   "w": "right",
+   "start": 32.32,
+   "end": 32.52
+  },
+  {
+   "w": "off",
+   "start": 32.52,
+   "end": 32.66
+  },
+  {
+   "w": "the",
+   "start": 32.66,
+   "end": 32.76
+  },
+  {
+   "w": "bat.",
+   "start": 32.76,
+   "end": 32.9
+  },
+  {
+   "w": "So",
+   "start": 33.06,
+   "end": 33.06
+  },
+  {
+   "w": "the",
+   "start": 33.06,
+   "end": 33.18
+  },
+  {
+   "w": "point",
+   "start": 33.18,
+   "end": 33.36
+  },
+  {
+   "w": "may",
+   "start": 33.36,
+   "end": 33.58
+  },
+  {
+   "w": "be,",
+   "start": 33.58,
+   "end": 33.78
+  },
+  {
+   "w": "hey,",
+   "start": 33.98,
+   "end": 34.02
+  },
+  {
+   "w": "we're",
+   "start": 34.12,
+   "end": 34.16
+  },
+  {
+   "w": "gonna",
+   "start": 34.16,
+   "end": 34.24
+  },
+  {
+   "w": "take",
+   "start": 34.24,
+   "end": 34.38
+  },
+  {
+   "w": "two",
+   "start": 34.38,
+   "end": 34.62
+  },
+  {
+   "w": "points",
+   "start": 34.62,
+   "end": 34.96
+  },
+  {
+   "w": "off",
+   "start": 34.96,
+   "end": 35.3
+  },
+  {
+   "w": "of",
+   "start": 35.3,
+   "end": 35.42
+  },
+  {
+   "w": "400K,",
+   "start": 35.42,
+   "end": 35.86
+  },
+  {
+   "w": "which",
+   "start": 35.96,
+   "end": 36.04
+  },
+  {
+   "w": "would",
+   "start": 36.04,
+   "end": 36.14
+  },
+  {
+   "w": "be",
+   "start": 36.14,
+   "end": 36.24
+  },
+  {
+   "w": "$8",
+   "start": 36.24,
+   "end": 36.5
+  },
+  {
+   "w": ",000.",
+   "start": 36.5,
+   "end": 36.88
+  }
+ ]
+}

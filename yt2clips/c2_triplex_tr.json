@@ -1,0 +1,636 @@
+{
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 2.58,
+   "text": "And at the time, I was 24, right?"
+  },
+  {
+   "start": 2.78,
+   "end": 6.92,
+   "text": "And so I was just fresh into my new job and I had saved up as much as I could."
+  },
+  {
+   "start": 7.4,
+   "end": 11.32,
+   "text": "And all the money that I had saved up was in the amount of about five grand."
+  },
+  {
+   "start": 11.6,
+   "end": 16.36,
+   "text": "Because of this loan product, I was able to go in, buy a triplex for 190K."
+  },
+  {
+   "start": 16.6,
+   "end": 18.78,
+   "text": "You can't do that today, at least not for that price."
+  },
+  {
+   "start": 18.94,
+   "end": 22.52,
+   "text": "Those prices have increased, but that 3.5% down loan allowed me to do that."
+  },
+  {
+   "start": 22.66,
+   "end": 27.56,
+   "text": "Not to mention, it also lowers the credit amount that you actually have to have."
+  },
+  {
+   "start": 27.56,
+   "end": 30.48,
+   "text": "So your credit does not need to be perfect when you're using an FHA loan."
+  }
+ ],
+ "words": [
+  {
+   "w": "And",
+   "start": 0.0,
+   "end": 0.08
+  },
+  {
+   "w": "at",
+   "start": 0.08,
+   "end": 0.22
+  },
+  {
+   "w": "the",
+   "start": 0.22,
+   "end": 0.36
+  },
+  {
+   "w": "time,",
+   "start": 0.36,
+   "end": 0.78
+  },
+  {
+   "w": "I",
+   "start": 1.1,
+   "end": 1.32
+  },
+  {
+   "w": "was",
+   "start": 1.32,
+   "end": 1.48
+  },
+  {
+   "w": "24,",
+   "start": 1.48,
+   "end": 2.1
+  },
+  {
+   "w": "right?",
+   "start": 2.48,
+   "end": 2.58
+  },
+  {
+   "w": "And",
+   "start": 2.78,
+   "end": 2.82
+  },
+  {
+   "w": "so",
+   "start": 2.82,
+   "end": 2.96
+  },
+  {
+   "w": "I",
+   "start": 2.96,
+   "end": 3.1
+  },
+  {
+   "w": "was",
+   "start": 3.1,
+   "end": 3.24
+  },
+  {
+   "w": "just",
+   "start": 3.24,
+   "end": 3.5
+  },
+  {
+   "w": "fresh",
+   "start": 3.5,
+   "end": 3.76
+  },
+  {
+   "w": "into",
+   "start": 3.76,
+   "end": 3.98
+  },
+  {
+   "w": "my",
+   "start": 3.98,
+   "end": 4.1
+  },
+  {
+   "w": "new",
+   "start": 4.1,
+   "end": 4.26
+  },
+  {
+   "w": "job",
+   "start": 4.26,
+   "end": 4.52
+  },
+  {
+   "w": "and",
+   "start": 4.52,
+   "end": 4.86
+  },
+  {
+   "w": "I",
+   "start": 4.86,
+   "end": 5.02
+  },
+  {
+   "w": "had",
+   "start": 5.02,
+   "end": 5.18
+  },
+  {
+   "w": "saved",
+   "start": 5.18,
+   "end": 5.48
+  },
+  {
+   "w": "up",
+   "start": 5.48,
+   "end": 5.72
+  },
+  {
+   "w": "as",
+   "start": 5.72,
+   "end": 6.0
+  },
+  {
+   "w": "much",
+   "start": 6.0,
+   "end": 6.38
+  },
+  {
+   "w": "as",
+   "start": 6.38,
+   "end": 6.56
+  },
+  {
+   "w": "I",
+   "start": 6.56,
+   "end": 6.72
+  },
+  {
+   "w": "could.",
+   "start": 6.72,
+   "end": 6.92
+  },
+  {
+   "w": "And",
+   "start": 7.4,
+   "end": 7.44
+  },
+  {
+   "w": "all",
+   "start": 7.44,
+   "end": 7.82
+  },
+  {
+   "w": "the",
+   "start": 7.82,
+   "end": 7.92
+  },
+  {
+   "w": "money",
+   "start": 7.92,
+   "end": 8.04
+  },
+  {
+   "w": "that",
+   "start": 8.04,
+   "end": 8.24
+  },
+  {
+   "w": "I",
+   "start": 8.24,
+   "end": 8.32
+  },
+  {
+   "w": "had",
+   "start": 8.32,
+   "end": 8.52
+  },
+  {
+   "w": "saved",
+   "start": 8.52,
+   "end": 8.76
+  },
+  {
+   "w": "up",
+   "start": 8.76,
+   "end": 9.0
+  },
+  {
+   "w": "was",
+   "start": 9.0,
+   "end": 9.2
+  },
+  {
+   "w": "in",
+   "start": 9.2,
+   "end": 9.64
+  },
+  {
+   "w": "the",
+   "start": 9.64,
+   "end": 9.82
+  },
+  {
+   "w": "amount",
+   "start": 9.82,
+   "end": 10.32
+  },
+  {
+   "w": "of",
+   "start": 10.32,
+   "end": 10.46
+  },
+  {
+   "w": "about",
+   "start": 10.46,
+   "end": 10.66
+  },
+  {
+   "w": "five",
+   "start": 10.66,
+   "end": 10.96
+  },
+  {
+   "w": "grand.",
+   "start": 10.96,
+   "end": 11.32
+  },
+  {
+   "w": "Because",
+   "start": 11.6,
+   "end": 12.0
+  },
+  {
+   "w": "of",
+   "start": 12.0,
+   "end": 12.2
+  },
+  {
+   "w": "this",
+   "start": 12.2,
+   "end": 12.36
+  },
+  {
+   "w": "loan",
+   "start": 12.36,
+   "end": 12.66
+  },
+  {
+   "w": "product,",
+   "start": 12.66,
+   "end": 13.12
+  },
+  {
+   "w": "I",
+   "start": 13.14,
+   "end": 13.44
+  },
+  {
+   "w": "was",
+   "start": 13.44,
+   "end": 13.56
+  },
+  {
+   "w": "able",
+   "start": 13.56,
+   "end": 13.72
+  },
+  {
+   "w": "to",
+   "start": 13.72,
+   "end": 13.88
+  },
+  {
+   "w": "go",
+   "start": 13.88,
+   "end": 14.04
+  },
+  {
+   "w": "in,",
+   "start": 14.04,
+   "end": 14.32
+  },
+  {
+   "w": "buy",
+   "start": 14.48,
+   "end": 14.78
+  },
+  {
+   "w": "a",
+   "start": 14.78,
+   "end": 14.96
+  },
+  {
+   "w": "triplex",
+   "start": 14.96,
+   "end": 15.3
+  },
+  {
+   "w": "for",
+   "start": 15.3,
+   "end": 15.56
+  },
+  {
+   "w": "190K.",
+   "start": 15.56,
+   "end": 16.36
+  },
+  {
+   "w": "You",
+   "start": 16.6,
+   "end": 16.8
+  },
+  {
+   "w": "can't",
+   "start": 16.8,
+   "end": 17.06
+  },
+  {
+   "w": "do",
+   "start": 17.06,
+   "end": 17.14
+  },
+  {
+   "w": "that",
+   "start": 17.14,
+   "end": 17.32
+  },
+  {
+   "w": "today,",
+   "start": 17.32,
+   "end": 17.62
+  },
+  {
+   "w": "at",
+   "start": 17.78,
+   "end": 17.92
+  },
+  {
+   "w": "least",
+   "start": 17.92,
+   "end": 18.04
+  },
+  {
+   "w": "not",
+   "start": 18.04,
+   "end": 18.26
+  },
+  {
+   "w": "for",
+   "start": 18.26,
+   "end": 18.4
+  },
+  {
+   "w": "that",
+   "start": 18.4,
+   "end": 18.54
+  },
+  {
+   "w": "price.",
+   "start": 18.54,
+   "end": 18.78
+  },
+  {
+   "w": "Those",
+   "start": 18.94,
+   "end": 19.0
+  },
+  {
+   "w": "prices",
+   "start": 19.0,
+   "end": 19.24
+  },
+  {
+   "w": "have",
+   "start": 19.24,
+   "end": 19.4
+  },
+  {
+   "w": "increased,",
+   "start": 19.4,
+   "end": 19.72
+  },
+  {
+   "w": "but",
+   "start": 19.86,
+   "end": 20.02
+  },
+  {
+   "w": "that",
+   "start": 20.02,
+   "end": 20.18
+  },
+  {
+   "w": "3",
+   "start": 20.18,
+   "end": 20.42
+  },
+  {
+   "w": ".5",
+   "start": 20.42,
+   "end": 20.72
+  },
+  {
+   "w": "%",
+   "start": 20.72,
+   "end": 21.0
+  },
+  {
+   "w": "down",
+   "start": 21.0,
+   "end": 21.26
+  },
+  {
+   "w": "loan",
+   "start": 21.26,
+   "end": 21.54
+  },
+  {
+   "w": "allowed",
+   "start": 21.54,
+   "end": 21.9
+  },
+  {
+   "w": "me",
+   "start": 21.9,
+   "end": 22.06
+  },
+  {
+   "w": "to",
+   "start": 22.06,
+   "end": 22.16
+  },
+  {
+   "w": "do",
+   "start": 22.16,
+   "end": 22.3
+  },
+  {
+   "w": "that.",
+   "start": 22.3,
+   "end": 22.52
+  },
+  {
+   "w": "Not",
+   "start": 22.66,
+   "end": 22.96
+  },
+  {
+   "w": "to",
+   "start": 22.96,
+   "end": 23.16
+  },
+  {
+   "w": "mention,",
+   "start": 23.16,
+   "end": 23.6
+  },
+  {
+   "w": "it",
+   "start": 23.72,
+   "end": 24.1
+  },
+  {
+   "w": "also",
+   "start": 24.1,
+   "end": 24.64
+  },
+  {
+   "w": "lowers",
+   "start": 24.64,
+   "end": 25.5
+  },
+  {
+   "w": "the",
+   "start": 25.5,
+   "end": 25.74
+  },
+  {
+   "w": "credit",
+   "start": 25.74,
+   "end": 25.98
+  },
+  {
+   "w": "amount",
+   "start": 25.98,
+   "end": 26.3
+  },
+  {
+   "w": "that",
+   "start": 26.3,
+   "end": 26.48
+  },
+  {
+   "w": "you",
+   "start": 26.48,
+   "end": 26.6
+  },
+  {
+   "w": "actually",
+   "start": 26.6,
+   "end": 26.92
+  },
+  {
+   "w": "have",
+   "start": 26.92,
+   "end": 27.16
+  },
+  {
+   "w": "to",
+   "start": 27.16,
+   "end": 27.32
+  },
+  {
+   "w": "have.",
+   "start": 27.32,
+   "end": 27.56
+  },
+  {
+   "w": "So",
+   "start": 27.56,
+   "end": 27.76
+  },
+  {
+   "w": "your",
+   "start": 27.76,
+   "end": 27.88
+  },
+  {
+   "w": "credit",
+   "start": 27.88,
+   "end": 28.16
+  },
+  {
+   "w": "does",
+   "start": 28.16,
+   "end": 28.36
+  },
+  {
+   "w": "not",
+   "start": 28.36,
+   "end": 28.6
+  },
+  {
+   "w": "need",
+   "start": 28.6,
+   "end": 28.8
+  },
+  {
+   "w": "to",
+   "start": 28.8,
+   "end": 28.88
+  },
+  {
+   "w": "be",
+   "start": 28.88,
+   "end": 29.0
+  },
+  {
+   "w": "perfect",
+   "start": 29.0,
+   "end": 29.34
+  },
+  {
+   "w": "when",
+   "start": 29.34,
+   "end": 29.56
+  },
+  {
+   "w": "you're",
+   "start": 29.56,
+   "end": 29.68
+  },
+  {
+   "w": "using",
+   "start": 29.68,
+   "end": 29.92
+  },
+  {
+   "w": "an",
+   "start": 29.92,
+   "end": 30.06
+  },
+  {
+   "w": "FHA",
+   "start": 30.06,
+   "end": 30.34
+  },
+  {
+   "w": "loan.",
+   "start": 30.34,
+   "end": 30.48
+  }
+ ]
+}
