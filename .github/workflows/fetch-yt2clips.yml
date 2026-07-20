@@ -1,0 +1,30 @@
+name: Fetch YT2 clips
+on:
+  push:
+    branches: [claude/ekabo-video-editing-styles-wrs455]
+    paths: ['.github/workflows/fetch-yt2clips.yml']
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download clips
+        run: |
+          set -e
+          mkdir -p yt2clips
+          curl -fsSL -o yt2clips/c1_pmi.mp4       "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/3_qGNAIcqd4/56a4a0ac-6eb6-4b28-8e66-28da65d2c66a/clips/clip_03.mp4"
+          curl -fsSL -o yt2clips/c2_triplex.mp4   "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/3_qGNAIcqd4/56a4a0ac-6eb6-4b28-8e66-28da65d2c66a/clips/clip_01.mp4"
+          curl -fsSL -o yt2clips/c3_heloc.mp4      "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/3_qGNAIcqd4/56a4a0ac-6eb6-4b28-8e66-28da65d2c66a/clips/clip_08.mp4"
+          curl -fsSL -o yt2clips/c4_hardmoney.mp4  "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/3_qGNAIcqd4/56a4a0ac-6eb6-4b28-8e66-28da65d2c66a/clips/clip_07.mp4"
+          curl -fsSL -o yt2clips/c5_dscr.mp4       "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/3_qGNAIcqd4/56a4a0ac-6eb6-4b28-8e66-28da65d2c66a/clips/clip_04.mp4"
+          ls -la yt2clips/
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add yt2clips/
+          git commit -m "Add YT2 source clips [skip ci]" || echo "nothing"
+          git push
