@@ -14,19 +14,23 @@ jobs:
       - name: Download assets
         run: |
           set -e
-          mkdir -p broll
           base="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          mkdir -p v4broll
-          curl -fsSL -o v4broll/b1_family.png  "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260717_002112_aee5c7d3-ca24-47ab-b365-87f81decb9dc.png"
-          curl -fsSL -o v4broll/b2_paycheck.png "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260717_002113_2ae104d2-0da0-4f07-9682-aaa8735cc353.png"
-          curl -fsSL -o v4broll/b3_clock.png   "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260717_002113_1a9ef804-ec0c-4db4-b02e-63de73df6c23.png"
-          curl -fsSL -o v4broll/b4_dial.png    "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260717_002125_fa90d3f4-d267-4909-9981-c24cd6f48cf4.png"
-          curl -fsSL -o v4broll/b5_rentals.png "https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/hf_20260717_002126_a659c1b3-49a3-46f4-a731-8a01114e2e14.png"
-          ls -la v4broll/
+          mkdir -p yt2broll
+          # Clip 1 (PMI removal) — 6 b-roll
+          curl -fsSL -o yt2broll/c1_b1_home.png      "$base/hf_20260720_114457_77bfb23a-dfc8-4f3a-b445-80590bc49010.png"
+          curl -fsSL -o yt2broll/c1_b2_apprec.png    "$base/hf_20260720_114505_45ecedf5-3bb9-4131-9d84-a826209bb06b.png"
+          curl -fsSL -o yt2broll/c1_b3_lender.png    "$base/hf_20260720_114507_6433a2fe-9de6-4a21-9338-708e2b650c36.png"
+          curl -fsSL -o yt2broll/c1_b4_appraiser.png "$base/hf_20260721_000143_d0f16a03-bd65-47c3-8486-c2453da5205c.png"
+          curl -fsSL -o yt2broll/c1_b5_report.png    "$base/hf_20260721_000148_c9b87455-0e1b-4d53-9ee5-ecc95b22b91d.png"
+          curl -fsSL -o yt2broll/c1_b6_pmi.png       "$base/hf_20260721_000150_7f8eb35d-6894-47b2-8acd-473efd8ac325.png"
+          # Clip 2 (HELOC arbitrage) — 2 b-roll so far
+          curl -fsSL -o yt2broll/c2_b1_card.png      "$base/hf_20260721_000311_4f2477f0-4f0d-45bb-a1dd-2705e8fae34f.png"
+          curl -fsSL -o yt2broll/c2_b2_lowint.png    "$base/hf_20260721_000312_f6e1a576-4732-4f91-a58f-d09c298f56a1.png"
+          ls -la yt2broll/
       - name: Commit assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add broll/ clips/ canva/ v1broll/ v2broll/ v3broll/ v4broll/
-          git commit -m "Add generated b-roll assets [skip ci]"
+          git add yt2broll/
+          git commit -m "Add YT2 b-roll assets [skip ci]"
           git push
