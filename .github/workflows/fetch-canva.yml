@@ -1,0 +1,26 @@
+name: Fetch Canva exports
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download Canva exports
+        run: |
+          set -e
+          mkdir -p yt2canva
+          curl -fsSL -o yt2canva/c2_b3_primary.jpg "https://export-download.canva.com/xFP9s/DAHP-HxFP9s/-1/0/0001-1123032348974559153.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T175717Z&X-Amz-Expires=27808&X-Amz-Signature=a725871a02b179b0e0edb4208be6c907489a675068b2e26d90056a3853b49df1&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2001%3A40%3A45%20GMT"
+          curl -fsSL -o yt2canva/c2_b4_lending.jpg "https://export-download.canva.com/l8yyg/DAHP-Fl8yyg/-1/0/0001-7093679552702607320.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T231226Z&X-Amz-Expires=8886&X-Amz-Signature=7ec180c4f5766aeb023942e6ff9bda5ec1a1ee0bd98ba241513a2981af5c77e0&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2001%3A40%3A32%20GMT"
+          curl -fsSL -o yt2canva/c2_b5_flip.jpg "https://export-download.canva.com/dgHk0/DAHP-CdgHk0/-1/0/0001-9194608780092092897.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T161527Z&X-Amz-Expires=33374&X-Amz-Signature=5c3eb5ac596e9af5ec1d679e8b906487d038837211d67c3ee544724080a46098&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2001%3A31%3A41%20GMT"
+          curl -fsSL -o yt2canva/c2_b6_spread.jpg "https://export-download.canva.com/6dWCc/DAHP-G6dWCc/-1/0/0001-7788359795640975072.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T214056Z&X-Amz-Expires=14844&X-Amz-Signature=baadf2a2d1257da8ba326bd56b9ee49a6ce2acefb8c7ee8fd10ffd4fdd3941b7&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2001%3A48%3A20%20GMT"
+          ls -la yt2canva/
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add yt2canva/
+          git commit -m "Add YT2 clip2 Canva b-roll exports [skip ci]"
+          git push
