@@ -14,21 +14,14 @@ jobs:
       - name: Download assets
         run: |
           set -e
-          mkdir -p yt2canva
-          # Clip 3 (hard money) — 4 b-roll
-          curl -fsSL -o yt2canva/c3_b1_hardmoney.jpg "https://export-download.canva.com/ZY4IU/DAHP-IZY4IU/-1/0/0001-3357943661523625441.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T045258Z&X-Amz-Expires=78034&X-Amz-Signature=4e1f92fbccfc0ab423171fb02180d12df7986f21efca793ab0d4ab6f96f3dadf&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2002%3A33%3A32%20GMT"
-          curl -fsSL -o yt2canva/c3_b2_highint.jpg "https://export-download.canva.com/3eudU/DAHP-I3eudU/-1/0/0001-6410258312868827189.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T234510Z&X-Amz-Expires=6843&X-Amz-Signature=24d78b2886eb5668392c8f5a9b864010a38cb3610ee469d61dfb7cb7c42975ca&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2001%3A39%3A13%20GMT"
-          curl -fsSL -o yt2canva/c3_b3_clock.jpg "https://export-download.canva.com/wsMYQ/DAHP-FwsMYQ/-1/0/0001-1692737702468201024.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T114637Z&X-Amz-Expires=50221&X-Amz-Signature=c101f26a232f6b25485f232f4c18d4b41df43de3bbc9a81a02d4540000eb95b0&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2001%3A43%3A38%20GMT"
-          curl -fsSL -o yt2canva/c3_b4_points.jpg "https://export-download.canva.com/QbgZw/DAHP-MQbgZw/-1/0/0001-7997777179141645250.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T100451Z&X-Amz-Expires=59465&X-Amz-Signature=710b95c60287654656b1640ba61fa775d272ae5b826de3d91633edcf8ebb6c5d&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2002%3A35%3A56%20GMT"
-          # Clip 4 (DSCR) — 3 b-roll
-          curl -fsSL -o yt2canva/c4_b1_scale.jpg "https://export-download.canva.com/i9_jM/DAHP-Ki9_jM/-1/0/0001-7547417215541784508.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T034718Z&X-Amz-Expires=81832&X-Amz-Signature=61a902820d8a2c8f10787849bdc0577d2bf39c187bad73c38d480f639c6e1ceb&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2002%3A31%3A10%20GMT"
-          curl -fsSL -o yt2canva/c4_b2_cap10.jpg "https://export-download.canva.com/lSRSg/DAHP-HlSRSg/-1/0/0001-9123677084484032112.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T055134Z&X-Amz-Expires=73736&X-Amz-Signature=b0d8f460727e4a090174473f476b31f33f47aef20189416e62d6227a1719f321&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2002%3A20%3A30%20GMT"
-          curl -fsSL -o yt2canva/c4_b3_dscr.jpg "https://export-download.canva.com/b64jI/DAHP-Cb64jI/-1/0/0001-6410258311714300867.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260720%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260720T064645Z&X-Amz-Expires=70030&X-Amz-Signature=d1150084a86bbeb4f610b6fcbf865671d6c892736b9049d18a05ca6141a2c7c9&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Tue%2C%2021%20Jul%202026%2002%3A13%3A55%20GMT"
-          ls -la yt2canva/
+          mkdir -p ep3
+          # Episode 3 (CPv_mmUbVTc) — top viral clip (score 9.2)
+          curl -fsSL -o ep3/top_clip.mp4 "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/CPv_mmUbVTc/f407374d-7e1c-4685-82a8-881c6fad2500/clips/clip_01.mp4"
+          ls -la ep3/
       - name: Commit assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add yt2canva/
-          git commit -m "Add YT2 clip2 Canva b-roll [skip ci]"
+          git add ep3/
+          git commit -m "Add episode 3 top clip [skip ci]"
           git push
