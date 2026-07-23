@@ -26,7 +26,7 @@ const columns = [
     items: [
       { label: "Ways to Give", to: "/get-involved" },
       { label: "Volunteer", to: "/get-involved#volunteer" },
-      { label: "What's On", to: "/events" },
+      { label: "Events", to: "/events" },
       { label: "Contact Us", to: "/contact" },
     ],
   },

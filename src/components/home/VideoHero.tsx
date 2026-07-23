@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, ArrowRight, Pause, Play } from "lucide-react";
+import { ArrowRight, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Illustration } from "@/components/art/Illustration";
 import { heroFilm } from "@/data/photos";
@@ -85,12 +85,6 @@ export function VideoHero() {
             educational programs and service providers.
           </p>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
-            <Button asChild size="lg">
-              <Link to="/get-involved">
-                <Heart className="mr-1 h-5 w-5" />
-                Donate
-              </Link>
-            </Button>
             <Button
               asChild
               size="lg"

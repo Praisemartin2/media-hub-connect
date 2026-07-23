@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
-import { Video, PenLine, Newspaper, Radio } from "lucide-react";
+import { Video, PenLine, Newspaper, Radio, ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/shared/Reveal";
 import { MediaCard } from "@/components/cards/MediaCard";
+import { IgPostCard } from "@/components/cards/IgPostCard";
 import { SEO } from "@/components/shared/SEO";
 import { cn } from "@/lib/utils";
 import { mediaItems, mediaFilters, type MediaType } from "@/data/media";
+import { igPosts } from "@/data/ig";
 
 const typeMeta: Record<MediaType, { icon: typeof Video; label: string; blurb: string }> = {
   vlog: { icon: Video, label: "Daily Vlogs", blurb: "Behind-the-scenes moments" },
@@ -55,6 +57,43 @@ const Media = () => {
           })}
         </div>
       </PageHero>
+
+      {/* Opportunity Watch — auto-updating daily feed */}
+      {igPosts.length > 0 && (
+        <section className="border-b border-border bg-brand-cream py-16 lg:py-20">
+          <div className="container-cofy">
+            <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="eyebrow font-display">Opportunity Watch</p>
+                <h2 className="mt-2 font-display text-3xl font-bold sm:text-4xl">
+                  Daily youth-opportunity news
+                </h2>
+                <p className="mt-3 max-w-2xl text-muted-foreground">
+                  Every day we spotlight one real story about creating
+                  opportunities for young people around the world — posted to
+                  our Instagram.
+                </p>
+              </div>
+              <a
+                href="https://www.instagram.com/cofyinc"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 font-semibold text-primary hover:underline focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                Follow @cofyinc
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {igPosts.slice(0, 6).map((p, i) => (
+                <Reveal key={p.date} delay={(i % 3) * 80}>
+                  <IgPostCard post={p} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Featured */}
       {featured && (
