@@ -7,6 +7,7 @@ import {
   MapPin,
   Clock,
   ArrowRight,
+  ArrowUpRight,
 } from "lucide-react";
 import { Reveal } from "@/components/shared/Reveal";
 import { Sunburst } from "@/components/shared/Sunburst";
@@ -63,6 +64,7 @@ function DateSquare({ event, past = false }: { event: COFYEvent; past?: boolean 
 
 /** One row in the sequential square list. */
 function EventRow({ event, past = false }: { event: COFYEvent; past?: boolean }) {
+  const canRegister = !past && event.registerUrl?.startsWith("http");
   return (
     <div className="card-lift flex items-stretch gap-0 border border-border bg-card">
       <DateSquare event={event} past={past} />
@@ -78,6 +80,18 @@ function EventRow({ event, past = false }: { event: COFYEvent; past?: boolean })
           {event.location}
         </p>
       </div>
+      {canRegister && (
+        <a
+          href={event.registerUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Register for ${event.title}`}
+          className="flex shrink-0 items-center gap-1.5 self-center border border-primary px-4 py-2.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-white focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring mr-4"
+        >
+          Register
+          <ArrowUpRight className="h-4 w-4" />
+        </a>
+      )}
     </div>
   );
 }
@@ -150,6 +164,17 @@ const Events = () => {
                         {featured.time}
                       </p>
                     </div>
+                    {featured.registerUrl?.startsWith("http") && (
+                      <a
+                        href={featured.registerUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex shrink-0 items-center gap-1.5 bg-secondary px-5 py-3 font-display text-base font-bold text-secondary-foreground transition-colors hover:bg-brand-yellow-light"
+                      >
+                        Register
+                        <ArrowUpRight className="h-4 w-4" />
+                      </a>
+                    )}
                   </div>
                 </div>
                 <p className="mt-4 font-serif text-base leading-relaxed text-muted-foreground">

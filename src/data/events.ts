@@ -41,7 +41,7 @@ export const events: COFYEvent[] = [
       "A three-day Professional Development Workshop for Educators. Theme: Teaching How They Learn — Special Education Conversations. Reaching schools with transformational education.",
     category: "Workshop",
     gradient: "from-brand-blue to-brand-blue-dark",
-    registerUrl: "#register",
+    registerUrl: "https://forms.gle/hZ5bnRLH7MXq4bwr8",
   },
   {
     id: "educational-summit-2026-imo",
@@ -55,7 +55,7 @@ export const events: COFYEvent[] = [
       "A two-day Professional Development Workshop for Educators — featuring the T.O.T.A.L.-36+ Project launch, mentorship sessions and project-based learning.",
     category: "Workshop",
     gradient: "from-brand-yellow to-brand-yellow-light",
-    registerUrl: "#register",
+    registerUrl: "https://forms.gle/S6pt4Td67dYkXgfeA",
   },
   {
     id: "educational-summit-2026-abia",
@@ -69,7 +69,7 @@ export const events: COFYEvent[] = [
       "A two-day Professional Development Workshop for Educators — understanding neurodiversity, differentiated instruction in inclusive classrooms, multiple intelligences, a book fair and a PBL showcase.",
     category: "Workshop",
     gradient: "from-brand-blue-dark to-brand-blue-deep",
-    registerUrl: "#register",
+    registerUrl: "https://forms.gle/AxmGE3NgYK7QeCtJ6",
   },
   {
     id: "quarterly-webinar-q3",
