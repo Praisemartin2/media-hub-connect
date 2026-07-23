@@ -55,6 +55,65 @@ const Media = () => {
         </div>
       </PageHero>
 
+      {/* Filter tabs — the headline of the Stories page */}
+      <section className="pt-10 lg:pt-14">
+        <div className="container-cofy">
+          <div className="flex flex-wrap items-center gap-2.5">
+            {mediaFilters.map((f) => (
+              <button
+                key={f.value}
+                onClick={() => setFilter(f.value)}
+                aria-pressed={filter === f.value}
+                className={cn(
+                  "rounded-none px-5 py-2.5 text-sm font-semibold transition-all",
+                  filter === f.value
+                    ? "bg-primary text-white shadow-md shadow-primary/25"
+                    : "border border-border bg-card text-foreground/70 hover:border-primary/40 hover:text-primary",
+                )}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured */}
+      {featured && (
+        <section className="pt-10 lg:pt-14">
+          <div className="container-cofy">
+            <div className="mb-6 flex items-center gap-2">
+              <Radio className="h-5 w-5 text-primary" />
+              <h2 className="font-display text-sm font-bold uppercase tracking-wider text-primary">
+                Featured Story
+              </h2>
+            </div>
+            <Reveal>
+              <MediaCard item={featured} featured />
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* Grid */}
+      <section className="py-16 lg:py-20">
+        <div className="container-cofy">
+          {filtered.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {filtered.map((item, i) => (
+                <Reveal key={item.id} delay={(i % 3) * 80}>
+                  <MediaCard item={item} />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <p className="py-16 text-center text-muted-foreground">
+              No stories here yet — check back soon!
+            </p>
+          )}
+        </div>
+      </section>
+
       {/* Opportunity Watch — auto-updating daily feed */}
       {igPosts.length > 0 && (
         <section className="border-b border-border bg-brand-cream py-16 lg:py-20">
@@ -92,60 +151,6 @@ const Media = () => {
         </section>
       )}
 
-      {/* Featured */}
-      {featured && (
-        <section className="pt-16 lg:pt-20">
-          <div className="container-cofy">
-            <div className="mb-6 flex items-center gap-2">
-              <Radio className="h-5 w-5 text-primary" />
-              <h2 className="font-display text-sm font-bold uppercase tracking-wider text-primary">
-                Featured Story
-              </h2>
-            </div>
-            <Reveal>
-              <MediaCard item={featured} featured />
-            </Reveal>
-          </div>
-        </section>
-      )}
-
-      {/* Filter + grid */}
-      <section className="py-16 lg:py-20">
-        <div className="container-cofy">
-          {/* Filter tabs */}
-          <div className="mb-10 flex flex-wrap items-center gap-2.5">
-            {mediaFilters.map((f) => (
-              <button
-                key={f.value}
-                onClick={() => setFilter(f.value)}
-                aria-pressed={filter === f.value}
-                className={cn(
-                  "rounded-none px-5 py-2.5 text-sm font-semibold transition-all",
-                  filter === f.value
-                    ? "bg-primary text-white shadow-md shadow-primary/25"
-                    : "border border-border bg-card text-foreground/70 hover:border-primary/40 hover:text-primary",
-                )}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
-
-          {filtered.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {filtered.map((item, i) => (
-                <Reveal key={item.id} delay={(i % 3) * 80}>
-                  <MediaCard item={item} />
-                </Reveal>
-              ))}
-            </div>
-          ) : (
-            <p className="py-16 text-center text-muted-foreground">
-              No stories here yet — check back soon!
-            </p>
-          )}
-        </div>
-      </section>
     </>
   );
 };
