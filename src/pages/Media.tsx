@@ -9,11 +9,11 @@ import { cn } from "@/lib/utils";
 import { mediaItems, mediaFilters, type MediaType } from "@/data/media";
 import { igPosts } from "@/data/ig";
 
-const typeMeta: Record<MediaType, { icon: typeof Video; label: string; blurb: string }> = {
-  vlog: { icon: Video, label: "Daily Vlogs", blurb: "Behind-the-scenes moments" },
-  blog: { icon: PenLine, label: "Blog", blurb: "Tips, guides & insights" },
-  news: { icon: Newspaper, label: "News", blurb: "Announcements & updates" },
-};
+const highlights: { icon: typeof Video; label: string; blurb: string }[] = [
+  { icon: Radio, label: "Opportunity Watch", blurb: "One real story every day" },
+  { icon: PenLine, label: "Blog", blurb: "Tips, guides & insights" },
+  { icon: Newspaper, label: "News", blurb: "Announcements & updates" },
+];
 
 const Media = () => {
   const [filter, setFilter] = useState<MediaType | "all">("all");
@@ -32,29 +32,26 @@ const Media = () => {
       />
       <PageHero
         eyebrow="Stories"
-        title="Daily vlogs, stories & the latest news"
-        description="One home for everything happening at COFY — fresh vlogs, helpful blogs and community news, updated all the time."
+        title="Stories, news & daily opportunities"
+        description="One home for everything happening at COFY — daily opportunity news, helpful blogs and community updates."
       >
         <div className="flex flex-wrap gap-4">
-          {(Object.keys(typeMeta) as MediaType[]).map((t) => {
-            const meta = typeMeta[t];
-            return (
-              <div
-                key={t}
-                className="flex items-center gap-3 border border-border bg-card px-4 py-3"
-              >
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
-                  <meta.icon className="h-5 w-5" />
+          {highlights.map((meta) => (
+            <div
+              key={meta.label}
+              className="flex items-center gap-3 border border-border bg-card px-4 py-3"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
+                <meta.icon className="h-5 w-5" />
+              </span>
+              <span className="text-left">
+                <span className="block font-display text-lg font-medium text-foreground">
+                  {meta.label}
                 </span>
-                <span className="text-left">
-                  <span className="block font-display text-lg font-medium text-foreground">
-                    {meta.label}
-                  </span>
-                  <span className="block font-serif text-sm text-muted-foreground">{meta.blurb}</span>
-                </span>
-              </div>
-            );
-          })}
+                <span className="block font-serif text-sm text-muted-foreground">{meta.blurb}</span>
+              </span>
+            </div>
+          ))}
         </div>
       </PageHero>
 
@@ -102,7 +99,7 @@ const Media = () => {
             <div className="mb-6 flex items-center gap-2">
               <Radio className="h-5 w-5 text-primary" />
               <h2 className="font-display text-sm font-bold uppercase tracking-wider text-primary">
-                Featured · Latest Vlog
+                Featured Story
               </h2>
             </div>
             <Reveal>

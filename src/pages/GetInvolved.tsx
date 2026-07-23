@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Heart,
   HandHeart,
@@ -8,6 +9,8 @@ import {
   Megaphone,
   Check,
   Sparkles,
+  ArrowRight,
+  ArrowUpRight,
 } from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeading } from "@/components/shared/SectionHeading";
@@ -17,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { SEO } from "@/components/shared/SEO";
 import { PhotoImg } from "@/components/shared/PhotoImg";
 import { cn } from "@/lib/utils";
+import { site } from "@/data/site";
 import { toast } from "sonner";
 
 const amounts = [25, 50, 100, 250];
@@ -179,7 +183,8 @@ const GetInvolved = () => {
                 {monthly ? "/mo" : ""}
               </Button>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                Secure giving • 100% goes to youth programs
+                Demo preview — online payments aren't live yet. To give today,
+                email {site.email}.
               </p>
             </div>
           </Reveal>
@@ -195,12 +200,43 @@ const GetInvolved = () => {
               5,000 Books for Life
             </h2>
             <p className="mt-5 max-w-2xl font-serif text-lg leading-relaxed text-white/90">
-              In partnership with BookSmiles.org, we're bringing 5,000 books to
-              rural communities in Africa. Your contribution goes toward
-              purchasing and distributing books to schools and libraries that
-              need them most. Every donation, no matter the size, makes a
-              difference. Send a Smile today!
+              In partnership with{" "}
+              <a
+                href="https://booksmiles.org"
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold underline underline-offset-4 hover:text-secondary"
+              >
+                BookSmiles.org
+              </a>
+              , we're bringing 5,000 books to rural communities in Africa. Your
+              contribution goes toward purchasing and distributing books to
+              schools and libraries that need them most. Every donation, no
+              matter the size, makes a difference. Send a Smile today!
             </p>
+            <div className="mt-7 flex flex-wrap gap-4">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-none bg-secondary font-bold text-secondary-foreground hover:bg-brand-yellow-light"
+              >
+                <Link to="/books">
+                  Explore the campaign
+                  <ArrowRight className="ml-1 h-5 w-5" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-white hover:text-primary"
+              >
+                <a href="https://booksmiles.org" target="_blank" rel="noreferrer">
+                  Donate books via BookSmiles
+                  <ArrowUpRight className="ml-1 h-5 w-5" />
+                </a>
+              </Button>
+            </div>
           </div>
           <div className="bg-white p-5 sm:p-8">
             <PhotoImg id="books" className="w-full object-cover" />

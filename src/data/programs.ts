@@ -25,6 +25,8 @@ export type Program = {
   quote: { text: string; name: string; role: string };
   /** Plain-language "how you can help" line */
   engage: string;
+  /** Optional dedicated campaign page for this program */
+  campaign?: { label: string; to: string };
 };
 
 export const programs: Program[] = [
@@ -93,6 +95,7 @@ export const programs: Program[] = [
       role: "Scholarship Recipient",
     },
     engage: "Fund a scholarship or connect us with a partner school abroad.",
+    campaign: { label: "Explore 5,000 Books for Life", to: "/books" },
   },
   {
     slug: "mentorship",

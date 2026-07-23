@@ -285,7 +285,7 @@ const Index = () => {
             </Button>
             <Button asChild variant="outline" className="border-black text-black hover:bg-black hover:text-white">
               <Link to="/events">
-                What's on{nextEvents[0] ? ` — next: ${formatDate(nextEvents[0].date, { month: "short", day: "numeric", year: undefined })}` : ""}
+                Events{nextEvents[0] ? ` — next: ${formatDate(nextEvents[0].date, { month: "short", day: "numeric", year: undefined })}` : ""}
                 <ArrowRight className="ml-1 h-5 w-5" />
               </Link>
             </Button>

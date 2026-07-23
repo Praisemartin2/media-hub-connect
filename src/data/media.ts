@@ -15,22 +15,33 @@ export type MediaItem = {
   /** Brand illustration variant for the thumbnail */
   art: import("@/components/art/Illustration").ArtVariant;
   featured?: boolean;
+  /** Article paragraphs. Assembled only from copy that already exists in the site data. */
+  body?: string[];
+  /** Original post on cofyouth.org, when this item summarizes a real founder blog. */
+  sourceUrl?: string;
 };
+
+const COFY_BLOG = "https://www.cofyouth.org/blog";
 
 export const mediaItems: MediaItem[] = [
   {
     id: "vlog-outreach-week",
-    type: "vlog",
+    type: "blog",
     title: "Inside Our Educational Outreach Week",
     excerpt:
       "Every summer we hold an Educational Outreach week of hands-on learning for our members. Come behind the scenes with us.",
     author: "COFY Media Team",
     date: "2026-06-20",
-    duration: "8:42",
-    category: "Daily Vlog",
+    readTime: "3 min read",
+    category: "Behind the Scenes",
     gradient: "from-brand-blue to-brand-blue-dark",
     art: "library",
     featured: true,
+    body: [
+      "Every summer we hold an Educational Outreach Week — a week of hands-on learning opportunities for our members, free of charge, as are all COFY events and services.",
+      "Education is the key to unlocking future opportunities. Through research-based identification and intervention methods, we provide high-quality, transformational education to youth aged 5–21 — plus webinars, panel discussions, courses and resources for educators, youth with disabilities, and their caretakers.",
+      "Want to join us for the next one? Educational Outreach Week runs July 13–17, 2026 at community venues and online. Head to the Events page to learn more — everyone is welcome.",
+    ],
   },
   {
     id: "news-read-for-reach",
@@ -44,6 +55,11 @@ export const mediaItems: MediaItem[] = [
     category: "Announcement",
     gradient: "from-brand-blue-dark to-brand-blue-deep",
     art: "books",
+    body: [
+      "Through our Read for Reach drive, 5,000 donated books were delivered to communities in Nigeria — part of our mission to bridge the gap between urban and rural areas in Africa.",
+      "Access to books and learning resources is essential for children to reach their full potential. That's why book drives like this one sit at the heart of our Funding Learning Opportunities program.",
+      "The next Read for Reach book drive runs August through October 2026, with collection points and online giving. Every donation, no matter the size, makes a difference.",
+    ],
   },
   {
     id: "news-booksmiles",
@@ -57,6 +73,11 @@ export const mediaItems: MediaItem[] = [
     category: "Partnership",
     gradient: "from-brand-yellow-light to-brand-yellow",
     art: "outreach",
+    body: [
+      "5,000 Books for Life: in partnership with BookSmiles.org, we are working to bring 5,000 books to rural communities in Africa.",
+      "Access to books and learning resources is essential for children to reach their full potential — your donation purchases and distributes books to schools and libraries that need them most.",
+      "Every donation, no matter the size, makes a difference. Send a Smile today!",
+    ],
   },
   {
     id: "news-autism-panel",
@@ -70,6 +91,10 @@ export const mediaItems: MediaItem[] = [
     category: "Community",
     gradient: "from-brand-blue to-brand-blue-light",
     art: "volunteers",
+    body: [
+      "Every April we celebrate Autism Awareness Month. Our discussion panel brought educators, parents and caregivers together for an honest conversation.",
+      "Supporting the people who support our youth is central to what we do — from quarterly educational webinars for teachers, parents and caregivers to panel discussions like this one. All events and services are offered free of charge to recipients.",
+    ],
   },
   {
     id: "blog-new-nigeria",
@@ -83,6 +108,11 @@ export const mediaItems: MediaItem[] = [
     category: "From the Founder",
     gradient: "from-brand-blue to-brand-yellow",
     art: "community",
+    body: [
+      "In this reflection, COFY founder Dr. Ngozi Martin-Oguike writes about hope and change in Nigeria:",
+      "“When one man cooks for the people, they finish the food. But let the people cook for one man and he is consumed by the food...”",
+    ],
+    sourceUrl: COFY_BLOG,
   },
   {
     id: "blog-womens-togetherness",
@@ -96,6 +126,11 @@ export const mediaItems: MediaItem[] = [
     category: "From the Founder",
     gradient: "from-brand-blue-light to-brand-blue",
     art: "family",
+    body: [
+      "In this piece, Dr. Ngozi Martin-Oguike writes about meeting Hanatu at the Internally Displaced People's (IDP) Camp in Abuja:",
+      "“That's why she is called Woman! Mother!”",
+    ],
+    sourceUrl: COFY_BLOG,
   },
   {
     id: "blog-our-people-are-hungry",
@@ -109,6 +144,10 @@ export const mediaItems: MediaItem[] = [
     category: "From the Founder",
     gradient: "from-brand-blue-deep to-brand-blue",
     art: "park",
+    body: [
+      "A reflection from Dr. Ngozi Martin-Oguike on need, compassion and the call to serve our communities.",
+    ],
+    sourceUrl: COFY_BLOG,
   },
   {
     id: "blog-i-was-hungry",
@@ -122,6 +161,11 @@ export const mediaItems: MediaItem[] = [
     category: "Mission Projects",
     gradient: "from-brand-yellow to-brand-yellow-light",
     art: "scholarship",
+    body: [
+      "From Dr. Ngozi Martin-Oguike's account of a mission journey:",
+      "“On an adventure that was not recommended by man. It was a clear experience of God working out his purpose one day at a time...”",
+    ],
+    sourceUrl: COFY_BLOG,
   },
   {
     id: "blog-in-my-mind",
@@ -135,12 +179,15 @@ export const mediaItems: MediaItem[] = [
     category: "From the Founder",
     gradient: "from-brand-blue to-brand-blue-light",
     art: "mentorship",
+    body: [
+      "Thoughts from Dr. Ngozi Martin-Oguike on purpose, calling and creating opportunities for the next generation.",
+    ],
+    sourceUrl: COFY_BLOG,
   },
 ];
 
 export const mediaFilters: { label: string; value: MediaType | "all" }[] = [
   { label: "All Stories", value: "all" },
-  { label: "Daily Vlogs", value: "vlog" },
   { label: "Blog", value: "blog" },
   { label: "News", value: "news" },
 ];

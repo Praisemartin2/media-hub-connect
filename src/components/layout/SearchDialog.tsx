@@ -90,7 +90,7 @@ export function SearchDialog() {
                 <CommandItem
                   key={m.id}
                   value={`${m.type} ${m.title} ${m.category} ${m.excerpt}`}
-                  onSelect={() => go("/media")}
+                  onSelect={() => go(`/media/${m.id}`)}
                 >
                   <Icon className="mr-2 h-4 w-4 text-primary" />
                   <span className="truncate">{m.title}</span>
