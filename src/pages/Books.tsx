@@ -12,10 +12,8 @@ import { Reveal } from "@/components/shared/Reveal";
 import { StatCounter } from "@/components/shared/StatCounter";
 import { Sunburst } from "@/components/shared/Sunburst";
 import { PhotoImg } from "@/components/shared/PhotoImg";
-import { MediaCard } from "@/components/cards/MediaCard";
 import { SEO } from "@/components/shared/SEO";
 import { programs } from "@/data/programs";
-import { mediaItems } from "@/data/media";
 
 const steps = [
   {
@@ -50,9 +48,6 @@ const steps = [
  */
 const Books = () => {
   const program = programs.find((p) => p.slug === "international-outreach")!;
-  const stories = mediaItems.filter((m) =>
-    ["news-read-for-reach", "news-booksmiles"].includes(m.id),
-  );
 
   return (
     <>
@@ -196,29 +191,6 @@ const Books = () => {
         </div>
       </section>
 
-      {/* Stories */}
-      <section className="border-t border-border py-16 lg:py-24">
-        <div className="container-cofy">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-            <h2 className="font-display text-2xl font-bold sm:text-3xl">
-              Stories from the campaign
-            </h2>
-            <Button asChild variant="outline" className="rounded-none font-semibold">
-              <Link to="/events">
-                Read for Reach — Events
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            {stories.map((item, i) => (
-              <Reveal key={item.id} delay={i * 80}>
-                <MediaCard item={item} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 };
