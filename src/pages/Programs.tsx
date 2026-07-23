@@ -5,7 +5,7 @@ import { Reveal } from "@/components/shared/Reveal";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/shared/SEO";
 import { programs } from "@/data/programs";
-import { Illustration } from "@/components/art/Illustration";
+import { photos, plateFallback, type PhotoKey } from "@/data/photos";
 
 const Programs = () => {
   return (
@@ -28,9 +28,16 @@ const Programs = () => {
                 id={program.slug}
                 className="card-lift grid gap-8 overflow-hidden rounded-lg border border-border bg-card p-7 lg:grid-cols-[1fr_1.4fr] lg:p-10"
               >
-                <div className="relative flex flex-col justify-center overflow-hidden rounded-lg bg-brand-blue-deep p-8 text-white">
-                  <div className="absolute inset-0 opacity-90"><Illustration variant={program.art} label="" /></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-deep/90 via-brand-blue-deep/40 to-transparent" aria-hidden />
+                <div className="relative flex min-h-[320px] flex-col justify-end overflow-hidden rounded-lg bg-brand-blue-deep p-8 text-white">
+                  <img
+                    src={photos[program.art as PhotoKey]?.min}
+                    alt={photos[program.art as PhotoKey]?.alt ?? ""}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = plateFallback(program.art as PhotoKey);
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-deep/95 via-brand-blue-deep/35 to-transparent" aria-hidden />
                   <span className="relative flex h-16 w-16 items-center justify-center rounded-lg bg-white/15 backdrop-blur">
                     <program.icon className="h-8 w-8" />
                   </span>

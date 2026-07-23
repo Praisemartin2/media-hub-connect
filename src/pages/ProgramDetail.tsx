@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { ArrowRight, ArrowLeft, CheckCircle2, Heart, Quote } from "lucide-react";
+import { ArrowRight, ArrowLeft, ArrowUpRight, CheckCircle2, Heart, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/shared/Reveal";
 import { StatCounter } from "@/components/shared/StatCounter";
@@ -158,8 +158,53 @@ const ProgramDetail = () => {
         </div>
       </section>
 
+      {/* Find help in New Jersey */}
+      {program.resources && program.resources.length > 0 && (
+        <section className="py-16 lg:py-24">
+          <div className="container-cofy">
+            <Reveal>
+              <div className="max-w-3xl">
+                <p className="eyebrow font-display">Find Help in New Jersey</p>
+                <h2 className="mt-2 font-display text-3xl font-medium sm:text-4xl">
+                  Resources you can reach today
+                </h2>
+                <p className="mt-4 font-serif text-lg text-muted-foreground">
+                  Trusted New Jersey organizations and state services related to
+                  this program. Every link opens the organization's own site.
+                </p>
+              </div>
+            </Reveal>
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {program.resources.map((r, i) => (
+                <Reveal key={r.url} delay={(i % 2) * 80}>
+                  <a
+                    href={r.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="card-lift group flex h-full flex-col rounded-lg border border-border bg-card p-7 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="font-display text-xl font-bold leading-snug transition-colors group-hover:text-primary">
+                        {r.name}
+                      </h3>
+                      <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </div>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      {r.blurb}
+                    </p>
+                    <span className="mt-4 text-xs font-semibold text-primary">
+                      {new URL(r.url).hostname.replace("www.", "")}
+                    </span>
+                  </a>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Stories */}
-      <section className="py-16 lg:py-24">
+      <section className="border-t border-border py-16 lg:py-24">
         <div className="container-cofy">
           <div className="mb-10 flex items-end justify-between gap-6">
             <h2 className="font-display text-2xl font-bold sm:text-3xl">
