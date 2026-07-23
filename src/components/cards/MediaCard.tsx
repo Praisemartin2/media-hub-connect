@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Play, Clock, ArrowUpRight, Newspaper, PenLine, Video } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -5,13 +6,13 @@ import { formatDateShort } from "@/lib/format";
 import { Illustration } from "@/components/art/Illustration";
 import type { MediaItem, MediaType } from "@/data/media";
 
-const typeIcon: Record<MediaType, typeof Video> = {
+export const typeIcon: Record<MediaType, typeof Video> = {
   vlog: Video,
   blog: PenLine,
   news: Newspaper,
 };
 
-const typeLabel: Record<MediaType, string> = {
+export const typeLabel: Record<MediaType, string> = {
   vlog: "Vlog",
   blog: "Blog",
   news: "News",
@@ -20,9 +21,11 @@ const typeLabel: Record<MediaType, string> = {
 export function MediaCard({ item, featured = false }: { item: MediaItem; featured?: boolean }) {
   const Icon = typeIcon[item.type];
   return (
-    <article
+    <Link
+      to={`/media/${item.id}`}
       className={cn(
         "card-lift group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card",
+        "focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
         featured && "lg:flex-row",
       )}
     >
@@ -90,6 +93,6 @@ export function MediaCard({ item, featured = false }: { item: MediaItem; feature
           </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }

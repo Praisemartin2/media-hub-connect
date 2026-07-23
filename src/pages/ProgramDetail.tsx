@@ -134,6 +134,14 @@ const ProgramDetail = () => {
                     Support this program
                   </Link>
                 </Button>
+                {program.campaign && (
+                  <Button asChild size="lg" variant="outline">
+                    <Link to={program.campaign.to}>
+                      {program.campaign.label}
+                      <ArrowRight className="ml-1 h-5 w-5" />
+                    </Link>
+                  </Button>
+                )}
                 <Button
                   asChild
                   size="lg"

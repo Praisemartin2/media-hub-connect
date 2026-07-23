@@ -9,6 +9,8 @@ import About from "./pages/About.tsx";
 import Programs from "./pages/Programs.tsx";
 import ProgramDetail from "./pages/ProgramDetail.tsx";
 import Media from "./pages/Media.tsx";
+import MediaDetail from "./pages/MediaDetail.tsx";
+import Books from "./pages/Books.tsx";
 import Events from "./pages/Events.tsx";
 import GetInvolved from "./pages/GetInvolved.tsx";
 import Contact from "./pages/Contact.tsx";
@@ -30,6 +32,8 @@ const App = () => (
             <Route path="/programs" element={<Programs />} />
             <Route path="/programs/:slug" element={<ProgramDetail />} />
             <Route path="/media" element={<Media />} />
+            <Route path="/media/:id" element={<MediaDetail />} />
+            <Route path="/books" element={<Books />} />
             <Route path="/events" element={<Events />} />
             <Route path="/get-involved" element={<GetInvolved />} />
             <Route path="/contact" element={<Contact />} />

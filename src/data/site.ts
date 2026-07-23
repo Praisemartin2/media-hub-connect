@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Youtube, Linkedin, type LucideIcon } from "lucide-react";
+import { Instagram, Globe, type LucideIcon } from "lucide-react";
 
 export const site = {
   name: "Creating Opportunities for Youth Inc.",
@@ -21,17 +21,15 @@ export const site = {
 
 export const navLinks = [
   { label: "Mission", to: "/about" },
-  { label: "What's On", to: "/events" },
+  { label: "Events", to: "/events" },
   { label: "Projects", to: "/programs" },
   { label: "Stories", to: "/media" },
   { label: "Support Us", to: "/get-involved" },
 ];
 
 export const socials: { label: string; href: string; icon: LucideIcon }[] = [
-  { label: "Facebook", href: "https://facebook.com", icon: Facebook },
-  { label: "Instagram", href: "https://instagram.com", icon: Instagram },
-  { label: "YouTube", href: "https://youtube.com", icon: Youtube },
-  { label: "LinkedIn", href: "https://linkedin.com", icon: Linkedin },
+  { label: "Instagram", href: "https://www.instagram.com/cofyinc", icon: Instagram },
+  { label: "cofyouth.org", href: "https://www.cofyouth.org", icon: Globe },
 ];
 
 export const impactStats = [
