@@ -8,7 +8,6 @@ import {
   Clock,
   ArrowRight,
 } from "lucide-react";
-import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/shared/Reveal";
 import { Sunburst } from "@/components/shared/Sunburst";
 import { Button } from "@/components/ui/button";
@@ -104,24 +103,7 @@ const Events = () => {
         title="Events — Upcoming & Past | COFY"
         description="Find upcoming COFY events — workshops, summits, community days and outreach — plus highlights from past gatherings."
       />
-      <PageHero
-        eyebrow="Events"
-        title="Gather, learn & celebrate with us"
-        description="From learning camps to our Educational Summits, there's always a way to connect with the COFY community — in person and online."
-      >
-        <div className="flex flex-wrap gap-3">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
-            <CalendarClock className="h-4 w-4 text-secondary" />
-            {upcoming.length} upcoming
-          </span>
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
-            <History className="h-4 w-4 text-secondary" />
-            {past.length} past events
-          </span>
-        </div>
-      </PageHero>
-
-      <section className="py-16 lg:py-24">
+      <section className="py-10 lg:py-16">
         <div className="container-cofy grid gap-14 lg:grid-cols-2 lg:gap-10">
           {/* Upcoming — left */}
           <div>
