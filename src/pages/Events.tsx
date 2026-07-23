@@ -1,16 +1,89 @@
-import { useMemo, useState } from "react";
-import { CalendarDays, History, CalendarClock } from "lucide-react";
+import { useMemo } from "react";
+import { Link } from "react-router-dom";
+import {
+  CalendarClock,
+  History,
+  Heart,
+  MapPin,
+  Clock,
+  ArrowRight,
+} from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/shared/Reveal";
-import { EventCard } from "@/components/cards/EventCard";
+import { Sunburst } from "@/components/shared/Sunburst";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { SEO } from "@/components/shared/SEO";
-import { cn } from "@/lib/utils";
-import { events } from "@/data/events";
-import { isUpcoming } from "@/lib/format";
+import { events, type COFYEvent } from "@/data/events";
+import { isUpcoming, dateParts, formatDate } from "@/lib/format";
+import { photos, plateFallback, type PhotoKey } from "@/data/photos";
+
+/** Photo representing each type of event (main square imagery). */
+const categoryPhoto: Record<COFYEvent["category"], PhotoKey> = {
+  Workshop: "workshop",
+  Outreach: "outreach",
+  Community: "community",
+  Fundraiser: "books",
+  Celebration: "volunteers",
+};
+
+/** "Aug 5 – 7, 2026" style label for single or multi-day events. */
+function rangeLabel(e: COFYEvent): string {
+  const start = formatDate(e.date);
+  if (!e.endDate) return start;
+  const s = new Date(e.date + "T00:00:00");
+  const en = new Date(e.endDate + "T00:00:00");
+  const sameMonth =
+    s.getMonth() === en.getMonth() && s.getFullYear() === en.getFullYear();
+  if (sameMonth) {
+    return `${s.toLocaleDateString("en-US", { month: "long" })} ${s.getDate()} – ${en.getDate()}, ${en.getFullYear()}`;
+  }
+  return `${formatDate(e.date, { year: undefined })} – ${formatDate(e.endDate)}`;
+}
+
+/** Square date block: month + day (and end day for ranges). */
+function DateSquare({ event, past = false }: { event: COFYEvent; past?: boolean }) {
+  const { month, day } = dateParts(event.date);
+  const end = event.endDate ? dateParts(event.endDate) : undefined;
+  return (
+    <div
+      className={
+        past
+          ? "flex h-20 w-20 shrink-0 flex-col items-center justify-center border border-border bg-card text-foreground"
+          : "flex h-20 w-20 shrink-0 flex-col items-center justify-center bg-secondary text-secondary-foreground"
+      }
+    >
+      <span className="text-[11px] font-bold uppercase tracking-widest">{month}</span>
+      <span className="font-display text-2xl font-bold leading-none">
+        {day}
+        {end && <span className="text-base font-semibold">–{end.day}</span>}
+      </span>
+    </div>
+  );
+}
+
+/** One row in the sequential square list. */
+function EventRow({ event, past = false }: { event: COFYEvent; past?: boolean }) {
+  return (
+    <div className="card-lift flex items-stretch gap-0 border border-border bg-card">
+      <DateSquare event={event} past={past} />
+      <div className="flex min-w-0 flex-1 flex-col justify-center px-5 py-3">
+        <p className="text-xs font-bold uppercase tracking-wider text-primary">
+          {event.category}
+        </p>
+        <h3 className="mt-0.5 truncate font-display text-lg font-bold leading-snug">
+          {event.title}
+        </h3>
+        <p className="mt-0.5 flex items-center gap-1.5 truncate text-sm text-muted-foreground">
+          <MapPin className="h-3.5 w-3.5 shrink-0 text-primary" />
+          {event.location}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 const Events = () => {
-  const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
-
   const { upcoming, past } = useMemo(() => {
     const up = events
       .filter((e) => isUpcoming(e.date))
@@ -21,18 +94,20 @@ const Events = () => {
     return { upcoming: up, past: pa };
   }, []);
 
-  const list = tab === "upcoming" ? upcoming : past;
+  const featured = upcoming[0];
+  const featuredPhoto = featured ? photos[categoryPhoto[featured.category]] : undefined;
+  const [pastHighlight, ...pastRest] = past;
 
   return (
     <>
       <SEO
         title="Events — Upcoming & Past | COFY"
-        description="Find upcoming COFY events — workshops, fundraisers, community days and outreach — plus highlights from past gatherings."
+        description="Find upcoming COFY events — workshops, summits, community days and outreach — plus highlights from past gatherings."
       />
       <PageHero
         eyebrow="Events"
         title="Gather, learn & celebrate with us"
-        description="From learning camps to our annual gala, there's always a way to connect with the COFY community — in person and online."
+        description="From learning camps to our Educational Summits, there's always a way to connect with the COFY community — in person and online."
       >
         <div className="flex flex-wrap gap-3">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
@@ -47,43 +122,135 @@ const Events = () => {
       </PageHero>
 
       <section className="py-16 lg:py-24">
-        <div className="container-cofy">
-          {/* Tab switcher */}
-          <div className="mb-10 inline-flex rounded-none border border-border bg-card p-1">
-            {([
-              { key: "upcoming", label: "Upcoming", icon: CalendarDays },
-              { key: "past", label: "Past Events", icon: History },
-            ] as const).map((t) => (
-              <button
-                key={t.key}
-                onClick={() => setTab(t.key)}
-                aria-pressed={tab === t.key}
-                className={cn(
-                  "inline-flex items-center gap-2 rounded-none px-5 py-2.5 text-sm font-semibold transition-all",
-                  tab === t.key
-                    ? "bg-primary text-white shadow-md shadow-primary/25"
-                    : "text-foreground/65 hover:text-primary",
-                )}
-              >
-                <t.icon className="h-4 w-4" />
-                {t.label}
-              </button>
-            ))}
-          </div>
+        <div className="container-cofy grid gap-14 lg:grid-cols-2 lg:gap-10">
+          {/* Upcoming — left */}
+          <div>
+            <div className="mb-8 flex items-center gap-2">
+              <CalendarClock className="h-5 w-5 text-primary" />
+              <h2 className="font-display text-2xl font-bold sm:text-3xl">Upcoming</h2>
+            </div>
 
-          <div className="grid gap-5">
-            {list.map((event, i) => (
-              <Reveal key={event.id} delay={i * 60}>
-                <EventCard event={event} past={tab === "past"} />
+            {/* Main square: next event with type photo */}
+            {featured && featuredPhoto && (
+              <Reveal>
+                <div className="relative aspect-square overflow-hidden">
+                  <img
+                    src={featuredPhoto.min}
+                    alt={featuredPhoto.alt}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = plateFallback(
+                        categoryPhoto[featured.category],
+                      );
+                    }}
+                  />
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"
+                    aria-hidden
+                  />
+                  <Badge className="absolute left-5 top-5 gap-1.5 border-0 bg-secondary font-bold text-secondary-foreground">
+                    Next up · {featured.category}
+                  </Badge>
+                  <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7 text-white">
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold uppercase tracking-wider text-secondary">
+                        {rangeLabel(featured)}
+                      </p>
+                      <h3 className="mt-1 font-display text-2xl font-bold leading-tight sm:text-3xl">
+                        {featured.title}
+                      </h3>
+                      <p className="mt-2 flex items-center gap-1.5 text-sm text-white/85">
+                        <MapPin className="h-4 w-4 shrink-0 text-secondary" />
+                        <span className="truncate">{featured.venue}, {featured.location}</span>
+                      </p>
+                      <p className="mt-1 flex items-center gap-1.5 text-sm text-white/85">
+                        <Clock className="h-4 w-4 shrink-0 text-secondary" />
+                        {featured.time}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <p className="mt-4 font-serif text-base leading-relaxed text-muted-foreground">
+                  {featured.description}
+                </p>
               </Reveal>
-            ))}
+            )}
+
+            {/* Sequential square list */}
+            <div className="mt-8 grid gap-4">
+              {upcoming.slice(1).map((event, i) => (
+                <Reveal key={event.id} delay={i * 60}>
+                  <EventRow event={event} />
+                </Reveal>
+              ))}
+              {upcoming.length === 0 && (
+                <p className="py-10 text-center text-muted-foreground">
+                  Nothing scheduled right now — new events are added often!
+                </p>
+              )}
+            </div>
           </div>
 
-          {list.length === 0 && (
-            <p className="py-16 text-center text-muted-foreground">
-              Nothing here right now — new events are added often!
+          {/* Past — right */}
+          <div>
+            <div className="mb-8 flex items-center gap-2">
+              <History className="h-5 w-5 text-primary" />
+              <h2 className="font-display text-2xl font-bold sm:text-3xl">Past events</h2>
+            </div>
+
+            {/* Past highlight */}
+            {pastHighlight && (
+              <Reveal>
+                <div className="border border-border bg-brand-cream p-6 sm:p-8">
+                  <p className="eyebrow font-display">Highlight</p>
+                  <h3 className="mt-2 font-display text-2xl font-bold leading-tight">
+                    {pastHighlight.title}
+                  </h3>
+                  <p className="mt-2 text-sm font-semibold text-muted-foreground">
+                    {rangeLabel(pastHighlight)} · {pastHighlight.location}
+                  </p>
+                  <p className="mt-3 font-serif text-base leading-relaxed text-foreground/75">
+                    {pastHighlight.description}
+                  </p>
+                </div>
+              </Reveal>
+            )}
+
+            <div className="mt-8 grid gap-4">
+              {pastRest.map((event, i) => (
+                <Reveal key={event.id} delay={i * 60}>
+                  <EventRow event={event} past />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Donate band */}
+      <section className="relative overflow-hidden bg-primary py-16 text-white lg:py-20">
+        <Sunburst className="absolute -top-4 right-8 w-56 text-white/20" />
+        <div className="container-cofy relative flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-3xl font-medium sm:text-4xl">
+              Every COFY event is free of charge
+            </h2>
+            <p className="mt-3 font-serif text-lg text-white/85">
+              Your gift keeps workshops, summits and outreach open to every
+              family — at no cost to them.
             </p>
-          )}
+          </div>
+          <Button
+            asChild
+            size="lg"
+            className="shrink-0 rounded-none bg-secondary px-8 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
+          >
+            <Link to="/get-involved#donate">
+              <Heart className="mr-1 h-5 w-5" />
+              Donate
+              <ArrowRight className="ml-1 h-5 w-5" />
+            </Link>
+          </Button>
         </div>
       </section>
     </>

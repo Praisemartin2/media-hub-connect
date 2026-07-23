@@ -74,7 +74,7 @@ const GetInvolved = () => {
       />
 
       {/* Donation */}
-      <section className="py-20 lg:py-28">
+      <section id="donate" className="scroll-mt-20 py-20 lg:py-28">
         <div className="container-cofy grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
             <SectionHeading

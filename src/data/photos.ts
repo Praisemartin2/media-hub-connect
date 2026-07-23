@@ -19,13 +19,15 @@ export type PhotoKey =
   | "mentorship"
   | "community"
   | "books"
-  | "volunteers";
+  | "volunteers"
+  | "workshop"
+  | "newjersey";
 
 export const photos: Record<PhotoKey, { min: string; raw: string; alt: string }> = {
   disability: {
-    min: `${LOCAL}/real-team-nigeria.jpg`,
-    raw: `${LOCAL}/real-team-nigeria.jpg`,
-    alt: "COFY team members with community members during an outreach visit in Nigeria",
+    min: `${CDN}/hf_20260723_033732_52d00cb1-fe69-4616-babb-82916307300b_min.webp`,
+    raw: `${CDN}/hf_20260723_033732_52d00cb1-fe69-4616-babb-82916307300b.png`,
+    alt: "An educator kneels beside a child in a pediatric wheelchair, working on an adaptive learning activity among therapy tools and resources",
   },
   education: {
     min: `${CDN}/hf_20260703_043836_416f23c2-62ca-4641-aeb5-4f6c30d6ef74_min.webp`,
@@ -57,11 +59,27 @@ export const photos: Record<PhotoKey, { min: string; raw: string; alt: string }>
     raw: `${CDN}/hf_20260703_043844_331be3ca-b40a-4dfb-bd35-6f52c2759430.png`,
     alt: "A diverse group of adult volunteers stand together smiling in a bright community center",
   },
+  workshop: {
+    min: `${CDN}/hf_20260723_033443_8e890403-3bed-4ba0-b457-c9f9b60a8a60_min.webp`,
+    raw: `${CDN}/hf_20260723_033443_8e890403-3bed-4ba0-b457-c9f9b60a8a60.png`,
+    alt: "Nigerian educators take notes and smile during a professional development workshop in a bright school hall",
+  },
+  newjersey: {
+    min: `${CDN}/hf_20260723_033636_cbb57088-2d1e-43e0-a2af-82b984968d4c_min.webp`,
+    raw: `${CDN}/hf_20260723_033636_cbb57088-2d1e-43e0-a2af-82b984968d4c.png`,
+    alt: "Teenagers and young adults practice life skills with supportive educators at a New Jersey community center",
+  },
 };
 
 /** Photoreal 5s hero film (Kling 3.0 turbo, 1280×720 MP4). */
 export const heroFilm = `${CDN}/hf_20260703_043903_62d9786a-6653-4b4c-85fb-dad9e031817d.mp4`;
 
+/** Keys without their own illustrated plate fall back to a close sibling. */
+const plateAlias: Partial<Record<PhotoKey, PhotoKey>> = {
+  workshop: "education",
+  newjersey: "community",
+};
+
 /** Local illustrated plate used as onError fallback for a photo key. */
 export const plateFallback = (key: PhotoKey) =>
-  `${import.meta.env.BASE_URL}media/photos/${key}.png`;
+  `${import.meta.env.BASE_URL}media/photos/${plateAlias[key] ?? key}.png`;

@@ -35,7 +35,7 @@ const Index = () => {
         <div className="container-cofy grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <div className="bg-brand-sky p-5 sm:p-8">
-              <PhotoImg id="community" loading="eager" className="w-full object-cover" />
+              <PhotoImg id="newjersey" loading="eager" className="w-full object-cover" />
             </div>
           </Reveal>
           <Reveal delay={100}>
@@ -244,52 +244,6 @@ const Index = () => {
               </Button>
             </form>
           </Reveal>
-        </div>
-      </section>
-
-      {/* 8 — Yellow Programs block + program cards (spec section 8) */}
-      <section className="relative overflow-hidden bg-secondary py-20 text-secondary-foreground lg:py-24">
-        <Sunburst className="absolute -top-4 left-8 w-48 text-black/20" />
-        <div className="container-cofy">
-          <p className="eyebrow font-display text-black/60">Programs</p>
-          <h2 className="mt-2 max-w-3xl font-display text-5xl font-medium leading-none tracking-tight sm:text-6xl">
-            Empowering the next generation
-          </h2>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {cardPrograms.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 80}>
-                <Link to={`/programs/${p.slug}`} className="group block bg-white p-4">
-                  <div className="overflow-hidden">
-                    <PhotoImg
-                      id={p.art as "education" | "outreach" | "mentorship"}
-                      className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                    />
-                  </div>
-                  <h3 className="mt-4 font-display text-2xl font-medium leading-tight tracking-tight text-foreground group-hover:text-primary">
-                    {p.title}
-                  </h3>
-                  <span className="mb-1 mt-2 inline-flex items-center gap-2 font-display text-lg text-primary">
-                    Learn more
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Button asChild variant="outline" className="border-black text-black hover:bg-black hover:text-white">
-              <Link to="/programs">
-                View all projects
-                <ArrowRight className="ml-1 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="border-black text-black hover:bg-black hover:text-white">
-              <Link to="/events">
-                Events{nextEvents[0] ? ` — next: ${formatDate(nextEvents[0].date, { month: "short", day: "numeric", year: undefined })}` : ""}
-                <ArrowRight className="ml-1 h-5 w-5" />
-              </Link>
-            </Button>
-          </div>
         </div>
       </section>
 
