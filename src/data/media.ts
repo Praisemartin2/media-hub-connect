@@ -44,42 +44,6 @@ export const mediaItems: MediaItem[] = [
     ],
   },
   {
-    id: "news-read-for-reach",
-    type: "news",
-    title: "Read for Reach — 5,000 Books Donated to Nigeria",
-    excerpt:
-      "Through our Read for Reach drive, 5,000 books reached communities in Nigeria — part of our mission to bridge the gap between urban and rural areas in Africa.",
-    author: "COFY Newsroom",
-    date: "2026-05-30",
-    readTime: "3 min read",
-    category: "Announcement",
-    gradient: "from-brand-blue-dark to-brand-blue-deep",
-    art: "books",
-    body: [
-      "Through our Read for Reach drive, 5,000 donated books were delivered to communities in Nigeria — part of our mission to bridge the gap between urban and rural areas in Africa.",
-      "Access to books and learning resources is essential for children to reach their full potential. That's why book drives like this one sit at the heart of our Funding Learning Opportunities program.",
-      "The next Read for Reach book drive runs August through October 2026, with collection points and online giving. Every donation, no matter the size, makes a difference.",
-    ],
-  },
-  {
-    id: "news-booksmiles",
-    type: "news",
-    title: "5,000 Books for Life — Our Partnership with BookSmiles",
-    excerpt:
-      "In partnership with BookSmiles.org, we're bringing books to schools and libraries in rural African communities. Every donation counts — send a Smile today!",
-    author: "COFY Newsroom",
-    date: "2026-04-18",
-    readTime: "4 min read",
-    category: "Partnership",
-    gradient: "from-brand-yellow-light to-brand-yellow",
-    art: "outreach",
-    body: [
-      "5,000 Books for Life: in partnership with BookSmiles.org, we are working to bring 5,000 books to rural communities in Africa.",
-      "Access to books and learning resources is essential for children to reach their full potential — your donation purchases and distributes books to schools and libraries that need them most.",
-      "Every donation, no matter the size, makes a difference. Send a Smile today!",
-    ],
-  },
-  {
     id: "news-autism-panel",
     type: "news",
     title: "Autism Awareness Discussion Panel",
