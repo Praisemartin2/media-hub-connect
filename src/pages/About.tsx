@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Target, Eye, Heart, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Target, Eye, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { PhotoImg } from "@/components/shared/PhotoImg";
@@ -258,32 +258,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="container-cofy">
-        <Reveal>
-          <div className="flex flex-col items-center justify-between gap-6 rounded-lg bg-primary px-8 py-12 text-center text-white sm:flex-row sm:text-left">
-            <div>
-              <h2 className="font-display text-2xl font-bold sm:text-3xl">
-                Want to be part of the story?
-              </h2>
-              <p className="mt-2 text-white/80">
-                Donate, volunteer or partner with us to create opportunity.
-              </p>
-            </div>
-            <Button
-              asChild
-              size="lg"
-              className="shrink-0 rounded-none bg-secondary px-7 font-bold text-secondary-foreground hover:bg-brand-yellow-light"
-            >
-              <Link to="/get-involved">
-                <Heart className="mr-1 h-5 w-5" />
-                Get Involved
-                <ArrowRight className="ml-1 h-5 w-5" />
-              </Link>
-            </Button>
-          </div>
-        </Reveal>
-      </section>
     </>
   );
 };
