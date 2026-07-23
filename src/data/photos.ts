@@ -71,6 +71,12 @@ export const photos: Record<PhotoKey, { min: string; raw: string; alt: string }>
   },
 };
 
+/** Real portrait of Dr. Ngozi Martin-Oguike (user-provided, Higgsfield-hosted). */
+export const drNgoziPortrait = {
+  src: "https://d2ol7oe51mr4n9.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev/f5a595b8-9850-41e2-ae60-28d9d41918ad.webp",
+  alt: "Dr. Ngozi Martin-Oguike, President, Founder & CEO of COFY Inc.",
+};
+
 /** Photoreal 5s hero film (Kling 3.0 turbo, 1280×720 MP4). */
 export const heroFilm = `${CDN}/hf_20260703_043903_62d9786a-6653-4b4c-85fb-dad9e031817d.mp4`;
 
