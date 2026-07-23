@@ -27,6 +27,8 @@ export type Program = {
   engage: string;
   /** Optional dedicated campaign page for this program */
   campaign?: { label: string; to: string };
+  /** Real, clickable help resources available in New Jersey */
+  resources?: { name: string; url: string; blurb: string }[];
 };
 
 export const programs: Program[] = [
@@ -51,6 +53,33 @@ export const programs: Program[] = [
       role: "Parent",
     },
     engage: "Live your best life — sponsor a family's support plan or volunteer with our service providers.",
+    resources: [
+      {
+        name: "PerformCare NJ — Children's System of Care",
+        url: "https://www.performcarenj.org/families/disability",
+        blurb: "New Jersey's single entry point for services for children with intellectual and developmental disabilities, up to age 21. Call 1-877-652-7624, 24/7.",
+      },
+      {
+        name: "NJ Division of Developmental Disabilities (DDD)",
+        url: "https://www.nj.gov/humanservices/ddd/",
+        blurb: "Public funding and supports for New Jersey adults with intellectual and developmental disabilities, age 21 and older.",
+      },
+      {
+        name: "The Arc of New Jersey",
+        url: "https://www.arcnj.org/",
+        blurb: "The state's largest advocacy and service organization for children and adults with intellectual and developmental disabilities and their families.",
+      },
+      {
+        name: "Autism New Jersey",
+        url: "https://autismnj.org/",
+        blurb: "Statewide network of parents and professionals — helpline, referrals and guidance for families affected by autism. Call 800-4-AUTISM.",
+      },
+      {
+        name: "SPAN Parent Advocacy Network",
+        url: "https://spanadvocacy.org/",
+        blurb: "Free training and one-on-one support for NJ families navigating special education, health and transition to adult life.",
+      },
+    ],
   },
   {
     slug: "educational-opportunities",
@@ -73,6 +102,28 @@ export const programs: Program[] = [
       role: "Parent",
     },
     engage: "Donate books and supplies, or fund a child's learning kit.",
+    resources: [
+      {
+        name: "New Jersey Tutoring Corps",
+        url: "https://njtutoringcorps.org/",
+        blurb: "High-impact math and reading tutoring for academically vulnerable K–8 students across New Jersey.",
+      },
+      {
+        name: "NJ DOE — Office of Special Education",
+        url: "https://www.nj.gov/education/specialed/",
+        blurb: "State guidance on IEPs, special education programs and parent rights in New Jersey public schools.",
+      },
+      {
+        name: "SPAN Parent Advocacy Network",
+        url: "https://spanadvocacy.org/",
+        blurb: "Help for families navigating special education services and school meetings — free workshops and advocates.",
+      },
+      {
+        name: "NJ 211",
+        url: "https://www.nj211.org/",
+        blurb: "Free, confidential helpline connecting New Jersey families to local education, food, housing and family services. Dial 2-1-1.",
+      },
+    ],
   },
   {
     slug: "international-outreach",
@@ -96,6 +147,23 @@ export const programs: Program[] = [
     },
     engage: "Fund a scholarship or connect us with a partner school abroad.",
     campaign: { label: "Explore 5,000 Books for Life", to: "/books" },
+    resources: [
+      {
+        name: "BookSmiles",
+        url: "https://booksmiles.org/",
+        blurb: "Our 5,000 Books for Life partner — a South Jersey book bank that puts donated books into children's hands. Donate books or volunteer.",
+      },
+      {
+        name: "Bridge of Books Foundation",
+        url: "https://bridgeofbooksfoundation.org/",
+        blurb: "Volunteer-led NJ nonprofit that has provided over a million books to underserved children throughout New Jersey.",
+      },
+      {
+        name: "NJ 211",
+        url: "https://www.nj211.org/",
+        blurb: "Find local literacy programs, libraries and family services anywhere in New Jersey. Dial 2-1-1.",
+      },
+    ],
   },
   {
     slug: "mentorship",
@@ -118,6 +186,28 @@ export const programs: Program[] = [
       role: "Youth Participant",
     },
     engage: "Become a mentor — a few hours a week changes a life (training provided).",
+    resources: [
+      {
+        name: "NJ Division of Vocational Rehabilitation Services (DVRS)",
+        url: "https://www.nj.gov/labor/career-services/special-services/individuals-with-disabilities/",
+        blurb: "Helps students with disabilities (from age 14) prepare for, find and keep a job — including services during the last two years of high school.",
+      },
+      {
+        name: "The Boggs Center at Rutgers",
+        url: "https://boggscenter.rwjms.rutgers.edu/",
+        blurb: "New Jersey's University Center for Excellence in Developmental Disabilities — transition-to-adult-life resources and training.",
+      },
+      {
+        name: "NJ DDD — Transition from School to Adult Life",
+        url: "https://www.nj.gov/humanservices/ddd/individuals/transition/",
+        blurb: "State guide for families planning the move from school services to adult supports at age 21.",
+      },
+      {
+        name: "PerformCare NJ",
+        url: "https://www.performcarenj.org/",
+        blurb: "Entry point for New Jersey youth services — behavioral health, IDD supports and care coordination up to age 21.",
+      },
+    ],
   },
 ];
 
