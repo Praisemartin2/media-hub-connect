@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Target, Eye, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { PhotoImg } from "@/components/shared/PhotoImg";
+import { drNgoziPortrait, plateFallback } from "@/data/photos";
 import { Reveal } from "@/components/shared/Reveal";
 import { StatCounter } from "@/components/shared/StatCounter";
 import { Button } from "@/components/ui/button";
@@ -176,7 +176,14 @@ const About = () => {
           <Reveal>
             <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
               <div className="bg-brand-sky p-5 sm:p-8">
-                <PhotoImg id="mentorship" className="w-full object-cover" />
+                <img
+                  src={drNgoziPortrait.src}
+                  alt={drNgoziPortrait.alt}
+                  className="aspect-square w-full object-cover"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = plateFallback("mentorship");
+                  }}
+                />
               </div>
               <div>
                 <p className="eyebrow font-display">President, Founder & CEO</p>
