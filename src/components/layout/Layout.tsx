@@ -4,10 +4,17 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [pathname]);
+    if (hash) {
+      // Let the page render, then honor in-page anchors like /get-involved#donate
+      requestAnimationFrame(() => {
+        document.querySelector(hash)?.scrollIntoView({ behavior: "instant" as ScrollBehavior });
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    }
+  }, [pathname, hash]);
   return null;
 }
 
