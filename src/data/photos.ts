@@ -25,9 +25,9 @@ export type PhotoKey =
 
 export const photos: Record<PhotoKey, { min: string; raw: string; alt: string }> = {
   disability: {
-    min: `${CDN}/hf_20260723_033732_52d00cb1-fe69-4616-babb-82916307300b_min.webp`,
-    raw: `${CDN}/hf_20260723_033732_52d00cb1-fe69-4616-babb-82916307300b.png`,
-    alt: "An educator kneels beside a child in a pediatric wheelchair, working on an adaptive learning activity among therapy tools and resources",
+    min: `${CDN}/hf_20260725_055154_1f8d36df-ec98-4617-b2bd-926420759c7e_min.webp`,
+    raw: `${CDN}/hf_20260725_055154_1f8d36df-ec98-4617-b2bd-926420759c7e.png`,
+    alt: "A Black educator sits beside a smiling child in a pediatric wheelchair, working on an adaptive learning activity among therapy tools and resources",
   },
   education: {
     min: `${CDN}/hf_20260703_043836_416f23c2-62ca-4641-aeb5-4f6c30d6ef74_min.webp`,
