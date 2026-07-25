@@ -15,8 +15,8 @@ jobs:
         run: |
           set -e
           mkdir -p ep3
-          # Episode 3 (CPv_mmUbVTc) — clip #2 (score 8.7, $670K house hack / Airbnb)
-          curl -fsSL -o ep3/clip2.mp4 "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/CPv_mmUbVTc/f407374d-7e1c-4685-82a8-881c6fad2500/clips/clip_08.mp4"
+          # Episode 3 (CPv_mmUbVTc) — clip #3 (score 8.6, Airbnb management math)
+          curl -fsSL -o ep3/clip3.mp4 "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/CPv_mmUbVTc/f407374d-7e1c-4685-82a8-881c6fad2500/clips/clip_09.mp4"
           ls -la ep3/
       - name: Commit assets
         run: |
