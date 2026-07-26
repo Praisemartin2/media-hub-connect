@@ -14,14 +14,21 @@ jobs:
       - name: Download assets
         run: |
           set -e
-          mkdir -p ep3
-          # Episode 3 (CPv_mmUbVTc) — clip #3 (score 8.6, Airbnb management math)
-          curl -fsSL -o ep3/clip3.mp4 "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/CPv_mmUbVTc/f407374d-7e1c-4685-82a8-881c6fad2500/clips/clip_09.mp4"
-          ls -la ep3/
+          base="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
+          mkdir -p va
+          # YT2 clip #5 — VA 0% down (score 9.1)
+          curl -fsSL -o va/clip_va.mp4 "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/3_qGNAIcqd4/56a4a0ac-6eb6-4b28-8e66-28da65d2c66a/clips/clip_05.mp4"
+          # 5 new Higgsfield b-roll
+          curl -fsSL -o va/b1_vetfamily.png "$base/hf_20260726_004957_94bb4133-3941-4880-b669-bfd80033b925.png"
+          curl -fsSL -o va/b2_valoan.png    "$base/hf_20260726_004958_126eb77a-7b52-4256-8c89-59a9b612cbe1.png"
+          curl -fsSL -o va/b3_keys.png      "$base/hf_20260726_005004_022e0867-34bb-4ce6-b178-2464bf11819b.png"
+          curl -fsSL -o va/b4_cashback.png  "$base/hf_20260726_005005_8af713c1-7681-4f7d-b81b-bccc1b49222f.png"
+          curl -fsSL -o va/b5_flag.png      "$base/hf_20260726_005010_25506d29-470c-4f00-b3c7-1a0dcdfbd0fb.png"
+          ls -la va/
       - name: Commit assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ep3/
-          git commit -m "Add episode 3 top clip [skip ci]"
+          git add va/
+          git commit -m "Add VA clip + b-roll [skip ci]"
           git push
