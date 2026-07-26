@@ -1,0 +1,1166 @@
+{
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 3.46,
+   "text": "VA, because you are a veteran and you serve the country,"
+  },
+  {
+   "start": 3.78,
+   "end": 6.76,
+   "text": "you actually get to put down 0%, which is incredible."
+  },
+  {
+   "start": 7.08,
+   "end": 9.22,
+   "text": "So you can get into a property with no money in,"
+  },
+  {
+   "start": 9.4,
+   "end": 10.96,
+   "text": "and as long as you run the numbers and they work,"
+  },
+  {
+   "start": 11.1,
+   "end": 12.64,
+   "text": "it's basically an infinite return"
+  },
+  {
+   "start": 12.64,
+   "end": 13.88,
+   "text": "because you didn't have any money yet."
+  },
+  {
+   "start": 14.04,
+   "end": 15.74,
+   "text": "The other piece is they allow you to have"
+  },
+  {
+   "start": 15.74,
+   "end": 18.5,
+   "text": "up to 4% in seller credits, right?"
+  },
+  {
+   "start": 18.56,
+   "end": 20.82,
+   "text": "So it's not the 6% that you get with FHA,"
+  },
+  {
+   "start": 21.12,
+   "end": 22.8,
+   "text": "but 4% is still pretty good."
+  },
+  {
+   "start": 22.9,
+   "end": 24.64,
+   "text": "That should cover your closing costs."
+  },
+  {
+   "start": 24.86,
+   "end": 26.82,
+   "text": "It may not allow you to buy down the interest rate much,"
+  },
+  {
+   "start": 26.92,
+   "end": 29.74,
+   "text": "but your closing costs should be covered in that 4%."
+  },
+  {
+   "start": 29.74,
+   "end": 31.34,
+   "text": "And again, you're bringing zero to the table."
+  },
+  {
+   "start": 31.62,
+   "end": 33.44,
+   "text": "So typically when we help a VA client,"
+  },
+  {
+   "start": 33.74,
+   "end": 35.68,
+   "text": "they're able to put down their earnest money"
+  },
+  {
+   "start": 35.68,
+   "end": 36.7,
+   "text": "because you still need to do that."
+  },
+  {
+   "start": 37.0,
+   "end": 38.2,
+   "text": "And then at the closing table,"
+  },
+  {
+   "start": 38.56,
+   "end": 40.66,
+   "text": "they basically get a check for their earnest money back,"
+  },
+  {
+   "start": 40.78,
+   "end": 41.32,
+   "text": "which is kind of cool."
+  },
+  {
+   "start": 41.48,
+   "end": 42.82,
+   "text": "So it's like, okay, you put this down"
+  },
+  {
+   "start": 42.82,
+   "end": 44.22,
+   "text": "to show that you were serious about the property"
+  },
+  {
+   "start": 44.22,
+   "end": 45.68,
+   "text": "and now here goes your money back."
+  },
+  {
+   "start": 45.9,
+   "end": 48.14,
+   "text": "And so you're getting paid to essentially buy the property,"
+  },
+  {
+   "start": 48.44,
+   "end": 48.98,
+   "text": "which is pretty."
+  }
+ ],
+ "words": [
+  {
+   "w": "VA,",
+   "start": 0.0,
+   "end": 0.44
+  },
+  {
+   "w": "because",
+   "start": 0.62,
+   "end": 1.1
+  },
+  {
+   "w": "you",
+   "start": 1.1,
+   "end": 1.52
+  },
+  {
+   "w": "are",
+   "start": 1.52,
+   "end": 1.72
+  },
+  {
+   "w": "a",
+   "start": 1.72,
+   "end": 1.94
+  },
+  {
+   "w": "veteran",
+   "start": 1.94,
+   "end": 2.3
+  },
+  {
+   "w": "and",
+   "start": 2.3,
+   "end": 2.56
+  },
+  {
+   "w": "you",
+   "start": 2.56,
+   "end": 2.76
+  },
+  {
+   "w": "serve",
+   "start": 2.76,
+   "end": 2.94
+  },
+  {
+   "w": "the",
+   "start": 2.94,
+   "end": 3.14
+  },
+  {
+   "w": "country,",
+   "start": 3.14,
+   "end": 3.46
+  },
+  {
+   "w": "you",
+   "start": 3.78,
+   "end": 3.82
+  },
+  {
+   "w": "actually",
+   "start": 3.82,
+   "end": 4.1
+  },
+  {
+   "w": "get",
+   "start": 4.1,
+   "end": 4.28
+  },
+  {
+   "w": "to",
+   "start": 4.28,
+   "end": 4.38
+  },
+  {
+   "w": "put",
+   "start": 4.38,
+   "end": 4.52
+  },
+  {
+   "w": "down",
+   "start": 4.52,
+   "end": 4.76
+  },
+  {
+   "w": "0%,",
+   "start": 4.76,
+   "end": 5.82
+  },
+  {
+   "w": "which",
+   "start": 5.82,
+   "end": 6.06
+  },
+  {
+   "w": "is",
+   "start": 6.06,
+   "end": 6.2
+  },
+  {
+   "w": "incredible.",
+   "start": 6.2,
+   "end": 6.76
+  },
+  {
+   "w": "So",
+   "start": 7.08,
+   "end": 7.08
+  },
+  {
+   "w": "you",
+   "start": 7.08,
+   "end": 7.16
+  },
+  {
+   "w": "can",
+   "start": 7.16,
+   "end": 7.26
+  },
+  {
+   "w": "get",
+   "start": 7.26,
+   "end": 7.38
+  },
+  {
+   "w": "into",
+   "start": 7.38,
+   "end": 7.5
+  },
+  {
+   "w": "a",
+   "start": 7.5,
+   "end": 7.62
+  },
+  {
+   "w": "property",
+   "start": 7.62,
+   "end": 7.92
+  },
+  {
+   "w": "with",
+   "start": 7.92,
+   "end": 8.46
+  },
+  {
+   "w": "no",
+   "start": 8.46,
+   "end": 8.78
+  },
+  {
+   "w": "money",
+   "start": 8.78,
+   "end": 8.94
+  },
+  {
+   "w": "in,",
+   "start": 8.94,
+   "end": 9.22
+  },
+  {
+   "w": "and",
+   "start": 9.4,
+   "end": 9.48
+  },
+  {
+   "w": "as",
+   "start": 9.48,
+   "end": 9.6
+  },
+  {
+   "w": "long",
+   "start": 9.6,
+   "end": 9.76
+  },
+  {
+   "w": "as",
+   "start": 9.76,
+   "end": 9.88
+  },
+  {
+   "w": "you",
+   "start": 9.88,
+   "end": 9.96
+  },
+  {
+   "w": "run",
+   "start": 9.96,
+   "end": 10.06
+  },
+  {
+   "w": "the",
+   "start": 10.06,
+   "end": 10.2
+  },
+  {
+   "w": "numbers",
+   "start": 10.2,
+   "end": 10.44
+  },
+  {
+   "w": "and",
+   "start": 10.44,
+   "end": 10.62
+  },
+  {
+   "w": "they",
+   "start": 10.62,
+   "end": 10.76
+  },
+  {
+   "w": "work,",
+   "start": 10.76,
+   "end": 10.96
+  },
+  {
+   "w": "it's",
+   "start": 11.1,
+   "end": 11.34
+  },
+  {
+   "w": "basically",
+   "start": 11.34,
+   "end": 11.66
+  },
+  {
+   "w": "an",
+   "start": 11.66,
+   "end": 11.88
+  },
+  {
+   "w": "infinite",
+   "start": 11.88,
+   "end": 12.22
+  },
+  {
+   "w": "return",
+   "start": 12.22,
+   "end": 12.64
+  },
+  {
+   "w": "because",
+   "start": 12.64,
+   "end": 12.86
+  },
+  {
+   "w": "you",
+   "start": 12.86,
+   "end": 12.98
+  },
+  {
+   "w": "didn't",
+   "start": 12.98,
+   "end": 13.12
+  },
+  {
+   "w": "have",
+   "start": 13.12,
+   "end": 13.34
+  },
+  {
+   "w": "any",
+   "start": 13.34,
+   "end": 13.5
+  },
+  {
+   "w": "money",
+   "start": 13.5,
+   "end": 13.64
+  },
+  {
+   "w": "yet.",
+   "start": 13.64,
+   "end": 13.88
+  },
+  {
+   "w": "The",
+   "start": 14.04,
+   "end": 14.12
+  },
+  {
+   "w": "other",
+   "start": 14.12,
+   "end": 14.28
+  },
+  {
+   "w": "piece",
+   "start": 14.28,
+   "end": 14.5
+  },
+  {
+   "w": "is",
+   "start": 14.5,
+   "end": 14.7
+  },
+  {
+   "w": "they",
+   "start": 14.7,
+   "end": 14.88
+  },
+  {
+   "w": "allow",
+   "start": 14.88,
+   "end": 15.18
+  },
+  {
+   "w": "you",
+   "start": 15.18,
+   "end": 15.36
+  },
+  {
+   "w": "to",
+   "start": 15.36,
+   "end": 15.5
+  },
+  {
+   "w": "have",
+   "start": 15.5,
+   "end": 15.74
+  },
+  {
+   "w": "up",
+   "start": 15.74,
+   "end": 15.94
+  },
+  {
+   "w": "to",
+   "start": 15.94,
+   "end": 16.12
+  },
+  {
+   "w": "4",
+   "start": 16.12,
+   "end": 16.58
+  },
+  {
+   "w": "%",
+   "start": 16.58,
+   "end": 17.02
+  },
+  {
+   "w": "in",
+   "start": 17.02,
+   "end": 17.26
+  },
+  {
+   "w": "seller",
+   "start": 17.26,
+   "end": 17.6
+  },
+  {
+   "w": "credits,",
+   "start": 17.6,
+   "end": 18.06
+  },
+  {
+   "w": "right?",
+   "start": 18.32,
+   "end": 18.5
+  },
+  {
+   "w": "So",
+   "start": 18.56,
+   "end": 18.68
+  },
+  {
+   "w": "it's",
+   "start": 18.68,
+   "end": 18.82
+  },
+  {
+   "w": "not",
+   "start": 18.82,
+   "end": 19.0
+  },
+  {
+   "w": "the",
+   "start": 19.0,
+   "end": 19.2
+  },
+  {
+   "w": "6",
+   "start": 19.2,
+   "end": 19.44
+  },
+  {
+   "w": "%",
+   "start": 19.44,
+   "end": 19.76
+  },
+  {
+   "w": "that",
+   "start": 19.76,
+   "end": 19.96
+  },
+  {
+   "w": "you",
+   "start": 19.96,
+   "end": 20.04
+  },
+  {
+   "w": "get",
+   "start": 20.04,
+   "end": 20.18
+  },
+  {
+   "w": "with",
+   "start": 20.18,
+   "end": 20.34
+  },
+  {
+   "w": "FHA,",
+   "start": 20.34,
+   "end": 20.82
+  },
+  {
+   "w": "but",
+   "start": 21.12,
+   "end": 21.26
+  },
+  {
+   "w": "4",
+   "start": 21.26,
+   "end": 21.56
+  },
+  {
+   "w": "%",
+   "start": 21.56,
+   "end": 21.92
+  },
+  {
+   "w": "is",
+   "start": 21.92,
+   "end": 22.1
+  },
+  {
+   "w": "still",
+   "start": 22.1,
+   "end": 22.36
+  },
+  {
+   "w": "pretty",
+   "start": 22.36,
+   "end": 22.56
+  },
+  {
+   "w": "good.",
+   "start": 22.56,
+   "end": 22.8
+  },
+  {
+   "w": "That",
+   "start": 22.9,
+   "end": 23.02
+  },
+  {
+   "w": "should",
+   "start": 23.02,
+   "end": 23.3
+  },
+  {
+   "w": "cover",
+   "start": 23.3,
+   "end": 23.68
+  },
+  {
+   "w": "your",
+   "start": 23.68,
+   "end": 23.92
+  },
+  {
+   "w": "closing",
+   "start": 23.92,
+   "end": 24.32
+  },
+  {
+   "w": "costs.",
+   "start": 24.32,
+   "end": 24.64
+  },
+  {
+   "w": "It",
+   "start": 24.86,
+   "end": 24.92
+  },
+  {
+   "w": "may",
+   "start": 24.92,
+   "end": 25.06
+  },
+  {
+   "w": "not",
+   "start": 25.06,
+   "end": 25.22
+  },
+  {
+   "w": "allow",
+   "start": 25.22,
+   "end": 25.44
+  },
+  {
+   "w": "you",
+   "start": 25.44,
+   "end": 25.54
+  },
+  {
+   "w": "to",
+   "start": 25.54,
+   "end": 25.66
+  },
+  {
+   "w": "buy",
+   "start": 25.66,
+   "end": 25.84
+  },
+  {
+   "w": "down",
+   "start": 25.84,
+   "end": 26.02
+  },
+  {
+   "w": "the",
+   "start": 26.02,
+   "end": 26.16
+  },
+  {
+   "w": "interest",
+   "start": 26.16,
+   "end": 26.38
+  },
+  {
+   "w": "rate",
+   "start": 26.38,
+   "end": 26.6
+  },
+  {
+   "w": "much,",
+   "start": 26.6,
+   "end": 26.82
+  },
+  {
+   "w": "but",
+   "start": 26.92,
+   "end": 27.06
+  },
+  {
+   "w": "your",
+   "start": 27.06,
+   "end": 27.2
+  },
+  {
+   "w": "closing",
+   "start": 27.2,
+   "end": 27.62
+  },
+  {
+   "w": "costs",
+   "start": 27.62,
+   "end": 27.88
+  },
+  {
+   "w": "should",
+   "start": 27.88,
+   "end": 28.22
+  },
+  {
+   "w": "be",
+   "start": 28.22,
+   "end": 28.46
+  },
+  {
+   "w": "covered",
+   "start": 28.46,
+   "end": 28.76
+  },
+  {
+   "w": "in",
+   "start": 28.76,
+   "end": 28.94
+  },
+  {
+   "w": "that",
+   "start": 28.94,
+   "end": 29.06
+  },
+  {
+   "w": "4%.",
+   "start": 29.06,
+   "end": 29.74
+  },
+  {
+   "w": "And",
+   "start": 29.74,
+   "end": 29.94
+  },
+  {
+   "w": "again,",
+   "start": 29.94,
+   "end": 30.16
+  },
+  {
+   "w": "you're",
+   "start": 30.28,
+   "end": 30.4
+  },
+  {
+   "w": "bringing",
+   "start": 30.4,
+   "end": 30.52
+  },
+  {
+   "w": "zero",
+   "start": 30.52,
+   "end": 30.78
+  },
+  {
+   "w": "to",
+   "start": 30.78,
+   "end": 31.02
+  },
+  {
+   "w": "the",
+   "start": 31.02,
+   "end": 31.12
+  },
+  {
+   "w": "table.",
+   "start": 31.12,
+   "end": 31.34
+  },
+  {
+   "w": "So",
+   "start": 31.62,
+   "end": 31.62
+  },
+  {
+   "w": "typically",
+   "start": 31.62,
+   "end": 32.1
+  },
+  {
+   "w": "when",
+   "start": 32.1,
+   "end": 32.34
+  },
+  {
+   "w": "we",
+   "start": 32.34,
+   "end": 32.46
+  },
+  {
+   "w": "help",
+   "start": 32.46,
+   "end": 32.66
+  },
+  {
+   "w": "a",
+   "start": 32.66,
+   "end": 32.8
+  },
+  {
+   "w": "VA",
+   "start": 32.8,
+   "end": 33.06
+  },
+  {
+   "w": "client,",
+   "start": 33.06,
+   "end": 33.44
+  },
+  {
+   "w": "they're",
+   "start": 33.74,
+   "end": 33.8
+  },
+  {
+   "w": "able",
+   "start": 33.8,
+   "end": 34.02
+  },
+  {
+   "w": "to",
+   "start": 34.02,
+   "end": 34.44
+  },
+  {
+   "w": "put",
+   "start": 34.44,
+   "end": 34.92
+  },
+  {
+   "w": "down",
+   "start": 34.92,
+   "end": 35.1
+  },
+  {
+   "w": "their",
+   "start": 35.1,
+   "end": 35.24
+  },
+  {
+   "w": "earnest",
+   "start": 35.24,
+   "end": 35.46
+  },
+  {
+   "w": "money",
+   "start": 35.46,
+   "end": 35.68
+  },
+  {
+   "w": "because",
+   "start": 35.68,
+   "end": 35.92
+  },
+  {
+   "w": "you",
+   "start": 35.92,
+   "end": 36.02
+  },
+  {
+   "w": "still",
+   "start": 36.02,
+   "end": 36.18
+  },
+  {
+   "w": "need",
+   "start": 36.18,
+   "end": 36.34
+  },
+  {
+   "w": "to",
+   "start": 36.34,
+   "end": 36.48
+  },
+  {
+   "w": "do",
+   "start": 36.48,
+   "end": 36.54
+  },
+  {
+   "w": "that.",
+   "start": 36.54,
+   "end": 36.7
+  },
+  {
+   "w": "And",
+   "start": 37.0,
+   "end": 37.02
+  },
+  {
+   "w": "then",
+   "start": 37.02,
+   "end": 37.12
+  },
+  {
+   "w": "at",
+   "start": 37.12,
+   "end": 37.26
+  },
+  {
+   "w": "the",
+   "start": 37.26,
+   "end": 37.38
+  },
+  {
+   "w": "closing",
+   "start": 37.38,
+   "end": 37.72
+  },
+  {
+   "w": "table,",
+   "start": 37.72,
+   "end": 38.2
+  },
+  {
+   "w": "they",
+   "start": 38.56,
+   "end": 38.66
+  },
+  {
+   "w": "basically",
+   "start": 38.66,
+   "end": 38.98
+  },
+  {
+   "w": "get",
+   "start": 38.98,
+   "end": 39.22
+  },
+  {
+   "w": "a",
+   "start": 39.22,
+   "end": 39.34
+  },
+  {
+   "w": "check",
+   "start": 39.34,
+   "end": 39.54
+  },
+  {
+   "w": "for",
+   "start": 39.54,
+   "end": 39.74
+  },
+  {
+   "w": "their",
+   "start": 39.74,
+   "end": 39.88
+  },
+  {
+   "w": "earnest",
+   "start": 39.88,
+   "end": 40.12
+  },
+  {
+   "w": "money",
+   "start": 40.12,
+   "end": 40.34
+  },
+  {
+   "w": "back,",
+   "start": 40.34,
+   "end": 40.66
+  },
+  {
+   "w": "which",
+   "start": 40.78,
+   "end": 40.8
+  },
+  {
+   "w": "is",
+   "start": 40.8,
+   "end": 40.94
+  },
+  {
+   "w": "kind",
+   "start": 40.94,
+   "end": 41.04
+  },
+  {
+   "w": "of",
+   "start": 41.04,
+   "end": 41.16
+  },
+  {
+   "w": "cool.",
+   "start": 41.16,
+   "end": 41.32
+  },
+  {
+   "w": "So",
+   "start": 41.48,
+   "end": 41.56
+  },
+  {
+   "w": "it's",
+   "start": 41.56,
+   "end": 41.7
+  },
+  {
+   "w": "like,",
+   "start": 41.7,
+   "end": 41.8
+  },
+  {
+   "w": "okay,",
+   "start": 41.82,
+   "end": 42.08
+  },
+  {
+   "w": "you",
+   "start": 42.24,
+   "end": 42.38
+  },
+  {
+   "w": "put",
+   "start": 42.38,
+   "end": 42.5
+  },
+  {
+   "w": "this",
+   "start": 42.5,
+   "end": 42.64
+  },
+  {
+   "w": "down",
+   "start": 42.64,
+   "end": 42.82
+  },
+  {
+   "w": "to",
+   "start": 42.82,
+   "end": 42.94
+  },
+  {
+   "w": "show",
+   "start": 42.94,
+   "end": 43.08
+  },
+  {
+   "w": "that",
+   "start": 43.08,
+   "end": 43.18
+  },
+  {
+   "w": "you",
+   "start": 43.18,
+   "end": 43.28
+  },
+  {
+   "w": "were",
+   "start": 43.28,
+   "end": 43.38
+  },
+  {
+   "w": "serious",
+   "start": 43.38,
+   "end": 43.58
+  },
+  {
+   "w": "about",
+   "start": 43.58,
+   "end": 43.76
+  },
+  {
+   "w": "the",
+   "start": 43.76,
+   "end": 43.88
+  },
+  {
+   "w": "property",
+   "start": 43.88,
+   "end": 44.22
+  },
+  {
+   "w": "and",
+   "start": 44.22,
+   "end": 44.48
+  },
+  {
+   "w": "now",
+   "start": 44.48,
+   "end": 44.66
+  },
+  {
+   "w": "here",
+   "start": 44.66,
+   "end": 44.84
+  },
+  {
+   "w": "goes",
+   "start": 44.84,
+   "end": 45.02
+  },
+  {
+   "w": "your",
+   "start": 45.02,
+   "end": 45.16
+  },
+  {
+   "w": "money",
+   "start": 45.16,
+   "end": 45.36
+  },
+  {
+   "w": "back.",
+   "start": 45.36,
+   "end": 45.68
+  },
+  {
+   "w": "And",
+   "start": 45.9,
+   "end": 46.0
+  },
+  {
+   "w": "so",
+   "start": 46.0,
+   "end": 46.1
+  },
+  {
+   "w": "you're",
+   "start": 46.1,
+   "end": 46.2
+  },
+  {
+   "w": "getting",
+   "start": 46.2,
+   "end": 46.32
+  },
+  {
+   "w": "paid",
+   "start": 46.32,
+   "end": 46.7
+  },
+  {
+   "w": "to",
+   "start": 46.7,
+   "end": 47.06
+  },
+  {
+   "w": "essentially",
+   "start": 47.06,
+   "end": 47.36
+  },
+  {
+   "w": "buy",
+   "start": 47.36,
+   "end": 47.62
+  },
+  {
+   "w": "the",
+   "start": 47.62,
+   "end": 47.74
+  },
+  {
+   "w": "property,",
+   "start": 47.74,
+   "end": 48.14
+  },
+  {
+   "w": "which",
+   "start": 48.44,
+   "end": 48.48
+  },
+  {
+   "w": "is",
+   "start": 48.48,
+   "end": 48.68
+  },
+  {
+   "w": "pretty.",
+   "start": 48.68,
+   "end": 48.98
+  }
+ ]
+}
