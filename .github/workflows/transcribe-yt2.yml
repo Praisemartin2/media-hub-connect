@@ -2,7 +2,7 @@ name: Transcribe YT2 clips
 on:
   push:
     branches: [claude/ekabo-video-editing-styles-wrs455]
-    paths: ['.github/workflows/transcribe-yt2.yml','.github/scripts/transcribe_yt2.py']
+    paths: ['.github/workflows/transcribe-yt2.yml','.github/scripts/transcribe_va.py']
   workflow_dispatch: {}
 permissions:
   contents: write
@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: pip install -q faster-whisper && python3 .github/scripts/transcribe_yt2.py
+      - run: pip install -q faster-whisper && python3 .github/scripts/transcribe_va.py
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add yt2clips/*_tr.json
-          git commit -m "Add YT2 clip transcripts [skip ci]" || echo nothing
+          git add va/clip_va_tr.json
+          git commit -m "Add VA clip transcript [skip ci]" || echo nothing
           git push
