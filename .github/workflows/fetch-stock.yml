@@ -2,7 +2,7 @@ name: Fetch stock photo candidates
 on:
   push:
     branches: [claude/ekabo-video-editing-styles-wrs455]
-    paths: ['.github/workflows/fetch-stock.yml', '.github/scripts/fetch_stock.py']
+    paths: ['.github/workflows/fetch-stock.yml', '.github/scripts/fetch_stock_va.py']
   workflow_dispatch: {}
 permissions:
   contents: write
@@ -12,11 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Search Commons and download candidates
-        run: python3 .github/scripts/fetch_stock.py
+        run: python3 .github/scripts/fetch_stock_va.py
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add stock/
-          git commit -m "Add stock photo candidates [skip ci]" || echo "nothing to commit"
+          git add stockva/
+          git commit -m "Add VA stock photo candidates [skip ci]" || echo "nothing to commit"
           git push
