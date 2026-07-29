@@ -14,10 +14,10 @@ jobs:
       - name: Download clip
         run: |
           set -e
-          mkdir -p loan
-          # Episode 3 (CPv_mmUbVTc) — clip_05, "Commercial Loan Mistake" (score 8.9)
-          curl -fsSL -o loan/clip_loan.mp4 "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/CPv_mmUbVTc/f407374d-7e1c-4685-82a8-881c6fad2500/clips/clip_05.mp4"
-          ls -la loan/
+          mkdir -p storage
+          # Episode 3 (CPv_mmUbVTc) — clip_06, "11 Acres / $2.2M Storage" (score 8.5)
+          curl -fsSL -o storage/clip_storage.mp4 "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/CPv_mmUbVTc/f407374d-7e1c-4685-82a8-881c6fad2500/clips/clip_06.mp4"
+          ls -la storage/
       - name: Transcribe
         run: |
           pip install -q faster-whisper
@@ -25,19 +25,19 @@ jobs:
           import json
           from faster_whisper import WhisperModel
           m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          segments, info = m.transcribe("loan/clip_loan.mp4", word_timestamps=True, vad_filter=True)
+          segments, info = m.transcribe("storage/clip_storage.mp4", word_timestamps=True, vad_filter=True)
           words, segs = [], []
           for s in segments:
               segs.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()})
               for w in (s.words or []):
                   words.append({"w": w.word.strip(), "start": round(w.start,3), "end": round(w.end,3)})
-          json.dump({"segments":segs,"words":words}, open("loan/clip_loan_tr.json","w"), indent=1)
+          json.dump({"segments":segs,"words":words}, open("storage/clip_storage_tr.json","w"), indent=1)
           print(len(words), "words")
           PY
       - name: Commit assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add loan/
-          git commit -m "Add commercial-loan clip + transcript [skip ci]"
+          git add storage/
+          git commit -m "Add storage clip + transcript [skip ci]"
           git push
