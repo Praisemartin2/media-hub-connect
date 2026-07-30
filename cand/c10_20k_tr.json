@@ -1,0 +1,541 @@
+{
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 2.94,
+   "text": "On the low months, somewhere around 10, 11K,"
+  },
+  {
+   "start": 3.32,
+   "end": 5.06,
+   "text": "on the higher months, like summer months"
+  },
+  {
+   "start": 5.06,
+   "end": 6.86,
+   "text": "where you start to get like the World Cup"
+  },
+  {
+   "start": 6.86,
+   "end": 7.78,
+   "text": "and these type of bookings,"
+  },
+  {
+   "start": 8.08,
+   "end": 9.56,
+   "text": "we've crossed the 20K threshold."
+  },
+  {
+   "start": 9.96,
+   "end": 12.32,
+   "text": "Yeah, man, hey, that'll replace a day job."
+  },
+  {
+   "start": 12.8,
+   "end": 15.12,
+   "text": "Pretty smooth, I like that, I like that."
+  },
+  {
+   "start": 15.5,
+   "end": 16.36,
+   "text": "That's awesome, man,"
+  },
+  {
+   "start": 16.42,
+   "end": 20.24,
+   "text": "and I like that you found a niche within real estate"
+  },
+  {
+   "start": 20.24,
+   "end": 22.54,
+   "text": "to start bringing in additional income."
+  },
+  {
+   "start": 22.68,
+   "end": 25.34,
+   "text": "A lot of people either do what I do or flip houses,"
+  },
+  {
+   "start": 25.42,
+   "end": 26.96,
+   "text": "or they become an agent"
+  },
+  {
+   "start": 26.96,
+   "end": 29.08,
+   "text": "and start helping people from that perspective."
+  }
+ ],
+ "words": [
+  {
+   "w": "On",
+   "start": 0.0,
+   "end": 0.08
+  },
+  {
+   "w": "the",
+   "start": 0.08,
+   "end": 0.24
+  },
+  {
+   "w": "low",
+   "start": 0.24,
+   "end": 0.6
+  },
+  {
+   "w": "months,",
+   "start": 0.6,
+   "end": 0.96
+  },
+  {
+   "w": "somewhere",
+   "start": 1.22,
+   "end": 1.58
+  },
+  {
+   "w": "around",
+   "start": 1.58,
+   "end": 1.94
+  },
+  {
+   "w": "10,",
+   "start": 1.94,
+   "end": 2.26
+  },
+  {
+   "w": "11K,",
+   "start": 2.42,
+   "end": 2.94
+  },
+  {
+   "w": "on",
+   "start": 3.32,
+   "end": 3.46
+  },
+  {
+   "w": "the",
+   "start": 3.46,
+   "end": 3.64
+  },
+  {
+   "w": "higher",
+   "start": 3.64,
+   "end": 3.98
+  },
+  {
+   "w": "months,",
+   "start": 3.98,
+   "end": 4.26
+  },
+  {
+   "w": "like",
+   "start": 4.42,
+   "end": 4.48
+  },
+  {
+   "w": "summer",
+   "start": 4.48,
+   "end": 4.76
+  },
+  {
+   "w": "months",
+   "start": 4.76,
+   "end": 5.06
+  },
+  {
+   "w": "where",
+   "start": 5.06,
+   "end": 5.22
+  },
+  {
+   "w": "you",
+   "start": 5.22,
+   "end": 5.3
+  },
+  {
+   "w": "start",
+   "start": 5.3,
+   "end": 5.46
+  },
+  {
+   "w": "to",
+   "start": 5.46,
+   "end": 5.62
+  },
+  {
+   "w": "get",
+   "start": 5.62,
+   "end": 5.8
+  },
+  {
+   "w": "like",
+   "start": 5.8,
+   "end": 6.36
+  },
+  {
+   "w": "the",
+   "start": 6.36,
+   "end": 6.48
+  },
+  {
+   "w": "World",
+   "start": 6.48,
+   "end": 6.68
+  },
+  {
+   "w": "Cup",
+   "start": 6.68,
+   "end": 6.86
+  },
+  {
+   "w": "and",
+   "start": 6.86,
+   "end": 7.04
+  },
+  {
+   "w": "these",
+   "start": 7.04,
+   "end": 7.18
+  },
+  {
+   "w": "type",
+   "start": 7.18,
+   "end": 7.32
+  },
+  {
+   "w": "of",
+   "start": 7.32,
+   "end": 7.42
+  },
+  {
+   "w": "bookings,",
+   "start": 7.42,
+   "end": 7.78
+  },
+  {
+   "w": "we've",
+   "start": 8.08,
+   "end": 8.42
+  },
+  {
+   "w": "crossed",
+   "start": 8.42,
+   "end": 8.68
+  },
+  {
+   "w": "the",
+   "start": 8.68,
+   "end": 8.88
+  },
+  {
+   "w": "20K",
+   "start": 8.88,
+   "end": 9.28
+  },
+  {
+   "w": "threshold.",
+   "start": 9.28,
+   "end": 9.56
+  },
+  {
+   "w": "Yeah,",
+   "start": 9.96,
+   "end": 10.24
+  },
+  {
+   "w": "man,",
+   "start": 10.4,
+   "end": 10.44
+  },
+  {
+   "w": "hey,",
+   "start": 10.52,
+   "end": 10.64
+  },
+  {
+   "w": "that'll",
+   "start": 10.72,
+   "end": 11.42
+  },
+  {
+   "w": "replace",
+   "start": 11.42,
+   "end": 11.68
+  },
+  {
+   "w": "a",
+   "start": 11.68,
+   "end": 11.88
+  },
+  {
+   "w": "day",
+   "start": 11.88,
+   "end": 12.04
+  },
+  {
+   "w": "job.",
+   "start": 12.04,
+   "end": 12.32
+  },
+  {
+   "w": "Pretty",
+   "start": 12.8,
+   "end": 13.06
+  },
+  {
+   "w": "smooth,",
+   "start": 13.06,
+   "end": 13.7
+  },
+  {
+   "w": "I",
+   "start": 13.92,
+   "end": 14.02
+  },
+  {
+   "w": "like",
+   "start": 14.02,
+   "end": 14.24
+  },
+  {
+   "w": "that,",
+   "start": 14.24,
+   "end": 14.46
+  },
+  {
+   "w": "I",
+   "start": 14.56,
+   "end": 14.7
+  },
+  {
+   "w": "like",
+   "start": 14.7,
+   "end": 14.92
+  },
+  {
+   "w": "that.",
+   "start": 14.92,
+   "end": 15.12
+  },
+  {
+   "w": "That's",
+   "start": 15.5,
+   "end": 15.8
+  },
+  {
+   "w": "awesome,",
+   "start": 15.8,
+   "end": 16.14
+  },
+  {
+   "w": "man,",
+   "start": 16.16,
+   "end": 16.36
+  },
+  {
+   "w": "and",
+   "start": 16.42,
+   "end": 16.5
+  },
+  {
+   "w": "I",
+   "start": 16.5,
+   "end": 16.66
+  },
+  {
+   "w": "like",
+   "start": 16.66,
+   "end": 16.86
+  },
+  {
+   "w": "that",
+   "start": 16.86,
+   "end": 17.1
+  },
+  {
+   "w": "you",
+   "start": 17.1,
+   "end": 17.44
+  },
+  {
+   "w": "found",
+   "start": 17.44,
+   "end": 17.94
+  },
+  {
+   "w": "a",
+   "start": 17.94,
+   "end": 18.44
+  },
+  {
+   "w": "niche",
+   "start": 18.44,
+   "end": 19.04
+  },
+  {
+   "w": "within",
+   "start": 19.04,
+   "end": 19.6
+  },
+  {
+   "w": "real",
+   "start": 19.6,
+   "end": 19.88
+  },
+  {
+   "w": "estate",
+   "start": 19.88,
+   "end": 20.24
+  },
+  {
+   "w": "to",
+   "start": 20.24,
+   "end": 20.78
+  },
+  {
+   "w": "start",
+   "start": 20.78,
+   "end": 21.04
+  },
+  {
+   "w": "bringing",
+   "start": 21.04,
+   "end": 21.32
+  },
+  {
+   "w": "in",
+   "start": 21.32,
+   "end": 21.56
+  },
+  {
+   "w": "additional",
+   "start": 21.56,
+   "end": 22.06
+  },
+  {
+   "w": "income.",
+   "start": 22.06,
+   "end": 22.54
+  },
+  {
+   "w": "A",
+   "start": 22.68,
+   "end": 22.76
+  },
+  {
+   "w": "lot",
+   "start": 22.76,
+   "end": 22.9
+  },
+  {
+   "w": "of",
+   "start": 22.9,
+   "end": 23.02
+  },
+  {
+   "w": "people",
+   "start": 23.02,
+   "end": 23.36
+  },
+  {
+   "w": "either",
+   "start": 23.36,
+   "end": 24.1
+  },
+  {
+   "w": "do",
+   "start": 24.1,
+   "end": 24.36
+  },
+  {
+   "w": "what",
+   "start": 24.36,
+   "end": 24.46
+  },
+  {
+   "w": "I",
+   "start": 24.46,
+   "end": 24.56
+  },
+  {
+   "w": "do",
+   "start": 24.56,
+   "end": 24.7
+  },
+  {
+   "w": "or",
+   "start": 24.7,
+   "end": 24.84
+  },
+  {
+   "w": "flip",
+   "start": 24.84,
+   "end": 24.98
+  },
+  {
+   "w": "houses,",
+   "start": 24.98,
+   "end": 25.34
+  },
+  {
+   "w": "or",
+   "start": 25.42,
+   "end": 25.74
+  },
+  {
+   "w": "they",
+   "start": 25.74,
+   "end": 25.92
+  },
+  {
+   "w": "become",
+   "start": 25.92,
+   "end": 26.32
+  },
+  {
+   "w": "an",
+   "start": 26.32,
+   "end": 26.54
+  },
+  {
+   "w": "agent",
+   "start": 26.54,
+   "end": 26.96
+  },
+  {
+   "w": "and",
+   "start": 26.96,
+   "end": 27.26
+  },
+  {
+   "w": "start",
+   "start": 27.26,
+   "end": 27.54
+  },
+  {
+   "w": "helping",
+   "start": 27.54,
+   "end": 27.86
+  },
+  {
+   "w": "people",
+   "start": 27.86,
+   "end": 28.16
+  },
+  {
+   "w": "from",
+   "start": 28.16,
+   "end": 28.38
+  },
+  {
+   "w": "that",
+   "start": 28.38,
+   "end": 28.64
+  },
+  {
+   "w": "perspective.",
+   "start": 28.64,
+   "end": 29.08
+  }
+ ]
+}

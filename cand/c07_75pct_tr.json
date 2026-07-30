@@ -1,0 +1,541 @@
+{
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 2.16,
+   "text": "We're now at like 75% occupied."
+  },
+  {
+   "start": 2.64,
+   "end": 4.5,
+   "text": "I love storage now, it's amazing."
+  },
+  {
+   "start": 5.28,
+   "end": 7.58,
+   "text": "Literally, we're running it with one VA and one handyman"
+  },
+  {
+   "start": 7.58,
+   "end": 9.38,
+   "text": "in like a text group chat, which is awesome."
+  },
+  {
+   "start": 10.08,
+   "end": 12.84,
+   "text": "Okay, so you build for 2.2."
+  },
+  {
+   "start": 13.38,
+   "end": 15.5,
+   "text": "So what's that put you in terms of like,"
+  },
+  {
+   "start": 15.56,
+   "end": 18.18,
+   "text": "what's your debt service on that versus what are you bringing"
+  },
+  {
+   "start": 18.18,
+   "end": 19.94,
+   "text": "in from a money perspective?"
+  },
+  {
+   "start": 20.14,
+   "end": 22.26,
+   "text": "Because you said you're what, 75, 85% occupied?"
+  },
+  {
+   "start": 22.46,
+   "end": 23.84,
+   "text": "So we're 75% occupied."
+  },
+  {
+   "start": 24.08,
+   "end": 26.52,
+   "text": "Last month, we brought in a little bit over 15K."
+  },
+  {
+   "start": 26.52,
+   "end": 29.22,
+   "text": "And the note on this is around."
+  }
+ ],
+ "words": [
+  {
+   "w": "We're",
+   "start": 0.0,
+   "end": 0.22
+  },
+  {
+   "w": "now",
+   "start": 0.22,
+   "end": 0.4
+  },
+  {
+   "w": "at",
+   "start": 0.4,
+   "end": 0.54
+  },
+  {
+   "w": "like",
+   "start": 0.54,
+   "end": 0.68
+  },
+  {
+   "w": "75",
+   "start": 0.68,
+   "end": 1.18
+  },
+  {
+   "w": "%",
+   "start": 1.18,
+   "end": 1.78
+  },
+  {
+   "w": "occupied.",
+   "start": 1.78,
+   "end": 2.16
+  },
+  {
+   "w": "I",
+   "start": 2.64,
+   "end": 2.76
+  },
+  {
+   "w": "love",
+   "start": 2.76,
+   "end": 3.16
+  },
+  {
+   "w": "storage",
+   "start": 3.16,
+   "end": 3.52
+  },
+  {
+   "w": "now,",
+   "start": 3.52,
+   "end": 3.86
+  },
+  {
+   "w": "it's",
+   "start": 3.96,
+   "end": 4.12
+  },
+  {
+   "w": "amazing.",
+   "start": 4.12,
+   "end": 4.5
+  },
+  {
+   "w": "Literally,",
+   "start": 5.28,
+   "end": 5.28
+  },
+  {
+   "w": "we're",
+   "start": 5.32,
+   "end": 5.74
+  },
+  {
+   "w": "running",
+   "start": 5.74,
+   "end": 5.92
+  },
+  {
+   "w": "it",
+   "start": 5.92,
+   "end": 6.1
+  },
+  {
+   "w": "with",
+   "start": 6.1,
+   "end": 6.24
+  },
+  {
+   "w": "one",
+   "start": 6.24,
+   "end": 6.44
+  },
+  {
+   "w": "VA",
+   "start": 6.44,
+   "end": 6.78
+  },
+  {
+   "w": "and",
+   "start": 6.78,
+   "end": 6.96
+  },
+  {
+   "w": "one",
+   "start": 6.96,
+   "end": 7.12
+  },
+  {
+   "w": "handyman",
+   "start": 7.12,
+   "end": 7.58
+  },
+  {
+   "w": "in",
+   "start": 7.58,
+   "end": 8.02
+  },
+  {
+   "w": "like",
+   "start": 8.02,
+   "end": 8.14
+  },
+  {
+   "w": "a",
+   "start": 8.14,
+   "end": 8.28
+  },
+  {
+   "w": "text",
+   "start": 8.28,
+   "end": 8.44
+  },
+  {
+   "w": "group",
+   "start": 8.44,
+   "end": 8.68
+  },
+  {
+   "w": "chat,",
+   "start": 8.68,
+   "end": 8.9
+  },
+  {
+   "w": "which",
+   "start": 8.9,
+   "end": 9.06
+  },
+  {
+   "w": "is",
+   "start": 9.06,
+   "end": 9.16
+  },
+  {
+   "w": "awesome.",
+   "start": 9.16,
+   "end": 9.38
+  },
+  {
+   "w": "Okay,",
+   "start": 10.08,
+   "end": 10.08
+  },
+  {
+   "w": "so",
+   "start": 10.28,
+   "end": 10.46
+  },
+  {
+   "w": "you",
+   "start": 10.46,
+   "end": 10.76
+  },
+  {
+   "w": "build",
+   "start": 10.76,
+   "end": 11.6
+  },
+  {
+   "w": "for",
+   "start": 11.6,
+   "end": 11.86
+  },
+  {
+   "w": "2",
+   "start": 11.86,
+   "end": 12.14
+  },
+  {
+   "w": ".2.",
+   "start": 12.14,
+   "end": 12.84
+  },
+  {
+   "w": "So",
+   "start": 13.38,
+   "end": 13.56
+  },
+  {
+   "w": "what's",
+   "start": 13.56,
+   "end": 13.88
+  },
+  {
+   "w": "that",
+   "start": 13.88,
+   "end": 14.08
+  },
+  {
+   "w": "put",
+   "start": 14.08,
+   "end": 14.26
+  },
+  {
+   "w": "you",
+   "start": 14.26,
+   "end": 14.58
+  },
+  {
+   "w": "in",
+   "start": 14.58,
+   "end": 14.92
+  },
+  {
+   "w": "terms",
+   "start": 14.92,
+   "end": 15.16
+  },
+  {
+   "w": "of",
+   "start": 15.16,
+   "end": 15.34
+  },
+  {
+   "w": "like,",
+   "start": 15.34,
+   "end": 15.5
+  },
+  {
+   "w": "what's",
+   "start": 15.56,
+   "end": 15.7
+  },
+  {
+   "w": "your",
+   "start": 15.7,
+   "end": 15.84
+  },
+  {
+   "w": "debt",
+   "start": 15.84,
+   "end": 16.04
+  },
+  {
+   "w": "service",
+   "start": 16.04,
+   "end": 16.38
+  },
+  {
+   "w": "on",
+   "start": 16.38,
+   "end": 16.58
+  },
+  {
+   "w": "that",
+   "start": 16.58,
+   "end": 16.84
+  },
+  {
+   "w": "versus",
+   "start": 16.84,
+   "end": 17.16
+  },
+  {
+   "w": "what",
+   "start": 17.16,
+   "end": 17.56
+  },
+  {
+   "w": "are",
+   "start": 17.56,
+   "end": 17.68
+  },
+  {
+   "w": "you",
+   "start": 17.68,
+   "end": 17.94
+  },
+  {
+   "w": "bringing",
+   "start": 17.94,
+   "end": 18.18
+  },
+  {
+   "w": "in",
+   "start": 18.18,
+   "end": 18.5
+  },
+  {
+   "w": "from",
+   "start": 18.5,
+   "end": 18.78
+  },
+  {
+   "w": "a",
+   "start": 18.78,
+   "end": 19.0
+  },
+  {
+   "w": "money",
+   "start": 19.0,
+   "end": 19.42
+  },
+  {
+   "w": "perspective?",
+   "start": 19.42,
+   "end": 19.94
+  },
+  {
+   "w": "Because",
+   "start": 20.14,
+   "end": 20.18
+  },
+  {
+   "w": "you",
+   "start": 20.18,
+   "end": 20.28
+  },
+  {
+   "w": "said",
+   "start": 20.28,
+   "end": 20.44
+  },
+  {
+   "w": "you're",
+   "start": 20.44,
+   "end": 20.64
+  },
+  {
+   "w": "what,",
+   "start": 20.64,
+   "end": 20.74
+  },
+  {
+   "w": "75,",
+   "start": 20.82,
+   "end": 21.1
+  },
+  {
+   "w": "85",
+   "start": 21.3,
+   "end": 21.5
+  },
+  {
+   "w": "%",
+   "start": 21.5,
+   "end": 21.92
+  },
+  {
+   "w": "occupied?",
+   "start": 21.92,
+   "end": 22.26
+  },
+  {
+   "w": "So",
+   "start": 22.46,
+   "end": 22.66
+  },
+  {
+   "w": "we're",
+   "start": 22.66,
+   "end": 22.8
+  },
+  {
+   "w": "75",
+   "start": 22.8,
+   "end": 23.12
+  },
+  {
+   "w": "%",
+   "start": 23.12,
+   "end": 23.4
+  },
+  {
+   "w": "occupied.",
+   "start": 23.4,
+   "end": 23.84
+  },
+  {
+   "w": "Last",
+   "start": 24.08,
+   "end": 24.24
+  },
+  {
+   "w": "month,",
+   "start": 24.24,
+   "end": 24.48
+  },
+  {
+   "w": "we",
+   "start": 24.5,
+   "end": 24.68
+  },
+  {
+   "w": "brought",
+   "start": 24.68,
+   "end": 24.86
+  },
+  {
+   "w": "in",
+   "start": 24.86,
+   "end": 25.0
+  },
+  {
+   "w": "a",
+   "start": 25.0,
+   "end": 25.12
+  },
+  {
+   "w": "little",
+   "start": 25.12,
+   "end": 25.26
+  },
+  {
+   "w": "bit",
+   "start": 25.26,
+   "end": 25.44
+  },
+  {
+   "w": "over",
+   "start": 25.44,
+   "end": 25.72
+  },
+  {
+   "w": "15K.",
+   "start": 25.72,
+   "end": 26.52
+  },
+  {
+   "w": "And",
+   "start": 26.52,
+   "end": 27.26
+  },
+  {
+   "w": "the",
+   "start": 27.26,
+   "end": 27.86
+  },
+  {
+   "w": "note",
+   "start": 27.86,
+   "end": 28.16
+  },
+  {
+   "w": "on",
+   "start": 28.16,
+   "end": 28.4
+  },
+  {
+   "w": "this",
+   "start": 28.4,
+   "end": 28.66
+  },
+  {
+   "w": "is",
+   "start": 28.66,
+   "end": 28.92
+  },
+  {
+   "w": "around.",
+   "start": 28.92,
+   "end": 29.22
+  }
+ ]
+}
