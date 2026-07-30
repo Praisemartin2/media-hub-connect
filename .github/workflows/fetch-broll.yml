@@ -11,33 +11,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download clip
+      - name: Download candidate clips
         run: |
           set -e
-          mkdir -p storage
-          # Episode 3 (CPv_mmUbVTc) — clip_06, "11 Acres / $2.2M Storage" (score 8.5)
-          curl -fsSL -o storage/clip_storage.mp4 "https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/CPv_mmUbVTc/f407374d-7e1c-4685-82a8-881c6fad2500/clips/clip_06.mp4"
-          ls -la storage/
-      - name: Transcribe
+          mkdir -p cand
+          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/CPv_mmUbVTc/f407374d-7e1c-4685-82a8-881c6fad2500/clips"
+          curl -fsSL -o cand/c04_12units.mp4 "$b/clip_04.mp4"   # 8.4
+          curl -fsSL -o cand/c03_paycut.mp4  "$b/clip_03.mp4"   # 8.2
+          curl -fsSL -o cand/c10_20k.mp4     "$b/clip_10.mp4"   # 8.1
+          curl -fsSL -o cand/c07_75pct.mp4   "$b/clip_07.mp4"   # 8.0
+          ls -la cand/
+      - name: Transcribe all
         run: |
           pip install -q faster-whisper
           python3 - <<'PY'
-          import json
+          import json, glob, os
           from faster_whisper import WhisperModel
           m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          segments, info = m.transcribe("storage/clip_storage.mp4", word_timestamps=True, vad_filter=True)
-          words, segs = [], []
-          for s in segments:
-              segs.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()})
-              for w in (s.words or []):
-                  words.append({"w": w.word.strip(), "start": round(w.start,3), "end": round(w.end,3)})
-          json.dump({"segments":segs,"words":words}, open("storage/clip_storage_tr.json","w"), indent=1)
-          print(len(words), "words")
+          for f in sorted(glob.glob("cand/*.mp4")):
+              key = os.path.splitext(f)[0]
+              segments, info = m.transcribe(f, word_timestamps=True, vad_filter=True)
+              words, segs = [], []
+              for s in segments:
+                  segs.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()})
+                  for w in (s.words or []):
+                      words.append({"w": w.word.strip(), "start": round(w.start,3), "end": round(w.end,3)})
+              json.dump({"segments":segs,"words":words}, open(key+"_tr.json","w"), indent=1)
+              print(f, len(words), "words")
           PY
       - name: Commit assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add storage/
-          git commit -m "Add storage clip + transcript [skip ci]"
+          git add cand/
+          git commit -m "Add candidate clips + transcripts [skip ci]"
           git push
