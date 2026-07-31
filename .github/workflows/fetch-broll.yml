@@ -11,38 +11,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download candidate clips
+      - name: Download carousel imagery
         run: |
           set -e
-          mkdir -p cand
-          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/CPv_mmUbVTc/f407374d-7e1c-4685-82a8-881c6fad2500/clips"
-          curl -fsSL -o cand/c04_12units.mp4 "$b/clip_04.mp4"   # 8.4
-          curl -fsSL -o cand/c03_paycut.mp4  "$b/clip_03.mp4"   # 8.2
-          curl -fsSL -o cand/c10_20k.mp4     "$b/clip_10.mp4"   # 8.1
-          curl -fsSL -o cand/c07_75pct.mp4   "$b/clip_07.mp4"   # 8.0
-          ls -la cand/
-      - name: Transcribe all
-        run: |
-          pip install -q faster-whisper
-          python3 - <<'PY'
-          import json, glob, os
-          from faster_whisper import WhisperModel
-          m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          for f in sorted(glob.glob("cand/*.mp4")):
-              key = os.path.splitext(f)[0]
-              segments, info = m.transcribe(f, word_timestamps=True, vad_filter=True)
-              words, segs = [], []
-              for s in segments:
-                  segs.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()})
-                  for w in (s.words or []):
-                      words.append({"w": w.word.strip(), "start": round(w.start,3), "end": round(w.end,3)})
-              json.dump({"segments":segs,"words":words}, open(key+"_tr.json","w"), indent=1)
-              print(f, len(words), "words")
-          PY
+          hf="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
+          mkdir -p carousel
+          # Higgsfield — 4 cover houses + 1 interior
+          curl -fsSL -o carousel/h1_bungalow.png  "$hf/hf_20260731_010248_787686d3-3682-409c-80b9-381f317cef46.png"
+          curl -fsSL -o carousel/h2_colonial.png  "$hf/hf_20260731_010259_46851c82-f62f-465b-b9b1-eec2a8f056e9.png"
+          curl -fsSL -o carousel/h3_farmhouse.png "$hf/hf_20260731_010304_00044f4f-e191-4592-be28-8399036b53ed.png"
+          curl -fsSL -o carousel/h4_tudor.png     "$hf/hf_20260731_010317_5db39205-4b62-42a3-85d0-ceadd4d443f9.png"
+          curl -fsSL -o carousel/i1_bench.png     "$hf/hf_20260731_010322_74bada11-2b89-4f6b-846e-2a0c3326b387.png"
+          # Canva — 4 more interiors
+          curl -fsSL -o carousel/i2_sofa.jpg "https://export-download.canva.com/RKnxc/DAHQ6QRKnxc/-1/0/0001-9066257225923312965.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260730%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260730T165033Z&X-Amz-Expires=34033&X-Amz-Signature=e820231e81d1b75b124e0dabb301c7de45c2e3bedb53b59e51bbc97aeb4694a4&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2031%20Jul%202026%2002%3A17%3A46%20GMT"
+          curl -fsSL -o carousel/i3_desk.jpg "https://export-download.canva.com/fOgJU/DAHQ6XfOgJU/-1/0/0001-730094315565289858.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260730%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260730T110838Z&X-Amz-Expires=57328&X-Amz-Signature=9a37098f6c0523336faa5e500e23c6b20771baf98fd0d5dc0c84ea97c4d17ab1&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2031%20Jul%202026%2003%3A04%3A06%20GMT"
+          curl -fsSL -o carousel/i4_console.jpg "https://export-download.canva.com/KKOCY/DAHQ6eKKOCY/-1/0/0001-2979642330757083904.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260730%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260730T121617Z&X-Amz-Expires=53322&X-Amz-Signature=1041bc8df9332abc626fb27c666a8466197a94d70e3a3232ff1e57655fa9bc98&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2031%20Jul%202026%2003%3A04%3A59%20GMT"
+          curl -fsSL -o carousel/i5_lounge.jpg "https://export-download.canva.com/V-IJs/DAHQ6dV-IJs/-1/0/0001-3360196497981621780.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260730%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260730T105637Z&X-Amz-Expires=57993&X-Amz-Signature=757c8059e61625783d2b961eda57fae3198c435314d4027070df4412e09ffa22&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2031%20Jul%202026%2003%3A03%3A10%20GMT"
+          ls -la carousel/
       - name: Commit assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cand/
-          git commit -m "Add candidate clips + transcripts [skip ci]"
+          git add carousel/
+          git commit -m "Add carousel imagery [skip ci]"
           git push
