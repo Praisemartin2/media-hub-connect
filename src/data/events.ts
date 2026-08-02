@@ -10,7 +10,14 @@ export type COFYEvent = {
   category: "Workshop" | "Fundraiser" | "Community" | "Outreach" | "Celebration";
   gradient: string;
   registerUrl?: string;
+  /** Pin this event to the lead slot on the Events page and homepage. */
+  featured?: boolean;
+  /** Promo film shown in the lead slot instead of a photo. */
+  video?: string;
 };
+
+/** Promo film for the TOTAL-36 Educational Mission, Summer 2026. */
+export const missionVideo = `${import.meta.env.BASE_URL}media/educational-mission-2026.mp4`;
 
 // "Today" reference for the site: 2026-06-25
 export const events: COFYEvent[] = [
@@ -42,6 +49,8 @@ export const events: COFYEvent[] = [
     category: "Workshop",
     gradient: "from-brand-blue to-brand-blue-dark",
     registerUrl: "https://forms.gle/hZ5bnRLH7MXq4bwr8",
+    featured: true,
+    video: `${import.meta.env.BASE_URL}media/educational-mission-2026.mp4`,
   },
   {
     id: "educational-summit-2026-imo",

@@ -12,20 +12,10 @@ import {
 import { Reveal } from "@/components/shared/Reveal";
 import { Sunburst } from "@/components/shared/Sunburst";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SEO } from "@/components/shared/SEO";
+import { FeaturedEvent } from "@/components/events/FeaturedEvent";
 import { events, type COFYEvent } from "@/data/events";
 import { isUpcoming, dateParts, formatDateRange, formatPlace } from "@/lib/format";
-import { photos, plateFallback, type PhotoKey } from "@/data/photos";
-
-/** Photo representing each type of event (main square imagery). */
-const categoryPhoto: Record<COFYEvent["category"], PhotoKey> = {
-  Workshop: "workshop",
-  Outreach: "outreach",
-  Community: "community",
-  Fundraiser: "books",
-  Celebration: "volunteers",
-};
 
 /** Square date block: month + day (and end day for ranges). */
 function DateSquare({ event, past = false }: { event: COFYEvent; past?: boolean }) {
@@ -85,16 +75,16 @@ function EventRow({ event, past = false }: { event: COFYEvent; past?: boolean })
 const Events = () => {
   const { upcoming, past } = useMemo(() => {
     const up = events
-      .filter((e) => isUpcoming(e.date))
+      .filter((e) => isUpcoming(e.date, e.endDate))
       .sort((a, b) => a.date.localeCompare(b.date));
     const pa = events
-      .filter((e) => !isUpcoming(e.date))
+      .filter((e) => !isUpcoming(e.date, e.endDate))
       .sort((a, b) => b.date.localeCompare(a.date));
     return { upcoming: up, past: pa };
   }, []);
 
-  const featured = upcoming[0];
-  const featuredPhoto = featured ? photos[categoryPhoto[featured.category]] : undefined;
+  const featured = upcoming.find((e) => e.featured) ?? upcoming[0];
+  const rest = upcoming.filter((e) => e.id !== featured?.id);
   const [pastHighlight, ...pastRest] = past;
 
   return (
@@ -103,16 +93,78 @@ const Events = () => {
         title="Events — Upcoming & Past | COFY"
         description="Find upcoming COFY events — workshops, summits, community days and outreach — plus highlights from past gatherings."
       />
+      {/* Upcoming */}
       <section className="py-10 lg:py-16">
-        <div className="container-cofy grid gap-14 lg:grid-cols-2 lg:gap-10">
-          {/* Past — left */}
-          <div>
-            <div className="mb-8 flex items-center gap-2">
-              <History className="h-5 w-5 text-primary" />
-              <h2 className="font-display text-2xl font-bold sm:text-3xl">Past events</h2>
-            </div>
+        <div className="container-cofy">
+          <div className="mb-8 flex items-center gap-2">
+            <CalendarClock className="h-5 w-5 text-primary" />
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">Upcoming</h2>
+          </div>
 
-            {/* Past highlight */}
+          {upcoming.length > 0 ? (
+            <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+              {/* Lead slot: the current event */}
+              {featured && (
+                <Reveal>
+                  <FeaturedEvent event={featured} />
+                  <p className="mt-6 text-sm font-bold uppercase tracking-wider text-primary">
+                    {formatDateRange(featured.date, featured.endDate)}
+                  </p>
+                  <h3 className="mt-1 font-display text-2xl font-bold leading-tight sm:text-3xl">
+                    {featured.title}
+                  </h3>
+                  <p className="mt-3 flex items-start gap-1.5 text-sm text-muted-foreground">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{formatPlace(featured.venue, featured.location)}</span>
+                  </p>
+                  <p className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <Clock className="h-4 w-4 shrink-0 text-primary" />
+                    {featured.time}
+                  </p>
+                  <p className="mt-4 font-serif text-base leading-relaxed text-muted-foreground">
+                    {featured.description}
+                  </p>
+                  {featured.registerUrl?.startsWith("http") && (
+                    <a
+                      href={featured.registerUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Register for ${featured.title}`}
+                      className="mt-6 inline-flex items-center gap-1.5 bg-primary px-6 py-3 font-display text-lg font-bold text-white transition-colors hover:bg-brand-blue-dark focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                    >
+                      Register now
+                      <ArrowUpRight className="h-5 w-5" />
+                    </a>
+                  )}
+                </Reveal>
+              )}
+
+              {/* Everything else, in date order */}
+              <div className="grid content-start gap-4">
+                {rest.map((event, i) => (
+                  <Reveal key={event.id} delay={i * 60}>
+                    <EventRow event={event} />
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p className="py-10 text-muted-foreground">
+              Nothing scheduled right now — new events are added often!
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* Past events */}
+      <section className="py-10 lg:py-16">
+        <div className="container-cofy">
+          <div className="mb-8 flex items-center gap-2">
+            <History className="h-5 w-5 text-primary" />
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">Past events</h2>
+          </div>
+
+          <div className="max-w-3xl">
             {pastHighlight && (
               <Reveal>
                 <div className="border border-border bg-brand-cream p-6 sm:p-8">
@@ -136,85 +188,6 @@ const Events = () => {
                   <EventRow event={event} past />
                 </Reveal>
               ))}
-            </div>
-          </div>
-
-          {/* Upcoming — right */}
-          <div>
-            <div className="mb-8 flex items-center gap-2">
-              <CalendarClock className="h-5 w-5 text-primary" />
-              <h2 className="font-display text-2xl font-bold sm:text-3xl">Upcoming</h2>
-            </div>
-
-            {/* Main square: next event with type photo */}
-            {featured && featuredPhoto && (
-              <Reveal>
-                <div className="relative aspect-square overflow-hidden">
-                  <img
-                    src={featuredPhoto.min}
-                    alt={featuredPhoto.alt}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src = plateFallback(
-                        categoryPhoto[featured.category],
-                      );
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"
-                    aria-hidden
-                  />
-                  <Badge className="absolute left-5 top-5 gap-1.5 border-0 bg-secondary font-bold text-secondary-foreground">
-                    Next up · {featured.category}
-                  </Badge>
-                  <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7 text-white">
-                    <div className="min-w-0">
-                      <p className="text-sm font-bold uppercase tracking-wider text-secondary">
-                        {formatDateRange(featured.date, featured.endDate)}
-                      </p>
-                      <h3 className="mt-1 font-display text-2xl font-bold leading-tight sm:text-3xl">
-                        {featured.title}
-                      </h3>
-                      <p className="mt-2 flex items-center gap-1.5 text-sm text-white/85">
-                        <MapPin className="h-4 w-4 shrink-0 text-secondary" />
-                        <span className="truncate">{formatPlace(featured.venue, featured.location)}</span>
-                      </p>
-                      <p className="mt-1 flex items-center gap-1.5 text-sm text-white/85">
-                        <Clock className="h-4 w-4 shrink-0 text-secondary" />
-                        {featured.time}
-                      </p>
-                    </div>
-                    {featured.registerUrl?.startsWith("http") && (
-                      <a
-                        href={featured.registerUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex shrink-0 items-center gap-1.5 bg-secondary px-5 py-3 font-display text-base font-bold text-secondary-foreground transition-colors hover:bg-brand-yellow-light"
-                      >
-                        Register
-                        <ArrowUpRight className="h-4 w-4" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-                <p className="mt-4 font-serif text-base leading-relaxed text-muted-foreground">
-                  {featured.description}
-                </p>
-              </Reveal>
-            )}
-
-            {/* Sequential square list */}
-            <div className="mt-8 grid gap-4">
-              {upcoming.slice(1).map((event, i) => (
-                <Reveal key={event.id} delay={i * 60}>
-                  <EventRow event={event} />
-                </Reveal>
-              ))}
-              {upcoming.length === 0 && (
-                <p className="py-10 text-center text-muted-foreground">
-                  Nothing scheduled right now — new events are added often!
-                </p>
-              )}
             </div>
           </div>
         </div>

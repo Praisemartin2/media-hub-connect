@@ -45,9 +45,18 @@ export function dateParts(iso: string): { month: string; day: string } {
   };
 }
 
-/** Today reference for the demo content. */
-export const TODAY = new Date("2026-06-25T00:00:00");
+/** Local midnight today — the reference point for upcoming vs. past. */
+export function today(): Date {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
 
-export function isUpcoming(iso: string): boolean {
-  return new Date(iso + "T00:00:00") >= TODAY;
+/**
+ * An event counts as upcoming while it is still running, so a multi-day
+ * event that has already started (e.g. a season-long book drive) stays in
+ * the upcoming list until its end date passes.
+ */
+export function isUpcoming(iso: string, endIso?: string): boolean {
+  return new Date((endIso ?? iso) + "T00:00:00") >= today();
 }
