@@ -19,7 +19,7 @@ Instagram via the official Graph API.
 - Address: 7 Woodbridge Ave, Sewaren, NJ 07077 · cofyincorporated@gmail.com · (732) 844-9392
 - President/Founder: Dr. Ngozi Martin-Oguike. Marketing & IT: Mr. Praise Martin-Oguike.
 - Website (this repo, auto-deployed from `main` via GitHub Pages):
-  **https://praisemartin2.github.io/media-hub-connect/**
+  **https://www.cofyouth.org/**
 - Brand: cobalt `#0064F0`, yellow `#FFBD12`, white; Oswald (display) + Inter;
   square corners; sunburst motif. Logo: `src/assets/cofy-logo.png`.
 
