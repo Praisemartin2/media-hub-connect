@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/shared/Reveal";
 import { Sunburst } from "@/components/shared/Sunburst";
+import { FeaturedEvent } from "@/components/events/FeaturedEvent";
 import { events } from "@/data/events";
 import { dateParts, formatDateRange, formatPlace, isUpcoming } from "@/lib/format";
 
@@ -12,10 +13,13 @@ import { dateParts, formatDateRange, formatPlace, isUpcoming } from "@/lib/forma
  */
 export function UpcomingEvents() {
   const upcoming = events
-    .filter((e) => isUpcoming(e.date))
+    .filter((e) => isUpcoming(e.date, e.endDate))
     .sort((a, b) => a.date.localeCompare(b.date));
 
   if (upcoming.length === 0) return null;
+
+  const featured = upcoming.find((e) => e.featured) ?? upcoming[0];
+  const rest = upcoming.filter((e) => e.id !== featured.id);
 
   return (
     <section className="relative overflow-hidden bg-secondary py-20 text-secondary-foreground lg:py-24">
@@ -33,8 +37,49 @@ export function UpcomingEvents() {
           charge. Register below.
         </p>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {upcoming.map((event, i) => {
+        {/* Lead slot: the current event, with its promo film */}
+        <Reveal>
+          <div className="mt-12 grid items-stretch gap-8 lg:grid-cols-2">
+            <FeaturedEvent event={featured} />
+            <div className="flex flex-col justify-center bg-white p-7 sm:p-10">
+              <p className="text-xs font-bold uppercase tracking-wider text-primary">
+                Happening next · {featured.category}
+              </p>
+              <h3 className="mt-2 font-display text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl">
+                {featured.title}
+              </h3>
+              <p className="mt-3 font-display text-lg font-bold text-foreground">
+                {formatDateRange(featured.date, featured.endDate)}
+              </p>
+              <p className="mt-4 flex items-start gap-1.5 text-sm text-muted-foreground">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <span>{formatPlace(featured.venue, featured.location)}</span>
+              </p>
+              <p className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground">
+                <Clock className="h-4 w-4 shrink-0 text-primary" />
+                {featured.time}
+              </p>
+              <p className="mt-5 font-serif text-base leading-relaxed text-foreground/75">
+                {featured.description}
+              </p>
+              {featured.registerUrl?.startsWith("http") && (
+                <a
+                  href={featured.registerUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Register for ${featured.title}`}
+                  className="mt-7 inline-flex w-fit items-center gap-1.5 bg-primary px-6 py-3 font-display text-lg font-bold text-white transition-colors hover:bg-brand-blue-dark focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                >
+                  Register now
+                  <ArrowUpRight className="h-5 w-5" />
+                </a>
+              )}
+            </div>
+          </div>
+        </Reveal>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {rest.map((event, i) => {
             const { month, day } = dateParts(event.date);
             const end = event.endDate ? dateParts(event.endDate) : undefined;
             const canRegister = event.registerUrl?.startsWith("http");

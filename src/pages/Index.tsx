@@ -21,7 +21,7 @@ const [featureProgram, ...cardPrograms] = programs;
 
 const Index = () => {
   const stories = mediaItems.slice(0, 3);
-  const nextEvents = events.filter((e) => isUpcoming(e.date)).slice(0, 3);
+  const nextEvents = events.filter((e) => isUpcoming(e.date, e.endDate)).slice(0, 3);
 
   return (
     <>
