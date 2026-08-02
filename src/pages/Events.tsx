@@ -105,7 +105,41 @@ const Events = () => {
       />
       <section className="py-10 lg:py-16">
         <div className="container-cofy grid gap-14 lg:grid-cols-2 lg:gap-10">
-          {/* Upcoming — left */}
+          {/* Past — left */}
+          <div>
+            <div className="mb-8 flex items-center gap-2">
+              <History className="h-5 w-5 text-primary" />
+              <h2 className="font-display text-2xl font-bold sm:text-3xl">Past events</h2>
+            </div>
+
+            {/* Past highlight */}
+            {pastHighlight && (
+              <Reveal>
+                <div className="border border-border bg-brand-cream p-6 sm:p-8">
+                  <p className="eyebrow font-display">Highlight</p>
+                  <h3 className="mt-2 font-display text-2xl font-bold leading-tight">
+                    {pastHighlight.title}
+                  </h3>
+                  <p className="mt-2 text-sm font-semibold text-muted-foreground">
+                    {formatDateRange(pastHighlight.date, pastHighlight.endDate)} · {pastHighlight.location}
+                  </p>
+                  <p className="mt-3 font-serif text-base leading-relaxed text-foreground/75">
+                    {pastHighlight.description}
+                  </p>
+                </div>
+              </Reveal>
+            )}
+
+            <div className="mt-8 grid gap-4">
+              {pastRest.map((event, i) => (
+                <Reveal key={event.id} delay={i * 60}>
+                  <EventRow event={event} past />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          {/* Upcoming — right */}
           <div>
             <div className="mb-8 flex items-center gap-2">
               <CalendarClock className="h-5 w-5 text-primary" />
@@ -181,40 +215,6 @@ const Events = () => {
                   Nothing scheduled right now — new events are added often!
                 </p>
               )}
-            </div>
-          </div>
-
-          {/* Past — right */}
-          <div>
-            <div className="mb-8 flex items-center gap-2">
-              <History className="h-5 w-5 text-primary" />
-              <h2 className="font-display text-2xl font-bold sm:text-3xl">Past events</h2>
-            </div>
-
-            {/* Past highlight */}
-            {pastHighlight && (
-              <Reveal>
-                <div className="border border-border bg-brand-cream p-6 sm:p-8">
-                  <p className="eyebrow font-display">Highlight</p>
-                  <h3 className="mt-2 font-display text-2xl font-bold leading-tight">
-                    {pastHighlight.title}
-                  </h3>
-                  <p className="mt-2 text-sm font-semibold text-muted-foreground">
-                    {formatDateRange(pastHighlight.date, pastHighlight.endDate)} · {pastHighlight.location}
-                  </p>
-                  <p className="mt-3 font-serif text-base leading-relaxed text-foreground/75">
-                    {pastHighlight.description}
-                  </p>
-                </div>
-              </Reveal>
-            )}
-
-            <div className="mt-8 grid gap-4">
-              {pastRest.map((event, i) => (
-                <Reveal key={event.id} delay={i * 60}>
-                  <EventRow event={event} past />
-                </Reveal>
-              ))}
             </div>
           </div>
         </div>
