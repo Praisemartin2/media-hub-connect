@@ -3,6 +3,7 @@ import { ArrowRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { VideoHero } from "@/components/home/VideoHero";
 import { KineticMission } from "@/components/home/KineticMission";
+import { UpcomingEvents } from "@/components/home/UpcomingEvents";
 import { Sunburst } from "@/components/shared/Sunburst";
 import { Reveal } from "@/components/shared/Reveal";
 import { MediaCard } from "@/components/cards/MediaCard";
@@ -29,6 +30,9 @@ const Index = () => {
         description={site.mission}
       />
       <VideoHero />
+
+      {/* Upcoming events — featured prominently */}
+      <UpcomingEvents />
 
       {/* 2 — Split feature: who we are */}
       <section id="mission" className="scroll-mt-24 py-20 lg:py-28">
