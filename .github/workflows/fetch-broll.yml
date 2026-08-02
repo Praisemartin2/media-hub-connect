@@ -11,19 +11,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download fonts
+      - name: Download carousel 2 imagery
         run: |
           set -e
-          mkdir -p fonts
-          g="https://raw.githubusercontent.com/google/fonts/main/ofl"
-          curl -fsSL -o "fonts/PlayfairDisplay.ttf"       "$g/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf"
-          curl -fsSL -o "fonts/PlayfairDisplay-Italic.ttf" "$g/playfairdisplay/PlayfairDisplay-Italic%5Bwght%5D.ttf"
-          curl -fsSL -o "fonts/Caveat.ttf"                "$g/caveat/Caveat%5Bwght%5D.ttf"
-          ls -la fonts/
+          mkdir -p carousel2
+          curl -fsSL -o carousel2/c1_duplex.jpg "https://export-download.canva.com/gtLGI/DAHRGkgtLGI/-1/0/0001-5894597402696770053.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260801%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260801T075229Z&X-Amz-Expires=75114&X-Amz-Signature=e0f5f5bfb9e356a926380823626199229075b1fb8ef92fd5eb5646642fbbe85b&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2002%20Aug%202026%2004%3A44%3A23%20GMT"
+          curl -fsSL -o carousel2/c2_multifamily.jpg "https://export-download.canva.com/OoAf4/DAHRG8OoAf4/-1/0/0001-2781484159004247680.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260801%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260801T143450Z&X-Amz-Expires=51915&X-Amz-Signature=3b71de4e8175c5c5cd2a5cc8afc168a382500e59d5c6c90efba4ebcf8506a670&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2002%20Aug%202026%2005%3A00%3A05%20GMT"
+          curl -fsSL -o carousel2/c3_ranch.jpg "https://export-download.canva.com/2nEyo/DAHRGz2nEyo/-1/0/0001-4337477830657062164.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260801%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260801T194431Z&X-Amz-Expires=33369&X-Amz-Signature=82647b3c43afc80d3e6c0c5a8c4efd0c6abea1fa0a0a554e0db9c8766c2e64a7&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2002%20Aug%202026%2005%3A00%3A40%20GMT"
+          curl -fsSL -o carousel2/c4_townhomes.jpg "https://export-download.canva.com/RruZE/DAHRG0RruZE/-1/0/0001-3373707511425839378.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260801%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260801T215623Z&X-Amz-Expires=23760&X-Amz-Signature=1af5037eedb7eae2375d6aa6dea0ced4b97ce4a9356bc1a60ab7765c2c990030&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2002%20Aug%202026%2004%3A32%3A23%20GMT"
+          curl -fsSL -o carousel2/s1_roof.jpg "https://export-download.canva.com/mADMI/DAHRG5mADMI/-1/0/0001-9136063235047781366.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260801%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260801T052145Z&X-Amz-Expires=85337&X-Amz-Signature=58928101b78944f3b130e7792dcabde6b5b8baaf93be14aefd65d746dc9846e0&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2002%20Aug%202026%2005%3A04%3A02%20GMT"
+          curl -fsSL -o carousel2/s2_street.jpg "https://export-download.canva.com/UmLic/DAHRGyUmLic/-1/0/0001-4756312597878733506.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260801%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260801T093035Z&X-Amz-Expires=68509&X-Amz-Signature=1a1212dd0bb5fe89d34887cbbe68e8d336081eb0129758ab8446f65b81899cc1&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2002%20Aug%202026%2004%3A32%3A24%20GMT"
+          curl -fsSL -o carousel2/s3_basement.jpg "https://export-download.canva.com/Xu7So/DAHRG6Xu7So/-1/0/0001-7479864472923459389.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260802%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260802T004042Z&X-Amz-Expires=14922&X-Amz-Signature=4c07d587445ff4c3e1716fa5542f62d4e5bcdb5c41db0d87fd00d9d7fc3db99f&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2002%20Aug%202026%2004%3A49%3A24%20GMT"
+          curl -fsSL -o carousel2/s4_driveway.jpg "https://export-download.canva.com/yOgcM/DAHRGxyOgcM/-1/0/0001-9188980529902168495.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260801%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260801T194349Z&X-Amz-Expires=31799&X-Amz-Signature=164e9ea3e81e124b28dac52cc153834cc12cb764e2c1ccdbf130a2fe499c14e5&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2002%20Aug%202026%2004%3A33%3A48%20GMT"
+          curl -fsSL -o carousel2/s5_vacant.jpg "https://export-download.canva.com/wG6Ik/DAHRGwwG6Ik/-1/0/0001-3373707511770362417.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260802%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260802T030448Z&X-Amz-Expires=5838&X-Amz-Signature=616401829341f7f582efc6591ade2b5fa8b471bd146e6d1821794e8d1e34286c&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2002%20Aug%202026%2004%3A42%3A06%20GMT"
+          ls -la carousel2/
       - name: Commit assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add fonts/
-          git commit -m "Add carousel fonts [skip ci]"
+          git add carousel2/
+          git commit -m "Add carousel 2 imagery [skip ci]"
           git push
