@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SEO } from "@/components/shared/SEO";
 import { events, type COFYEvent } from "@/data/events";
-import { isUpcoming, dateParts, formatDate } from "@/lib/format";
+import { isUpcoming, dateParts, formatDateRange, formatPlace } from "@/lib/format";
 import { photos, plateFallback, type PhotoKey } from "@/data/photos";
 
 /** Photo representing each type of event (main square imagery). */
@@ -26,20 +26,6 @@ const categoryPhoto: Record<COFYEvent["category"], PhotoKey> = {
   Fundraiser: "books",
   Celebration: "volunteers",
 };
-
-/** "Aug 5 – 7, 2026" style label for single or multi-day events. */
-function rangeLabel(e: COFYEvent): string {
-  const start = formatDate(e.date);
-  if (!e.endDate) return start;
-  const s = new Date(e.date + "T00:00:00");
-  const en = new Date(e.endDate + "T00:00:00");
-  const sameMonth =
-    s.getMonth() === en.getMonth() && s.getFullYear() === en.getFullYear();
-  if (sameMonth) {
-    return `${s.toLocaleDateString("en-US", { month: "long" })} ${s.getDate()} – ${en.getDate()}, ${en.getFullYear()}`;
-  }
-  return `${formatDate(e.date, { year: undefined })} – ${formatDate(e.endDate)}`;
-}
 
 /** Square date block: month + day (and end day for ranges). */
 function DateSquare({ event, past = false }: { event: COFYEvent; past?: boolean }) {
@@ -150,14 +136,14 @@ const Events = () => {
                   <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7 text-white">
                     <div className="min-w-0">
                       <p className="text-sm font-bold uppercase tracking-wider text-secondary">
-                        {rangeLabel(featured)}
+                        {formatDateRange(featured.date, featured.endDate)}
                       </p>
                       <h3 className="mt-1 font-display text-2xl font-bold leading-tight sm:text-3xl">
                         {featured.title}
                       </h3>
                       <p className="mt-2 flex items-center gap-1.5 text-sm text-white/85">
                         <MapPin className="h-4 w-4 shrink-0 text-secondary" />
-                        <span className="truncate">{featured.venue}, {featured.location}</span>
+                        <span className="truncate">{formatPlace(featured.venue, featured.location)}</span>
                       </p>
                       <p className="mt-1 flex items-center gap-1.5 text-sm text-white/85">
                         <Clock className="h-4 w-4 shrink-0 text-secondary" />
@@ -214,7 +200,7 @@ const Events = () => {
                     {pastHighlight.title}
                   </h3>
                   <p className="mt-2 text-sm font-semibold text-muted-foreground">
-                    {rangeLabel(pastHighlight)} · {pastHighlight.location}
+                    {formatDateRange(pastHighlight.date, pastHighlight.endDate)} · {pastHighlight.location}
                   </p>
                   <p className="mt-3 font-serif text-base leading-relaxed text-foreground/75">
                     {pastHighlight.description}

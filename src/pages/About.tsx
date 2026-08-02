@@ -24,6 +24,109 @@ const About = () => {
         description="Welcome to COFY, a registered nonprofit organization based in the state of New Jersey. Our mission is to provide educational and life skills support to youth with developmental delays and their families, enabling them to transition successfully into college, careers, and independent living."
       />
 
+      {/* Our Team */}
+      <section className="py-16 lg:py-20">
+        <div className="container-cofy">
+          <SectionHeading
+            align="left"
+            eyebrow="Our Team"
+            title="The people behind COFY"
+          />
+
+          {/* President */}
+          <Reveal>
+            <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
+              <div className="bg-brand-sky p-5 sm:p-8">
+                <img
+                  src={drNgoziPortrait.src}
+                  alt={drNgoziPortrait.alt}
+                  className="aspect-square w-full object-cover"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = plateFallback("mentorship");
+                  }}
+                />
+              </div>
+              <div>
+                <p className="eyebrow font-display">President, Founder & CEO</p>
+                <h3 className="mt-2 font-display text-4xl font-medium tracking-tight">
+                  Dr. Ngozi Martin-Oguike
+                </h3>
+                <p className="mt-5 font-serif text-lg leading-relaxed text-foreground/75">
+                  A certified teacher of students with disabilities and a
+                  learning disability teacher consultant, Ngozi serves as a
+                  Learning Disabilities Teacher Consultant at Orange Public
+                  Schools, New Jersey, and Assistant Dean of Special Education
+                  for Teach-Beyond Transformational Education Services, USA.
+                  With a passion for educating the marginalized and vulnerable
+                  — locally and internationally — she founded COFY with
+                  like-minded educators to create opportunities for youth,
+                  especially those with special needs.
+                </p>
+                <p className="mt-4 font-serif text-lg leading-relaxed text-foreground/75">
+                  Born in Benin City, Nigeria, she holds a B.A. Honors from the
+                  University of Benin, an M.F.A. from the University of
+                  Nigeria, Nsukka, an M.A. in Special Education from Kean
+                  University, and a Doctor of Education in Educational
+                  Leadership from Bethel University, St. Paul, Minnesota. She
+                  is the author of three books.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Board */}
+          <Reveal delay={100}>
+            <div className="mt-16">
+              <h3 className="font-display text-3xl font-medium tracking-tight">
+                Board of Directors
+              </h3>
+              <ul className="mt-8 grid gap-x-10 gap-y-5 font-serif text-lg sm:grid-cols-2 lg:grid-cols-3">
+                {[
+                  ["Mr. Praise Martin-Oguike", "Director of Marketing and IT"],
+                  ["Mrs. Lorna Akabogu", "Secretary"],
+                  ["Venerable Dr. Martin Oguike", "Member"],
+                  ["Mrs. Helen Ani", "Member"],
+                  ["Ms. Angela Amoatey", "Member"],
+                  ["Sandra Uchegbulam", "Member"],
+                  ["Mrs. Charity Ezeji", "Finance Officer"],
+                ].map(([name, role]) => (
+                  <li key={name} className="border-l-2 border-secondary pl-4">
+                    <span className="block font-semibold text-foreground">{name}</span>
+                    <span className="text-foreground/60">{role}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-8 font-serif text-lg text-foreground/75">
+                <span className="font-semibold text-foreground">Volunteers:</span>{" "}
+                Eva-Astoria Martin-Oguike · Seun Olanrewaju
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Join the team */}
+          <Reveal delay={150}>
+            <div className="mt-16 bg-brand-cream p-8 sm:p-12">
+              <h3 className="font-display text-3xl font-medium tracking-tight">
+                Join the team
+              </h3>
+              <p className="mt-4 max-w-2xl font-serif text-lg leading-relaxed text-foreground/75">
+                You are invited to join our team at COFY! We are seeking
+                educational professionals with good intentions, caregivers of
+                youth with special educational needs, or anyone enthusiastic
+                about our goals and objectives.
+              </p>
+              <Button asChild className="mt-7">
+                <Link to="/get-involved#volunteer">
+                  Get Involved
+                  <ArrowRight className="ml-1 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+
       {/* Mission & Vision */}
       <section className="py-20 lg:py-28">
         <div className="container-cofy grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -162,108 +265,6 @@ const About = () => {
         </div>
       </section>
 
-
-      {/* Our Team */}
-      <section className="border-t border-border py-20 lg:py-28">
-        <div className="container-cofy">
-          <SectionHeading
-            align="left"
-            eyebrow="Our Team"
-            title="The people behind COFY"
-          />
-
-          {/* President */}
-          <Reveal>
-            <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
-              <div className="bg-brand-sky p-5 sm:p-8">
-                <img
-                  src={drNgoziPortrait.src}
-                  alt={drNgoziPortrait.alt}
-                  className="aspect-square w-full object-cover"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = plateFallback("mentorship");
-                  }}
-                />
-              </div>
-              <div>
-                <p className="eyebrow font-display">President, Founder & CEO</p>
-                <h3 className="mt-2 font-display text-4xl font-medium tracking-tight">
-                  Dr. Ngozi Martin-Oguike
-                </h3>
-                <p className="mt-5 font-serif text-lg leading-relaxed text-foreground/75">
-                  A certified teacher of students with disabilities and a
-                  learning disability teacher consultant, Ngozi serves as a
-                  Learning Disabilities Teacher Consultant at Orange Public
-                  Schools, New Jersey, and Assistant Dean of Special Education
-                  for Teach-Beyond Transformational Education Services, USA.
-                  With a passion for educating the marginalized and vulnerable
-                  — locally and internationally — she founded COFY with
-                  like-minded educators to create opportunities for youth,
-                  especially those with special needs.
-                </p>
-                <p className="mt-4 font-serif text-lg leading-relaxed text-foreground/75">
-                  Born in Benin City, Nigeria, she holds a B.A. Honors from the
-                  University of Benin, an M.F.A. from the University of
-                  Nigeria, Nsukka, an M.A. in Special Education from Kean
-                  University, and a Doctor of Education in Educational
-                  Leadership from Bethel University, St. Paul, Minnesota. She
-                  is the author of three books.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Board */}
-          <Reveal delay={100}>
-            <div className="mt-16">
-              <h3 className="font-display text-3xl font-medium tracking-tight">
-                Board of Directors
-              </h3>
-              <ul className="mt-8 grid gap-x-10 gap-y-5 font-serif text-lg sm:grid-cols-2 lg:grid-cols-3">
-                {[
-                  ["Mr. Praise Martin-Oguike", "Director of Marketing and IT"],
-                  ["Mrs. Lorna Akabogu", "Secretary"],
-                  ["Venerable Dr. Martin Oguike", "Member"],
-                  ["Mrs. Helen Ani", "Member"],
-                  ["Ms. Angela Amoatey", "Member"],
-                  ["Sandra Uchegbulam", "Member"],
-                  ["Mrs. Charity Ezeji", "Finance Officer"],
-                ].map(([name, role]) => (
-                  <li key={name} className="border-l-2 border-secondary pl-4">
-                    <span className="block font-semibold text-foreground">{name}</span>
-                    <span className="text-foreground/60">{role}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-8 font-serif text-lg text-foreground/75">
-                <span className="font-semibold text-foreground">Volunteers:</span>{" "}
-                Eva-Astoria Martin-Oguike · Seun Olanrewaju
-              </p>
-            </div>
-          </Reveal>
-
-          {/* Join the team */}
-          <Reveal delay={150}>
-            <div className="mt-16 bg-brand-cream p-8 sm:p-12">
-              <h3 className="font-display text-3xl font-medium tracking-tight">
-                Join the team
-              </h3>
-              <p className="mt-4 max-w-2xl font-serif text-lg leading-relaxed text-foreground/75">
-                You are invited to join our team at COFY! We are seeking
-                educational professionals with good intentions, caregivers of
-                youth with special educational needs, or anyone enthusiastic
-                about our goals and objectives.
-              </p>
-              <Button asChild className="mt-7">
-                <Link to="/get-involved#volunteer">
-                  Get Involved
-                  <ArrowRight className="ml-1 h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
     </>
   );

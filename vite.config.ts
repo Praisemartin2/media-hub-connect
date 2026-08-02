@@ -5,9 +5,10 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // When building for GitHub Pages the app is served from /media-hub-connect/.
-  // Local dev and Lovable keep the default "/" base.
-  base: process.env.GITHUB_PAGES === "true" ? "/media-hub-connect/" : "/",
+  // Served from the root of the custom domain (www.cofyouth.org — see
+  // public/CNAME), so the base path is "/" everywhere: production, local
+  // dev and Lovable.
+  base: "/",
   server: {
     host: "::",
     port: 8080,
