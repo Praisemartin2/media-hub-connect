@@ -11,25 +11,60 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download source video
+      - name: Try remaining extraction routes
+        id: dl
+        continue-on-error: true
         run: |
-          set -e
+          set +e
           pip install -q -U yt-dlp
           mkdir -p yt4
           URL="https://youtu.be/e-piFY-JUqg"
-          ok=0
-          for pc in tv_embedded ios web_safari android_vr web; do
-            echo "--- trying player_client=$pc ---"
-            if yt-dlp --extractor-args "youtube:player_client=$pc" \
-                 -f "bv*[height<=720][ext=mp4]+ba[ext=m4a]/b[height<=720][ext=mp4]/b" \
-                 --merge-output-format mp4 \
-                 -o "yt4/source.%(ext)s" "$URL"; then ok=1; break; fi
-            sleep 3
+          VID="e-piFY-JUqg"
+
+          # Route A: player clients not tried before
+          for pc in mweb android tv web_creator ios_music default; do
+            echo "=== A: player_client=$pc ==="
+            yt-dlp --extractor-args "youtube:player_client=$pc" \
+              --no-warnings -f "b[height<=720]/b" --merge-output-format mp4 \
+              -o "yt4/source.%(ext)s" "$URL" && echo "OK_A_$pc" && ls -la yt4 && exit 0
+            sleep 2
           done
-          if [ "$ok" != "1" ]; then echo "ALL_CLIENTS_FAILED"; exit 1; fi
-          ls -la yt4/
-      - name: Transcribe
+
+          # Route B: skip webpage/config probes
+          echo "=== B: player_skip ==="
+          yt-dlp --extractor-args "youtube:player_skip=webpage,configs;player_client=android" \
+            --no-warnings -f "b[height<=720]/b" -o "yt4/source.%(ext)s" "$URL" \
+            && echo "OK_B" && ls -la yt4 && exit 0
+
+          # Route C: public Invidious mirrors (different IP reputation)
+          for inst in yewtu.be inv.nadeko.net invidious.nerdvpn.de iv.ggtyler.dev; do
+            echo "=== C: $inst ==="
+            curl -fsSL --max-time 60 "https://$inst/api/v1/videos/$VID" -o /tmp/meta.json || continue
+            python3 - <<PY
+import json,sys
+try:
+    d=json.load(open("/tmp/meta.json"))
+except Exception as e:
+    sys.exit(1)
+fs=[f for f in d.get("formatStreams",[]) if f.get("url")]
+fs.sort(key=lambda f: int(f.get("qualityLabel","0p").rstrip("p") or 0), reverse=True)
+open("/tmp/url.txt","w").write(fs[0]["url"] if fs else "")
+print("streams:", len(fs))
+PY
+            u=$(cat /tmp/url.txt 2>/dev/null)
+            if [ -n "$u" ]; then
+              curl -fsSL --max-time 300 "$u" -o yt4/source.mp4 && \
+                [ -s yt4/source.mp4 ] && echo "OK_C_$inst" && ls -la yt4 && exit 0
+            fi
+          done
+
+          echo "ALL_ROUTES_FAILED"
+          exit 1
+      - name: Report + transcribe if we got it
         run: |
+          if [ ! -s yt4/source.mp4 ] && [ -z "$(ls yt4/source.* 2>/dev/null)" ]; then
+            echo "NO_SOURCE — nothing to transcribe"; exit 0
+          fi
           pip install -q faster-whisper
           python3 - <<'PY'
           import json, glob
@@ -43,18 +78,16 @@ jobs:
               for w in (s.words or []):
                   words.append({"w": w.word.strip(), "start": round(w.start,3), "end": round(w.end,3)})
           json.dump({"segments":segs,"words":words}, open("yt4/transcript.json","w"), indent=1)
-          print("duration", segs[-1]["end"] if segs else 0, "words", len(words))
+          print("OK duration", segs[-1]["end"] if segs else 0)
           PY
-      - name: Commit transcript only
-        run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add yt4/transcript.json
-          git commit -m "Add yt4 transcript [skip ci]"
-          git push
-      - name: Upload source as artifact
+          git add yt4/transcript.json && git commit -m "Add yt4 transcript [skip ci]" && git push
+      - name: Upload source
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: yt4-source
           path: yt4/source.*
+          if-no-files-found: ignore
           retention-days: 3
