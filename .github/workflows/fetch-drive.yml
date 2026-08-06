@@ -11,35 +11,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download Episode 167 and cut candidate window
+      - name: Cut clip 2 from Episode 167
         run: |
           set -e
           pip install -q gdown
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
           mkdir -p ep167
           gdown "https://drive.google.com/uc?id=1iiKo6PIw46uvcPEJz1hF4DaIoe8Pattv" -O raw167.mp4
-          ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate \
-            -show_entries format=duration -of default=noprint_wrappers=1 raw167.mp4
-
-          # reference frames: inside clip window + after screen-share starts
-          for t in 60 90 120 170 300 810; do
-            ffmpeg -v error -ss $t -i raw167.mp4 -frames:v 1 -vf scale=640:-2 ep167/frame_${t}.jpg
-          done
-
-          # 3-piece cut: hook / proof+stakes / payoff  (drops webinar references + a repeat)
+          # confirm camera framing inside the new window
+          ffmpeg -v error -ss 10 -i raw167.mp4 -frames:v 1 -vf scale=640:-2 ep167/chk_10.jpg
+          ffmpeg -v error -ss 45 -i raw167.mp4 -frames:v 1 -vf scale=640:-2 ep167/chk_45.jpg
+          # 2-piece cut: the "why" + the proof
           ffmpeg -v error -i raw167.mp4 -filter_complex "\
-            [0:v]trim=57.08:64.32,setpts=PTS-STARTPTS[v0];[0:a]atrim=57.08:64.32,asetpts=PTS-STARTPTS[a0];\
-            [0:v]trim=78.98:114.00,setpts=PTS-STARTPTS[v1];[0:a]atrim=78.98:114.00,asetpts=PTS-STARTPTS[a1];\
-            [0:v]trim=117.08:124.82,setpts=PTS-STARTPTS[v2];[0:a]atrim=117.08:124.82,asetpts=PTS-STARTPTS[a2];\
-            [v0][a0][v1][a1][v2][a2]concat=n=3:v=1:a=1[v][a]" \
+            [0:v]trim=4.66:19.64,setpts=PTS-STARTPTS[v0];[0:a]atrim=4.66:19.64,asetpts=PTS-STARTPTS[a0];\
+            [0:v]trim=40.56:52.74,setpts=PTS-STARTPTS[v1];[0:a]atrim=40.56:52.74,asetpts=PTS-STARTPTS[a1];\
+            [v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]" \
             -map "[v]" -map "[a]" -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p \
-            -c:a aac -b:a 192k -movflags +faststart ep167/cut_raw.mp4
+            -c:a aac -b:a 192k -movflags +faststart ep167/cut2_raw.mp4
           ls -la ep167/
-          ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 ep167/cut_raw.mp4
+          ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 ep167/cut2_raw.mp4
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add ep167/
-          git commit -m "Add Episode 167 candidate cut + frames [skip ci]" || echo "nothing to commit"
+          git commit -m "Add Episode 167 clip 2 cut [skip ci]" || echo "nothing to commit"
           git push
