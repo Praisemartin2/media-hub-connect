@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SEO } from "@/components/shared/SEO";
 import { PhotoImg } from "@/components/shared/PhotoImg";
+import { DonateButton } from "@/components/donate/DonateButton";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
 import { toast } from "sonner";
@@ -168,24 +169,7 @@ const GetInvolved = () => {
                 </p>
               )}
 
-              <Button
-                size="lg"
-                onClick={() =>
-                  toast.success(
-                    `Thank you for your ${monthly ? "monthly " : ""}gift of $${amount || 0}!`,
-                    { description: "This demo doesn't process real payments yet." },
-                  )
-                }
-                className="mt-6 w-full rounded-none bg-secondary text-base font-bold text-secondary-foreground hover:bg-brand-yellow-light"
-              >
-                <Heart className="mr-1 h-5 w-5" />
-                Donate ${amount || 0}
-                {monthly ? "/mo" : ""}
-              </Button>
-              <p className="mt-3 text-center text-xs text-muted-foreground">
-                Demo preview — online payments aren't live yet. To give today,
-                email {site.email}.
-              </p>
+              <DonateButton amount={amount} monthly={monthly} />
             </div>
           </Reveal>
         </div>
