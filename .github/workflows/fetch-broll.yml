@@ -11,83 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Try remaining extraction routes
-        id: dl
-        continue-on-error: true
+      - name: Download story A b-roll
         run: |
-          set +e
-          pip install -q -U yt-dlp
-          mkdir -p yt4
-          URL="https://youtu.be/e-piFY-JUqg"
-          VID="e-piFY-JUqg"
-
-          # Route A: player clients not tried before
-          for pc in mweb android tv web_creator ios_music default; do
-            echo "=== A: player_client=$pc ==="
-            yt-dlp --extractor-args "youtube:player_client=$pc" \
-              --no-warnings -f "b[height<=720]/b" --merge-output-format mp4 \
-              -o "yt4/source.%(ext)s" "$URL" && echo "OK_A_$pc" && ls -la yt4 && exit 0
-            sleep 2
-          done
-
-          # Route B: skip webpage/config probes
-          echo "=== B: player_skip ==="
-          yt-dlp --extractor-args "youtube:player_skip=webpage,configs;player_client=android" \
-            --no-warnings -f "b[height<=720]/b" -o "yt4/source.%(ext)s" "$URL" \
-            && echo "OK_B" && ls -la yt4 && exit 0
-
-          # Route C: public Invidious mirrors (different IP reputation)
-          for inst in yewtu.be inv.nadeko.net invidious.nerdvpn.de iv.ggtyler.dev; do
-            echo "=== C: $inst ==="
-            curl -fsSL --max-time 60 "https://$inst/api/v1/videos/$VID" -o /tmp/meta.json || continue
-            python3 - <<PY
-import json,sys
-try:
-    d=json.load(open("/tmp/meta.json"))
-except Exception as e:
-    sys.exit(1)
-fs=[f for f in d.get("formatStreams",[]) if f.get("url")]
-fs.sort(key=lambda f: int(f.get("qualityLabel","0p").rstrip("p") or 0), reverse=True)
-open("/tmp/url.txt","w").write(fs[0]["url"] if fs else "")
-print("streams:", len(fs))
-PY
-            u=$(cat /tmp/url.txt 2>/dev/null)
-            if [ -n "$u" ]; then
-              curl -fsSL --max-time 300 "$u" -o yt4/source.mp4 && \
-                [ -s yt4/source.mp4 ] && echo "OK_C_$inst" && ls -la yt4 && exit 0
-            fi
-          done
-
-          echo "ALL_ROUTES_FAILED"
-          exit 1
-      - name: Report + transcribe if we got it
+          set -e
+          mkdir -p storyAbroll
+          curl -fsSL -o storyAbroll/b1_dinner.jpg "https://export-download.canva.com/pCNUg/DAHRwfpCNUg/-1/0/0001-5526428844965036960.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260808%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260808T021328Z&X-Amz-Expires=86705&X-Amz-Signature=09ec2a3e3122b695c75ac5d17705de022c96e7fe3878fd82effd1f2b54587bad&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2009%20Aug%202026%2002%3A18%3A33%20GMT"
+          curl -fsSL -o storyAbroll/b2_arrive.jpg "https://export-download.canva.com/7kCxc/DAHRwV7kCxc/-1/0/0001-6575767559588030208.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260808%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260808T225854Z&X-Amz-Expires=12274&X-Amz-Signature=f559d0188fc8c37e43cfcf58dcdde68d6a26e73f780479d7f1c9633f069448c7&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2009%20Aug%202026%2002%3A23%3A28%20GMT"
+          curl -fsSL -o storyAbroll/b3_messy.jpg "https://export-download.canva.com/2U0Tk/DAHRwV2U0Tk/-1/0/0001-7940358246683340548.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260808%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260808T184412Z&X-Amz-Expires=30505&X-Amz-Signature=a21a982ca17751c8597bb830df1b6fc5038907a908e909d369fce1cc7af77aeb&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2009%20Aug%202026%2003%3A12%3A37%20GMT"
+          curl -fsSL -o storyAbroll/b4_refund.jpg "https://export-download.canva.com/77fW4/DAHRwW77fW4/-1/0/0001-6419267474291125423.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260808%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260808T051549Z&X-Amz-Expires=78164&X-Amz-Signature=5acecaa0ed51c95f06cc333314b86f744cde2d30305613484f40d2882dfccc24&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2009%20Aug%202026%2002%3A58%3A33%20GMT"
+          curl -fsSL -o storyAbroll/b5_cleaner.jpg "https://export-download.canva.com/M4iwU/DAHRwXM4iwU/-1/0/0001-2497758097564407660.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260808%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260808T145929Z&X-Amz-Expires=41182&X-Amz-Signature=53a734b9451d2958ce1bbc2c63020eb1fce563ac807183182c8f02d37448cbae&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2009%20Aug%202026%2002%3A25%3A51%20GMT"
+          curl -fsSL -o storyAbroll/b6_laptop.jpg "https://export-download.canva.com/ob07Q/DAHRwcob07Q/-1/0/0001-5206673272913318243.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260808%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260808T195556Z&X-Amz-Expires=24081&X-Amz-Signature=25757b6d7f7928eebb1ff82a99ba24652c37079d5e87307930a34bfda803833c&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2009%20Aug%202026%2002%3A37%3A17%20GMT"
+          ls -la storyAbroll/
+      - name: Commit
         run: |
-          if [ ! -s yt4/source.mp4 ] && [ -z "$(ls yt4/source.* 2>/dev/null)" ]; then
-            echo "NO_SOURCE — nothing to transcribe"; exit 0
-          fi
-          pip install -q faster-whisper
-          python3 - <<'PY'
-          import json, glob
-          from faster_whisper import WhisperModel
-          src = sorted(glob.glob("yt4/source.*"))[0]
-          m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          segments, info = m.transcribe(src, word_timestamps=True, vad_filter=True)
-          words, segs = [], []
-          for s in segments:
-              segs.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()})
-              for w in (s.words or []):
-                  words.append({"w": w.word.strip(), "start": round(w.start,3), "end": round(w.end,3)})
-          json.dump({"segments":segs,"words":words}, open("yt4/transcript.json","w"), indent=1)
-          print("OK duration", segs[-1]["end"] if segs else 0)
-          PY
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add yt4/transcript.json && git commit -m "Add yt4 transcript [skip ci]" && git push
-      - name: Upload source
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: yt4-source
-          path: yt4/source.*
-          if-no-files-found: ignore
-          retention-days: 3
+          git add storyAbroll/
+          git commit -m "Add story A b-roll [skip ci]" || echo nothing
+          git push
