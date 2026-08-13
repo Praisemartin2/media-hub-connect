@@ -29,10 +29,24 @@ jobs:
             -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p -c:a aac -b:a 192k \
             -movflags +faststart ep167/storyC_raw.mp4
           ls -la ep167/
+      - name: Download replacement b-roll
+        run: |
+          set -e
+          mkdir -p aiops/broll
+          b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
+          curl -fsSL -o aiops/broll/c1b_phone_dark.png  "$b/hf_20260813_045847_ca6124cd-fd73-46a0-aab1-d7f5c83fe19e.png"
+          curl -fsSL -o aiops/broll/c1c_thumb_glow.png  "$b/hf_20260813_045847_98c30ad3-a8d5-4224-a19b-860d5c9888a7.png"
+          curl -fsSL -o aiops/broll/c5b_agents_back.png "$b/hf_20260813_045847_f7e86172-5148-45ad-8a4a-1d9054649e8e.png"
+          curl -fsSL -o aiops/broll/c5c_agents_blur.png "$b/hf_20260813_045847_54624839-e0b3-4231-8414-0a97fdb32f11.png"
+          ls -la aiops/broll/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ep167/
-          git commit -m "Add Episode 167 AI-operations story cut [skip ci]" || echo "nothing to commit"
-          git push
+          git add ep167/ aiops/
+          git commit -m "Add Episode 167 AI-operations cut + replacement b-roll [skip ci]" || echo "nothing to commit"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
+            sleep $((i*3))
+          done
+          exit 1
