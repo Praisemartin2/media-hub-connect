@@ -11,21 +11,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download financial-freedom candidate clips
+      - name: Download + transcribe Ramit candidates
         run: |
           set -e
-          mkdir -p ff
-          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/NWZZEa9BURw/1b218c55-4074-43fc-84ec-c72a71a688ee/clips"
-          curl -fsSL -o ff/h_kip.mp4        "$b/clip_04.mp4"
-          curl -fsSL -o ff/h_vanderbilt.mp4 "$b/clip_06.mp4"
-          curl -fsSL -o ff/h_cash.mp4       "$b/clip_07.mp4"
-          ls -la ff/
+          pip install -q faster-whisper
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
+          mkdir -p ff2
+          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/NXGN85IzH3g/021c88b0-0981-4fb0-afd7-8e9ad525804e/clips"
+          curl -fsSL -o ff2/r_values.mp4 "$b/clip_01.mp4"
+          curl -fsSL -o ff2/r_target.mp4 "$b/clip_05.mp4"
+          curl -fsSL -o ff2/r_twomonths.mp4 "$b/clip_06.mp4"
+          ls -la ff2/
+          python3 - <<'PY'
+          import glob, json, os
+          from faster_whisper import WhisperModel
+          m = WhisperModel("small.en", device="cpu", compute_type="int8")
+          for f in sorted(glob.glob("ff2/*.mp4")):
+              name = os.path.basename(f)[:-4]
+              segs, info = m.transcribe(f, word_timestamps=True, vad_filter=True)
+              S, W = [], []
+              for s in segs:
+                  S.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()})
+                  for w in (s.words or []):
+                      W.append({"w": w.word.strip(), "start": round(w.start,2), "end": round(w.end,2)})
+              json.dump({"segments": S, "words": W}, open(f"ff2/{name}_tr.json","w"))
+              print(name, "segs", len(S))
+              for s in S: print(f"  {s['start']:6.2f} {s['text']}")
+          PY
+          ls -la ff2/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ff/
-          git commit -m "Add financial-freedom candidate clips [skip ci]" || echo nothing
+          git add ff2/
+          git commit -m "Add Ramit candidate clips + transcripts [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
