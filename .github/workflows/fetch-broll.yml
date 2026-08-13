@@ -11,21 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download dating carousel imagery
+      - name: Download AI-ops clips
         run: |
           set -e
-          mkdir -p dating
-          curl -fsSL -o dating/s1_arch.jpg "https://export-download.canva.com/jaUaA/DAHSCVjaUaA/-1/0/0001-4870029511759987416.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260811%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260811T111643Z&X-Amz-Expires=58265&X-Amz-Signature=d4ff3573d269c316c285188de5eb8f6c44b28e7f7ebffc984098b3cf6d3e98ca&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Wed%2C%2012%20Aug%202026%2003%3A27%3A48%20GMT"
-          curl -fsSL -o dating/s2_starter.jpg "https://export-download.canva.com/Al35k/DAHSCbAl35k/-1/0/0001-1806455862899953286.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260811%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260811T034108Z&X-Amz-Expires=84353&X-Amz-Signature=fa023f3d266c77b6959bd7af0ddc66e0002dea1eedf915b4707c3c0fb3cb92de&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Wed%2C%2012%20Aug%202026%2003%3A07%3A01%20GMT"
-          curl -fsSL -o dating/s3_reno.jpg "https://export-download.canva.com/jg9Fk/DAHSCcjg9Fk/-1/0/0001-4553651635453623820.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260811%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260811T021722Z&X-Amz-Expires=88448&X-Amz-Signature=2fc0dec705ec7e65ee0676aee2695cafa90c317e067ec3708cf087af6ae3585e&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Wed%2C%2012%20Aug%202026%2002%3A51%3A30%20GMT"
-          curl -fsSL -o dating/s4_velvet.jpg "https://export-download.canva.com/IaWR4/DAHSCVIaWR4/-1/0/0001-6018447413446562793.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260811%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260811T033627Z&X-Amz-Expires=86760&X-Amz-Signature=de8f850b1c72a2f204bf494d916832cfa99f3620ace800fbf31a5d047681b1f7&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Wed%2C%2012%20Aug%202026%2003%3A42%3A27%20GMT"
-          curl -fsSL -o dating/s5_fourplex.jpg "https://export-download.canva.com/hQpuo/DAHSCRhQpuo/-1/0/0001-654660260143497601.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260811%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260811T145607Z&X-Amz-Expires=43282&X-Amz-Signature=69595990f17769195792009ef3fafdd1757b5c3f977976ff52ca7c18dfc3fa2a&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Wed%2C%2012%20Aug%202026%2002%3A57%3A29%20GMT"
-          curl -fsSL -o dating/s6_keys.jpg "https://export-download.canva.com/gJRTI/DAHSCbgJRTI/-1/0/0001-3618028815563941543.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260811%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260811T172317Z&X-Amz-Expires=36011&X-Amz-Signature=d385cf0419c96d9163b7a98ab18332a1dd0d6ef37d63c84a6ebf62a8ecc5db56&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Wed%2C%2012%20Aug%202026%2003%3A23%3A28%20GMT"
-          ls -la dating/
+          mkdir -p aiops
+          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/6oE28Ff8ZU-e20b9599b6/8f7e2766-ad2a-4899-bbae-94da86d2d9e0/clips"
+          curl -fsSL -o aiops/a1_ai_reply.mp4 "$b/clip_06.mp4"
+          curl -fsSL -o aiops/a2_vas.mp4      "$b/clip_07.mp4"
+          ls -la aiops/
+          for f in aiops/*.mp4; do
+            echo "== $f"; ffprobe -v error -select_streams v:0 \
+              -show_entries stream=width,height -show_entries format=duration \
+              -of default=noprint_wrappers=1 "$f"
+          done
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add dating/
-          git commit -m "Add dating carousel imagery [skip ci]" || echo nothing
+          git add aiops/
+          git commit -m "Add AI-ops clips [skip ci]" || echo nothing
           git push
