@@ -11,18 +11,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download AI-ops clips
+      - name: Download AI-ops b-roll
         run: |
           set -e
-          mkdir -p aiops
-          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/6oE28Ff8ZU-e20b9599b6/8f7e2766-ad2a-4899-bbae-94da86d2d9e0/clips"
-          curl -fsSL -o aiops/a1_ai_reply.mp4 "$b/clip_06.mp4"
-          curl -fsSL -o aiops/a2_vas.mp4      "$b/clip_07.mp4"
-          ls -la aiops/
+          mkdir -p aiops/broll
+          b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
+          curl -fsSL -o aiops/broll/c1_phone_night.png "$b/hf_20260813_045232_55efd731-e4b7-4c82-8b31-37e42eaea3ff.png"
+          curl -fsSL -o aiops/broll/c2_nightstand.png  "$b/hf_20260813_045232_e03df5c5-884a-482c-85c4-9275edb8a048.png"
+          curl -fsSL -o aiops/broll/c3_empty_office.png "$b/hf_20260813_045232_a9053783-2b7b-4f9c-8178-6f78a866a177.png"
+          curl -fsSL -o aiops/broll/c4_empty_chair.png "$b/hf_20260813_045232_3c29c120-f5f6-4c3d-91ad-29da95616e66.png"
+          curl -fsSL -o aiops/broll/c5_three_agents.png "$b/hf_20260813_045232_7b1e3164-de71-4706-bc2e-c0e7dc2c3d60.png"
+          curl -fsSL -o aiops/broll/c6_night_window.png "$b/hf_20260813_045232_e40b9325-7d9b-40bc-a93b-d5a102455e06.png"
+          curl -fsSL -o aiops/broll/c7_one_person.png  "$b/hf_20260813_045232_f4d071c9-3317-4027-b730-8f9bda09d2ef.png"
+          curl -fsSL -o aiops/broll/c8_rental.png      "$b/hf_20260813_045232_2d55222f-bb44-415d-8d9a-fea4a021884a.png"
+          ls -la aiops/broll/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add aiops/
-          git commit -m "Add AI-ops clips [skip ci]" || echo nothing
-          git push
+          git commit -m "Add AI-ops b-roll stills [skip ci]" || echo nothing
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && break
+            sleep $((i*3))
+          done
