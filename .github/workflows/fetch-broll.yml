@@ -19,11 +19,6 @@ jobs:
           curl -fsSL -o aiops/a1_ai_reply.mp4 "$b/clip_06.mp4"
           curl -fsSL -o aiops/a2_vas.mp4      "$b/clip_07.mp4"
           ls -la aiops/
-          for f in aiops/*.mp4; do
-            echo "== $f"; ffprobe -v error -select_streams v:0 \
-              -show_entries stream=width,height -show_entries format=duration \
-              -of default=noprint_wrappers=1 "$f"
-          done
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
