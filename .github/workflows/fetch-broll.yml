@@ -11,50 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Try to fetch + transcribe financial-freedom candidates
+      - name: Download financial-freedom candidate clips
         run: |
-          set +e
-          pip install -q yt-dlp faster-whisper
-          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
+          set -e
           mkdir -p ff
-          get () { # id
-            id="$1"
-            for cl in android ios web_safari tv mweb; do
-              yt-dlp --extractor-args "youtube:player_client=$cl" \
-                     -f "bestaudio/best" -x --audio-format mp3 --audio-quality 5 \
-                     -o "ff/$id.%(ext)s" "https://www.youtube.com/watch?v=$id" \
-                     --print-to-file "%(title)s|%(duration)s|%(uploader)s" "ff/$id.meta" 2>&1 | tail -3
-              [ -f "ff/$id.mp3" ] && echo "OK $id via $cl" && return 0
-            done
-            echo "FAIL $id"
-            return 1
-          }
-          get NWZZEa9BURw
-          get 0nhkU_DImhU
-          ls -la ff/
-          python3 - <<'PY'
-          import glob, json, os
-          from faster_whisper import WhisperModel
-          m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          for f in sorted(glob.glob("ff/*.mp3")):
-              vid = os.path.basename(f)[:-4]
-              segs, info = m.transcribe(f, word_timestamps=True, vad_filter=True)
-              S, W = [], []
-              for s in segs:
-                  S.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()})
-                  for w in (s.words or []):
-                      W.append({"w": w.word.strip(), "start": round(w.start,2), "end": round(w.end,2)})
-              json.dump({"segments": S, "words": W}, open(f"ff/{vid}_transcript.json","w"))
-              print(vid, "segments:", len(S), "dur:", S[-1]["end"] if S else 0)
-          PY
+          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/NWZZEa9BURw/1b218c55-4074-43fc-84ec-c72a71a688ee/clips"
+          curl -fsSL -o ff/h_kip.mp4        "$b/clip_04.mp4"
+          curl -fsSL -o ff/h_vanderbilt.mp4 "$b/clip_06.mp4"
+          curl -fsSL -o ff/h_cash.mp4       "$b/clip_07.mp4"
           ls -la ff/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          rm -f ff/*.mp3
-          git add ff/ || true
-          git commit -m "Add financial-freedom candidate transcripts [skip ci]" || echo nothing
+          git add ff/
+          git commit -m "Add financial-freedom candidate clips [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
