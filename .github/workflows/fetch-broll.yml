@@ -11,28 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download + transcribe longer candidates
+      - name: Download + transcribe Kathy Fettke candidates
         run: |
           set -e
           pip install -q faster-whisper
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          mkdir -p ff3
-          n="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/NXGN85IzH3g/021c88b0-0981-4fb0-afd7-8e9ad525804e/clips"
-          d="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/pz6jhMPA-2w/9b49b6f0-ae5f-452e-86ce-cb96c454a579/clips"
-          # bright NYT studio
-          curl -fsSL -o ff3/n_income.mp4    "$n/clip_02.mp4"
-          curl -fsSL -o ff3/n_drawbridge.mp4 "$n/clip_09.mp4"
-          curl -fsSL -o ff3/n_17pct.mp4     "$n/clip_10.mp4"
-          # DOAC
-          curl -fsSL -o ff3/d_moneyguy.mp4  "$d/clip_05.mp4"
-          curl -fsSL -o ff3/d_mortgage.mp4  "$d/clip_07.mp4"
-          curl -fsSL -o ff3/d_lung.mp4      "$d/clip_09.mp4"
-          ls -la ff3/
+          mkdir -p ff4
+          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/RMjXqUfJ6tI/44a2bb4b-3506-4b91-b589-bfa19b05623c/clips"
+          curl -fsSL -o ff4/k_fourplex.mp4 "$b/clip_01.mp4"
+          curl -fsSL -o ff4/k_25k.mp4      "$b/clip_10.mp4"
+          curl -fsSL -o ff4/k_rate.mp4     "$b/clip_08.mp4"
+          ls -la ff4/
           python3 - <<'PY'
           import glob, json, os
           from faster_whisper import WhisperModel
           m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          for f in sorted(glob.glob("ff3/*.mp4")):
+          for f in sorted(glob.glob("ff4/*.mp4")):
               name = os.path.basename(f)[:-4]
               segs, info = m.transcribe(f, word_timestamps=True, vad_filter=True)
               S, W = [], []
@@ -40,16 +34,16 @@ jobs:
                   S.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()})
                   for w in (s.words or []):
                       W.append({"w": w.word.strip(), "start": round(w.start,2), "end": round(w.end,2)})
-              json.dump({"segments": S, "words": W}, open(f"ff3/{name}_tr.json","w"))
+              json.dump({"segments": S, "words": W}, open(f"ff4/{name}_tr.json","w"))
               print("=====", name, len(S))
           PY
-          ls -la ff3/
+          ls -la ff4/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ff3/
-          git commit -m "Add longer candidate clips + transcripts [skip ci]" || echo nothing
+          git add ff4/
+          git commit -m "Add Kathy Fettke candidate clips + transcripts [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
