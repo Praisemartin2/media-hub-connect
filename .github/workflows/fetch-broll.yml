@@ -11,22 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download + transcribe Kathy Fettke candidates
+      - name: Download + transcribe BiggerPockets candidates
         run: |
           set -e
           pip install -q faster-whisper
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          mkdir -p ff4
-          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/RMjXqUfJ6tI/44a2bb4b-3506-4b91-b589-bfa19b05623c/clips"
-          curl -fsSL -o ff4/k_fourplex.mp4 "$b/clip_01.mp4"
-          curl -fsSL -o ff4/k_25k.mp4      "$b/clip_10.mp4"
-          curl -fsSL -o ff4/k_rate.mp4     "$b/clip_08.mp4"
-          ls -la ff4/
+          mkdir -p ff5
+          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/3h7vFjE51Q0/24f20f67-9954-42ba-9347-6db74c870b0c/clips"
+          curl -fsSL -o ff5/bp_duplex.mp4  "$b/clip_03.mp4"
+          curl -fsSL -o ff5/bp_5pct.mp4    "$b/clip_05.mp4"
+          curl -fsSL -o ff5/bp_4unit.mp4   "$b/clip_10.mp4"
+          ls -la ff5/
           python3 - <<'PY'
           import glob, json, os
           from faster_whisper import WhisperModel
           m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          for f in sorted(glob.glob("ff4/*.mp4")):
+          for f in sorted(glob.glob("ff5/*.mp4")):
               name = os.path.basename(f)[:-4]
               segs, info = m.transcribe(f, word_timestamps=True, vad_filter=True)
               S, W = [], []
@@ -34,16 +34,16 @@ jobs:
                   S.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()})
                   for w in (s.words or []):
                       W.append({"w": w.word.strip(), "start": round(w.start,2), "end": round(w.end,2)})
-              json.dump({"segments": S, "words": W}, open(f"ff4/{name}_tr.json","w"))
+              json.dump({"segments": S, "words": W}, open(f"ff5/{name}_tr.json","w"))
               print("=====", name, len(S))
           PY
-          ls -la ff4/
+          ls -la ff5/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ff4/
-          git commit -m "Add Kathy Fettke candidate clips + transcripts [skip ci]" || echo nothing
+          git add ff5/
+          git commit -m "Add BiggerPockets candidate clips + transcripts [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
