@@ -209,7 +209,7 @@ const GetInvolved = () => {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-primary"
+                className="h-auto whitespace-normal border-white py-3 text-white hover:bg-white hover:text-primary"
               >
                 <a href="https://booksmiles.org" target="_blank" rel="noreferrer">
                   Donate books via BookSmiles

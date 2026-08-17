@@ -126,6 +126,11 @@
     color-scheme: light;
   }
 
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "cv11", "ss01";

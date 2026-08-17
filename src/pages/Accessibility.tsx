@@ -74,14 +74,14 @@ const Accessibility = () => {
                   <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
                     <a
                       href={`mailto:${site.email}`}
-                      className="inline-flex items-center gap-2 font-semibold text-primary underline-offset-4 hover:underline"
+                      className="inline-flex items-center gap-2 break-all font-semibold text-primary underline-offset-4 hover:underline"
                     >
                       <Mail className="h-4 w-4" />
                       {site.email}
                     </a>
                     <a
                       href={site.phoneHref}
-                      className="inline-flex items-center gap-2 font-semibold text-primary underline-offset-4 hover:underline"
+                      className="inline-flex items-center gap-2 break-all font-semibold text-primary underline-offset-4 hover:underline"
                     >
                       <Phone className="h-4 w-4" />
                       {site.phone}

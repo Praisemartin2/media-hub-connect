@@ -43,7 +43,7 @@ export function FeaturedEvent({ event }: { event: COFYEvent }) {
       <img
         src={photo.min}
         alt={photo.alt}
-        className="aspect-square w-full object-cover"
+        className="aspect-square w-full max-w-full object-cover"
         onError={(e) => {
           (e.currentTarget as HTMLImageElement).src = plateFallback(
             categoryPhoto[event.category],

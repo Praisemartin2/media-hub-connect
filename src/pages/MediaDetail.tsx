@@ -110,7 +110,7 @@ const MediaDetail = () => {
                   <p className="mt-1 text-muted-foreground">
                     The full post lives on our main site.
                   </p>
-                  <Button asChild variant="outline" className="mt-4">
+                  <Button asChild variant="outline" className="mt-4 h-auto whitespace-normal py-2.5 text-left">
                     <a href={item.sourceUrl} target="_blank" rel="noreferrer">
                       Read the original on cofyouth.org
                       <ArrowUpRight className="ml-1 h-4 w-4" />
