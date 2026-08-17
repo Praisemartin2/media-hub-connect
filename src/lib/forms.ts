@@ -3,18 +3,24 @@
  * inbox (cofyincorporated@gmail.com) by FormSubmit.co, so no server is
  * needed. The AJAX endpoint keeps visitors on the page.
  *
- * One-time setup: FormSubmit emails an activation link to the inbox on
- * the first-ever submission; after COFY clicks it once, every
- * submission arrives as a formatted email.
+ * One-time setup: the relay must be activated once for this email —
+ * open /activate-forms.html and follow the two steps there.
+ *
+ * If the relay fails for ANY reason (not yet activated, ad blocker,
+ * network, service down), the caller falls back to opening the
+ * visitor's own email app with the message pre-filled, so nothing a
+ * visitor writes can be lost.
  */
 import { site } from "@/data/site";
 
 const ENDPOINT = `https://formsubmit.co/ajax/${site.email}`;
 
+export type FormResult = "sent" | "failed";
+
 export async function submitForm(
   subject: string,
   data: Record<string, string>,
-): Promise<boolean> {
+): Promise<FormResult> {
   try {
     const res = await fetch(ENDPOINT, {
       method: "POST",
@@ -26,11 +32,14 @@ export async function submitForm(
         _captcha: "false",
       }),
     });
-    if (!res.ok) return false;
-    const json = (await res.json().catch(() => null)) as { success?: string | boolean } | null;
-    return json ? json.success === "true" || json.success === true : true;
+    const json = (await res.json().catch(() => null)) as
+      | { success?: string | boolean; message?: string }
+      | null;
+    const ok =
+      res.ok && (json ? json.success === "true" || json.success === true : true);
+    return ok ? "sent" : "failed";
   } catch {
-    return false;
+    return "failed";
   }
 }
 
@@ -41,4 +50,18 @@ export function formValues(form: HTMLFormElement): Record<string, string> {
     if (typeof v === "string" && !k.startsWith("_")) out[k] = v;
   });
   return out;
+}
+
+/**
+ * Guaranteed-delivery fallback: open the visitor's email app with the
+ * whole message pre-filled and addressed to the COFY inbox.
+ */
+export function openMailFallback(subject: string, data: Record<string, string>): void {
+  const body = Object.entries(data)
+    .map(([k, v]) => `${k}: ${v}`)
+    .join("\n");
+  const url = `mailto:${site.email}?subject=${encodeURIComponent(
+    `[cofyouth.org] ${subject}`,
+  )}&body=${encodeURIComponent(body)}`;
+  window.location.href = url;
 }

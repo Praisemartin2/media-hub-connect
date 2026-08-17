@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { SEO } from "@/components/shared/SEO";
 import { site, socials } from "@/data/site";
 import { toast } from "sonner";
-import { submitForm, formValues } from "@/lib/forms";
+import { submitForm, formValues, openMailFallback } from "@/lib/forms";
 
 const contactCards = [
   {
@@ -115,7 +115,7 @@ const Contact = () => {
                 const form = e.currentTarget;
                 const btn = form.querySelector("button[type=submit]") as HTMLButtonElement | null;
                 if (btn) btn.disabled = true;
-                const ok = await submitForm("Contact form message", formValues(form));
+                const ok = (await submitForm("Contact form message", formValues(form))) === "sent";
                 if (btn) btn.disabled = false;
                 if (ok) {
                   toast.success("Message sent!", {
@@ -123,9 +123,10 @@ const Contact = () => {
                   });
                   form.reset();
                 } else {
-                  toast.error("Couldn't send just now", {
-                    description: `Please email us directly at ${site.email}.`,
+                  toast.info("Opening your email app instead", {
+                    description: `Your message is pre-filled and addressed to ${site.email} — just press send.`,
                   });
+                  openMailFallback("Contact form message", formValues(form));
                 }
               }}
               className="rounded-lg border border-border bg-card p-7 sm:p-9"

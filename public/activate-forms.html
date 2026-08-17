@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Activate form delivery — COFY</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #f3f3ee;
+        color: #000;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #ddd;
+        max-width: 560px;
+        padding: 40px;
+      }
+      h1 { font-size: 26px; margin: 0 0 8px; }
+      p { line-height: 1.6; margin: 12px 0; }
+      ol { line-height: 1.8; padding-left: 20px; }
+      button {
+        background: #0064f0;
+        color: #fff;
+        border: 0;
+        font-size: 17px;
+        font-weight: 700;
+        padding: 14px 28px;
+        cursor: pointer;
+        margin-top: 12px;
+      }
+      button:hover { background: #0050c0; }
+      .note { font-size: 14px; color: #555; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Activate form delivery</h1>
+      <p>
+        This one-time step connects the website's forms to
+        <strong>cofyincorporated@gmail.com</strong>. Only COFY staff need to do
+        this, and only once.
+      </p>
+      <ol>
+        <li>Press the button below. FormSubmit's page will open and send an activation email.</li>
+        <li>Open <strong>cofyincorporated@gmail.com</strong> (check Spam/Promotions too), find the email from FormSubmit, and click <strong>Activate</strong>.</li>
+      </ol>
+      <p>
+        After that, every contact message, volunteer signup and newsletter
+        signup from the website arrives in the inbox automatically.
+      </p>
+      <form action="https://formsubmit.co/cofyincorporated@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="[cofyouth.org] Form delivery activation" />
+        <input type="hidden" name="Message" value="This is the one-time activation submission for the COFY website forms." />
+        <button type="submit">Send activation request</button>
+      </form>
+      <p class="note">
+        If the activation email doesn't arrive within a few minutes, look in
+        Spam, then try this button once more.
+      </p>
+    </div>
+  </body>
+</html>
