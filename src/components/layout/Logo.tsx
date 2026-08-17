@@ -22,7 +22,7 @@ export function Logo({ className, showText = true, light = false }: LogoProps) {
         alt="COFY inc. logo"
         width={48}
         height={48}
-        className="h-11 w-11 rounded-xl object-cover shadow-sm ring-1 ring-black/5 transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12"
+        className="h-11 w-11 object-cover sm:h-12 sm:w-12"
       />
       {showText && (
         <span className="leading-tight">

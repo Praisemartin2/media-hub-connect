@@ -150,7 +150,7 @@ const Events = () => {
             </div>
           ) : (
             <p className="py-10 text-muted-foreground">
-              Nothing scheduled right now — new events are added often!
+              Nothing scheduled right now. New events are added often.
             </p>
           )}
         </div>
@@ -203,7 +203,7 @@ const Events = () => {
             </h2>
             <p className="mt-3 font-serif text-lg text-white/85">
               Your gift keeps workshops, summits and outreach open to every
-              family — at no cost to them.
+              family, at no cost to them.
             </p>
           </div>
           <Button

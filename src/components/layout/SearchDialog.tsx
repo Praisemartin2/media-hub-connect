@@ -50,7 +50,7 @@ export function SearchDialog() {
         size="sm"
         onClick={() => setOpen(true)}
         aria-label="Search the site"
-        className="rounded-full font-medium text-foreground/70"
+        className="font-medium text-foreground/70"
       >
         <Search className="h-4 w-4 sm:mr-1.5" />
         <span className="hidden sm:inline">Search</span>

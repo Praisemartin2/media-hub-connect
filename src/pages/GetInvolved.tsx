@@ -3,12 +3,9 @@ import { Link } from "react-router-dom";
 import {
   Heart,
   HandHeart,
-  Users,
   Gift,
   Building2,
   Megaphone,
-  Check,
-  Sparkles,
   ArrowRight,
   ArrowUpRight,
 } from "lucide-react";
@@ -90,7 +87,7 @@ const GetInvolved = () => {
                   key={amt}
                   className="flex items-center gap-3 rounded-lg border border-border bg-card p-4"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary/20 font-display font-bold text-primary">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-secondary/20 font-display font-bold text-primary">
                     ${amt}
                   </span>
                   <span className="text-sm text-muted-foreground">{impact}</span>
@@ -101,7 +98,7 @@ const GetInvolved = () => {
 
           {/* Donation card */}
           <Reveal>
-            <div className="rounded-lg border border-border bg-card p-7 shadow-xl shadow-primary/5 sm:p-9">
+            <div className="rounded-lg border border-border bg-card p-7 sm:p-9">
               <div className="mb-6 flex border border-border bg-muted p-1">
                 <button
                   onClick={() => setMonthly(false)}
@@ -163,8 +160,7 @@ const GetInvolved = () => {
               </div>
 
               {amount > 0 && impactByAmount[amount] && (
-                <p className="mt-4 flex items-start gap-2 rounded-lg bg-secondary/15 p-3 text-sm text-foreground">
-                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <p className="mt-4 border-l-0 bg-secondary/15 p-3 text-sm text-foreground">
                   {impactByAmount[amount]}
                 </p>
               )}
@@ -258,10 +254,6 @@ const GetInvolved = () => {
             <div className="mt-12 overflow-hidden rounded-lg bg-primary p-8 text-white sm:p-12">
               <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
                 <div>
-                  <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm font-semibold">
-                    <Users className="h-4 w-4 text-secondary" />
-                    Join 40+ mentors
-                  </span>
                   <h3 className="mt-4 font-display text-2xl font-bold sm:text-3xl">
                     Become a volunteer mentor
                   </h3>
@@ -272,8 +264,8 @@ const GetInvolved = () => {
                   <ul className="mt-5 space-y-2 text-sm">
                     {["Flexible scheduling", "Full training provided", "Ongoing support"].map(
                       (b) => (
-                        <li key={b} className="flex items-center gap-2">
-                          <Check className="h-4 w-4 text-secondary" />
+                        <li key={b} className="flex items-center gap-3">
+                          <span className="h-1.5 w-1.5 bg-secondary" aria-hidden />
                           {b}
                         </li>
                       ),

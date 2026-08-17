@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { CheckCircle2, ArrowRight, Heart } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/shared/Reveal";
 import { Button } from "@/components/ui/button";
@@ -38,7 +38,7 @@ const Programs = () => {
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-deep/95 via-brand-blue-deep/35 to-transparent" aria-hidden />
-                  <span className="relative flex h-16 w-16 items-center justify-center rounded-lg bg-white/15 backdrop-blur">
+                  <span className="relative flex h-16 w-16 items-center justify-center bg-secondary text-secondary-foreground">
                     <program.icon className="h-8 w-8" />
                   </span>
                   <h2 className="relative mt-6 font-display text-2xl font-bold sm:text-3xl">
@@ -52,8 +52,8 @@ const Programs = () => {
                   </p>
                   <ul className="mt-6 grid gap-3 sm:grid-cols-1">
                     {program.highlights.map((h) => (
-                      <li key={h} className="flex items-start gap-3 font-medium text-foreground">
-                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                      <li key={h} className="flex items-start gap-4 font-medium text-foreground">
+                        <span className="mt-2 h-2 w-2 shrink-0 bg-secondary" aria-hidden />
                         {h}
                       </li>
                     ))}
@@ -80,7 +80,6 @@ const Programs = () => {
       <section className="container-cofy">
         <Reveal>
           <div className="relative overflow-hidden rounded-lg bg-brand-blue-deep px-8 py-14 text-center text-white sm:px-16">
-            <div className="absolute inset-0 bg-hero-radial" aria-hidden />
             <div className="relative mx-auto max-w-2xl">
               <h2 className="font-display text-3xl font-extrabold sm:text-4xl">
                 Help us reach more young people

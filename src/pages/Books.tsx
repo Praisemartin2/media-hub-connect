@@ -3,7 +3,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   BookOpen,
-  CheckCircle2,
   HandHeart,
   Heart,
 } from "lucide-react";
@@ -19,7 +18,7 @@ const steps = [
   {
     icon: BookOpen,
     title: "Donate books",
-    text: "In partnership with BookSmiles.org — send a Smile today and put books directly into children's hands.",
+    text: "In partnership with BookSmiles.org. Send a Smile today and put books directly into children's hands.",
     href: "https://booksmiles.org",
     external: true,
     cta: "Visit BookSmiles",
@@ -109,7 +108,7 @@ const Books = () => {
                     key={h}
                     className="flex items-start gap-3 text-lg font-medium text-foreground"
                   >
-                    <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-primary" />
+                    <span className="mt-3 h-2 w-2 shrink-0 bg-primary" aria-hidden />
                     {h}
                   </li>
                 ))}

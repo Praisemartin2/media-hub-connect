@@ -1,8 +1,7 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { ArrowRight, ArrowLeft, ArrowUpRight, CheckCircle2, Heart, Quote } from "lucide-react";
+import { ArrowRight, ArrowLeft, ArrowUpRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/shared/Reveal";
-import { StatCounter } from "@/components/shared/StatCounter";
 import { SEO } from "@/components/shared/SEO";
 import { photos, plateFallback } from "@/data/photos";
 import { MediaCard } from "@/components/cards/MediaCard";
@@ -10,9 +9,9 @@ import { programs } from "@/data/programs";
 import { mediaItems } from "@/data/media";
 
 /**
- * Obama.org-style rich program landing page: full-bleed hero,
- * narrative, impact stat, voice from the program, and a clear
- * "how to help" call to action.
+ * Program landing page: light header, photo band, narrative, NJ help
+ * resources, and a clear "how to help" call to action. Only real,
+ * sourced content — no invented stats or quotes.
  */
 const ProgramDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -64,51 +63,27 @@ const ProgramDetail = () => {
         </div>
       </section>
 
-      {/* Narrative + impact */}
+      {/* Narrative */}
       <section className="py-16 lg:py-24">
-        <div className="container-cofy grid gap-12 lg:grid-cols-[1.5fr_1fr]">
+        <div className="container-cofy">
           <Reveal>
-            <div>
+            <div className="max-w-3xl">
               <h2 className="font-display text-2xl font-bold sm:text-3xl">
                 What this program does
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                 {program.description}
               </p>
-              <ul className="mt-8 space-y-4">
+              <ul className="mt-8 space-y-4 border-t border-border pt-8">
                 {program.highlights.map((h) => (
-                  <li key={h} className="flex items-start gap-3 text-lg font-medium text-foreground">
-                    <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-primary" />
+                  <li key={h} className="flex items-start gap-4 text-lg font-medium text-foreground">
+                    <span className="mt-2.5 h-2 w-2 shrink-0 bg-secondary" aria-hidden />
                     {h}
                   </li>
                 ))}
               </ul>
             </div>
           </Reveal>
-
-          <div className="space-y-6">
-            <Reveal delay={80}>
-              <div className="rounded-lg bg-primary p-8 text-center text-white">
-                <p className="font-display text-5xl font-extrabold text-secondary">
-                  <StatCounter value={program.stat.value} suffix={program.stat.suffix} />
-                </p>
-                <p className="mt-2 text-white/85">{program.stat.label}</p>
-              </div>
-            </Reveal>
-            <Reveal delay={140}>
-              <figure className="rounded-lg border border-border bg-card p-8">
-                <Quote className="h-8 w-8 text-secondary" />
-                <blockquote className="mt-3 text-lg leading-relaxed">
-                  "{program.quote.text}"
-                </blockquote>
-                <figcaption className="mt-4 text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">{program.quote.name}</span>
-                  {" · "}
-                  {program.quote.role}
-                </figcaption>
-              </figure>
-            </Reveal>
-          </div>
         </div>
       </section>
 
@@ -187,7 +162,7 @@ const ProgramDetail = () => {
                       <h3 className="font-display text-xl font-bold leading-snug transition-colors group-hover:text-primary">
                         {r.name}
                       </h3>
-                      <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-primary" />
                     </div>
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                       {r.blurb}

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Target, Eye, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Target, Eye, MapPin, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { drNgoziPortrait, plateFallback } from "@/data/photos";
@@ -90,7 +90,7 @@ const About = () => {
                   ["Sandra Uchegbulam", "Member"],
                   ["Mrs. Charity Ezeji", "Finance Officer"],
                 ].map(([name, role]) => (
-                  <li key={name} className="border-l-2 border-secondary pl-4">
+                  <li key={name} className="border-t border-border pt-3">
                     <span className="block font-semibold text-foreground">{name}</span>
                     <span className="text-foreground/60">{role}</span>
                   </li>
@@ -132,13 +132,11 @@ const About = () => {
         <div className="container-cofy grid gap-12 lg:grid-cols-2 lg:items-center">
           <Reveal>
             <div className="relative">
-              <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-secondary/20" aria-hidden />
               <div className="relative overflow-hidden bg-primary p-10">
-                <div className="absolute inset-0 bg-hero-radial opacity-70" aria-hidden />
                 <img
                   src={logo}
                   alt="COFY inc. logo"
-                  className="relative mx-auto w-1/2 rounded-lg shadow-2xl ring-1 ring-white/20"
+                  className="relative mx-auto w-1/2"
                 />
                 <p className="relative mt-8 text-center font-display text-xl font-bold text-white">
                   "Helping Together." (2 Corinthians 1:11)
@@ -223,7 +221,7 @@ const About = () => {
               {site.serves.map((place) => (
                 <span
                   key={place}
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground"
+                  className="inline-flex items-center gap-2 border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground"
                 >
                   <MapPin className="h-4 w-4 text-primary" />
                   {place}
@@ -237,8 +235,8 @@ const About = () => {
                 "Free books and learning resources",
                 "Scholarships and international outreach",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-foreground">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                <li key={item} className="flex items-start gap-4 text-foreground">
+                  <span className="mt-2 h-2 w-2 shrink-0 bg-secondary" aria-hidden />
                   {item}
                 </li>
               ))}
@@ -250,7 +248,7 @@ const About = () => {
               {impactStats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-lg border border-border bg-gradient-to-br from-card to-brand-cream p-7 text-center"
+                  className="rounded-lg border border-border bg-card p-7 text-center"
                 >
                   <p className="font-display text-4xl font-extrabold text-primary">
                     <StatCounter value={stat.value} suffix={stat.suffix} />

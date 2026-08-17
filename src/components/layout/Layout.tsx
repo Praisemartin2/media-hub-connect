@@ -24,7 +24,7 @@ export function Layout() {
       {/* WCAG skip link */}
       <a
         href="#main-content"
-        className="sr-only z-[60] rounded-full bg-secondary px-5 py-2.5 font-semibold text-secondary-foreground focus:not-sr-only focus:absolute focus:left-4 focus:top-4"
+        className="sr-only z-[60] bg-secondary px-5 py-2.5 font-semibold text-secondary-foreground focus:not-sr-only focus:absolute focus:left-4 focus:top-4"
       >
         Skip to main content
       </a>

@@ -98,7 +98,15 @@ export function Footer() {
             {site.name} is a registered nonprofit organization in the state of
             New Jersey.
           </p>
-          <p>© {new Date().getFullYear()} {site.shortName} All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+            <Link to="/terms" className="underline-offset-4 hover:underline">
+              Terms of Service
+            </Link>
+            <Link to="/privacy" className="underline-offset-4 hover:underline">
+              Privacy Policy
+            </Link>
+            <p>© {new Date().getFullYear()} {site.shortName} All rights reserved.</p>
+          </div>
         </div>
       </div>
     </footer>
