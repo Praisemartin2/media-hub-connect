@@ -102,7 +102,7 @@ const Events = () => {
           </div>
 
           {upcoming.length > 0 ? (
-            <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
               {/* Lead slot: the current event */}
               {featured && (
                 <Reveal>
@@ -140,7 +140,7 @@ const Events = () => {
               )}
 
               {/* Everything else, in date order */}
-              <div className="grid content-start gap-4">
+              <div className="grid grid-cols-1 content-start gap-4">
                 {rest.map((event, i) => (
                   <Reveal key={event.id} delay={i * 60}>
                     <EventRow event={event} />
@@ -182,7 +182,7 @@ const Events = () => {
               </Reveal>
             )}
 
-            <div className="mt-8 grid gap-4">
+            <div className="mt-8 grid grid-cols-1 gap-4">
               {pastRest.map((event, i) => (
                 <Reveal key={event.id} delay={i * 60}>
                   <EventRow event={event} past />

@@ -74,7 +74,7 @@ const Books = () => {
               asChild
               size="lg"
               variant="outline"
-              className="border-black text-black hover:bg-black hover:text-white"
+              className="h-auto whitespace-normal border-black py-3 text-black hover:bg-black hover:text-white"
             >
               <a href="https://booksmiles.org" target="_blank" rel="noreferrer">
                 Donate books via BookSmiles

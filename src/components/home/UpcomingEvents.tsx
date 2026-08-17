@@ -39,7 +39,7 @@ export function UpcomingEvents() {
 
         {/* Lead slot: the current event, with its promo film */}
         <Reveal>
-          <div className="mt-12 grid items-stretch gap-8 lg:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2">
             <FeaturedEvent event={featured} />
             <div className="flex flex-col justify-center bg-white p-7 sm:p-10">
               <p className="text-xs font-bold uppercase tracking-wider text-primary">
