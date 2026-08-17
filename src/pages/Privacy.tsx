@@ -12,6 +12,7 @@ const sections: { title: string; body: string[] }[] = [
   {
     title: "What we collect, and where it goes",
     body: [
+      "Website forms: the contact, volunteer and newsletter forms on this site are delivered to our inbox by FormSubmit.co, a form-to-email relay. What you type in the form (your name, contact details and message) is emailed to us and handled under FormSubmit's own privacy policy in transit. We use it only to reply and to send you what you asked for.",
       "Event registration: when you register for an event, the form runs on Google Forms. Your answers (typically your name and contact details) go to COFY so we can run the event. Google processes the form under its own privacy policy.",
       "Donations: payments are handled entirely by PayPal on PayPal's pages. COFY receives your name, the amount, and the contact details PayPal shares with recipients. We never see your card number.",
       "Email: if you write to us, we keep the correspondence so we can reply and follow up.",
@@ -20,7 +21,7 @@ const sections: { title: string; body: string[] }[] = [
   {
     title: "Newsletter",
     body: [
-      "The newsletter signup form on our homepage is not yet connected to a mailing system. Until it is, submitting it does not store your details anywhere. When that changes, this policy will say so plainly.",
+      "Signing up for the newsletter sends your details to our inbox so we can add you to our mailing list. If you change your mind, one email to us takes you off it.",
     ],
   },
   {

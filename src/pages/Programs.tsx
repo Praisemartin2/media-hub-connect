@@ -16,6 +16,7 @@ const Programs = () => {
       />
       <PageHero
         eyebrow="Our Programs"
+        photo="education"
         title="Every program removes a barrier"
         description="Four ways we turn challenges into opportunity for youth with developmental delays and the families who love them."
       />

@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import type { ReactNode } from "react";
+import { PhotoImg } from "@/components/shared/PhotoImg";
+import type { PhotoKey } from "@/data/photos";
 
 type PageHeroProps = {
   eyebrow?: string;
   title: string;
   description?: string;
+  /** Full-width photo band rendered under the header text */
+  photo?: PhotoKey;
   children?: ReactNode;
 };
 
 /** Light editorial page header: breadcrumb, eyebrow, oversized title. */
-export function PageHero({ eyebrow, title, description, children }: PageHeroProps) {
+export function PageHero({ eyebrow, title, description, photo, children }: PageHeroProps) {
   return (
     <section className="border-b border-border bg-background">
       <div className="container-cofy pb-14 pt-12 lg:pb-20 lg:pt-16">
@@ -32,6 +36,11 @@ export function PageHero({ eyebrow, title, description, children }: PageHeroProp
         )}
         {children && <div className="mt-9">{children}</div>}
       </div>
+      {photo && (
+        <div className="h-[36svh] min-h-[260px] w-full overflow-hidden lg:h-[46svh]">
+          <PhotoImg id={photo} loading="eager" className="h-full w-full object-cover" />
+        </div>
+      )}
     </section>
   );
 }

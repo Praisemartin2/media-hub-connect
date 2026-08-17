@@ -32,6 +32,7 @@ const Media = () => {
       />
       <PageHero
         eyebrow="Stories"
+        photo="volunteers"
         title="Stories, news & daily opportunities"
         description="One home for everything happening at COFY — daily opportunity news, helpful blogs and community updates."
       >

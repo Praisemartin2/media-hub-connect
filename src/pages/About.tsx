@@ -20,6 +20,7 @@ const About = () => {
       />
       <PageHero
         eyebrow="Our Mission"
+        photo="community"
         title="In the spirit of togetherness."
         description="Welcome to COFY, a registered nonprofit organization based in the state of New Jersey. Our mission is to provide educational and life skills support to youth with developmental delays and their families, enabling them to transition successfully into college, careers, and independent living."
       />

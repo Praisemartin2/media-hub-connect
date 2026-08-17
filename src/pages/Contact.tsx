@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { SEO } from "@/components/shared/SEO";
 import { site, socials } from "@/data/site";
 import { toast } from "sonner";
+import { submitForm, formValues } from "@/lib/forms";
 
 const contactCards = [
   {
@@ -43,6 +44,7 @@ const Contact = () => {
       />
       <PageHero
         eyebrow="Contact"
+        photo="mentorship"
         title="We'd love to hear from you"
         description="Questions about our programs, volunteering or partnership? Reach out. A real person is ready to help."
       />
@@ -108,13 +110,23 @@ const Contact = () => {
           {/* Form */}
           <Reveal>
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 const form = e.currentTarget;
-                toast.success("Message sent!", {
-                  description: "Thanks for reaching out. We'll be in touch soon.",
-                });
-                form.reset();
+                const btn = form.querySelector("button[type=submit]") as HTMLButtonElement | null;
+                if (btn) btn.disabled = true;
+                const ok = await submitForm("Contact form message", formValues(form));
+                if (btn) btn.disabled = false;
+                if (ok) {
+                  toast.success("Message sent!", {
+                    description: "Thanks for reaching out. We'll be in touch soon.",
+                  });
+                  form.reset();
+                } else {
+                  toast.error("Couldn't send just now", {
+                    description: `Please email us directly at ${site.email}.`,
+                  });
+                }
               }}
               className="rounded-lg border border-border bg-card p-7 sm:p-9"
             >
@@ -125,20 +137,21 @@ const Contact = () => {
               <div className="mt-6 grid gap-5 sm:grid-cols-2">
                 <div className="space-y-1.5">
                   <Label htmlFor="firstName">First Name</Label>
-                  <Input id="firstName" required autoComplete="given-name" placeholder="Jane" />
+                  <Input id="firstName" name="First Name" required autoComplete="given-name" placeholder="Jane" />
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="lastName">Last Name</Label>
-                  <Input id="lastName" required autoComplete="family-name" placeholder="Doe" />
+                  <Input id="lastName" name="Last Name" required autoComplete="family-name" placeholder="Doe" />
                 </div>
                 <div className="space-y-1.5 sm:col-span-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" required autoComplete="email" placeholder="jane@email.com" />
+                  <Input id="email" name="Email" type="email" required autoComplete="email" placeholder="jane@email.com" />
                 </div>
                 <div className="space-y-1.5 sm:col-span-2">
                   <Label htmlFor="message">Message</Label>
                   <Textarea
                     id="message"
+                    name="Message"
                     required
                     rows={5}
                     placeholder="Tell us a little about how we can help…"
