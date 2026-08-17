@@ -20,7 +20,7 @@ import { DonateButton } from "@/components/donate/DonateButton";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
 import { toast } from "sonner";
-import { submitForm, formValues } from "@/lib/forms";
+import { submitForm, formValues, openMailFallback } from "@/lib/forms";
 
 const amounts = [25, 50, 100, 250];
 const impactByAmount: Record<number, string> = {
@@ -280,7 +280,7 @@ const GetInvolved = () => {
                     const form = e.currentTarget;
                     const btn = form.querySelector("button[type=submit]") as HTMLButtonElement | null;
                     if (btn) btn.disabled = true;
-                    const ok = await submitForm("Volunteer interest", formValues(form));
+                    const ok = (await submitForm("Volunteer interest", formValues(form))) === "sent";
                     if (btn) btn.disabled = false;
                     if (ok) {
                       toast.success("Thanks for your interest!", {
@@ -288,9 +288,10 @@ const GetInvolved = () => {
                       });
                       form.reset();
                     } else {
-                      toast.error("Couldn't send just now", {
-                        description: `Please email us at ${site.email}.`,
+                      toast.info("Opening your email app instead", {
+                        description: `Your details are pre-filled and addressed to ${site.email} — just press send.`,
                       });
+                      openMailFallback("Volunteer interest", formValues(form));
                     }
                   }}
                   className="rounded-lg bg-white p-6 text-foreground"

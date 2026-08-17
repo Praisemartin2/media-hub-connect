@@ -16,7 +16,7 @@ import { formatDate, isUpcoming } from "@/lib/format";
 import { SEO } from "@/components/shared/SEO";
 import { PhotoImg } from "@/components/shared/PhotoImg";
 import { toast } from "sonner";
-import { submitForm, formValues } from "@/lib/forms";
+import { submitForm, formValues, openMailFallback } from "@/lib/forms";
 
 const [featureProgram, ...cardPrograms] = programs;
 
@@ -175,7 +175,7 @@ const Index = () => {
                 const form = e.currentTarget;
                 const btn = form.querySelector("button[type=submit]") as HTMLButtonElement | null;
                 if (btn) btn.disabled = true;
-                const ok = await submitForm("Newsletter signup", formValues(form));
+                const ok = (await submitForm("Newsletter signup", formValues(form))) === "sent";
                 if (btn) btn.disabled = false;
                 if (ok) {
                   toast.success("You're an insider!", {
@@ -183,9 +183,10 @@ const Index = () => {
                   });
                   form.reset();
                 } else {
-                  toast.error("Couldn't sign you up just now", {
-                    description: `Please email us at ${site.email} and we'll add you.`,
+                  toast.info("Opening your email app instead", {
+                    description: `Your signup is pre-filled and addressed to ${site.email} — just press send.`,
                   });
+                  openMailFallback("Newsletter signup", formValues(form));
                 }
               }}
               className="space-y-8"
