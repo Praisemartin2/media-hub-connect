@@ -16,6 +16,7 @@ import { formatDate, isUpcoming } from "@/lib/format";
 import { SEO } from "@/components/shared/SEO";
 import { PhotoImg } from "@/components/shared/PhotoImg";
 import { toast } from "sonner";
+import { submitForm, formValues } from "@/lib/forms";
 
 const [featureProgram, ...cardPrograms] = programs;
 
@@ -169,13 +170,23 @@ const Index = () => {
           </Reveal>
           <Reveal delay={100}>
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 const form = e.currentTarget;
-                toast.success("You're an insider!", {
-                  description: "Thanks for joining the COFY community.",
-                });
-                form.reset();
+                const btn = form.querySelector("button[type=submit]") as HTMLButtonElement | null;
+                if (btn) btn.disabled = true;
+                const ok = await submitForm("Newsletter signup", formValues(form));
+                if (btn) btn.disabled = false;
+                if (ok) {
+                  toast.success("You're an insider!", {
+                    description: "Thanks for joining the COFY community.",
+                  });
+                  form.reset();
+                } else {
+                  toast.error("Couldn't sign you up just now", {
+                    description: `Please email us at ${site.email} and we'll add you.`,
+                  });
+                }
               }}
               className="space-y-8"
             >
@@ -184,7 +195,7 @@ const Index = () => {
                   <span className="font-display text-lg">First name</span>
                   <input
                     required
-                    name="firstName"
+                    name="First Name"
                     autoComplete="given-name"
                     className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
                   />
@@ -193,7 +204,7 @@ const Index = () => {
                   <span className="font-display text-lg">Last name</span>
                   <input
                     required
-                    name="lastName"
+                    name="Last Name"
                     autoComplete="family-name"
                     className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
                   />
@@ -204,7 +215,7 @@ const Index = () => {
                 <input
                   required
                   type="email"
-                  name="email"
+                  name="Email"
                   autoComplete="email"
                   className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
                 />
@@ -215,7 +226,7 @@ const Index = () => {
                     Zip Code <span className="text-sm text-muted-foreground">(optional)</span>
                   </span>
                   <input
-                    name="zip"
+                    name="Zip Code"
                     inputMode="numeric"
                     autoComplete="postal-code"
                     className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
@@ -226,7 +237,7 @@ const Index = () => {
                     Phone <span className="text-sm text-muted-foreground">(optional)</span>
                   </span>
                   <input
-                    name="phone"
+                    name="Phone"
                     type="tel"
                     autoComplete="tel"
                     className="mt-1 w-full border-0 border-b-2 border-foreground/40 bg-transparent py-2 font-serif outline-none transition-colors focus:border-primary"
@@ -239,7 +250,7 @@ const Index = () => {
                 reply STOP to opt out.
               </p>
               <label className="flex items-start gap-3 font-serif">
-                <input required type="checkbox" name="terms" className="mt-1 h-5 w-5 accent-primary" />
+                <input required type="checkbox" name="Agreed to Terms" className="mt-1 h-5 w-5 accent-primary" />
                 <span>
                   Yes, I agree to the{" "}
                   <Link to="/terms" className="font-semibold text-primary underline underline-offset-4">

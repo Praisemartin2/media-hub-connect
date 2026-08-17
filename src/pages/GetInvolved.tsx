@@ -20,6 +20,7 @@ import { DonateButton } from "@/components/donate/DonateButton";
 import { cn } from "@/lib/utils";
 import { site } from "@/data/site";
 import { toast } from "sonner";
+import { submitForm, formValues } from "@/lib/forms";
 
 const amounts = [25, 50, 100, 250];
 const impactByAmount: Record<number, string> = {
@@ -67,6 +68,7 @@ const GetInvolved = () => {
       />
       <PageHero
         eyebrow="Get Involved"
+        photo="outreach"
         title="Be the opportunity in a young person's story"
         description="Whether you give, volunteer or partner, you help us open doors for youth who need it most."
       />
@@ -273,13 +275,23 @@ const GetInvolved = () => {
                   </ul>
                 </div>
                 <form
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
                     const form = e.currentTarget;
-                    toast.success("Thanks for your interest!", {
-                      description: "Our team will reach out about volunteering soon.",
-                    });
-                    form.reset();
+                    const btn = form.querySelector("button[type=submit]") as HTMLButtonElement | null;
+                    if (btn) btn.disabled = true;
+                    const ok = await submitForm("Volunteer interest", formValues(form));
+                    if (btn) btn.disabled = false;
+                    if (ok) {
+                      toast.success("Thanks for your interest!", {
+                        description: "Our team will reach out about volunteering soon.",
+                      });
+                      form.reset();
+                    } else {
+                      toast.error("Couldn't send just now", {
+                        description: `Please email us at ${site.email}.`,
+                      });
+                    }
                   }}
                   className="rounded-lg bg-white p-6 text-foreground"
                 >
@@ -287,9 +299,10 @@ const GetInvolved = () => {
                     Express interest
                   </h4>
                   <div className="mt-4 space-y-3">
-                    <Input required placeholder="Full name" aria-label="Full name" />
+                    <Input required name="Full Name" placeholder="Full name" aria-label="Full name" />
                     <Input
                       required
+                      name="Email"
                       type="email"
                       placeholder="Email address"
                       aria-label="Email address"
