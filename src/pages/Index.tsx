@@ -103,7 +103,7 @@ const Index = () => {
                   <div className="overflow-hidden">
                     <PhotoImg
                       id={p.art as "education" | "outreach" | "mentorship"}
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      className="aspect-[4/3] w-full object-cover"
                     />
                   </div>
                   <p className="eyebrow mt-5 font-display text-foreground/60">Projects</p>
@@ -115,7 +115,7 @@ const Index = () => {
                   </p>
                   <span className="mt-4 inline-flex items-center gap-2 font-display text-lg text-primary">
                     Learn more
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-4 w-4" />
                   </span>
                 </Link>
               </Reveal>
@@ -163,8 +163,8 @@ const Index = () => {
               Be an insider
             </h2>
             <p className="mt-6 max-w-md font-serif text-lg leading-relaxed text-foreground/75">
-              Get vlogs, stories and event news from COFY in your inbox — and
-              be the first to hear about workshops and volunteer days.
+              Get vlogs, stories and event news from COFY in your inbox, and be
+              the first to hear about workshops and volunteer days.
             </p>
           </Reveal>
           <Reveal delay={100}>
@@ -240,7 +240,13 @@ const Index = () => {
               </p>
               <label className="flex items-start gap-3 font-serif">
                 <input required type="checkbox" name="terms" className="mt-1 h-5 w-5 accent-primary" />
-                <span>Yes, I agree to the Terms of Service.</span>
+                <span>
+                  Yes, I agree to the{" "}
+                  <Link to="/terms" className="font-semibold text-primary underline underline-offset-4">
+                    Terms of Service
+                  </Link>
+                  .
+                </span>
               </label>
               <Button type="submit" size="lg">
                 Submit

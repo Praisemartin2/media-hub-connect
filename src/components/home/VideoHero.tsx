@@ -105,7 +105,7 @@ export function VideoHero() {
           type="button"
           onClick={togglePlay}
           aria-label={playing ? "Pause background video" : "Play background video"}
-          className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center border border-white/40 bg-black/40 text-white backdrop-blur transition-colors hover:bg-black/65 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+          className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center border border-white/40 bg-black/60 text-white transition-colors hover:bg-black/80 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
         >
           {playing ? <Pause className="h-5 w-5" /> : <Play className="ml-0.5 h-5 w-5" />}
         </button>

@@ -35,7 +35,12 @@ export function DonateButton({
     loadDonateSdk()
       .then(() => {
         if (cancelled || rendered.current) return;
-        const PayPal = (window as unknown as { PayPal?: any }).PayPal;
+        type DonateSdk = {
+          Donation?: {
+            Button: (opts: object) => { render: (sel: string) => void };
+          };
+        };
+        const PayPal = (window as unknown as { PayPal?: DonateSdk }).PayPal;
         const host = document.getElementById(containerId);
         if (!PayPal?.Donation || !host) {
           setSdkFailed(true);

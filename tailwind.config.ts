@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["'Libre Franklin'", "ui-sans-serif", "system-ui", "sans-serif"],
         serif: ["'Source Serif 4'", "Georgia", "serif"],
         display: ["Oswald", "'Arial Narrow'", "ui-sans-serif", "sans-serif"],
       },
@@ -120,8 +120,6 @@ export default {
         smooth: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
       backgroundImage: {
-        "hero-radial":
-          "radial-gradient(60% 60% at 80% 0%, hsl(var(--brand-yellow) / 0.18) 0%, transparent 60%), radial-gradient(50% 50% at 0% 100%, hsl(var(--brand-blue) / 0.25) 0%, transparent 55%)",
       },
     },
   },

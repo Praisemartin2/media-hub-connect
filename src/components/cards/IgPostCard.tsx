@@ -23,7 +23,7 @@ export function IgPostCard({ post }: { post: IgPost }) {
             height={1350}
             loading="lazy"
             onError={() => setImgOk(false)}
-            className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            className="aspect-[4/5] w-full object-cover"
           />
         ) : (
           <div className="relative flex aspect-[16/10] items-end overflow-hidden bg-primary p-5">
@@ -33,7 +33,7 @@ export function IgPostCard({ post }: { post: IgPost }) {
             </span>
           </div>
         )}
-        <Badge className="absolute left-4 top-4 gap-1.5 border-0 bg-white/90 font-semibold text-primary backdrop-blur">
+        <Badge className="absolute left-4 top-4 gap-1.5 border-0 bg-white font-semibold text-primary">
           <Globe2 className="h-3.5 w-3.5" />
           {post.region}
         </Badge>
@@ -55,7 +55,7 @@ export function IgPostCard({ post }: { post: IgPost }) {
           className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
           Source: {post.source_name}
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight className="h-4 w-4" />
         </a>
       </div>
     </article>

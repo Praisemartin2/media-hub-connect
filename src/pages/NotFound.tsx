@@ -16,26 +16,24 @@ const NotFound = () => {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-6 text-center text-foreground">
-      <div className="absolute inset-0 bg-hero-radial" aria-hidden />
-      <div className="absolute inset-0 bg-grid-soft opacity-[0.12]" aria-hidden />
       <div className="relative max-w-md">
         <img
           src={logo}
           alt="COFY inc. logo"
-          className="mx-auto mb-8 h-20 w-20 shadow-lg ring-1 ring-black/10"
+          className="mx-auto mb-8 h-20 w-20"
         />
         <p className="font-display text-7xl font-extrabold text-secondary">404</p>
         <h1 className="mt-4 font-display text-2xl font-bold">
           We couldn't find that page
         </h1>
         <p className="mt-3 text-muted-foreground">
-          The page may have moved — but there's plenty of opportunity to explore.
+          The page may have moved, but there is plenty of opportunity to explore.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Button
             asChild
             size="lg"
-            className="rounded-full bg-secondary font-bold text-secondary-foreground hover:bg-brand-yellow-light"
+            className="rounded-none bg-secondary font-bold text-secondary-foreground hover:bg-brand-yellow-light"
           >
             <Link to="/">
               <Home className="mr-1 h-5 w-5" />

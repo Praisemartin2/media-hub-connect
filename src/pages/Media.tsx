@@ -67,7 +67,7 @@ const Media = () => {
                 className={cn(
                   "rounded-none px-5 py-2.5 text-sm font-semibold transition-all",
                   filter === f.value
-                    ? "bg-primary text-white shadow-md shadow-primary/25"
+                    ? "bg-primary text-white"
                     : "border border-border bg-card text-foreground/70 hover:border-primary/40 hover:text-primary",
                 )}
               >
@@ -108,7 +108,7 @@ const Media = () => {
             </div>
           ) : (
             <p className="py-16 text-center text-muted-foreground">
-              No stories here yet — check back soon!
+              No stories here yet. Check back soon!
             </p>
           )}
         </div>
@@ -126,7 +126,7 @@ const Media = () => {
                 </h2>
                 <p className="mt-3 max-w-2xl text-muted-foreground">
                   Every day we spotlight one real story about creating
-                  opportunities for young people around the world — posted to
+                  opportunities for young people around the world, posted to
                   our Instagram.
                 </p>
               </div>

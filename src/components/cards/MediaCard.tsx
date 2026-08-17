@@ -32,27 +32,26 @@ export function MediaCard({ item, featured = false }: { item: MediaItem; feature
       {/* Thumbnail */}
       <div
         className={cn(
-          "relative flex shrink-0 items-end overflow-hidden bg-gradient-to-br p-5",
-          item.gradient,
+          "relative flex shrink-0 items-end overflow-hidden bg-brand-sky p-5",
           featured ? "min-h-56 lg:w-1/2" : "aspect-[16/10]",
         )}
       >
-        <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
+        <div className="absolute inset-0">
           <Illustration variant={item.art} label="" />
         </div>
-        <Badge className="absolute left-4 top-4 gap-1.5 border-0 bg-white/90 font-semibold text-primary backdrop-blur">
+        <Badge className="absolute left-4 top-4 gap-1.5 border-0 bg-white font-semibold text-primary">
           <Icon className="h-3.5 w-3.5" />
           {typeLabel[item.type]}
         </Badge>
         {item.type === "vlog" && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-primary shadow-lg transition-transform duration-300 group-hover:scale-110">
+            <span className="flex h-16 w-16 items-center justify-center bg-white text-primary">
               <Play className="ml-1 h-7 w-7 fill-current" />
             </span>
           </div>
         )}
         {item.duration && (
-          <span className="relative z-10 inline-flex items-center gap-1 rounded-md bg-black/55 px-2 py-1 text-xs font-medium text-white backdrop-blur">
+          <span className="relative z-10 inline-flex items-center gap-1 bg-black/70 px-2 py-1 text-xs font-medium text-white">
             <Clock className="h-3 w-3" />
             {item.duration}
           </span>
@@ -89,7 +88,7 @@ export function MediaCard({ item, featured = false }: { item: MediaItem; feature
           </span>
           <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
             {item.type === "vlog" ? "Watch" : "Read"}
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="h-4 w-4" />
           </span>
         </div>
       </div>

@@ -32,9 +32,9 @@ export function UpcomingEvents() {
           What's coming up
         </h2>
         <p className="mt-6 max-w-2xl font-serif text-lg leading-relaxed text-black/80">
-          Theme: <strong>Teaching How They Learn</strong> (TeachHTL) — reaching
-          schools with transformational education. Every COFY event is free of
-          charge. Register below.
+          Theme: <strong>Teaching How They Learn</strong> (TeachHTL). Reaching
+          schools with transformational education. Every COFY event is free
+          of charge, and you can register below.
         </p>
 
         {/* Lead slot: the current event, with its promo film */}

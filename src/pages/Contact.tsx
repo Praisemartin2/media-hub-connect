@@ -44,7 +44,7 @@ const Contact = () => {
       <PageHero
         eyebrow="Contact"
         title="We'd love to hear from you"
-        description="Questions about our programs, volunteering or partnership? Reach out — there's a real person ready to help."
+        description="Questions about our programs, volunteering or partnership? Reach out. A real person is ready to help."
       />
 
       <section className="py-20 lg:py-28">
@@ -95,7 +95,7 @@ const Contact = () => {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={s.label}
-                      className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary transition-all hover:-translate-y-0.5 hover:bg-primary hover:text-white"
+                      className="flex h-11 w-11 items-center justify-center border border-border text-primary transition-colors hover:bg-primary hover:text-white"
                     >
                       <s.icon className="h-5 w-5" />
                     </a>
@@ -112,11 +112,11 @@ const Contact = () => {
                 e.preventDefault();
                 const form = e.currentTarget;
                 toast.success("Message sent!", {
-                  description: "Thanks for reaching out — we'll be in touch soon.",
+                  description: "Thanks for reaching out. We'll be in touch soon.",
                 });
                 form.reset();
               }}
-              className="rounded-lg border border-border bg-card p-7 shadow-xl shadow-primary/5 sm:p-9"
+              className="rounded-lg border border-border bg-card p-7 sm:p-9"
             >
               <h2 className="font-display text-2xl font-bold">Send us a message</h2>
               <p className="mt-1.5 text-muted-foreground">
