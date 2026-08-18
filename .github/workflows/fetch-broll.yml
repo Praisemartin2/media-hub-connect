@@ -11,29 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Transcribe episode 1 shots
+      - name: Download 2D cast lineup variants
         run: |
           set -e
-          pip install -q faster-whisper
-          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          python3 - <<'PY'
-          import glob, json, os
-          from faster_whisper import WhisperModel
-          m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          for f in sorted(glob.glob("toon/s*.mp4")):
-              name = os.path.basename(f)[:-4]
-              segs, info = m.transcribe(f, word_timestamps=False, vad_filter=True)
-              S = [{"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()} for s in segs]
-              json.dump({"segments": S}, open(f"toon/{name}_tr.json","w"))
-              print(name, "|", " / ".join(x["text"] for x in S))
-          PY
-          ls -la toon/
+          mkdir -p toon2d
+          b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
+          curl -fsSL -o toon2d/lineup2d_v1.png "$b/hf_20260818_043542_0ffed6d1-c931-432c-b5a6-446ee683f852.png"
+          curl -fsSL -o toon2d/lineup2d_v2.png "$b/hf_20260818_043542_9622a812-59e7-4bd4-8f7f-07e135c1693d.png"
+          ls -la toon2d/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add toon/
-          git commit -m "Add episode 1 dialogue transcripts [skip ci]" || echo nothing
+          git add toon2d/
+          git commit -m "Add 2D cast lineup variants [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
