@@ -11,20 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download cast lineup variants
+      - name: Download episode 1 shots
         run: |
           set -e
           mkdir -p toon
           b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          curl -fsSL -o toon/lineup_v1.png "$b/hf_20260818_024913_f7fea01b-9312-47ea-9f33-8cfe60594ddb.png"
-          curl -fsSL -o toon/lineup_v2.png "$b/hf_20260818_024914_9169806b-0e6f-4840-aa65-7c3ee1b5637b.png"
+          curl -fsSL -o toon/s1_derek.mp4  "$b/hf_20260818_025225_793677c9-77b1-4549-beb1-432cb579d5c7.mp4"
+          curl -fsSL -o toon/s2_marcus.mp4 "$b/hf_20260818_025241_d2165be9-9e36-4b5f-84ec-5efd2eb0511c.mp4"
+          curl -fsSL -o toon/s3_gene.mp4   "$b/hf_20260818_025225_3e7912f0-14ed-4e2e-b3ca-37ee74e07b55.mp4"
+          curl -fsSL -o toon/s4_boss.mp4   "$b/hf_20260818_025241_d8e7832f-1bec-486d-9e9e-11e496d9702a.mp4"
+          curl -fsSL -o toon/s5_duplex.mp4 "$b/hf_20260818_025241_d048171e-b217-478b-b291-0e0249b929ea.mp4"
           ls -la toon/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add toon/
-          git commit -m "Add cast lineup variants [skip ci]" || echo nothing
+          git commit -m "Add episode 1 shots [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
