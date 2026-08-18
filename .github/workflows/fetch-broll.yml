@@ -11,39 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download + transcribe BiggerPockets candidates
+      - name: Download cast lineup variants
         run: |
           set -e
-          pip install -q faster-whisper
-          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          mkdir -p ff5
-          b="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_38Q7UV4HRCn3Op8W57z72pn2Iev/3h7vFjE51Q0/24f20f67-9954-42ba-9347-6db74c870b0c/clips"
-          curl -fsSL -o ff5/bp_duplex.mp4  "$b/clip_03.mp4"
-          curl -fsSL -o ff5/bp_5pct.mp4    "$b/clip_05.mp4"
-          curl -fsSL -o ff5/bp_4unit.mp4   "$b/clip_10.mp4"
-          ls -la ff5/
-          python3 - <<'PY'
-          import glob, json, os
-          from faster_whisper import WhisperModel
-          m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          for f in sorted(glob.glob("ff5/*.mp4")):
-              name = os.path.basename(f)[:-4]
-              segs, info = m.transcribe(f, word_timestamps=True, vad_filter=True)
-              S, W = [], []
-              for s in segs:
-                  S.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()})
-                  for w in (s.words or []):
-                      W.append({"w": w.word.strip(), "start": round(w.start,2), "end": round(w.end,2)})
-              json.dump({"segments": S, "words": W}, open(f"ff5/{name}_tr.json","w"))
-              print("=====", name, len(S))
-          PY
-          ls -la ff5/
+          mkdir -p toon
+          b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
+          curl -fsSL -o toon/lineup_v1.png "$b/hf_20260818_024913_f7fea01b-9312-47ea-9f33-8cfe60594ddb.png"
+          curl -fsSL -o toon/lineup_v2.png "$b/hf_20260818_024914_9169806b-0e6f-4840-aa65-7c3ee1b5637b.png"
+          ls -la toon/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ff5/
-          git commit -m "Add BiggerPockets candidate clips + transcripts [skip ci]" || echo nothing
+          git add toon/
+          git commit -m "Add cast lineup variants [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
