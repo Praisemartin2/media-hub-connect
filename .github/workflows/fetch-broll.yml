@@ -11,19 +11,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download corrected cast lineup
+      - name: Download + transcribe episode 2 shots
         run: |
           set -e
-          mkdir -p toon2d
+          pip install -q faster-whisper
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
+          mkdir -p toon2d/ep2
           b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          curl -fsSL -o toon2d/lineup2d_v3_boss_fix.png "$b/hf_20260818_152315_b92e8407-bdd5-4d98-913f-226fb4908f54.png"
-          ls -la toon2d/
+          curl -fsSL -o toon2d/ep2/s1_boss.mp4   "$b/hf_20260818_152708_beaa80b9-7d86-4679-bcc6-e62e1fce5568.mp4"
+          curl -fsSL -o toon2d/ep2/s2_derek.mp4  "$b/hf_20260818_152708_c7ef126b-9f7d-4a19-b492-0583f60fccc5.mp4"
+          curl -fsSL -o toon2d/ep2/s3_marcus.mp4 "$b/hf_20260818_152708_b30a84d1-452b-4329-be0b-f29970beae8a.mp4"
+          curl -fsSL -o toon2d/ep2/s4_gene.mp4   "$b/hf_20260818_152708_9516a82b-d30a-478e-95f8-96a2aea3ab88.mp4"
+          curl -fsSL -o toon2d/ep2/s5_duplex.mp4 "$b/hf_20260818_152708_90ce4909-4ce9-41ab-a360-0b65cc741553.mp4"
+          ls -la toon2d/ep2/
+          python3 - <<'PY'
+          import glob, json, os
+          from faster_whisper import WhisperModel
+          m = WhisperModel("small.en", device="cpu", compute_type="int8")
+          for f in sorted(glob.glob("toon2d/ep2/s*.mp4")):
+              name = os.path.basename(f)[:-4]
+              segs, info = m.transcribe(f, word_timestamps=False, vad_filter=True)
+              S = [{"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()} for s in segs]
+              json.dump({"segments": S}, open(f"toon2d/ep2/{name}_tr.json","w"))
+              print(name, "|", " / ".join(x["text"] for x in S))
+          PY
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add toon2d/
-          git commit -m "Add corrected cast lineup (boss face fix) [skip ci]" || echo nothing
+          git commit -m "Add episode 2 shots + transcripts [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
