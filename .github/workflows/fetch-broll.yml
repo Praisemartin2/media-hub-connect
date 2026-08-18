@@ -11,28 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download + transcribe shot 1 retake
+      - name: Download corrected cast lineup
         run: |
           set -e
-          pip install -q faster-whisper
-          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
+          mkdir -p toon2d
           b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          curl -fsSL -o toon2d/s1_derek_v2.mp4 "$b/hf_20260818_044731_d1534395-28ad-40d6-bee8-515073ce5d17.mp4"
-          python3 - <<'PY'
-          import json
-          from faster_whisper import WhisperModel
-          m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          segs, info = m.transcribe("toon2d/s1_derek_v2.mp4", word_timestamps=False, vad_filter=True)
-          S = [{"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()} for s in segs]
-          json.dump({"segments": S}, open("toon2d/s1_derek_v2_tr.json","w"))
-          print("s1_v2 |", " / ".join(x["text"] for x in S))
-          PY
+          curl -fsSL -o toon2d/lineup2d_v3_boss_fix.png "$b/hf_20260818_152315_b92e8407-bdd5-4d98-913f-226fb4908f54.png"
+          ls -la toon2d/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add toon2d/
-          git commit -m "Add shot 1 retake [skip ci]" || echo nothing
+          git commit -m "Add corrected cast lineup (boss face fix) [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
