@@ -11,20 +11,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download 2D cast lineup variants
+      - name: Download + transcribe 2D episode shots
         run: |
           set -e
+          pip install -q faster-whisper
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
           mkdir -p toon2d
           b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          curl -fsSL -o toon2d/lineup2d_v1.png "$b/hf_20260818_043542_0ffed6d1-c931-432c-b5a6-446ee683f852.png"
-          curl -fsSL -o toon2d/lineup2d_v2.png "$b/hf_20260818_043542_9622a812-59e7-4bd4-8f7f-07e135c1693d.png"
+          curl -fsSL -o toon2d/s1_derek.mp4  "$b/hf_20260818_043845_5dc1bb2a-0219-4c1c-83f2-134b27438499.mp4"
+          curl -fsSL -o toon2d/s2_marcus.mp4 "$b/hf_20260818_043845_d8d1e3fe-f510-4be0-a92e-2bd5f7a7a24f.mp4"
+          curl -fsSL -o toon2d/s3_gene.mp4   "$b/hf_20260818_043845_61199d1d-5de7-46f7-ace9-b8bc0d41de62.mp4"
+          curl -fsSL -o toon2d/s4_boss.mp4   "$b/hf_20260818_043845_e199d5c2-8ea4-4258-a43a-aa80f2c7e2f1.mp4"
+          curl -fsSL -o toon2d/s5_duplex.mp4 "$b/hf_20260818_043846_c20f8010-8e63-47d4-808e-bb07bf419761.mp4"
           ls -la toon2d/
+          python3 - <<'PY'
+          import glob, json, os
+          from faster_whisper import WhisperModel
+          m = WhisperModel("small.en", device="cpu", compute_type="int8")
+          for f in sorted(glob.glob("toon2d/s*.mp4")):
+              name = os.path.basename(f)[:-4]
+              segs, info = m.transcribe(f, word_timestamps=False, vad_filter=True)
+              S = [{"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()} for s in segs]
+              json.dump({"segments": S}, open(f"toon2d/{name}_tr.json","w"))
+              print(name, "|", " / ".join(x["text"] for x in S))
+          PY
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add toon2d/
-          git commit -m "Add 2D cast lineup variants [skip ci]" || echo nothing
+          git commit -m "Add 2D episode shots + transcripts [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
