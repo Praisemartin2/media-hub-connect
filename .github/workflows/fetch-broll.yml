@@ -11,24 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-<<<<<<< Updated upstream
-      - name: Re-transcribe s1 with medium model
-        run: |
-          set -e
-          pip install -q faster-whisper
-          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          python3 - <<'PY'
-          import glob, json, os
-          from faster_whisper import WhisperModel
-          m = WhisperModel("medium.en", device="cpu", compute_type="int8")
-          for f in ["toon2d/ep2b/s1_boss.mp4"]:
-              name = os.path.basename(f)[:-4]
-              segs, info = m.transcribe(f, word_timestamps=False, vad_filter=True)
-              S = [{"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip()} for s in segs]
-              json.dump({"segments": S}, open(f"toon2d/ep2b/{name}_tr_med.json","w"))
-              print(name, "|", " / ".join(x["text"] for x in S))
-          PY
-=======
       - name: Download lockbox hero variants
         run: |
           set -e
@@ -37,18 +19,12 @@ jobs:
           curl -fsSL -o lockbox/hero_v1.png "$b/hf_20260819_053801_b96aa165-3576-4ad9-ae28-367bf3e7ade6.png"
           curl -fsSL -o lockbox/hero_v2.png "$b/hf_20260819_053801_2a5b579c-6a2c-4b0f-af7c-b70b76ae0af7.png"
           ls -la lockbox/
->>>>>>> Stashed changes
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-<<<<<<< Updated upstream
-          git add toon2d/
-          git commit -m "Add s1 medium transcript [skip ci]" || echo nothing
-=======
           git add lockbox/
           git commit -m "Add lockbox hero variants [skip ci]" || echo nothing
->>>>>>> Stashed changes
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
