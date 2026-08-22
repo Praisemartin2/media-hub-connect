@@ -16,7 +16,7 @@ jobs:
           set -e
           pip install -q gdown
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          gdown --folder "https://drive.google.com/drive/folders/1lEeWmRNQehrGVKtcH3xA5xPjxzoAHEUs" -O event --remaining-ok
+          gdown --folder "https://drive.google.com/drive/folders/1lEeWmRNQehrGVKtcH3xA5xPjxzoAHEUs" -O event
           ls -la event/
           mkdir -p event_meta/sheets
           cp event/*.mp3 event_meta/ || true
