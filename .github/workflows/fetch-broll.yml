@@ -29,7 +29,7 @@ jobs:
                 -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p "seg/s$idx.mp4"
             else
               ffmpeg -y -loglevel error -ss "$in" -t "$dur" -i "event/$src" \
-                -filter_complex "${F}[v]" -map "[v]" -an \
+                -filter_complex "[0:v]${NORM},${GRADE}${extra}[v]" -map "[v]" -an \
                 -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p "seg/s$idx.mp4"
             fi
             echo "seg $idx done"
