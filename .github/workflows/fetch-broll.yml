@@ -11,23 +11,63 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download 90s display fonts
+      - name: Render 90s event recap
         run: |
           set -e
-          mkdir -p fonts90s
-          b="https://github.com/google/fonts/raw/main"
-          curl -fsSL -o fonts90s/LuckiestGuy-Regular.ttf "$b/apache/luckiestguy/LuckiestGuy-Regular.ttf" || \
-            curl -fsSL -o fonts90s/LuckiestGuy-Regular.ttf "$b/ofl/luckiestguy/LuckiestGuy-Regular.ttf"
-          curl -fsSL -o fonts90s/Chewy-Regular.ttf "$b/apache/chewy/Chewy-Regular.ttf" || \
-            curl -fsSL -o fonts90s/Chewy-Regular.ttf "$b/ofl/chewy/Chewy-Regular.ttf"
-          curl -fsSL -o fonts90s/Pacifico-Regular.ttf "$b/ofl/pacifico/Pacifico-Regular.ttf"
-          ls -la fonts90s/
+          pip install -q gdown
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
+          gdown --folder "https://drive.google.com/drive/folders/1lEeWmRNQehrGVKtcH3xA5xPjxzoAHEUs" -O event
+          mkdir -p seg exports/woodbury_park
+          GRADE="eq=saturation=1.12:gamma=1.02:contrast=1.04,colorbalance=rh=.05:gh=.01:bh=-.06:rm=.03:bm=-.03,vignette=PI/5.5,noise=alls=6:allf=t+u"
+          NORM="scale=1080:1920:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1920,fps=30,setsar=1"
+          cut () { # idx src in dur overlay extra
+            local idx=$1 src=$2 in=$3 dur=$4 ov=$5 extra=$6
+            local F="[0:v]${NORM},${GRADE}${extra}[v0]"
+            if [ -n "$ov" ]; then
+              ffmpeg -y -loglevel error -ss "$in" -t "$dur" -i "event/$src" -i "overlays90s/$ov" \
+                -filter_complex "${F};[v0][1:v]overlay=0:0[v]" -map "[v]" -an \
+                -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p "seg/s$idx.mp4"
+            else
+              ffmpeg -y -loglevel error -ss "$in" -t "$dur" -i "event/$src" \
+                -filter_complex "${F}[v]" -map "[v]" -an \
+                -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p "seg/s$idx.mp4"
+            fi
+            echo "seg $idx done"
+          }
+          cut 01 20260821_165415.mp4  5.30 2.65 ov_title.png ",fade=in:st=0:d=0.35:color=white"
+          cut 02 20260821_160023.mp4  1.10 2.00 ov_eats.png  ""
+          cut 03 20260821_165535.mp4  0.20 2.00 ""           ""
+          cut 04 20260821_164554.mp4 42.60 2.00 ""           ""
+          cut 05 20260821_165613.mp4  3.20 2.00 ""           ""
+          cut 06 20260821_164529.mp4  1.00 3.00 ov_dj.png    ""
+          cut 07 20260821_163710.mp4  0.50 2.00 ov_cuts.png  ""
+          cut 08 20260821_163827.mp4  1.30 2.00 ""           ""
+          cut 09 20260821_171605.mp4  1.20 2.00 ov_b2s.png   ""
+          cut 10 20260821_171450.mp4  6.00 2.00 ""           ""
+          cut 11 20260821_165652.mp4  2.30 2.00 ov_foam.png  ""
+          cut 12 20260821_165734.mp4  0.00 2.00 ""           ""
+          cut 13 20260821_172538.mp4 14.00 2.50 ""           ""
+          # end card from still (2.62s)
+          ffmpeg -y -loglevel error -loop 1 -t 2.62 -i overlays90s/ov_end.png \
+            -vf "scale=1080:1920,fps=30,setsar=1,fade=in:st=0:d=0.25:color=white" \
+            -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p seg/s14.mp4
+          for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14; do echo "file 'seg/s$i.mp4'"; done > list.txt
+          ffmpeg -y -loglevel error -f concat -safe 0 -i list.txt -i event/summer_in_the_park.mp3 \
+            -filter_complex "[1:a]atrim=0:30.77,afade=t=out:st=29.9:d=0.85,loudnorm=I=-16:TP=-1.5:LRA=11[a]" \
+            -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -movflags +faststart -shortest \
+            exports/woodbury_park/Woodbury_SummerInThePark_90s_Recap.mp4
+          ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 exports/woodbury_park/Woodbury_SummerInThePark_90s_Recap.mp4
+          # QA frames
+          mkdir -p exports/woodbury_park/qa
+          ffmpeg -y -loglevel error -i exports/woodbury_park/Woodbury_SummerInThePark_90s_Recap.mp4 \
+            -vf "select='eq(n\,20)+eq(n\,105)+eq(n\,175)+eq(n\,352)+eq(n\,445)+eq(n\,540)+eq(n\,672)+eq(n\,780)+eq(n\,890)',scale=270:480,tile=3x3" \
+            -frames:v 1 exports/woodbury_park/qa/grid.jpg
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add fonts90s/
-          git commit -m "Add 90s display fonts [skip ci]" || echo nothing
+          git add exports/woodbury_park/
+          git commit -m "Add Woodbury Park 90s recap video [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
