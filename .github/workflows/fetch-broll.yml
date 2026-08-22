@@ -11,29 +11,51 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Re-transcribe EP3 shot 2 with medium model
+      - name: Download event folder + build contact sheets
         run: |
           set -e
-          pip install -q faster-whisper
+          pip install -q gdown
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
+          gdown --folder "https://drive.google.com/drive/folders/1lEeWmRNQehrGVKtcH3xA5xPjxzoAHEUs" -O event --remaining-ok
+          ls -la event/
+          mkdir -p event_meta/sheets
+          cp event/*.mp3 event_meta/ || true
           python3 - <<'PY'
-          import json
-          from faster_whisper import WhisperModel
-          m = WhisperModel("medium.en", device="cpu", compute_type="int8")
-          segs, info = m.transcribe("toon2d/ep3/s2.mp4", word_timestamps=True, vad_filter=True)
-          S = []
-          for x in segs:
-              words = [{"w": w.word, "s": round(w.start,2), "e": round(w.end,2)} for w in (x.words or [])]
-              S.append({"start": round(x.start,2), "end": round(x.end,2), "text": x.text.strip(), "words": words})
-          json.dump({"segments": S}, open("toon2d/ep3/s2_tr_med.json","w"))
-          print("s2 med |", " / ".join(x["text"] for x in S))
+          import glob, json, os, subprocess
+          meta = {}
+          vids = sorted(glob.glob("event/*.mp4"))
+          for v in vids:
+              name = os.path.splitext(os.path.basename(v))[0]
+              p = subprocess.run(["ffprobe","-v","error","-select_streams","v:0",
+                  "-show_entries","stream=width,height,r_frame_rate:format=duration",
+                  "-of","json", v], capture_output=True, text=True)
+              d = json.loads(p.stdout)
+              dur = float(d["format"]["duration"])
+              st = d["streams"][0]
+              meta[name] = {"dur": round(dur,2), "w": st["width"], "h": st["height"]}
+              n = 8
+              step = dur / n
+              # 8 frames tiled 4x2, timestamp burned into each
+              vf = (f"fps=1/{step:.4f},scale=300:-2,"
+                    f"drawtext=text='%{{pts\\:hms}}':fontsize=22:fontcolor=yellow:borderw=2:x=8:y=8,"
+                    f"tile=4x2")
+              subprocess.run(["ffmpeg","-y","-loglevel","error","-i",v,
+                  "-vf", vf, "-frames:v","1","-q:v","5",
+                  f"event_meta/sheets/{name}.jpg"], check=True)
+              print(name, meta[name])
+          json.dump(meta, open("event_meta/durations.json","w"), indent=1)
           PY
+          for j in event/*.jpg; do
+            [ -e "$j" ] || continue
+            ffmpeg -y -loglevel error -i "$j" -vf "scale=480:-2" "event_meta/photo_$(basename "$j")"
+          done
+          du -sh event_meta/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add toon2d/
-          git commit -m "Add EP3 s2 medium transcript [skip ci]" || echo nothing
+          git add event_meta/
+          git commit -m "Add event contact sheets [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
