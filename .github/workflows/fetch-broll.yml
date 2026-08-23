@@ -11,109 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Render production-grade v2 recap
+      - name: Download documentary fonts
         run: |
           set -e
-          pip install -q gdown
-          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          gdown --folder "https://drive.google.com/drive/folders/1lEeWmRNQehrGVKtcH3xA5xPjxzoAHEUs" -O event
-          mkdir -p seg exports/woodbury_park
-          python3 - <<'PY'
-          import json, re, subprocess
-          def run(cmd): subprocess.run(cmd, check=True)
-          def probe_transfer(path):
-              p = subprocess.run(["ffprobe","-v","error","-select_streams","v:0",
-                  "-show_entries","stream=color_transfer","-of","default=nk=1:nw=1",path],
-                  capture_output=True, text=True)
-              return p.stdout.strip()
-          def measure_yavg(path):
-              out = "seg/_m.txt"
-              run(["ffmpeg","-y","-loglevel","error","-i",path,
-                   "-vf","fps=6,scale=240:-2,signalstats,metadata=print:key=lavfi.signalstats.YAVG:file="+out,
-                   "-f","null","-"])
-              vals=[float(m.group(1)) for line in open(out)
-                    for m in [re.match(r"lavfi\.signalstats\.YAVG=([\d.]+)", line)] if m]
-              return sum(vals)/len(vals) if vals else 0
-          # bright balanced 90s-lite grade (no vignette, no grain)
-          NORM  = "scale=1080:1920:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1920,fps=30,setsar=1"
-          GRADE = "curves=all='0/0.02 0.5/0.55 1/0.98',eq=saturation=1.08:gamma=1.04:contrast=1.02,colorbalance=rh=.03:bh=-.03"
-          TONE  = ("zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,"
-                   "tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p")
-          EDL = [
-            ("01","20260821_172538.mp4", 3.50, 2.65, "ov_title.png", True),
-            ("02","20260821_160023.mp4", 0.00, 2.00, "ov_eats.png",  False),
-            ("03","20260821_165535.mp4",17.25, 2.00, None,           False),
-            ("04","20260821_165613.mp4",16.00, 2.00, None,           False),
-            ("05","20260821_164554.mp4",64.50, 2.00, None,           False),
-            ("06","20260821_164529.mp4", 0.00, 3.00, "ov_dj.png",    False),
-            ("07","20260821_163710.mp4", 0.00, 2.00, "ov_cuts.png",  False),
-            ("08","20260821_163827.mp4", 1.25, 2.00, None,           False),
-            ("09","20260821_171605.mp4", 2.75, 2.00, "ov_b2s.png",   False),
-            ("10","20260821_171450.mp4", 8.50, 2.00, None,           False),
-            ("11","20260821_165652.mp4", 2.50, 2.00, "ov_foam.png",  False),
-            ("12","20260821_165734.mp4", 0.50, 2.00, None,           False),
-            ("13","20260821_160909.mp4",18.00, 2.50, None,           False),
-          ]
-          for idx, src, tin, dur, ov, titlefade in EDL:
-              path = f"event/{src}"
-              tr = probe_transfer(path)
-              tone = TONE + "," if tr in ("smpte2084","arib-std-b67") else ""
-              print(idx, src, "transfer:", tr or "none", "tonemap:", bool(tone))
-              trf = f"seg/s{idx}.trf"
-              run(["ffmpeg","-y","-loglevel","error","-ss",str(tin),"-t",str(dur),"-i",path,
-                   "-vf",f"vidstabdetect=result={trf}:shakiness=6","-f","null","-"])
-              stab = (f"vidstabtransform=input={trf}:smoothing=30:optzoom=1:interpol=bicubic,"
-                      "unsharp=5:5:0.4,")
-              base = f"seg/b{idx}.mp4"
-              vf = f"{stab}{tone}{NORM},{GRADE}"
-              run(["ffmpeg","-y","-loglevel","error","-ss",str(tin),"-t",str(dur),"-i",path,
-                   "-vf",vf,"-an","-c:v","libx264","-preset","medium","-crf","18",
-                   "-pix_fmt","yuv420p",base])
-              # exposure balance: nudge toward target luma 137 if off
-              y = measure_yavg(base)
-              cur = base
-              if abs(y-137) > 7:
-                  off = max(-0.10, min(0.10, (137.0-y)/255.0))
-                  bal = f"seg/c{idx}.mp4"
-                  run(["ffmpeg","-y","-loglevel","error","-i",base,"-vf",f"eq=brightness={off:.3f}",
-                       "-an","-c:v","libx264","-preset","medium","-crf","18","-pix_fmt","yuv420p",bal])
-                  print(idx,"yavg",round(y,1),"-> corrected",off)
-                  cur = bal
-              else:
-                  print(idx,"yavg",round(y,1),"ok")
-              # overlay + optional title fade
-              fin = f"seg/s{idx}.mp4"
-              fade = "fade=in:st=0:d=0.35:color=white," if titlefade else ""
-              if ov:
-                  run(["ffmpeg","-y","-loglevel","error","-i",cur,"-i",f"overlays90s/{ov}",
-                       "-filter_complex",f"[0:v]{fade}null[v0];[v0][1:v]overlay=0:0[v]",
-                       "-map","[v]","-an","-c:v","libx264","-preset","medium","-crf","18",
-                       "-pix_fmt","yuv420p",fin])
-              else:
-                  run(["ffmpeg","-y","-loglevel","error","-i",cur,"-vf",fade+"null",
-                       "-an","-c:v","libx264","-preset","medium","-crf","18","-pix_fmt","yuv420p",fin])
-              print("seg",idx,"done")
-          PY
-          # end card (2.62s)
-          ffmpeg -y -loglevel error -loop 1 -t 2.62 -i overlays90s/ov_end.png \
-            -vf "scale=1080:1920,fps=30,setsar=1,fade=in:st=0:d=0.25:color=white" \
-            -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p seg/s14.mp4
-          for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14; do echo "file 'seg/s$i.mp4'"; done > list.txt
-          ffmpeg -y -loglevel error -f concat -safe 0 -i list.txt -i event/summer_in_the_park.mp3 \
-            -filter_complex "[1:a]atrim=0:30.77,afade=t=out:st=29.9:d=0.85,loudnorm=I=-16:TP=-1.5:LRA=11[a]" \
-            -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -movflags +faststart -shortest \
-            exports/woodbury_park/Woodbury_SummerInThePark_90s_Recap_v2.mp4
-          ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 exports/woodbury_park/Woodbury_SummerInThePark_90s_Recap_v2.mp4
-          mkdir -p exports/woodbury_park/qa
-          ffmpeg -y -loglevel error -i exports/woodbury_park/Woodbury_SummerInThePark_90s_Recap_v2.mp4 \
-            -vf "select='eq(n\,30)+eq(n\,110)+eq(n\,200)+eq(n\,290)+eq(n\,400)+eq(n\,500)+eq(n\,610)+eq(n\,720)+eq(n\,860)',scale=270:480,tile=3x3" \
-            -frames:v 1 exports/woodbury_park/qa/grid_v2.jpg
+          mkdir -p fontsdoc
+          b="https://github.com/google/fonts/raw/main"
+          curl -fsSL -o fontsdoc/PlayfairDisplay-Regular.ttf "$b/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf"
+          curl -fsSL -o fontsdoc/CormorantGaramond-Light.ttf "$b/ofl/cormorantgaramond/CormorantGaramond-Light.ttf" || true
+          curl -fsSL -o fontsdoc/Montserrat-Light.ttf "$b/ofl/montserrat/Montserrat%5Bwght%5D.ttf"
+          ls -la fontsdoc/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add exports/woodbury_park/
-          git commit -m "Add production-grade v2 recap [skip ci]" || echo nothing
+          git add fontsdoc/
+          git commit -m "Add documentary fonts [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
