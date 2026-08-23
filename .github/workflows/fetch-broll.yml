@@ -104,7 +104,7 @@ jobs:
           for src, out, secs in [("overlays_doc/staff_card1.png","seg/p1.mp4",3.5),
                                  ("overlays_doc/staff_card2.png","seg/p2.mp4",3.5)]:
               frames = int(secs*30)
-              run(["ffmpeg","-y","-loglevel","error","-loop","1","-t",str(secs),"-i",src,
+              run(["ffmpeg","-y","-loglevel","error","-framerate","30","-loop","1","-t",str(secs),"-i",src,
                    "-vf",f"scale=2160:3840,zoompan=z='1+0.00045*on':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920:fps=30,setsar=1",
                    "-an","-c:v","libx264","-preset","medium","-crf","18","-pix_fmt","yuv420p",out])
           run(["ffmpeg","-y","-loglevel","error","-loop","1","-t","5.0","-i","overlays_doc/endcard.png",
@@ -124,10 +124,16 @@ jobs:
                   onset = i*0.05; break
           print("music onset", onset)
           # assemble: main + photos + end with xfade, montage total:
-          main_d = sum(d for _,_,_,d,_ in EDL)
+          def vdur(path):
+              q = subprocess.run(["ffprobe","-v","error","-show_entries","format=duration",
+                                  "-of","default=nk=1:nw=1",path],capture_output=True,text=True)
+              return float(q.stdout.strip())
+          main_d = vdur("seg/main.mp4")
+          p1_d = vdur("seg/p1.mp4"); p2_d = vdur("seg/p2.mp4")
+          print("durations", main_d, p1_d, p2_d)
           o1 = main_d - 0.5
-          o2 = o1 + 3.5 - 0.5
-          o3 = o2 + 3.5 - 0.5
+          o2 = o1 + p1_d - 0.5
+          o3 = o2 + p2_d - 0.5
           total = o3 + 5.0
           fc = (f"[0:v][1:v]xfade=transition=fade:duration=0.5:offset={o1:.2f}[xa];"
                 f"[xa][2:v]xfade=transition=fade:duration=0.5:offset={o2:.2f}[xb];"
