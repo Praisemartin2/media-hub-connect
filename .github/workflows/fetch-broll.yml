@@ -11,63 +11,86 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Render 90s event recap
+      - name: Analyze shot quality windows
         run: |
           set -e
           pip install -q gdown
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
           gdown --folder "https://drive.google.com/drive/folders/1lEeWmRNQehrGVKtcH3xA5xPjxzoAHEUs" -O event
-          mkdir -p seg exports/woodbury_park
-          GRADE="eq=saturation=1.12:gamma=1.02:contrast=1.04,colorbalance=rh=.05:gh=.01:bh=-.06:rm=.03:bm=-.03,vignette=PI/5.5,noise=alls=6:allf=t+u"
-          NORM="scale=1080:1920:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1920,fps=30,setsar=1"
-          cut () { # idx src in dur overlay extra
-            local idx=$1 src=$2 in=$3 dur=$4 ov=$5 extra=$6
-            local F="[0:v]${NORM},${GRADE}${extra}[v0]"
-            if [ -n "$ov" ]; then
-              ffmpeg -y -loglevel error -ss "$in" -t "$dur" -i "event/$src" -i "overlays90s/$ov" \
-                -filter_complex "${F};[v0][1:v]overlay=0:0[v]" -map "[v]" -an \
-                -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p "seg/s$idx.mp4"
-            else
-              ffmpeg -y -loglevel error -ss "$in" -t "$dur" -i "event/$src" \
-                -filter_complex "[0:v]${NORM},${GRADE}${extra}[v]" -map "[v]" -an \
-                -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p "seg/s$idx.mp4"
-            fi
-            echo "seg $idx done"
-          }
-          cut 01 20260821_165415.mp4  5.30 2.65 ov_title.png ",fade=in:st=0:d=0.35:color=white"
-          cut 02 20260821_160023.mp4  1.10 2.00 ov_eats.png  ""
-          cut 03 20260821_165535.mp4  0.20 2.00 ""           ""
-          cut 04 20260821_164554.mp4 42.60 2.00 ""           ""
-          cut 05 20260821_165613.mp4  3.20 2.00 ""           ""
-          cut 06 20260821_164529.mp4  1.00 3.00 ov_dj.png    ""
-          cut 07 20260821_163710.mp4  0.50 2.00 ov_cuts.png  ""
-          cut 08 20260821_163827.mp4  1.30 2.00 ""           ""
-          cut 09 20260821_171605.mp4  1.20 2.00 ov_b2s.png   ""
-          cut 10 20260821_171450.mp4  6.00 2.00 ""           ""
-          cut 11 20260821_165652.mp4  2.30 2.00 ov_foam.png  ""
-          cut 12 20260821_165734.mp4  0.00 2.00 ""           ""
-          cut 13 20260821_172538.mp4 14.00 2.50 ""           ""
-          # end card from still (2.62s)
-          ffmpeg -y -loglevel error -loop 1 -t 2.62 -i overlays90s/ov_end.png \
-            -vf "scale=1080:1920,fps=30,setsar=1,fade=in:st=0:d=0.25:color=white" \
-            -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p seg/s14.mp4
-          for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14; do echo "file 'seg/s$i.mp4'"; done > list.txt
-          ffmpeg -y -loglevel error -f concat -safe 0 -i list.txt -i event/summer_in_the_park.mp3 \
-            -filter_complex "[1:a]atrim=0:30.77,afade=t=out:st=29.9:d=0.85,loudnorm=I=-16:TP=-1.5:LRA=11[a]" \
-            -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -movflags +faststart -shortest \
-            exports/woodbury_park/Woodbury_SummerInThePark_90s_Recap.mp4
-          ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 exports/woodbury_park/Woodbury_SummerInThePark_90s_Recap.mp4
-          # QA frames
-          mkdir -p exports/woodbury_park/qa
-          ffmpeg -y -loglevel error -i exports/woodbury_park/Woodbury_SummerInThePark_90s_Recap.mp4 \
-            -vf "select='eq(n\,20)+eq(n\,105)+eq(n\,175)+eq(n\,352)+eq(n\,445)+eq(n\,540)+eq(n\,672)+eq(n\,780)+eq(n\,890)',scale=270:480,tile=3x3" \
-            -frames:v 1 exports/woodbury_park/qa/grid.jpg
+          mkdir -p event_meta2 an
+          python3 - <<'PY'
+          import json, os, re, subprocess
+          CLIPS = ["20260821_165415","20260821_160023","20260821_165535","20260821_164554",
+                   "20260821_165613","20260821_164529","20260821_163710","20260821_163827",
+                   "20260821_171605","20260821_171450","20260821_165652","20260821_165734",
+                   "20260821_172538","20260821_160909","20260821_162417","20260821_160056",
+                   "20260821_173206"]
+          def stats(path, out, motion):
+              vf = "fps=10,scale=480:-2,"
+              vf += "tblend=all_mode=difference," if motion else ""
+              vf += f"signalstats,metadata=print:key=lavfi.signalstats.YAVG:file={out}"
+              subprocess.run(["ffmpeg","-y","-loglevel","error","-i",path,"-vf",vf,"-f","null","-"], check=True)
+          def parse(out):
+              vals = []
+              t = None
+              for line in open(out):
+                  m = re.match(r"frame:\d+\s+pts:\d+\s+pts_time:([\d.]+)", line)
+                  if m: t = float(m.group(1)); continue
+                  m = re.match(r"lavfi\.signalstats\.YAVG=([\d.]+)", line)
+                  if m and t is not None: vals.append((t, float(m.group(1))))
+              return vals
+          import statistics
+          result = {}
+          for c in CLIPS:
+              p = f"event/{c}.mp4"
+              if not os.path.exists(p): print("MISSING", c); continue
+              stats(p, f"an/{c}_luma.txt", False)
+              stats(p, f"an/{c}_mot.txt", True)
+              luma = parse(f"an/{c}_luma.txt")
+              mot  = parse(f"an/{c}_mot.txt")
+              dur = luma[-1][0] if luma else 0
+              wins = {}
+              for wl in (2.0, 3.0):
+                  cands = []
+                  s = 0.0
+                  while s + wl <= dur:
+                      lv = [v for t,v in luma if s <= t < s+wl]
+                      mv = [v for t,v in mot  if s <= t < s+wl]
+                      if lv and mv:
+                          ymean = statistics.mean(lv); ystd = statistics.pstdev(lv)
+                          mmean = statistics.mean(mv); mmax = max(mv)
+                          pen = 0.0
+                          if ymean < 85: pen += (85-ymean)*0.3
+                          if ymean > 190: pen += (ymean-190)*0.3
+                          score = mmean + mmax*0.3 + ystd*0.8 + pen
+                          cands.append({"start": round(s,2), "score": round(score,2),
+                                        "mot": round(mmean,2), "mmax": round(mmax,2),
+                                        "yavg": round(ymean,1), "ystd": round(ystd,1)})
+                      s += 0.25
+                  cands.sort(key=lambda x: x["score"])
+                  keep = []
+                  for cd in cands:
+                      if all(abs(cd["start"]-k["start"]) >= wl*0.7 for k in keep):
+                          keep.append(cd)
+                      if len(keep) == 3: break
+                  wins[str(wl)] = keep
+              result[c] = {"dur": round(dur,2), "windows": wins}
+              todo = [(w["start"], 2.0, i) for i, w in enumerate(wins["2.0"][:2])]
+              todo += [(w["start"], 3.0, 9) for w in wins["3.0"][:1]]
+              for s, wl, i in todo:
+                  subprocess.run(["ffmpeg","-y","-loglevel","error","-ss",str(s),"-t",str(wl),
+                      "-i",p,"-vf",f"fps={6/wl:.4f},scale=200:-2,tile=6x1","-frames:v","1","-q:v","6",
+                      f"event_meta2/{c}_w{i}_{s:.2f}.jpg"], check=True)
+              print(c, json.dumps(wins)[:200])
+          json.dump(result, open("event_meta2/windows.json","w"), indent=1)
+          PY
+          du -sh event_meta2/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add exports/woodbury_park/
-          git commit -m "Add Woodbury Park 90s recap video [skip ci]" || echo nothing
+          git add event_meta2/
+          git commit -m "Add shot quality analysis [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
