@@ -140,19 +140,24 @@ jobs:
                 f"[9:v]format=rgba,fade=in:st=42.2:d=0.5:alpha=1,fade=out:st=47.0:d=0.5:alpha=1[c5];[v4][c5]overlay[v];"
                 f"[10:a]atrim={onset}:{onset+total:.2f},asetpts=PTS-STARTPTS,afade=t=in:st=0:d=0.4,"
                 f"afade=t=out:st={total-2.5:.2f}:d=2.5,loudnorm=I=-16:TP=-1.5:LRA=11[a]")
-          run(["ffmpeg","-y","-loglevel","error",
-               "-i","seg/main.mp4","-i","seg/p1.mp4","-i","seg/p2.mp4","-i","seg/end.mp4",
-               "-loop","1","-i","overlays_doc/matte.png",
-               "-loop","1","-i","overlays_doc/card1.png",
-               "-loop","1","-i","overlays_doc/card2.png",
-               "-loop","1","-i","overlays_doc/card3.png",
-               "-loop","1","-i","overlays_doc/card_fun.png",
-               "-loop","1","-i","overlays_doc/card4.png",
-               "-i","seg/music.mp3",
-               "-filter_complex",fc,"-map","[v]","-map","[a]","-t",f"{total:.2f}",
-               "-c:v","libx264","-preset","medium","-crf","18","-pix_fmt","yuv420p",
-               "-c:a","aac","-b:a","192k","-movflags","+faststart",
-               "exports/woodbury_park/Woodbury_BackToSchoolBash_60s.mp4"])
+          out = "exports/woodbury_park/Woodbury_BackToSchoolBash_60s.mp4"
+          import os
+          for crf in ("20","23"):
+              run(["ffmpeg","-y","-loglevel","error",
+                   "-i","seg/main.mp4","-i","seg/p1.mp4","-i","seg/p2.mp4","-i","seg/end.mp4",
+                   "-loop","1","-i","overlays_doc/matte.png",
+                   "-loop","1","-i","overlays_doc/card1.png",
+                   "-loop","1","-i","overlays_doc/card2.png",
+                   "-loop","1","-i","overlays_doc/card3.png",
+                   "-loop","1","-i","overlays_doc/card_fun.png",
+                   "-loop","1","-i","overlays_doc/card4.png",
+                   "-i","seg/music.mp3",
+                   "-filter_complex",fc,"-map","[v]","-map","[a]","-t",f"{total:.2f}",
+                   "-c:v","libx264","-preset","medium","-crf",crf,"-pix_fmt","yuv420p",
+                   "-c:a","aac","-b:a","192k","-movflags","+faststart",out])
+              sz = os.path.getsize(out)/1e6
+              print("crf",crf,"size MB",round(sz,1))
+              if sz < 95: break
           print("total", total)
           PY
           ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 exports/woodbury_park/Woodbury_BackToSchoolBash_60s.mp4
