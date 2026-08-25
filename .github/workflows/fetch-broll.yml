@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch Victory Sunday clips + contact sheets
+      - name: Render Victory Sundays recap
         run: |
           set -e
           pip install -q gdown
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          mkdir -p vs vs_meta
+          mkdir -p vs seg exports/ekabo_victory_sundays
           fetch () { gdown -q "$1" -O "vs/$2" || echo "FAILED $2"; }
           fetch 1ZsTkXry12fUpiwKVk5qt8lYKbz9MaxNh plymouth.mov
           fetch 1WnNXj9zFNc47NLqxJAwzj-kZh3qOg4lP levelridge.mov
@@ -25,47 +25,101 @@ jobs:
           fetch 1kIaHOjjCYV4ARQ8Y2jbKdzBRySqyLl0D jordan.mov
           fetch 1Xzz9_7ln4FOaaoZZy27WjmeOzmwkoqMU princess.mov
           fetch 1AeDPJBkkdCYjvVEx91wwndtGuWW1SN_L baby.mov
-          fetch 1Rk-ZudDxRWUATukDFh-7fUJJEP8wgt8C edited_close.mp4
           fetch 1Eitu6Qv9oI0gD5bcVFCzNLO1e_mt0DvP doctors.mov
           fetch 1ULX1uLnSe60dtg226vVBop5q8BycaimF vs_22226.mov
-          fetch 1RHyWNFacBCWI2XtvVrHCxysn0Vcj87ti niyi_close_228.mov
-          fetch 1BvdZL-SfkNkKe1eriNlZBbDauSZ__ddR killed_deal.mov
-          fetch 1NpWUMFsp8mXl_7QMi_1ggidkHB-p0bCt retired60.mov
-          fetch 1fiEB497LrZKkBhlWWxBrd9SB4_XKyDPo relationship.mp4
-          ls -la vs/
+          curl -fsSL -o seg/music.mp3 "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Carefree.mp3"
           python3 - <<'PY'
-          import glob, json, os, subprocess
-          meta = {}
-          for v in sorted(glob.glob("vs/*")):
-              name = os.path.splitext(os.path.basename(v))[0]
+          import re, struct, subprocess
+          def run(cmd): subprocess.run(cmd, check=True)
+          def probe_transfer(path):
               p = subprocess.run(["ffprobe","-v","error","-select_streams","v:0",
-                  "-show_entries","stream=width,height:format=duration","-of","json", v],
+                  "-show_entries","stream=color_transfer","-of","default=nk=1:nw=1",path],
                   capture_output=True, text=True)
-              try:
-                  d = json.loads(p.stdout)
-                  dur = float(d["format"]["duration"])
-                  st = d["streams"][0]
-              except Exception as e:
-                  print("SKIP", name, e); continue
-              meta[name] = {"dur": round(dur,2), "w": st["width"], "h": st["height"]}
-              n = 10
-              step = dur / n
-              vf = (f"fps=1/{step:.4f},scale=220:-2,"
-                    f"drawtext=text='%{{pts\\:hms}}':fontsize=20:fontcolor=yellow:borderw=2:x=6:y=6,"
-                    f"tile=5x2")
-              subprocess.run(["ffmpeg","-y","-loglevel","error","-i",v,
-                  "-vf", vf, "-frames:v","1","-q:v","6",
-                  f"vs_meta/{name}.jpg"], check=True)
-              print(name, meta[name])
-          json.dump(meta, open("vs_meta/durations.json","w"), indent=1)
+              return p.stdout.strip()
+          TONE = ("zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,"
+                  "tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p")
+          EDL = [
+            ("01","vs_22226.mov",  6.20, 2.4),
+            ("02","plymouth.mov", 19.50, 2.4),
+            ("03","baby.mov",     11.50, 2.4),
+            ("04","niyi_close.mov",30.00, 2.4),
+            ("05","niyi_close.mov",38.50, 2.4),
+            ("06","hammond.mov",  74.30, 2.4),
+            ("07","levelridge.mov",44.80, 2.4),
+            ("08","princess.mov", 52.20, 2.4),
+            ("09","doctors.mov",  52.00, 2.4),
+            ("10","jordan.mov",  115.00, 2.4),
+            ("11","plymouth.mov", 88.00, 2.4),
+            ("12","vs_22226.mov", 21.00, 2.4),
+          ]
+          for idx, src, tin, dur in EDL:
+              path = f"vs/{src}"
+              tr = probe_transfer(path)
+              tone = TONE + "," if tr in ("smpte2084","arib-std-b67") else ""
+              fc = (f"[0:v]{tone}split[a][b];"
+                    "[a]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
+                    "boxblur=22:2,eq=brightness=-0.06:saturation=0.9[bg];"
+                    "[b]scale=1000:-2:flags=lanczos,pad=iw+20:ih+20:10:10:white[fg];"
+                    "[bg][fg]overlay=(W-w)/2:(H-h)/2,fps=30,setsar=1,"
+                    "eq=saturation=1.03:contrast=1.02[v]")
+              run(["ffmpeg","-y","-loglevel","error","-ss",str(tin),"-t",str(dur),"-i",path,
+                   "-filter_complex",fc,"-map","[v]","-an",
+                   "-c:v","libx264","-preset","medium","-crf","18","-pix_fmt","yuv420p",f"seg/s{idx}.mp4"])
+              print("seg",idx,"done")
+          for card, out, secs in [("overlays_doc/vs_open.png","seg/open.mp4",2.6),
+                                  ("overlays_doc/vs_end.png","seg/end.mp4",3.2)]:
+              run(["ffmpeg","-y","-loglevel","error","-framerate","30","-loop","1","-t",str(secs),"-i",card,
+                   "-vf","scale=1080:1920,fps=30,setsar=1","-an",
+                   "-c:v","libx264","-preset","medium","-crf","18","-pix_fmt","yuv420p",out])
+          # music onset
+          run(["ffmpeg","-y","-loglevel","error","-i","seg/music.mp3","-ac","1","-ar","8000","-f","s16le","seg/pcm.raw"])
+          data = open("seg/pcm.raw","rb").read(); n=len(data)//2
+          smp = struct.unpack(f"<{n}h", data); win=400
+          rms=[(sum(x*x for x in smp[i:i+win])/win)**0.5 for i in range(0,min(n,8000*6)-win,win)]
+          mx=max(rms); rms=[r/mx for r in rms]
+          onset=0.0
+          for i in range(1,len(rms)):
+              if rms[i]-rms[i-1]>0.25 and rms[i]>0.5: onset=i*0.05; break
+          print("onset",onset)
+          def vdur(p):
+              q=subprocess.run(["ffprobe","-v","error","-show_entries","format=duration",
+                                "-of","default=nk=1:nw=1",p],capture_output=True,text=True)
+              return float(q.stdout.strip())
+          chain = ["seg/open.mp4"] + [f"seg/s{i:02d}.mp4" for i,_ in [(int(e[0]),0) for e in EDL]] + ["seg/end.mp4"]
+          trans = ["fade","slideleft","circleopen","fade","wiperight","fade","slideup","fade",
+                   "circleopen","slideleft","fade","fade","fade"]
+          ins = sum([["-i",c] for c in chain],[])
+          fc=[]; prev="[0:v]"; acc=vdur(chain[0])
+          offsets=[]
+          for i in range(1,len(chain)):
+              o = acc-0.4
+              offsets.append(round(o,2))
+              out = f"[x{i}]" if i<len(chain)-1 else "[v]"
+              fc.append(f"{prev}[{i}:v]xfade=transition={trans[i-1]}:duration=0.4:offset={o:.2f}{out}")
+              prev=out
+              acc = o + vdur(chain[i])
+          total=acc
+          print("offsets",offsets,"total",total)
+          fc.append(f"[{len(chain)}:a]atrim={onset}:{onset+total:.2f},asetpts=PTS-STARTPTS,"
+                    f"afade=t=in:st=0:d=0.4,afade=t=out:st={total-2.2:.2f}:d=2.2,"
+                    "loudnorm=I=-16:TP=-1.5:LRA=11[a]")
+          run(["ffmpeg","-y","-loglevel","error"]+ins+["-i","seg/music.mp3",
+               "-filter_complex",";".join(fc),"-map","[v]","-map","[a]","-t",f"{total:.2f}",
+               "-c:v","libx264","-preset","medium","-crf","19","-pix_fmt","yuv420p",
+               "-c:a","aac","-b:a","192k","-movflags","+faststart",
+               "exports/ekabo_victory_sundays/Ekabo_VictorySundays_Recap.mp4"])
           PY
-          du -sh vs_meta/
+          ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 exports/ekabo_victory_sundays/Ekabo_VictorySundays_Recap.mp4
+          mkdir -p exports/ekabo_victory_sundays/qa
+          ffmpeg -y -loglevel error -i exports/ekabo_victory_sundays/Ekabo_VictorySundays_Recap.mp4 \
+            -vf "select='eq(n\,30)+eq(n\,120)+eq(n\,210)+eq(n\,300)+eq(n\,390)+eq(n\,480)+eq(n\,570)+eq(n\,660)+eq(n\,750)+eq(n\,820)',scale=270:480,tile=5x2" \
+            -frames:v 1 exports/ekabo_victory_sundays/qa/grid.jpg
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add vs_meta/
-          git commit -m "Add Victory Sunday contact sheets [skip ci]" || echo nothing
+          git add exports/ekabo_victory_sundays/
+          git commit -m "Add Victory Sundays recap reel [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
