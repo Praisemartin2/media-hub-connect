@@ -11,32 +11,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download + transcribe EP4 v2 shots
+      - name: Re-transcribe EP4 v2 s3 with medium model
         run: |
           set -e
           pip install -q faster-whisper
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          curl -fsSL -o toon2d/ep4/v2_s3.mp4 "$b/hf_20260826_041623_75c038e7-172a-40d9-92a6-524a276af0cc.mp4"
-          curl -fsSL -o toon2d/ep4/v2_s4.mp4 "$b/hf_20260826_041623_3f295ba6-d74a-42e8-8721-393570b38c34.mp4"
-          curl -fsSL -o toon2d/ep4/v2_s5.mp4 "$b/hf_20260826_041623_e578dc41-9d01-475b-84cd-30eab777cf16.mp4"
-          curl -fsSL -o toon2d/ep4/v2_s6.mp4 "$b/hf_20260826_041623_0fef152e-e60c-4487-9c1a-213b69a24222.mp4"
           python3 - <<'PY2'
           import json
           from faster_whisper import WhisperModel
-          m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          for s in ["v2_s3","v2_s4","v2_s5","v2_s6"]:
-              segs, info = m.transcribe(f"toon2d/ep4/{s}.mp4", word_timestamps=False, vad_filter=True)
-              S = [{"start": round(x.start,2), "end": round(x.end,2), "text": x.text.strip()} for x in segs]
-              json.dump({"segments": S}, open(f"toon2d/ep4/{s}_tr.json","w"))
-              print(s, "|", " / ".join(x["text"] for x in S))
+          m = WhisperModel("medium.en", device="cpu", compute_type="int8")
+          segs, info = m.transcribe("toon2d/ep4/v2_s3.mp4", word_timestamps=False, vad_filter=True)
+          S = [{"start": round(x.start,2), "end": round(x.end,2), "text": x.text.strip()} for x in segs]
+          json.dump({"segments": S}, open("toon2d/ep4/v2_s3_tr_med.json","w"))
+          print("v2_s3 med |", " / ".join(x["text"] for x in S))
           PY2
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add toon2d/
-          git commit -m "Add EP4 v2 shots [skip ci]" || echo nothing
+          git commit -m "Add EP4 v2 s3 medium transcript [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
