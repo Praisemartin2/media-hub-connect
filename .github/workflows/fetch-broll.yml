@@ -11,35 +11,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download + transcribe EP4 shots
+      - name: Download + transcribe EP4 s6 retake
         run: |
           set -e
           pip install -q faster-whisper
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          mkdir -p toon2d/ep4
           b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          curl -fsSL -o toon2d/ep4/s1.mp4 "$b/hf_20260826_033531_b1119526-5249-4941-a61f-f9a51f0699d4.mp4"
-          curl -fsSL -o toon2d/ep4/s2.mp4 "$b/hf_20260826_033531_4b5b5b9b-5f2e-4c50-a5be-ccc2706089b2.mp4"
-          curl -fsSL -o toon2d/ep4/s3.mp4 "$b/hf_20260826_033530_e3dcb0f7-da84-4d26-bda0-1d1b1360bb47.mp4"
-          curl -fsSL -o toon2d/ep4/s4.mp4 "$b/hf_20260826_033531_6e08c109-93bf-4c50-ab74-1d7ec3edbd9f.mp4"
-          curl -fsSL -o toon2d/ep4/s5.mp4 "$b/hf_20260826_033531_01e647fd-c0c3-4787-b0a7-62ccfe055f3d.mp4"
-          curl -fsSL -o toon2d/ep4/s6.mp4 "$b/hf_20260826_033531_1f6f5e2c-de31-499a-91ad-0c65ec8a405b.mp4"
-          python3 - <<'PY'
+          curl -fsSL -o toon2d/ep4/s6b.mp4 "$b/hf_20260826_035058_ea882bf9-99c5-401e-aeb7-c4393556ade1.mp4"
+          python3 - <<'PY2'
           import json
           from faster_whisper import WhisperModel
           m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          for s in ["s1","s2","s3","s4","s5","s6"]:
-              segs, info = m.transcribe(f"toon2d/ep4/{s}.mp4", word_timestamps=False, vad_filter=True)
-              S = [{"start": round(x.start,2), "end": round(x.end,2), "text": x.text.strip()} for x in segs]
-              json.dump({"segments": S}, open(f"toon2d/ep4/{s}_tr.json","w"))
-              print(s, "|", " / ".join(x["text"] for x in S))
-          PY
+          segs, info = m.transcribe("toon2d/ep4/s6b.mp4", word_timestamps=False, vad_filter=True)
+          S = [{"start": round(x.start,2), "end": round(x.end,2), "text": x.text.strip()} for x in segs]
+          json.dump({"segments": S}, open("toon2d/ep4/s6b_tr.json","w"))
+          print("s6b |", " / ".join(x["text"] for x in S))
+          PY2
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add toon2d/
-          git commit -m "Add EP4 shots + transcripts [skip ci]" || echo nothing
+          git commit -m "Add EP4 s6 retake [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
