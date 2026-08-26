@@ -11,31 +11,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download + transcribe EP4 v3 shots
+      - name: Medium check EP4 v3 s2
         run: |
           set -e
           pip install -q faster-whisper
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          b="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          curl -fsSL -o toon2d/ep4/v3_s2.mp4 "$b/hf_20260826_044522_43e88c36-37b0-437f-a7bf-55cc5c4b1f69.mp4"
-          curl -fsSL -o toon2d/ep4/v3_s4.mp4 "$b/hf_20260826_044522_e5af539e-599e-4f8a-b88c-f71931aabfbe.mp4"
-          curl -fsSL -o toon2d/ep4/v3_s6.mp4 "$b/hf_20260826_044522_420b29e9-280c-4cc0-892e-5d1151d1f99e.mp4"
           python3 - <<'PY2'
           import json
           from faster_whisper import WhisperModel
-          m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          for s in ["v3_s2","v3_s4","v3_s6"]:
-              segs, info = m.transcribe(f"toon2d/ep4/{s}.mp4", word_timestamps=False, vad_filter=True)
-              S = [{"start": round(x.start,2), "end": round(x.end,2), "text": x.text.strip()} for x in segs]
-              json.dump({"segments": S}, open(f"toon2d/ep4/{s}_tr.json","w"))
-              print(s, "|", " / ".join(x["text"] for x in S))
+          m = WhisperModel("medium.en", device="cpu", compute_type="int8")
+          segs, info = m.transcribe("toon2d/ep4/v3_s2.mp4", word_timestamps=False, vad_filter=True)
+          S = [{"start": round(x.start,2), "end": round(x.end,2), "text": x.text.strip()} for x in segs]
+          json.dump({"segments": S}, open("toon2d/ep4/v3_s2_tr_med.json","w"))
+          print("v3_s2 med |", " / ".join(x["text"] for x in S))
           PY2
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add toon2d/
-          git commit -m "Add EP4 v3 shots [skip ci]" || echo nothing
+          git commit -m "Add EP4 v3 s2 medium transcript [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
