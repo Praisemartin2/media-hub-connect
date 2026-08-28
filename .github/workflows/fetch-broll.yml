@@ -16,7 +16,7 @@ jobs:
           set -e
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
           pip -q install gdown
-          mkdir -p src seg exports/ep169_reels/qa
+          mkdir -p bsrc seg exports/ep169_reels/qa
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
           curl -fSL -A "$UA" -e "https://financialfreedommastermindpodcast.buzzsprout.com/" \
             -o seg/full.mp3 "https://www.buzzsprout.com/1909068/episodes/19699488-169-the-best-time-to-sell-is-when-you-do-not-have-to.mp3"
@@ -32,8 +32,8 @@ jobs:
             [doctors]=1Eitu6Qv9oI0gD5bcVFCzNLO1e_mt0DvP
             [vs_22226]=1ULX1uLnSe60dtg226vVBop5q8BycaimF
           )
-          for k in "${!IDS[@]}"; do gdown -q "${IDS[$k]}" -O "src/$k"; done
-          ls -la src/
+          for k in "${!IDS[@]}"; do gdown -q "${IDS[$k]}" -O "bsrc/$k"; done
+          ls -la bsrc/
           cut1 () { # src start dur out
             local s=$1 st=$2 dur=$3 out=$4
             local tr pre y d b
@@ -61,7 +61,7 @@ jobs:
             local i=0 name st dur
             : > seg/${n}_list.txt
             while read -r name st dur; do
-              cut1 "src/$name" "$st" "$dur" "seg/${n}_$i.mp4"
+              cut1 "bsrc/$name" "$st" "$dur" "seg/${n}_$i.mp4" </dev/null
               echo "file '${n}_$i.mp4'" >> seg/${n}_list.txt
               i=$((i+1))
             done < "$edl"
