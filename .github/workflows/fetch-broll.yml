@@ -11,21 +11,45 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check video oembed
+      - name: Try yt-dlp on EP169
         run: |
-          mkdir -p vidcheck
-          for vid in "9ks-DxJ4g4M" "9ks-DxJ4g4m" "9Ks-DxJ4g4M"; do
-            echo "=== $vid ===" >> vidcheck/oembed.txt
-            curl -s -w "HTTP %{http_code}\n" "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${vid}&format=json" >> vidcheck/oembed.txt || true
-            echo "" >> vidcheck/oembed.txt
+          pip install -q -U yt-dlp
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
+          mkdir -p vidcheck ep169
+          ok=0
+          for client in android ios tv web_embedded; do
+            echo "=== client $client ===" >> vidcheck/ytdlp.txt
+            if yt-dlp --extractor-args "youtube:player_client=$client" -f "bv*[height<=720]+ba/b[height<=720]"                  --merge-output-format mp4 -o "ep169/full.mp4" --no-playlist                  "https://www.youtube.com/watch?v=9ks-DxJ4g4M" >> vidcheck/ytdlp.txt 2>&1; then
+              ok=1; echo "SUCCESS with $client" >> vidcheck/ytdlp.txt; break
+            fi
           done
-          cat vidcheck/oembed.txt
+          if [ "$ok" = "1" ]; then
+            python3 - <<'PY2'
+          import subprocess, json
+          d = subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","default=nk=1:nw=1","ep169/full.mp4"],capture_output=True,text=True).stdout.strip()
+          open("vidcheck/ep169_dur.txt","w").write(d)
+          print("duration", d)
+          PY2
+            # audio for transcription + low-res proxy for review
+            ffmpeg -y -loglevel error -i ep169/full.mp4 -ac 1 -ar 16000 -b:a 48k vidcheck/ep169_audio.mp3
+            pip install -q faster-whisper
+            python3 - <<'PY3'
+          import json
+          from faster_whisper import WhisperModel
+          m = WhisperModel("small.en", device="cpu", compute_type="int8")
+          segs, info = m.transcribe("vidcheck/ep169_audio.mp3", word_timestamps=False, vad_filter=True)
+          S = [{"start": round(x.start,1), "end": round(x.end,1), "text": x.text.strip()} for x in segs]
+          json.dump({"segments": S}, open("vidcheck/ep169_transcript.json","w"))
+          print("segments:", len(S))
+          PY3
+          fi
+          tail -5 vidcheck/ytdlp.txt
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add vidcheck/
-          git commit -m "Add video oembed check [skip ci]" || echo nothing
+          git commit -m "EP169 yt-dlp test + transcript [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
