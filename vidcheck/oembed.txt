@@ -1,0 +1,9 @@
+=== 9ks-DxJ4g4M ===
+{"title":"169. The Best Time To Sell Is When You Do Not Have To","author_name":"Ekabo Home","author_url":"https://www.youtube.com/@ekabohome","type":"video","height":113,"width":200,"version":"1.0","provider_name":"YouTube","provider_url":"https://www.youtube.com/","thumbnail_height":360,"thumbnail_width":480,"thumbnail_url":"https://i.ytimg.com/vi/9ks-DxJ4g4M/hqdefault.jpg","html":"\u003ciframe width=\u0022200\u0022 height=\u0022113\u0022 src=\u0022https://www.youtube.com/embed/9ks-DxJ4g4M?feature=oembed\u0022 frameborder=\u00220\u0022 allow=\u0022accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\u0022 referrerpolicy=\u0022strict-origin-when-cross-origin\u0022 allowfullscreen title=\u0022169. The Best Time To Sell Is When You Do Not Have To\u0022\u003e\u003c/iframe\u003e"}HTTP 200
+
+=== 9ks-DxJ4g4m ===
+Bad RequestHTTP 400
+
+=== 9Ks-DxJ4g4M ===
+Not FoundHTTP 404
+
