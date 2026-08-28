@@ -1,0 +1,22 @@
+[Script Info]
+PlayResX: 1080
+PlayResY: 1920
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, OutlineColour, BackColour, Bold, Outline, Shadow, Alignment, MarginL, MarginR, MarginV
+Style: Cap,Montserrat,64,&H001A212A,&H00E8EDF0,&H00000000,1,0,0,5,60,60,660
+[Events]
+Format: Layer, Start, End, Style, Text
+Dialogue: 0,0:00:00.00,0:00:02.30,Cap,And so if you were to buy a property for,
+Dialogue: 0,0:00:02.30,0:00:05.40,Cap,call it 400K, right?
+Dialogue: 0,0:00:05.40,0:00:08.10,Cap,And then you were to sell that property
+Dialogue: 0,0:00:08.10,0:00:09.70,Cap,two years later or a year later,
+Dialogue: 0,0:00:09.70,0:00:12.30,Cap,let's say for 430K,
+Dialogue: 0,0:00:12.30,0:00:14.20,Cap,you actually lost a little bit of money
+Dialogue: 0,0:00:14.20,0:00:15.30,Cap,when you think about it, right?
+Dialogue: 0,0:00:15.30,0:00:17.50,Cap,If you're at that 10%, you bought it for 400K,
+Dialogue: 0,0:00:17.50,0:00:21.00,Cap,you sold it for 430, you just lost about 43.
+Dialogue: 0,0:00:21.00,0:00:26.10,Cap,So you actually came out net 393, right?
+Dialogue: 0,0:00:26.10,0:00:28.60,Cap,So net, you lost 7K when you factor in
+Dialogue: 0,0:00:28.60,0:00:30.90,Cap,some of the closing costs and things of that nature.
+Dialogue: 0,0:00:30.90,0:00:33.80,Cap,And so it behooves you to hold onto a property
+Dialogue: 0,0:00:33.80,0:00:35.10,Cap,minimum five years.

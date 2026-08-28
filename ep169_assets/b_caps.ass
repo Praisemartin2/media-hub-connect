@@ -1,0 +1,23 @@
+[Script Info]
+PlayResX: 1080
+PlayResY: 1920
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, OutlineColour, BackColour, Bold, Outline, Shadow, Alignment, MarginL, MarginR, MarginV
+Style: Cap,Montserrat,64,&H001A212A,&H00E8EDF0,&H00000000,1,0,0,5,60,60,660
+[Events]
+Format: Layer, Start, End, Style, Text
+Dialogue: 0,0:00:00.00,0:00:02.70,Cap,The three most expensive decisions you will make
+Dialogue: 0,0:00:02.70,0:00:06.00,Cap,as a real estate investor are when to sell,
+Dialogue: 0,0:00:06.00,0:00:09.80,Cap,when to refinance, and when to 1031 exchange.
+Dialogue: 0,0:00:09.80,0:00:12.30,Cap,And notice, none of these are when to buy.
+Dialogue: 0,0:00:12.30,0:00:14.10,Cap,Everybody teaches buying,
+Dialogue: 0,0:00:14.10,0:00:16.50,Cap,and there are thousands of hours of free content
+Dialogue: 0,0:00:16.50,0:00:18.50,Cap,on how to find a deal, how to analyze a deal,
+Dialogue: 0,0:00:18.50,0:00:20.20,Cap,even on our site, how to do that.
+Dialogue: 0,0:00:20.20,0:00:22.40,Cap,Also, nobody teaches you what to do with the thing
+Dialogue: 0,0:00:22.40,0:00:24.30,Cap,after you own it, which is a problem,
+Dialogue: 0,0:00:24.30,0:00:26.90,Cap,because that's where most of the money actually is.
+Dialogue: 0,0:00:26.90,0:00:28.20,Cap,It's in the operations,
+Dialogue: 0,0:00:28.20,0:00:30.20,Cap,and it's in the dispose of the property.
+Dialogue: 0,0:00:30.20,0:00:32.20,Cap,If you get these three things right,
+Dialogue: 0,0:00:32.20,0:00:33.60,Cap,you can keep six figures.
