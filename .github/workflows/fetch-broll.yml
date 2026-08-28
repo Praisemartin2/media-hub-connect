@@ -11,26 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Medium check EP4 v3 s2
+      - name: Check video oembed
         run: |
-          set -e
-          pip install -q faster-whisper
-          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          python3 - <<'PY2'
-          import json
-          from faster_whisper import WhisperModel
-          m = WhisperModel("medium.en", device="cpu", compute_type="int8")
-          segs, info = m.transcribe("toon2d/ep4/v3_s2.mp4", word_timestamps=False, vad_filter=True)
-          S = [{"start": round(x.start,2), "end": round(x.end,2), "text": x.text.strip()} for x in segs]
-          json.dump({"segments": S}, open("toon2d/ep4/v3_s2_tr_med.json","w"))
-          print("v3_s2 med |", " / ".join(x["text"] for x in S))
-          PY2
+          mkdir -p vidcheck
+          for vid in "9ks-DxJ4g4M" "9ks-DxJ4g4m" "9Ks-DxJ4g4M"; do
+            echo "=== $vid ===" >> vidcheck/oembed.txt
+            curl -s -w "HTTP %{http_code}\n" "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${vid}&format=json" >> vidcheck/oembed.txt || true
+            echo "" >> vidcheck/oembed.txt
+          done
+          cat vidcheck/oembed.txt
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add toon2d/
-          git commit -m "Add EP4 v3 s2 medium transcript [skip ci]" || echo nothing
+          git add vidcheck/
+          git commit -m "Add video oembed check [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
