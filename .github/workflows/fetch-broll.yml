@@ -11,22 +11,95 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch EP169 podcast segments
+      - name: Render EP169 host clips with b-roll
         run: |
           set -e
-          mkdir -p ep169_v3
-          B=https://d2ol7oe51mr4n9.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev
-          curl -fsSL -o ep169_v3/segA.mp4 "$B/732ac9b3-81f3-4039-a10c-c52621210e1b.mp4"
-          curl -fsSL -o ep169_v3/segB.mp4 "$B/885125c9-f037-4e57-980b-1dd1d6e18645.mp4"
-          curl -fsSL -o ep169_v3/stripA.jpg "$B/aa2779c2-40da-49eb-9e75-7da973ab2f9c.jpg"
-          curl -fsSL -o ep169_v3/stripB.jpg "$B/8c1ba583-ed67-4261-b20a-3457c8146ab8.jpg"
-          ls -la ep169_v3/
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
+          mkdir -p br seg exports/ep169_reels/qa
+          G=https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev
+          curl -fsSL -o br/a1.png "$G/hf_20260828_205010_57f1a009-31b3-4dd7-b911-e3ca781e1eab.png"
+          curl -fsSL -o br/a2.png "$G/hf_20260828_205010_64c80a7b-b1c5-4f88-89e0-141b0a5584cd.png"
+          curl -fsSL -o br/a3.png "$G/hf_20260828_205010_4384fcdd-d755-4bd2-9a70-17f229a8126e.png"
+          curl -fsSL -o br/a4.png "$G/hf_20260828_205539_eb70f5d4-f723-46eb-90dc-eaddac8638ad.png"
+          curl -fsSL -o br/s1.png "$G/hf_20260828_205539_d7cd1d36-b1eb-42d9-964e-bb59a8b40dff.png"
+          curl -fsSL -o br/s2.png "$G/hf_20260828_205539_5f7becb3-13b0-47b9-8206-c8225c6990c9.png"
+          curl -fsSL -o br/s3.png "$G/hf_20260828_205010_bce786ac-f9c7-4a14-8614-62505437237c.png"
+          curl -fsSL -o br/b2.png "$G/hf_20260828_205010_351ab67f-8fce-4822-87bf-c69c655f61f6.png"
+          curl -fsSL -o br/b3.png "$G/hf_20260828_205010_44e24e42-4d2e-4fe3-b511-b889de324715.png"
+          curl -fsSL -o br/b4.png "$G/hf_20260828_205010_2d2f8f6d-0cc4-4ace-8e47-a749c5f01c63.png"
+          curl -fsSL -o br/b5.png "$G/hf_20260828_205010_0c936f12-1927-47ae-938b-21ec55367a8f.png"
+          curl -fsSL -o br/b6.png "$G/hf_20260828_205010_344a4222-9198-4b80-9724-0c8db1e8c4b5.png"
+          for f in br/*.png; do ffmpeg -y -loglevel error -i "$f" -vf scale=180:320 "br/$(basename $f .png)_t.jpg" </dev/null; done
+          ffmpeg -y -loglevel error -i br/a1_t.jpg -i br/a2_t.jpg -i br/a3_t.jpg -i br/a4_t.jpg -i br/s1_t.jpg -i br/s2_t.jpg -i br/s3_t.jpg -i br/b2_t.jpg -i br/b3_t.jpg -i br/b4_t.jpg -i br/b5_t.jpg -i br/b6_t.jpg -filter_complex "[0][1][2][3][4][5][6][7][8][9][10][11]xstack=inputs=12:layout=0_0|w0_0|w0+w1_0|w0+w1+w2_0|w0+w1+w2+w3_0|w0+w1+w2+w3+w4_0|0_h0|w0_h0|w0+w1_h0|w0+w1+w2_h0|w0+w1+w2+w3_h0|w0+w1+w2+w3+w4_h0" -frames:v 1 exports/ep169_reels/qa/broll_sheet.jpg </dev/null
+          hostcut () { # seg start dur out
+            ffmpeg -y -loglevel error -ss $2 -i "ep169_v3/$1.mp4" -t $3 \
+              -vf "crop=608:1080:(iw-608)/2-30:0,scale=1080:1920,fps=30,setsar=1,unsharp=5:5:0.5" \
+              -an -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p "$4" </dev/null
+          }
+          brcut () { # img dur out
+            ffmpeg -y -loglevel error -framerate 30 -loop 1 -t $2 -i "br/$1.png" \
+              -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,zoompan=z='1+0.0015*in':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920:fps=30,setsar=1" \
+              -an -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p "$3" </dev/null
+          }
+          # Reel A pieces
+          hostcut segA 0     3.5 seg/A0.mp4
+          brcut   a1        3.0 seg/A1.mp4
+          hostcut segA 6.5   5.8 seg/A2.mp4
+          brcut   a2        3.0 seg/A3.mp4
+          hostcut segA 15.3  5.7 seg/A4.mp4
+          brcut   a3        3.0 seg/A5.mp4
+          hostcut segA 24.0  4.6 seg/A6.mp4
+          brcut   a4        3.0 seg/A7.mp4
+          hostcut segA 31.6  3.5 seg/A8.mp4
+          # Reel B pieces
+          hostcut segB 0     4.5 seg/B0.mp4
+          brcut   b2        2.5 seg/B1.mp4
+          brcut   b3        2.5 seg/B2.mp4
+          hostcut segB 9.5   5.0 seg/B3.mp4
+          brcut   b4        3.0 seg/B4.mp4
+          hostcut segB 17.5  5.0 seg/B5.mp4
+          brcut   b5        3.0 seg/B6.mp4
+          hostcut segB 25.5  4.5 seg/B7.mp4
+          brcut   b6        3.6 seg/B8.mp4
+          assemble () { # n(a|b) SEG count
+            local n=$1 SEG=$2 cnt=$3
+            : > seg/${n}_vlist.txt
+            for i in $(seq 0 $((cnt-1))); do echo "file '$(echo $n | tr a-z A-Z)$i.mp4'" >> seg/${n}_vlist.txt; done
+            ffmpeg -y -loglevel error -f concat -safe 0 -i seg/${n}_vlist.txt -c copy seg/${n}_vid.mp4 </dev/null
+            ffmpeg -y -loglevel error -i seg/${n}_vid.mp4 -i "ep169_v3/$SEG.mp4" -i ep169_assets/chip.png \
+              -filter_complex "[0:v][2:v]overlay=0:0[v0];\
+                [v0]subtitles=ep169_assets/${n}_caps_v2.ass:fontsdir=fontsdoc[v];\
+                [1:a]aformat=sample_rates=44100:channel_layouts=stereo[a]" \
+              -map "[v]" -map "[a]" -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p \
+              -c:a aac -ar 44100 -shortest seg/${n}_m.mp4 </dev/null
+            ffmpeg -y -loglevel error -framerate 30 -loop 1 -t 3 -i ep169_assets/${n}_open.png \
+              -f lavfi -t 3 -i "anullsrc=channel_layout=stereo:sample_rate=44100" \
+              -vf "scale=1080:1920,fps=30,setsar=1,fade=in:st=0:d=0.3:color=white" \
+              -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p -c:a aac -ar 44100 seg/${n}_o.mp4 </dev/null
+            ffmpeg -y -loglevel error -framerate 30 -loop 1 -t 4.5 -i ep169_assets/${n}_end.png \
+              -f lavfi -t 4.5 -i "anullsrc=channel_layout=stereo:sample_rate=44100" \
+              -vf "scale=1080:1920,fps=30,setsar=1" \
+              -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p -c:a aac -ar 44100 seg/${n}_e.mp4 </dev/null
+            printf "file '${n}_o.mp4'\nfile '${n}_m.mp4'\nfile '${n}_e.mp4'\n" > seg/${n}_cat.txt
+            ffmpeg -y -loglevel error -f concat -safe 0 -i seg/${n}_cat.txt \
+              -af "loudnorm=I=-16:TP=-1.5:LRA=11" -c:v copy -c:a aac -b:a 160k -movflags +faststart \
+              exports/ep169_reels/${n}_v3.mp4 </dev/null
+            ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 exports/ep169_reels/${n}_v3.mp4 </dev/null
+          }
+          assemble a segA 9
+          assemble b segB 9
+          mv exports/ep169_reels/a_v3.mp4 "exports/ep169_reels/Ekabo_EP169_Clip1_Cost-Of-Selling-Too-Soon_v3.mp4"
+          mv exports/ep169_reels/b_v3.mp4 "exports/ep169_reels/Ekabo_EP169_Clip2_3-Most-Expensive-Decisions_v3.mp4"
+          for f in exports/ep169_reels/*_v3.mp4; do
+            base=$(basename "$f" .mp4)
+            ffmpeg -y -loglevel error -i "$f" -vf "fps=0.5,scale=180:320,tile=8x3" -frames:v 1 "exports/ep169_reels/qa/${base}.jpg" </dev/null
+          done
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ep169_v3/
-          git commit -m "Add EP169 1080p podcast segments and framing strips [skip ci]" || echo nothing
+          git add exports/ep169_reels/
+          git commit -m "Add EP169 host-clip reels v3 with AI b-roll [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
