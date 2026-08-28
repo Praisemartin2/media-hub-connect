@@ -21,14 +21,11 @@ jobs:
           curl -fSL -A "$UA" -e "https://financialfreedommastermindpodcast.buzzsprout.com/" \
             -o seg/full.mp3 "https://www.buzzsprout.com/1909068/episodes/19699488-169-the-best-time-to-sell-is-when-you-do-not-have-to.mp3"
           declare -A IDS=(
-            [plymouth]=1ZsTkXry12fUpiwKVk5qt8lYKbz9MaxNh
-            [levelridge]=1WnNXj9zFNc47NLqxJAwzj-kZh3qOg4lP
             [niyi_close]=1Gwv2mXiw0MW3JQu749j-kHUMLbh-bPaX
+            [niyi_close_228]=1RHyWNFacBCWI2XtvVrHCxysn0Vcj87ti
             [hammond]=1dCh2maql7GIKAK6EpYPqVA-8ncUcbxQk
             [jordan]=1kIaHOjjCYV4ARQ8Y2jbKdzBRySqyLl0D
             [princess]=1Xzz9_7ln4FOaaoZZy27WjmeOzmwkoqMU
-            [baby]=1AeDPJBkkdCYjvVEx91wwndtGuWW1SN_L
-            [edited_close]=1Rk-ZudDxRWUATukDFh-7fUJJEP8wgt8C
             [doctors]=1Eitu6Qv9oI0gD5bcVFCzNLO1e_mt0DvP
             [vs_22226]=1ULX1uLnSe60dtg226vVBop5q8BycaimF
           )
@@ -90,22 +87,22 @@ jobs:
           cat > seg/a.edl <<'EOF'
           hammond 10.0 4.0
           vs_22226 6.2 4.0
-          niyi_close 7.8 4.0
-          edited_close 0.0 4.0
-          plymouth 19.5 4.0
+          niyi_close_228 0.0 4.0
+          niyi_close_228 20.3 4.0
+          hammond 20.0 4.0
           niyi_close 31.0 4.0
-          niyi_close 38.5 4.0
+          niyi_close 58.0 4.0
           doctors 53.8 3.5
-          plymouth 88.0 3.6
+          niyi_close 70.0 3.6
           EOF
           cat > seg/b.edl <<'EOF'
           jordan 101.5 3.7
-          niyi_close 7.8 3.7
+          niyi_close_228 6.8 3.7
           hammond 24.0 3.7
           vs_22226 21.0 3.7
-          levelridge 44.8 3.7
+          niyi_close_228 40.6 3.7
           princess 48.0 3.7
-          baby 11.5 3.7
+          jordan 114.5 3.7
           niyi_close 31.0 3.7
           doctors 6.0 4.0
           EOF
