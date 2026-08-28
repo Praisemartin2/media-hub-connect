@@ -11,45 +11,46 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Try yt-dlp on EP169
+      - name: Fetch EP169 audio from Buzzsprout RSS + transcribe
         run: |
-          pip install -q -U yt-dlp
+          set -e
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          mkdir -p vidcheck ep169
-          ok=0
-          for client in android ios tv web_embedded; do
-            echo "=== client $client ===" >> vidcheck/ytdlp.txt
-            if yt-dlp --extractor-args "youtube:player_client=$client" -f "bv*[height<=720]+ba/b[height<=720]"                  --merge-output-format mp4 -o "ep169/full.mp4" --no-playlist                  "https://www.youtube.com/watch?v=9ks-DxJ4g4M" >> vidcheck/ytdlp.txt 2>&1; then
-              ok=1; echo "SUCCESS with $client" >> vidcheck/ytdlp.txt; break
-            fi
-          done
-          if [ "$ok" = "1" ]; then
-            python3 - <<'PY2'
-          import subprocess, json
-          d = subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","default=nk=1:nw=1","ep169/full.mp4"],capture_output=True,text=True).stdout.strip()
-          open("vidcheck/ep169_dur.txt","w").write(d)
-          print("duration", d)
-          PY2
-            # audio for transcription + low-res proxy for review
-            ffmpeg -y -loglevel error -i ep169/full.mp4 -ac 1 -ar 16000 -b:a 48k vidcheck/ep169_audio.mp3
-            pip install -q faster-whisper
-            python3 - <<'PY3'
-          import json
+          pip install -q faster-whisper
+          mkdir -p ep169
+          curl -fsSL -o ep169/feed.rss "https://feeds.buzzsprout.com/1909068.rss"
+          python3 - <<'PY2'
+          import re, json, subprocess
+          rss = open("ep169/feed.rss", encoding="utf-8", errors="replace").read()
+          items = rss.split("<item>")[1:]
+          found = None
+          for it in items:
+              tm = re.search(r"<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</title>", it, re.S)
+              title = tm.group(1).strip() if tm else ""
+              if title.startswith("169") or "Best Time To Sell" in title:
+                  em = re.search(r'enclosure url="([^"]+)"', it)
+                  found = {"title": title, "mp3": em.group(1) if em else None}
+                  break
+          json.dump(found or {"error":"not found"}, open("ep169/meta.json","w"), indent=1)
+          print(found)
+          assert found and found["mp3"], "episode 169 not found in RSS"
+          subprocess.run(["curl","-fsSL","-o","ep169/full.mp3",found["mp3"]], check=True)
+          subprocess.run(["ffmpeg","-y","-loglevel","error","-i","ep169/full.mp3","-ac","1","-ar","16000","ep169/mono.wav"], check=True)
           from faster_whisper import WhisperModel
           m = WhisperModel("small.en", device="cpu", compute_type="int8")
-          segs, info = m.transcribe("vidcheck/ep169_audio.mp3", word_timestamps=False, vad_filter=True)
-          S = [{"start": round(x.start,1), "end": round(x.end,1), "text": x.text.strip()} for x in segs]
-          json.dump({"segments": S}, open("vidcheck/ep169_transcript.json","w"))
-          print("segments:", len(S))
-          PY3
-          fi
-          tail -5 vidcheck/ytdlp.txt
+          segs, info = m.transcribe("ep169/mono.wav", word_timestamps=False, vad_filter=True)
+          S = [{"s": round(x.start,1), "e": round(x.end,1), "t": x.text.strip()} for x in segs]
+          json.dump({"segments": S}, open("ep169/transcript.json","w"))
+          print("duration", info.duration, "segments", len(S))
+          PY2
+          mkdir -p vidcheck
+          cp ep169/meta.json ep169/transcript.json vidcheck/ 2>/dev/null || true
+          du -sh ep169/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add vidcheck/
-          git commit -m "EP169 yt-dlp test + transcript [skip ci]" || echo nothing
+          git add vidcheck/meta.json vidcheck/transcript.json
+          git commit -m "Add EP169 meta + transcript [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
