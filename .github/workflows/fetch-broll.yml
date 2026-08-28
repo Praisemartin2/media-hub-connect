@@ -11,54 +11,121 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Render EP169 podcast reels
+      - name: Render EP169 b-roll reels
         run: |
           set -e
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
-          mkdir -p seg exports/ep169_reels
+          pip -q install gdown
+          mkdir -p src seg exports/ep169_reels/qa
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
           curl -fSL -A "$UA" -e "https://financialfreedommastermindpodcast.buzzsprout.com/" \
             -o seg/full.mp3 "https://www.buzzsprout.com/1909068/episodes/19699488-169-the-best-time-to-sell-is-when-you-do-not-have-to.mp3"
-          render () { # name start dur
-            local n=$1 st=$2 dur=$3
+          declare -A IDS=(
+            [plymouth]=1ZsTkXry12fUpiwKVk5qt8lYKbz9MaxNh
+            [levelridge]=1WnNXj9zFNc47NLqxJAwzj-kZh3qOg4lP
+            [niyi_close]=1Gwv2mXiw0MW3JQu749j-kHUMLbh-bPaX
+            [hammond]=1dCh2maql7GIKAK6EpYPqVA-8ncUcbxQk
+            [jordan]=1kIaHOjjCYV4ARQ8Y2jbKdzBRySqyLl0D
+            [princess]=1Xzz9_7ln4FOaaoZZy27WjmeOzmwkoqMU
+            [baby]=1AeDPJBkkdCYjvVEx91wwndtGuWW1SN_L
+            [edited_close]=1Rk-ZudDxRWUATukDFh-7fUJJEP8wgt8C
+            [doctors]=1Eitu6Qv9oI0gD5bcVFCzNLO1e_mt0DvP
+            [vs_22226]=1ULX1uLnSe60dtg226vVBop5q8BycaimF
+          )
+          for k in "${!IDS[@]}"; do gdown -q "${IDS[$k]}" -O "src/$k"; done
+          ls -la src/
+          cut1 () { # src start dur out
+            local s=$1 st=$2 dur=$3 out=$4
+            local tr pre y d b
+            tr=$(ffprobe -v error -select_streams v:0 -show_entries stream=color_transfer -of default=nk=1:nw=1 "$s")
+            pre=""
+            if [ "$tr" = "smpte2084" ] || [ "$tr" = "arib-std-b67" ]; then
+              pre="zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p,"
+            fi
+            ffmpeg -y -loglevel error -ss $st -i "$s" -t $dur \
+              -vf "${pre}scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30,setsar=1,tpad=stop_mode=clone:stop_duration=6" \
+              -an -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p "$out"
+            y=$(ffmpeg -i "$out" -vf "fps=6,signalstats,metadata=print:key=lavfi.signalstats.YAVG" -f null - 2>&1 \
+              | grep -o 'YAVG=[0-9.]*' | awk -F= '{s+=$2;n++} END{printf "%.0f", s/n}')
+            d=$((137 - y))
+            if [ ${d#-} -gt 7 ]; then
+              b=$(python3 -c "print(max(-0.10,min(0.10,$d/255)))")
+              ffmpeg -y -loglevel error -i "$out" -vf "eq=brightness=$b" \
+                -an -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p "${out%.mp4}_bal.mp4"
+              mv "${out%.mp4}_bal.mp4" "$out"
+            fi
+            echo "clip $out src=$s tr=$tr yavg=$y"
+          }
+          build () { # name audio_start audio_dur edl_file
+            local n=$1 ast=$2 adur=$3 edl=$4
+            local i=0 name st dur
+            : > seg/${n}_list.txt
+            while read -r name st dur; do
+              cut1 "src/$name" "$st" "$dur" "seg/${n}_$i.mp4"
+              echo "file '${n}_$i.mp4'" >> seg/${n}_list.txt
+              i=$((i+1))
+            done < "$edl"
+            ffmpeg -y -loglevel error -f concat -safe 0 -i seg/${n}_list.txt -c copy seg/${n}_broll.mp4
+            ffmpeg -y -loglevel error -i seg/${n}_broll.mp4 -ss $ast -t $adur -i seg/full.mp3 \
+              -i ep169_assets/chip.png \
+              -filter_complex "[0:v][2:v]overlay=0:0[v0];\
+                [v0]subtitles=ep169_assets/${n}_caps_v2.ass:fontsdir=fontsdoc[v];\
+                [1:a]aformat=sample_rates=44100:channel_layouts=stereo[a]" \
+              -map "[v]" -map "[a]" -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p \
+              -c:a aac -ar 44100 -shortest seg/${n}_m.mp4
             ffmpeg -y -loglevel error -framerate 30 -loop 1 -t 3 -i ep169_assets/${n}_open.png \
               -f lavfi -t 3 -i "anullsrc=channel_layout=stereo:sample_rate=44100" \
               -vf "scale=1080:1920,fps=30,setsar=1,fade=in:st=0:d=0.3:color=white" \
               -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p -c:a aac -ar 44100 seg/${n}_o.mp4
-            ffmpeg -y -loglevel error -framerate 30 -loop 1 -t $dur -i ep169_assets/${n}_main.png \
-              -ss $st -t $dur -i seg/full.mp3 \
-              -filter_complex "[1:a]aformat=sample_rates=44100:channel_layouts=stereo,asplit[a1][a2];\
-                [a2]showwaves=s=900x160:mode=cline:rate=30:colors=0x004AAD[wv];\
-                [0:v]scale=1080:1920,fps=30,setsar=1[bg];\
-                [bg][wv]overlay=90:1280[v0];\
-                [v0]subtitles=ep169_assets/${n}_caps.ass:fontsdir=fontsdoc[v]" \
-              -map "[v]" -map "[a1]" -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p \
-              -c:a aac -ar 44100 seg/${n}_m.mp4
             ffmpeg -y -loglevel error -framerate 30 -loop 1 -t 4.5 -i ep169_assets/${n}_end.png \
               -f lavfi -t 4.5 -i "anullsrc=channel_layout=stereo:sample_rate=44100" \
               -vf "scale=1080:1920,fps=30,setsar=1" \
               -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p -c:a aac -ar 44100 seg/${n}_e.mp4
-            printf "file '${n}_o.mp4'\nfile '${n}_m.mp4'\nfile '${n}_e.mp4'\n" > seg/${n}_list.txt
-            ffmpeg -y -loglevel error -f concat -safe 0 -i seg/${n}_list.txt \
+            printf "file '${n}_o.mp4'\nfile '${n}_m.mp4'\nfile '${n}_e.mp4'\n" > seg/${n}_cat.txt
+            ffmpeg -y -loglevel error -f concat -safe 0 -i seg/${n}_cat.txt \
               -af "loudnorm=I=-16:TP=-1.5:LRA=11" -c:v copy -c:a aac -b:a 160k -movflags +faststart \
-              exports/ep169_reels/${n}.mp4
-            ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 exports/ep169_reels/${n}.mp4
+              exports/ep169_reels/${n}_v2_tmp.mp4
+            ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 exports/ep169_reels/${n}_v2_tmp.mp4
           }
-          render a 240.9 35.1
-          render b 5.6 33.6
-          mv exports/ep169_reels/a.mp4 "exports/ep169_reels/Ekabo_EP169_Cost-Of-Selling-Too-Soon.mp4"
-          mv exports/ep169_reels/b.mp4 "exports/ep169_reels/Ekabo_EP169_3-Most-Expensive-Decisions.mp4"
-          mkdir -p exports/ep169_reels/qa
-          for f in exports/ep169_reels/*.mp4; do
+          cat > seg/a.edl <<'EOF'
+          hammond 10.0 4.0
+          vs_22226 6.2 4.0
+          niyi_close 7.8 4.0
+          edited_close 0.0 4.0
+          plymouth 19.5 4.0
+          niyi_close 31.0 4.0
+          niyi_close 38.5 4.0
+          doctors 53.8 3.5
+          plymouth 88.0 3.6
+          EOF
+          cat > seg/b.edl <<'EOF'
+          jordan 101.5 3.7
+          niyi_close 7.8 3.7
+          hammond 24.0 3.7
+          vs_22226 21.0 3.7
+          levelridge 44.8 3.7
+          princess 48.0 3.7
+          baby 11.5 3.7
+          niyi_close 31.0 3.7
+          doctors 6.0 4.0
+          EOF
+          sed -i 's/^          //' seg/a.edl seg/b.edl
+          build a 240.9 35.1 seg/a.edl
+          build b 5.6 33.6 seg/b.edl
+          mv exports/ep169_reels/a_v2_tmp.mp4 "exports/ep169_reels/Ekabo_EP169_Cost-Of-Selling-Too-Soon_v2.mp4"
+          mv exports/ep169_reels/b_v2_tmp.mp4 "exports/ep169_reels/Ekabo_EP169_3-Most-Expensive-Decisions_v2.mp4"
+          for f in exports/ep169_reels/*_v2.mp4; do
             base=$(basename "$f" .mp4)
             ffmpeg -y -loglevel error -i "$f" -vf "fps=0.25,scale=180:320,tile=6x2" -frames:v 1 "exports/ep169_reels/qa/${base}.jpg"
+            ffmpeg -y -loglevel error -ss 12 -i "$f" -frames:v 1 "exports/ep169_reels/qa/${base}_spot12.jpg"
+            ffmpeg -y -loglevel error -ss 24 -i "$f" -frames:v 1 "exports/ep169_reels/qa/${base}_spot24.jpg"
           done
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add exports/ep169_reels/
-          git commit -m "Add EP169 podcast reels [skip ci]" || echo nothing
+          git commit -m "Add EP169 b-roll reels v2 [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
