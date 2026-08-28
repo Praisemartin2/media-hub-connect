@@ -33,7 +33,14 @@ jobs:
           json.dump(found or {"error":"not found"}, open("ep169/meta.json","w"), indent=1)
           print(found)
           assert found and found["mp3"], "episode 169 not found in RSS"
-          subprocess.run(["curl","-fsSL","-o","ep169/full.mp3",found["mp3"]], check=True)
+          ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+          urls = [found["mp3"], found["mp3"] + "?download=true"]
+          ok = False
+          for u in urls:
+              r = subprocess.run(["curl","-fSL","-A",ua,"-e","https://financialfreedommastermindpodcast.buzzsprout.com/","-o","ep169/full.mp3",u])
+              if r.returncode == 0:
+                  ok = True; break
+          assert ok, "mp3 download failed"
           subprocess.run(["ffmpeg","-y","-loglevel","error","-i","ep169/full.mp3","-ac","1","-ar","16000","ep169/mono.wav"], check=True)
           from faster_whisper import WhisperModel
           m = WhisperModel("small.en", device="cpu", compute_type="int8")
