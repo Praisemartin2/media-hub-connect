@@ -17,18 +17,18 @@ jobs:
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
           mkdir -p br seg exports/ep169_reels/qa
           G=https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev
-          curl -fsSL -o br/a1.png "$G/hf_20260828_205010_57f1a009-31b3-4dd7-b911-e3ca781e1eab.png"
-          curl -fsSL -o br/a2.png "$G/hf_20260828_205010_64c80a7b-b1c5-4f88-89e0-141b0a5584cd.png"
-          curl -fsSL -o br/a3.png "$G/hf_20260828_205010_4384fcdd-d755-4bd2-9a70-17f229a8126e.png"
-          curl -fsSL -o br/a4.png "$G/hf_20260828_205539_eb70f5d4-f723-46eb-90dc-eaddac8638ad.png"
-          curl -fsSL -o br/s1.png "$G/hf_20260828_205539_d7cd1d36-b1eb-42d9-964e-bb59a8b40dff.png"
-          curl -fsSL -o br/s2.png "$G/hf_20260828_205539_5f7becb3-13b0-47b9-8206-c8225c6990c9.png"
-          curl -fsSL -o br/s3.png "$G/hf_20260828_205010_bce786ac-f9c7-4a14-8614-62505437237c.png"
-          curl -fsSL -o br/b2.png "$G/hf_20260828_205010_351ab67f-8fce-4822-87bf-c69c655f61f6.png"
-          curl -fsSL -o br/b3.png "$G/hf_20260828_205010_44e24e42-4d2e-4fe3-b511-b889de324715.png"
-          curl -fsSL -o br/b4.png "$G/hf_20260828_205010_2d2f8f6d-0cc4-4ace-8e47-a749c5f01c63.png"
-          curl -fsSL -o br/b5.png "$G/hf_20260828_205010_0c936f12-1927-47ae-938b-21ec55367a8f.png"
-          curl -fsSL -o br/b6.png "$G/hf_20260828_205010_344a4222-9198-4b80-9724-0c8db1e8c4b5.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/a1.png "$G/hf_20260828_205010_57f1a009-31b3-4dd7-b911-e3ca781e1eab.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/a2.png "$G/hf_20260828_205010_64c80a7b-b1c5-4f88-89e0-141b0a5584cd.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/a3.png "$G/hf_20260828_205010_4384fcdd-d755-4bd2-9a70-17f229a8126e.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/a4.png "$G/hf_20260828_205539_eb70f5d4-f723-46eb-90dc-eaddac8638ad.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/s1.png "$G/hf_20260828_205539_d7cd1d36-b1eb-42d9-964e-bb59a8b40dff.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/s2.png "$G/hf_20260828_205539_5f7becb3-13b0-47b9-8206-c8225c6990c9.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/s3.png "$G/hf_20260828_205010_bce786ac-f9c7-4a14-8614-62505437237c.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/b2.png "$G/hf_20260828_205010_351ab67f-8fce-4822-87bf-c69c655f61f6.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/b3.png "$G/hf_20260828_205010_44e24e42-4d2e-4fe3-b511-b889de324715.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/b4.png "$G/hf_20260828_205010_2d2f8f6d-0cc4-4ace-8e47-a749c5f01c63.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/b5.png "$G/hf_20260828_205010_0c936f12-1927-47ae-938b-21ec55367a8f.png"
+          curl -fsSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" --retry 5 --retry-all-errors --retry-delay 3 -o br/b6.png "$G/hf_20260828_205010_344a4222-9198-4b80-9724-0c8db1e8c4b5.png"
           for f in br/*.png; do ffmpeg -y -loglevel error -i "$f" -vf scale=180:320 "br/$(basename $f .png)_t.jpg" </dev/null; done
           ffmpeg -y -loglevel error -i br/a1_t.jpg -i br/a2_t.jpg -i br/a3_t.jpg -i br/a4_t.jpg -i br/s1_t.jpg -i br/s2_t.jpg -i br/s3_t.jpg -i br/b2_t.jpg -i br/b3_t.jpg -i br/b4_t.jpg -i br/b5_t.jpg -i br/b6_t.jpg -filter_complex "[0][1][2][3][4][5][6][7][8][9][10][11]xstack=inputs=12:layout=0_0|w0_0|w0+w1_0|w0+w1+w2_0|w0+w1+w2+w3_0|w0+w1+w2+w3+w4_0|0_h0|w0_h0|w0+w1_h0|w0+w1+w2_h0|w0+w1+w2+w3_h0|w0+w1+w2+w3+w4_h0" -frames:v 1 exports/ep169_reels/qa/broll_sheet.jpg </dev/null
           hostcut () { # seg start dur out
