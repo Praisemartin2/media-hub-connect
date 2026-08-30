@@ -1,6 +1,9 @@
 name: Social stats snapshot
 on:
   workflow_dispatch: {}
+  push:
+    branches: [claude/ekabo-video-editing-styles-wrs455]
+    paths: ['.github/workflows/social-stats.yml']
   schedule:
     - cron: '17 6 1 * *'
 permissions:
