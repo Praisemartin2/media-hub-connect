@@ -1,0 +1,35 @@
+name: Social stats snapshot
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '17 6 1 * *'
+permissions:
+  contents: write
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/ekabo-video-editing-styles-wrs455
+      - name: Fetch stats
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          YT_CHANNEL_ID: ${{ secrets.YT_CHANNEL_ID }}
+        run: |
+          python3 tools/social-stats/fetch_instagram.py || echo "Instagram skipped (see log above)"
+          python3 tools/social-stats/fetch_youtube.py || echo "YouTube skipped (see log above)"
+          python3 tools/social-stats/import_manual.py
+          python3 tools/social-stats/build_outputs.py
+      - name: Commit snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add stats/
+          git commit -m "Social stats snapshot $(date -u +%F) [skip ci]" || echo "nothing new"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
+            sleep $((i*3))
+          done
+          exit 1
