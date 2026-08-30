@@ -11,44 +11,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch and QA EP5 shots
+      - name: Medium.en check on EP5 s5 and s6
         run: |
           set -e
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
           pip -q install faster-whisper
           mkdir -p toon2d/ep5
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-          G=https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev
-          declare -A SHOTS=(
-            [s1]=hf_20260830_041818_dc608b3c-9dde-4c2a-ae01-8b3d524658ec.mp4
-            [s2]=hf_20260830_041818_1137a563-7e9e-486a-b50b-ccc9bf229fc2.mp4
-            [s3]=hf_20260830_041819_79f82eff-6db0-4d3f-86d0-a2e3ebfb7419.mp4
-            [s4]=hf_20260830_041818_b0b68755-d82b-4630-b3e2-174c3284dbcd.mp4
-            [s5]=hf_20260830_041818_9988c8f2-fb92-40c4-8c34-424633a20110.mp4
-            [s6]=hf_20260830_041818_2f6aa57b-a83d-4f11-80e5-63ba30e1dbfc.mp4
-          )
-          for k in s1 s2 s3 s4 s5 s6; do
-            curl -fsSL -A "$UA" --retry 5 --retry-all-errors --retry-delay 3 -o "toon2d/ep5/$k.mp4" "$G/${SHOTS[$k]}" </dev/null
-            ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 "toon2d/ep5/$k.mp4" </dev/null
-            ffmpeg -y -loglevel error -i "toon2d/ep5/$k.mp4" -vf "fps=1.25,scale=160:284,tile=12x1" -frames:v 1 "toon2d/ep5/${k}_strip.jpg" </dev/null
-            ffmpeg -y -loglevel error -i "toon2d/ep5/$k.mp4" -vn -ar 16000 -ac 1 "/tmp/$k.wav" </dev/null
-          done
+          ffmpeg -y -loglevel error -i toon2d/ep5/s5.mp4 -vn -ar 16000 -ac 1 /tmp/s5.wav </dev/null
+          ffmpeg -y -loglevel error -i toon2d/ep5/s6.mp4 -vn -ar 16000 -ac 1 /tmp/s6.wav </dev/null
           python3 - <<'PYEOF'
           import json
           from faster_whisper import WhisperModel
-          m = WhisperModel("small.en", compute_type="int8")
-          for k in ["s1","s2","s3","s4","s5","s6"]:
+          m = WhisperModel("medium.en", compute_type="int8")
+          out = {}
+          for k in ["s5","s6"]:
               segs, _ = m.transcribe(f"/tmp/{k}.wav", word_timestamps=True)
-              out = [{"s": round(s.start,2), "e": round(s.end,2), "t": s.text.strip()} for s in segs]
-              json.dump(out, open(f"toon2d/ep5/{k}_tr.json","w"), indent=1)
-              print(k, "=>", " | ".join(x["t"] for x in out))
+              out[k] = [{"s": round(s.start,2), "e": round(s.end,2), "t": s.text.strip()} for s in segs]
+              print(k, "=>", " | ".join(x["t"] for x in out[k]))
+          json.dump(out, open("toon2d/ep5/medium_check.json","w"), indent=1)
           PYEOF
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add toon2d/ep5/
-          git commit -m "Add EP5 shots with transcripts and QA strips [skip ci]" || echo nothing
+          git commit -m "Add EP5 medium.en dialogue check [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
