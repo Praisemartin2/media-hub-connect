@@ -48,14 +48,36 @@ This gets views/likes/comments per video. Watch-time and impressions are
 owner-only: in **YouTube Studio → Analytics → Advanced mode → Export**, save
 the CSV as `stats/manual/youtube_studio_<month>.csv` and commit it.
 
-## 3. LinkedIn and TikTok — manual export (no API approval needed)
+## 3. TikTok (@ekabohome) — official Display API (~15 minutes, one time)
 
-- **LinkedIn**: Page admin view → **Analytics → Content → Export** (pick the
-  date range since Sep 1, 2025) → open the XLS, save as CSV named
-  `stats/manual/linkedin_<month>.csv`, commit it.
-- **TikTok**: **TikTok Studio → Analytics → Content** → export or copy the
-  per-post numbers into `stats/manual/tiktok_<month>.csv` with columns:
-  `date,title,permalink,views,likes,comments,saves,shares`.
+Direct from TikTok, no app review needed for your own account (Sandbox mode):
+
+1. Go to **developers.tiktok.com** → log in (any TikTok login works) →
+   **Manage apps → Connect an app** → name it (e.g. "Ekabo Stats").
+2. In the app: **Add products → Login Kit** and **Display API** (wanted scopes:
+   `user.info.basic`, `video.list`).
+3. Under **Login Kit → Redirect URI** add exactly: `https://ekabohome.com/`
+4. Keep the app in **Sandbox** mode and add **@ekabohome** as a *target user*
+   (Sandbox → Manage targets). Sandbox apps work immediately for target users —
+   no review wait.
+5. Copy the app's **Client key** and **Client secret**, then on your computer run:
+   `python3 tiktok_auth.py CLIENT_KEY CLIENT_SECRET`
+   (download `tools/social-stats/tiktok_auth.py` from the repo). It walks you
+   through approving as @ekabohome and prints three values.
+6. Add those as repo secrets: `TIKTOK_CLIENT_KEY`, `TIKTOK_CLIENT_SECRET`,
+   `TIKTOK_REFRESH_TOKEN`.
+
+The snapshot then pulls every video's views, likes, comments and shares
+directly from TikTok. (Note: TikTok blocks anonymous scraping from cloud
+servers — verified — so the official API is the only reliable direct route.)
+
+## 4. LinkedIn — manual export (their API is approval-gated)
+
+Page admin view → **Analytics → Content → Export** (date range since
+Sep 1, 2025) → open the XLS, save as CSV named
+`stats/manual/linkedin_<month>.csv`, commit it. TikTok Studio CSV exports can
+also be dropped in `stats/manual/tiktok_<month>.csv` as a supplement (Studio
+has retention/watch-time numbers the public API doesn't expose).
 
 Any CSV dropped in `stats/manual/` named `<platform>_*.csv` is picked up
 automatically on the next run — column names are matched loosely
