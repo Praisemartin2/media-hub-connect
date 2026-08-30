@@ -18,12 +18,13 @@ jobs:
       - name: TikTok (direct, public profile)
         continue-on-error: true
         run: |
+          cd "$RUNNER_TEMP"
           npm init -y > /dev/null 2>&1
           npm install --no-audit --no-fund playwright > /dev/null 2>&1
           npx playwright install --with-deps chromium > /dev/null 2>&1
-          node tools/social-stats/tiktok_web.js
+          cd "$GITHUB_WORKSPACE"
+          NODE_PATH="$RUNNER_TEMP/node_modules" node tools/social-stats/tiktok_web.js
           python3 tools/social-stats/tiktok_normalize.py
-          rm -rf node_modules package.json package-lock.json
       - name: Instagram + Facebook (Meta Graph API)
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
@@ -44,6 +45,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -- package.json package-lock.json bun.lockb 2>/dev/null || true
           git add stats/
           git commit -m "Social stats snapshot $(date -u +%F) [skip ci]" || echo "nothing new"
           for i in 1 2 3 4 5; do
