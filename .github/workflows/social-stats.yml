@@ -23,7 +23,7 @@ jobs:
           npm install --no-audit --no-fund playwright > /dev/null 2>&1
           npx playwright install --with-deps chromium > /dev/null 2>&1
           cd "$GITHUB_WORKSPACE"
-          NODE_PATH="$RUNNER_TEMP/node_modules" node tools/social-stats/tiktok_web.js
+          NODE_PATH="$RUNNER_TEMP/node_modules" node tools/social-stats/tiktok_web.cjs
           python3 tools/social-stats/tiktok_normalize.py
       - name: Instagram + Facebook (Meta Graph API)
         env:
