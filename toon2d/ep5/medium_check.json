@@ -1,0 +1,36 @@
+{
+ "s5": [
+  {
+   "s": 0.0,
+   "e": 0.9,
+   "t": "That's the whole game."
+  },
+  {
+   "s": 1.36,
+   "e": 3.78,
+   "t": "A job funds your freedom, it isn't your freedom."
+  },
+  {
+   "s": 4.26,
+   "e": 5.48,
+   "t": "Rent doesn't fire you."
+  },
+  {
+   "s": 6.14,
+   "e": 7.88,
+   "t": "Saturday, the dulek's showing."
+  },
+  {
+   "s": 8.3,
+   "e": 8.98,
+   "t": "I'm not canceling."
+  }
+ ],
+ "s6": [
+  {
+   "s": 0.0,
+   "e": 5.4,
+   "t": "See you at 75 not him not us"
+  }
+ ]
+}
