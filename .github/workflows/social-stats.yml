@@ -12,14 +12,29 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: claude/ekabo-video-editing-styles-wrs455
-      - name: Fetch stats
+      - name: TikTok (direct, public profile)
+        continue-on-error: true
+        run: |
+          npm init -y > /dev/null 2>&1
+          npm install --no-audit --no-fund playwright > /dev/null 2>&1
+          npx playwright install --with-deps chromium > /dev/null 2>&1
+          node tools/social-stats/tiktok_web.js
+          python3 tools/social-stats/tiktok_normalize.py
+          rm -rf node_modules package.json package-lock.json
+      - name: Instagram + Facebook (Meta Graph API)
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: |
+          python3 tools/social-stats/fetch_instagram.py || echo "Instagram skipped (see log above)"
+          python3 tools/social-stats/fetch_facebook.py || echo "Facebook skipped (see log above)"
+      - name: YouTube
+        env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
           YT_CHANNEL_ID: ${{ secrets.YT_CHANNEL_ID }}
         run: |
-          python3 tools/social-stats/fetch_instagram.py || echo "Instagram skipped (see log above)"
           python3 tools/social-stats/fetch_youtube.py || echo "YouTube skipped (see log above)"
+      - name: Merge
+        run: |
           python3 tools/social-stats/import_manual.py
           python3 tools/social-stats/build_outputs.py
       - name: Commit snapshot

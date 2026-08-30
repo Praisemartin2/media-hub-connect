@@ -4,7 +4,8 @@ and print a summary (totals + per-campaign) used by the dashboard/report."""
 import csv, json, os
 from collections import defaultdict
 
-SOURCES = ["stats/instagram/posts.csv", "stats/youtube/videos.csv",
+SOURCES = ["stats/instagram/posts.csv", "stats/facebook/posts.csv",
+           "stats/tiktok/videos.csv", "stats/youtube/videos.csv",
            "stats/manual/normalized.csv"]
 FIELDS = ["platform","date","type","title","permalink","views","reach",
           "likes","comments","saves","shares","engagement","engagement_rate_pct","media_id"]
