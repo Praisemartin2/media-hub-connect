@@ -11,20 +11,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch style reference sheets
+      - name: Fetch PMO display and body fonts
         run: |
           set -e
-          mkdir -p pmo/style_ref
-          B=https://d2ol7oe51mr4n9.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev
-          curl -fsSL -o pmo/style_ref/sheet1.jpg "$B/c3a440fa-9e07-4979-933c-597b94c03e1c.jpg"
-          curl -fsSL -o pmo/style_ref/sheet2.jpg "$B/ce2bc51b-96c2-459a-8588-0a5bc74a35f1.jpg"
-          ls -la pmo/style_ref/
+          mkdir -p pmo/brand/fonts
+          fetch_font () { # family file
+            css=$(curl -fsSL -A "Mozilla/5.0" "https://fonts.googleapis.com/css2?family=$1&display=swap")
+            url=$(echo "$css" | grep -oE 'https://fonts.gstatic.com/[^)]+\.(ttf|woff2)' | head -1)
+            curl -fsSL -o "pmo/brand/fonts/$2" "$url"
+            ls -la "pmo/brand/fonts/$2"
+          }
+          fetch_font "Anton" Anton-Regular.ttf
+          fetch_font "Oswald:wght@600" Oswald-SemiBold.ttf
+          fetch_font "Inter:wght@400" Inter-Regular.ttf
+          fetch_font "Inter:ital,wght@1,400" Inter-Italic.ttf
+          fetch_font "Inter:wght@700" Inter-Bold.ttf
+          file pmo/brand/fonts/*
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add pmo/
-          git commit -m "Add thebranding.ai style reference sheets [skip ci]" || echo nothing
+          git commit -m "Add PMO brand fonts [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
