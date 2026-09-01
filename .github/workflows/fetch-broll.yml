@@ -11,20 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch IG style reference screenshots
+      - name: Fetch style reference sheets
         run: |
           set -e
           mkdir -p pmo/style_ref
           B=https://d2ol7oe51mr4n9.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev
-          curl -fsSL -o pmo/style_ref/ig_top.png "$B/d594f2f1-5381-4492-a154-24c476143213.png"
-          curl -fsSL -o pmo/style_ref/ig_grid.png "$B/4e7c4258-1ccb-4b1f-ab9d-c6ba864155f1.png"
+          curl -fsSL -o pmo/style_ref/sheet1.jpg "$B/c3a440fa-9e07-4979-933c-597b94c03e1c.jpg"
+          curl -fsSL -o pmo/style_ref/sheet2.jpg "$B/ce2bc51b-96c2-459a-8588-0a5bc74a35f1.jpg"
           ls -la pmo/style_ref/
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add pmo/
-          git commit -m "Add IG style reference captures [skip ci]" || echo nothing
+          git commit -m "Add thebranding.ai style reference sheets [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
