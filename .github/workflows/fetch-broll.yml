@@ -11,20 +11,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch reel music
+      - name: Prepare web-optimized portfolio media
         run: |
           set -e
-          mkdir -p pmo/assets/music
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/126.0"
-          curl -fsSL -A "$UA" -o pmo/assets/music/Cipher.mp3 "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Cipher.mp3" || true
-          curl -fsSL -A "$UA" -o pmo/assets/music/Basement_Floor.mp3 "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Basement%20Floor.mp3" || true
-          ls -la pmo/assets/music/
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg
+          mkdir -p pmo/site_media
+          web () { # src slug (vertical 9:16)
+            ffmpeg -y -loglevel error -i "$1" -vf "scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,fps=30" \
+              -c:v libx264 -preset slow -crf 30 -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 96k "pmo/site_media/$2.mp4" </dev/null
+            ffmpeg -y -loglevel error -ss 1.5 -i "pmo/site_media/$2.mp4" -frames:v 1 -q:v 4 "pmo/site_media/$2.jpg" </dev/null
+            printf "%s %s\n" "$2" "$(du -k pmo/site_media/$2.mp4 | cut -f1)KB"
+          }
+          web "exports/series_see_you_at_75/Ekabo_SeeYouAt75_EP5_The-Shrug.mp4" sya75_ep5
+          web "exports/series_see_you_at_75/Ekabo_SeeYouAt75_EP4_New-Management.mp4" sya75_ep4
+          web "exports/series_see_you_at_75/Ekabo_SeeYouAt75_EP3_The-Day-Off.mp4" sya75_ep3
+          web "exports/series_see_you_at_75/Ekabo_SeeYouAt75_EP1_The-Plan_2D.mp4" sya75_ep1
+          web "exports/ep169_reels/Ekabo_EP169_Clip1_Cost-Of-Selling-Too-Soon_v3.mp4" ep169_clip1
+          web "exports/ep169_reels/Ekabo_EP169_Clip2_3-Most-Expensive-Decisions_v3.mp4" ep169_clip2
+          web "exports/ekabo_victory_sundays/Ekabo_VictorySundays_Recap.mp4" victory_sundays
+          web "exports/woodbury_park/Woodbury_SummerInThePark_90s_Recap_v2.mp4" woodbury_recap
+          web "exports/pmo/PMO_Reel1_50-Pieces-8-Weeks.mp4" pmo_reel1
+          # testimonial (landscape 16:9)
+          ffmpeg -y -loglevel error -i pmo/assets/testimonial_raw.mp4 -vf "scale=1280:720,fps=25" \
+            -c:v libx264 -preset slow -crf 27 -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 128k \
+            -af "loudnorm=I=-16:TP=-1.5:LRA=11" pmo/site_media/testimonial_niyi.mp4 </dev/null
+          ffmpeg -y -loglevel error -ss 2 -i pmo/site_media/testimonial_niyi.mp4 -frames:v 1 -q:v 4 pmo/site_media/testimonial_niyi.jpg </dev/null
+          # hero background loop: 6s muted montage from the PMO reel evidence section, 1080p landscape crop of vertical → use letterbox-free 16:9 from reel1? keep simple: vertical loop
+          ffmpeg -y -loglevel error -ss 3 -t 6 -i "exports/pmo/PMO_Reel1_50-Pieces-8-Weeks.mp4" -vf "scale=720:1280,fps=30" -an \
+            -c:v libx264 -preset slow -crf 30 -pix_fmt yuv420p -movflags +faststart pmo/site_media/hero_loop.mp4 </dev/null
+          du -sh pmo/site_media; ls -la pmo/site_media
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pmo/
-          git commit -m "Add PMO reel music [skip ci]" || echo nothing
+          git add pmo/site_media/
+          git commit -m "Add web-optimized portfolio media for pmo-media.com [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
