@@ -1,0 +1,39 @@
+name: Birthday render
+on:
+  push:
+    branches: [claude/ekabo-video-editing-styles-wrs455]
+    paths: ['.github/workflows/bday-render.yml', 'bday/render.sh']
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Sources
+        run: |
+          set -e
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg >/dev/null
+          ffmpeg -version | head -1
+          pip install -q gdown
+          mkdir -p bday/src && cd bday/src
+          gdown -O IMG_1646.MOV "https://drive.google.com/uc?id=1KE2fWl2T0BBXZMRcRyGSU39SepccdLNc"
+          gdown -O VID_WA0000.mp4 "https://drive.google.com/uc?id=1qugrLRhhZVTbmVVEzOikGSwOxpYKQMnH"
+          gdown -O 20260902_153652.mp4 "https://drive.google.com/uc?id=11NpPLRPq-DTAd93AZSr53hGncMMSqdbc"
+      - name: Render
+        run: cd bday && ./render.sh
+      - name: Commit outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add bday/out/
+          git commit -m "Render Happy 70th birthday video v1 [skip ci]" || echo nothing
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
+            sleep $((i*3))
+          done
+          exit 1
