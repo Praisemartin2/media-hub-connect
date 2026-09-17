@@ -1,0 +1,6 @@
+IMG_1646 Input Integrated:    -25.2 LUFS
+IMG_1646 Input True Peak:     -10.3 dBTP
+20260902_153652 Input Integrated:    -22.9 LUFS
+20260902_153652 Input True Peak:      -0.9 dBTP
+VID_WA0000 Input Integrated:    -31.4 LUFS
+VID_WA0000 Input True Peak:      -9.7 dBTP
