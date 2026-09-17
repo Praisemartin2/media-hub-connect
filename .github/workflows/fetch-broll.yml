@@ -11,33 +11,60 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch site imagery and optimize
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download birthday sources and analyze
         run: |
           set -e
-          sudo apt-get -qq update && sudo apt-get -qq install -y imagemagick >/dev/null
-          mkdir -p pmo/site_images
-          B="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/128 Safari/537.36"
-          get () { # id slug
-            curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o "/tmp/$2.png" "$B/hf_20260910_002451_$1.png"
-            convert "/tmp/$2.png" -resize '1920x1920>' -strip -interlace Plane -sampling-factor 4:2:0 -quality 82 "pmo/site_images/$2.jpg"
-            convert "/tmp/$2.png" -resize '960x960>' -strip -quality 80 "pmo/site_images/$2_960.jpg"
-            printf "%s %s\n" "$2" "$(du -k pmo/site_images/$2.jpg | cut -f1)KB"
-          }
-          get 01669c29-1bc4-4284-aabc-961acd3384c5 hero_neighborhood
-          get b6b66383-e1ef-4628-a1c6-0929234597d1 blueprint_desk
-          get 653c93a4-b84e-4ff9-9478-96c4cb892d62 home_dusk
-          get 6c33fafa-9adc-43ef-819a-9433915a4e2b studio_camera
-          get 1267fff9-37bc-4b13-9719-7554d1ff615a dc_rowhouses
-          get cb19f4ee-8f27-4a76-94de-39d2b420753c bokeh_lights
-          montage pmo/site_images/*_960.jpg -tile 3x2 -geometry 480x320+6+6 -background black pmo/site_images/_contact_sheet.jpg
-          ls -la pmo/site_images
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg imagemagick >/dev/null
+          pip install -q gdown faster-whisper
+          mkdir -p bday/src bday/analysis
+          cd bday/src
+          gdown --fuzzy -O IMG_1646.MOV "https://drive.google.com/uc?id=1KE2fWl2T0BBXZMRcRyGSU39SepccdLNc"
+          gdown --fuzzy -O VID_WA0000.mp4 "https://drive.google.com/uc?id=1qugrLRhhZVTbmVVEzOikGSwOxpYKQMnH"
+          gdown --fuzzy -O 20260902_153652.mp4 "https://drive.google.com/uc?id=11NpPLRPq-DTAd93AZSr53hGncMMSqdbc"
+          gdown --fuzzy -O design.png "https://drive.google.com/uc?id=1BeMe5_Nf9mUw5VxHInovZyLkC9u9F1Rp"
+          ls -la
+          cd ../analysis
+          for f in ../src/*.MOV ../src/*.mp4; do
+            n=$(basename "${f%.*}")
+            echo "=== $n" >> probe.txt
+            ffprobe -v error -show_entries format=duration:stream=index,codec_type,codec_name,width,height,r_frame_rate,sample_rate,channels:stream_tags=rotate:side_data=rotation -of default=nw=1 "$f" >> probe.txt 2>&1 </dev/null
+            # rotation-aware thumbnails every 4s, tiled
+            ffmpeg -y -loglevel error -i "$f" -vf "fps=1/4,scale=320:-2,tile=6x6" -frames:v 1 "${n}_sheet.jpg" </dev/null
+            # midpoint full-res frame for grading reference
+            d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f")
+            ffmpeg -y -loglevel error -ss "$(python3 -c "print($d/2)")" -i "$f" -frames:v 1 -q:v 3 "${n}_mid.jpg" </dev/null
+            # loudness
+            ffmpeg -i "$f" -af loudnorm=print_format=summary -f null - 2>&1 </dev/null | grep -E "Input Integrated|Input True Peak" | sed "s/^/$n /" >> loudness.txt
+            # audio for whisper
+            ffmpeg -y -loglevel error -i "$f" -vn -ac 1 -ar 16000 "${n}.wav" </dev/null
+          done
+          python3 - <<'PY'
+          import glob, json, os
+          from faster_whisper import WhisperModel
+          m = WhisperModel("small.en", device="cpu", compute_type="int8")
+          for w in sorted(glob.glob("*.wav")):
+              n = w[:-4]
+              segs, info = m.transcribe(w, word_timestamps=True, vad_filter=True)
+              out = []
+              with open(n + ".txt", "w") as t:
+                  for s in segs:
+                      out.append({"start": round(s.start,2), "end": round(s.end,2), "text": s.text.strip(),
+                                  "words": [{"w": x.word, "s": round(x.start,2), "e": round(x.end,2)} for x in (s.words or [])]})
+                      t.write(f"[{s.start:7.2f} -> {s.end:7.2f}] {s.text.strip()}\n")
+              json.dump(out, open(n + ".json", "w"), indent=1)
+              print(n, "segments:", len(out), "dur:", round(info.duration,1))
+          PY
+          rm -f *.wav
+          ls -la
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pmo/site_images/
-          git commit -m "Add editorial site imagery for pmo-media.com [skip ci]" || echo nothing
+          git add bday/analysis/
+          git commit -m "Add 70th birthday source analysis [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
