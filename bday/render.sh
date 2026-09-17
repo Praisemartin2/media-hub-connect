@@ -20,7 +20,7 @@ clip () { # base.png src start end grade out
 }
 
 # ---- grades (warm, bright, matched) ----
-G1="eq=brightness=0.035:contrast=1.06:saturation=1.10,colortemperature=temperature=5600:mix=0.6,"           # iPhone indoor, a touch dim
+G1="eq=brightness=0.055:contrast=1.06:saturation=1.10,colortemperature=temperature=5600:mix=0.6,"           # iPhone indoor, a touch dim
 G2="hqdn3d=3:2:4:4,eq=brightness=0.02:contrast=1.10:saturation=1.12,colortemperature=temperature=5900:mix=0.5,unsharp=5:5:0.5:5:5:0.0,"  # WhatsApp low-res, flat overcast
 G3="colorbalance=rs=0.04:gs=0.0:bs=-0.07:rm=0.03:bm=-0.05,eq=brightness=0.02:contrast=1.05:saturation=1.05,colortemperature=temperature=5500:mix=0.6,"  # Samsung cool/blue
 
@@ -59,10 +59,10 @@ ffmpeg -y -loglevel error -i $WK/cut.mp4 -i assets/music/Canon_in_D_Major.mp3 \
 [m][sc]sidechaincompress=threshold=0.015:ratio=8:attack=150:release=1400:makeup=1:level_sc=1.6[md];\
 [md]volume=0.42[mv];\
 [sp][mv]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.95[a]" \
-  -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -movflags +faststart $OUT/Happy70th_Rev_Canon_Oguike_v1.mp4 </dev/null
+  -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -movflags +faststart $OUT/Happy70th_Rev_Canon_Oguike_v2.mp4 </dev/null
 
 # ---- previews for review ----
-ffmpeg -y -loglevel error -i $OUT/Happy70th_Rev_Canon_Oguike_v1.mp4 -vf "fps=1/5,scale=384:-2,tile=5x7" -frames:v 1 $OUT/_sheet_v1.jpg </dev/null
-ffmpeg -y -loglevel error -i $OUT/Happy70th_Rev_Canon_Oguike_v1.mp4 -vf "scale=854:480" -c:v libx264 -crf 28 -preset fast -c:a aac -b:a 96k $OUT/_preview480_v1.mp4 </dev/null
-ffmpeg -i $OUT/Happy70th_Rev_Canon_Oguike_v1.mp4 -af loudnorm=print_format=summary -f null - 2>&1 </dev/null | grep -E "Input Integrated|Input True Peak" > $OUT/_loudness_v1.txt
+ffmpeg -y -loglevel error -i $OUT/Happy70th_Rev_Canon_Oguike_v2.mp4 -vf "fps=1/5,scale=384:-2,tile=5x7" -frames:v 1 $OUT/_sheet_v2.jpg </dev/null
+ffmpeg -y -loglevel error -i $OUT/Happy70th_Rev_Canon_Oguike_v2.mp4 -vf "scale=854:480" -c:v libx264 -crf 28 -preset fast -c:a aac -b:a 96k $OUT/_preview480_v2.mp4 </dev/null
+ffmpeg -i $OUT/Happy70th_Rev_Canon_Oguike_v2.mp4 -af loudnorm=print_format=summary -f null - 2>&1 </dev/null | grep -E "Input Integrated|Input True Peak" > $OUT/_loudness_v2.txt
 ls -la $OUT
