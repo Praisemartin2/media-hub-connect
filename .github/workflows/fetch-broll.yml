@@ -21,10 +21,10 @@ jobs:
           pip install -q gdown faster-whisper
           mkdir -p bday/src bday/analysis
           cd bday/src
-          gdown --fuzzy -O IMG_1646.MOV "https://drive.google.com/uc?id=1KE2fWl2T0BBXZMRcRyGSU39SepccdLNc"
-          gdown --fuzzy -O VID_WA0000.mp4 "https://drive.google.com/uc?id=1qugrLRhhZVTbmVVEzOikGSwOxpYKQMnH"
-          gdown --fuzzy -O 20260902_153652.mp4 "https://drive.google.com/uc?id=11NpPLRPq-DTAd93AZSr53hGncMMSqdbc"
-          gdown --fuzzy -O design.png "https://drive.google.com/uc?id=1BeMe5_Nf9mUw5VxHInovZyLkC9u9F1Rp"
+          gdown -O IMG_1646.MOV "https://drive.google.com/uc?id=1KE2fWl2T0BBXZMRcRyGSU39SepccdLNc"
+          gdown -O VID_WA0000.mp4 "https://drive.google.com/uc?id=1qugrLRhhZVTbmVVEzOikGSwOxpYKQMnH"
+          gdown -O 20260902_153652.mp4 "https://drive.google.com/uc?id=11NpPLRPq-DTAd93AZSr53hGncMMSqdbc"
+          gdown -O design.png "https://drive.google.com/uc?id=1BeMe5_Nf9mUw5VxHInovZyLkC9u9F1Rp"
           ls -la
           cd ../analysis
           for f in ../src/*.MOV ../src/*.mp4; do
