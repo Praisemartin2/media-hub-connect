@@ -1,0 +1,14 @@
+=== IHEANYA
+index=0
+codec_name=h264
+codec_type=video
+width=768
+height=576
+r_frame_rate=30/1
+index=1
+codec_name=aac
+codec_type=audio
+sample_rate=44100
+channels=2
+r_frame_rate=0/0
+duration=56.702902
