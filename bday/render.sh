@@ -2,7 +2,7 @@
 # Render Happy 70th Birthday message video. Run from bday/ with sources in src/.
 set -euo pipefail
 OUT=out; WK=work; mkdir -p $OUT $WK
-VER=v3
+VER=v4
 XF=0.8; FPS=30
 enc="-c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p -r $FPS -c:a aac -b:a 192k -ar 48000 -ac 2"
 
