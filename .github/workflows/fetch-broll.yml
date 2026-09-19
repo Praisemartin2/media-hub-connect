@@ -21,23 +21,20 @@ jobs:
           pip install -q gdown faster-whisper
           mkdir -p bday/src bday/analysis
           cd bday/src
-          gdown -O IMG_1646.MOV "https://drive.google.com/uc?id=1KE2fWl2T0BBXZMRcRyGSU39SepccdLNc"
-          gdown -O VID_WA0000.mp4 "https://drive.google.com/uc?id=1qugrLRhhZVTbmVVEzOikGSwOxpYKQMnH"
-          gdown -O 20260902_153652.mp4 "https://drive.google.com/uc?id=11NpPLRPq-DTAd93AZSr53hGncMMSqdbc"
-          gdown -O design.png "https://drive.google.com/uc?id=1BeMe5_Nf9mUw5VxHInovZyLkC9u9F1Rp"
+          gdown -O IHEANYA.mp4 "https://drive.google.com/uc?id=1WND4ClOnd7m44X6YVUOpA57AEbCdB7jS"
           ls -la
           cd ../analysis
-          for f in ../src/*.MOV ../src/*.mp4; do
+          for f in ../src/IHEANYA.mp4; do
             n=$(basename "${f%.*}")
-            echo "=== $n" >> probe.txt
-            ffprobe -v error -show_entries format=duration:stream=index,codec_type,codec_name,width,height,r_frame_rate,sample_rate,channels:stream_tags=rotate:side_data=rotation -of default=nw=1 "$f" >> probe.txt 2>&1 </dev/null
+            echo "=== $n" >> probe_iheanya.txt
+            ffprobe -v error -show_entries format=duration:stream=index,codec_type,codec_name,width,height,r_frame_rate,sample_rate,channels:stream_tags=rotate:side_data=rotation -of default=nw=1 "$f" >> probe_iheanya.txt 2>&1 </dev/null
             # rotation-aware thumbnails every 4s, tiled
             ffmpeg -y -loglevel error -i "$f" -vf "fps=1/4,scale=320:-2,tile=6x6" -frames:v 1 "${n}_sheet.jpg" </dev/null
             # midpoint full-res frame for grading reference
             d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f")
             ffmpeg -y -loglevel error -ss "$(python3 -c "print($d/2)")" -i "$f" -frames:v 1 -q:v 3 "${n}_mid.jpg" </dev/null
             # loudness
-            ffmpeg -i "$f" -af loudnorm=print_format=summary -f null - 2>&1 </dev/null | grep -E "Input Integrated|Input True Peak" | sed "s/^/$n /" >> loudness.txt
+            ffmpeg -i "$f" -af loudnorm=print_format=summary -f null - 2>&1 </dev/null | grep -E "Input Integrated|Input True Peak" | sed "s/^/$n /" >> loudness_iheanya.txt
             # audio for whisper
             ffmpeg -y -loglevel error -i "$f" -vn -ac 1 -ar 16000 "${n}.wav" </dev/null
           done
@@ -64,7 +61,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add bday/analysis/
-          git commit -m "Add 70th birthday source analysis [skip ci]" || echo nothing
+          git commit -m "Add analysis for Iheanya message [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
