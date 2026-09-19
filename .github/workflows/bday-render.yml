@@ -24,6 +24,7 @@ jobs:
           gdown -O IMG_1646.MOV "https://drive.google.com/uc?id=1KE2fWl2T0BBXZMRcRyGSU39SepccdLNc"
           gdown -O VID_WA0000.mp4 "https://drive.google.com/uc?id=1qugrLRhhZVTbmVVEzOikGSwOxpYKQMnH"
           gdown -O 20260902_153652.mp4 "https://drive.google.com/uc?id=11NpPLRPq-DTAd93AZSr53hGncMMSqdbc"
+          gdown -O IHEANYA.mp4 "https://drive.google.com/uc?id=1WND4ClOnd7m44X6YVUOpA57AEbCdB7jS"
       - name: Render
         run: cd bday && ./render.sh
       - name: Commit outputs
@@ -31,7 +32,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add bday/out/
-          git commit -m "Render Happy 70th birthday video v2 [skip ci]" || echo nothing
+          git commit -m "Render Happy 70th birthday video v3 [skip ci]" || echo nothing
           for i in 1 2 3 4 5; do
             git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
             sleep $((i*3))
