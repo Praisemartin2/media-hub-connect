@@ -51,7 +51,7 @@ echo "durations ${DUR[*]}"
 # build xfade/acrossfade chains
 N=${#SEGS[@]}; INPUTS=""; for s in "${SEGS[@]}"; do INPUTS+=" -i $s"; done
 FC=$(python3 - <<PY
-d=[${DUR[*]// /,}]; x=$XF; n=len(d)
+d=[$(IFS=,; echo "${DUR[*]}")]; x=$XF; n=len(d)
 v="[0:v]"; a="[0:a]"; off=0; vf=""; af=""
 for i in range(1,n):
     off=off+d[i-1]-x
