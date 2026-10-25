@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { VideoHero } from "@/components/home/VideoHero";
 import { KineticMission } from "@/components/home/KineticMission";
 import { UpcomingEvents } from "@/components/home/UpcomingEvents";
+import { RecapFilm } from "@/components/events/RecapFilm";
 import { Sunburst } from "@/components/shared/Sunburst";
 import { Reveal } from "@/components/shared/Reveal";
 import { MediaCard } from "@/components/cards/MediaCard";
@@ -23,6 +24,7 @@ const [featureProgram, ...cardPrograms] = programs;
 const Index = () => {
   const stories = mediaItems.slice(0, 3);
   const nextEvents = events.filter((e) => isUpcoming(e.date, e.endDate)).slice(0, 3);
+  const recapEvent = events.find((e) => e.recapEmbedUrl);
 
   return (
     <>
@@ -34,6 +36,37 @@ const Index = () => {
 
       {/* Upcoming events — featured prominently */}
       <UpcomingEvents />
+
+      {/* Highlight film from the Nigeria summits */}
+      {recapEvent?.recapEmbedUrl && (
+        <section className="bg-brand-cream py-20 lg:py-24">
+          <div className="container-cofy grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+            <Reveal>
+              <RecapFilm embedUrl={recapEvent.recapEmbedUrl} />
+            </Reveal>
+            <Reveal delay={100}>
+              <p className="eyebrow font-display">Event highlight</p>
+              <h2 className="mt-2 font-display text-4xl font-medium leading-none tracking-tight sm:text-5xl">
+                Highlights from Nigeria
+              </h2>
+              <p className="mt-4 text-sm font-semibold text-muted-foreground">
+                Educational Summit 2026 · Abuja, Owerri &amp; Umuahia
+              </p>
+              {recapEvent.recapNote && (
+                <p className="mt-5 font-serif text-lg leading-relaxed text-foreground/75">
+                  {recapEvent.recapNote}
+                </p>
+              )}
+              <Button asChild variant="outline" className="mt-8">
+                <Link to="/events">
+                  See all events
+                  <ArrowRight className="ml-1 h-5 w-5" />
+                </Link>
+              </Button>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* 2 — Split feature: who we are */}
       <section id="mission" className="scroll-mt-24 py-20 lg:py-28">
