@@ -14,6 +14,14 @@ export type COFYEvent = {
   featured?: boolean;
   /** Promo film shown in the lead slot instead of a photo. */
   video?: string;
+  /**
+   * Recap film for an event that has happened, shown as a highlight.
+   * A Google Drive embed URL, so the full-resolution footage streams
+   * from Drive rather than being committed to the repo.
+   */
+  recapEmbedUrl?: string;
+  /** One line introducing the recap. */
+  recapNote?: string;
 };
 
 /** Promo film for the TOTAL-36 Educational Mission, Summer 2026. */
@@ -51,6 +59,10 @@ export const events: COFYEvent[] = [
     registerUrl: "https://forms.gle/hZ5bnRLH7MXq4bwr8",
     featured: true,
     video: `${import.meta.env.BASE_URL}media/educational-mission-2026.mp4`,
+    recapEmbedUrl:
+      "https://drive.google.com/file/d/1VUXcxK2Ij-MG6GCirCFc3vYoZDDXa6By/preview",
+    recapNote:
+      "Moments from the TOTAL-36 Educational Mission across Abuja, Owerri and Umuahia — teachers, facilitators and school communities over three summit stops in August 2026.",
   },
   {
     id: "educational-summit-2026-imo",

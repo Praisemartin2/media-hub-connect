@@ -34,6 +34,7 @@ const sections: { title: string; body: string[] }[] = [
     title: "Media hosting",
     body: [
       "Some images and video on this site are served from a content delivery network. Requesting those files shares your IP address with the host, as with any content on the internet. No identity information is attached.",
+      "Our event highlight film plays through an embedded Google Drive player. If you play it, Google receives the request as it would for any video on their platform, under Google's own privacy policy. The film only loads when the page is open; nothing is sent to Google before that.",
     ],
   },
   {

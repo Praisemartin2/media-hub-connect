@@ -86,6 +86,7 @@ const Events = () => {
   const featured = upcoming.find((e) => e.featured) ?? upcoming[0];
   const rest = upcoming.filter((e) => e.id !== featured?.id);
   const [pastHighlight, ...pastRest] = past;
+  const recap = past.find((e) => e.recapEmbedUrl);
 
   return (
     <>
@@ -163,6 +164,38 @@ const Events = () => {
             <History className="h-5 w-5 text-primary" />
             <h2 className="font-display text-2xl font-bold sm:text-3xl">Past events</h2>
           </div>
+
+          {/* Recap film from an event that has happened */}
+          {recap?.recapEmbedUrl && (
+            <Reveal>
+              <div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
+                <div className="relative aspect-video w-full overflow-hidden bg-brand-blue-deep">
+                  <iframe
+                    src={recap.recapEmbedUrl}
+                    title={`Highlights from ${recap.title}`}
+                    allow="autoplay; encrypted-media; fullscreen"
+                    allowFullScreen
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full border-0"
+                  />
+                </div>
+                <div>
+                  <p className="eyebrow font-display">Event highlight</p>
+                  <h3 className="mt-2 font-display text-3xl font-medium leading-tight sm:text-4xl">
+                    Highlights from Nigeria
+                  </h3>
+                  <p className="mt-3 text-sm font-semibold text-muted-foreground">
+                    Educational Summit 2026 · Abuja, Owerri &amp; Umuahia
+                  </p>
+                  {recap.recapNote && (
+                    <p className="mt-4 font-serif text-base leading-relaxed text-foreground/75">
+                      {recap.recapNote}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </Reveal>
+          )}
 
           <div className="max-w-3xl">
             {pastHighlight && (
