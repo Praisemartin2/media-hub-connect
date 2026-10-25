@@ -14,6 +14,7 @@ import { Sunburst } from "@/components/shared/Sunburst";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/shared/SEO";
 import { FeaturedEvent } from "@/components/events/FeaturedEvent";
+import { RecapFilm } from "@/components/events/RecapFilm";
 import { events, type COFYEvent } from "@/data/events";
 import { isUpcoming, dateParts, formatDateRange, formatPlace } from "@/lib/format";
 
@@ -169,16 +170,7 @@ const Events = () => {
           {recap?.recapEmbedUrl && (
             <Reveal>
               <div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
-                <div className="relative aspect-video w-full overflow-hidden bg-brand-blue-deep">
-                  <iframe
-                    src={recap.recapEmbedUrl}
-                    title={`Highlights from ${recap.title}`}
-                    allow="autoplay; encrypted-media; fullscreen"
-                    allowFullScreen
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full border-0"
-                  />
-                </div>
+                <RecapFilm embedUrl={recap.recapEmbedUrl} />
                 <div>
                   <p className="eyebrow font-display">Event highlight</p>
                   <h3 className="mt-2 font-display text-3xl font-medium leading-tight sm:text-4xl">
