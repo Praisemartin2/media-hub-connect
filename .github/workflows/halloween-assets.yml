@@ -1,0 +1,84 @@
+name: Halloween assets
+on:
+  push:
+    branches: [claude/ekabo-video-editing-styles-wrs455]
+    paths: ['.github/workflows/halloween-assets.yml']
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch plates, fonts, music
+        run: |
+          set -e
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg imagemagick >/dev/null
+          pip install -q numpy
+          mkdir -p halloween/assets/plates halloween/assets/fonts halloween/assets/music halloween/assets/fog halloween/out
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/128 Safari/537.36"
+          B="https://d8j0ntlcm91z4.cloudfront.net/user_38Q7UV4HRCn3Op8W57z72pn2Iev"
+          cd halloween/assets/plates
+          curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o mansion.png "$B/hf_20261028_220644_6fd57b0a-79f5-4655-9633-5087d92467fb.png"
+          curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o forest.png  "$B/hf_20261028_220644_7fcddf6e-a726-4960-a5b4-3e5a63e2125d.png"
+          curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o hall.png    "$B/hf_20261028_220645_71519192-05e3-468e-a5e2-27f184a9847d.png"
+          for f in *.png; do convert "$f" -resize '1920x1080^' -gravity center -extent 1920x1080 -strip -quality 90 "${f%.png}.jpg"; done
+          montage *.jpg -tile 3x1 -geometry 640x360+4+4 -background black _plates_sheet.jpg
+          ls -la
+          cd ../fonts
+          G="https://raw.githubusercontent.com/google/fonts/main"
+          curl -fsSL -o Creepster-Regular.ttf "$G/ofl/creepster/Creepster-Regular.ttf"
+          curl -fsSL -o Nosifer-Regular.ttf "$G/ofl/nosifer/Nosifer-Regular.ttf"
+          curl -fsSL -o Eater-Regular.ttf "$G/ofl/eater/Eater-Regular.ttf"
+          curl -fsSL -o SpecialElite-Regular.ttf "$G/apache/specialelite/SpecialElite-Regular.ttf"
+          curl -fsSL -o Butcherman-Regular.ttf "$G/ofl/butcherman/Butcherman-Regular.ttf" || true
+          curl -fsSL -o NewRocker-Regular.ttf "$G/ofl/newrocker/NewRocker-Regular.ttf" || true
+          ls -la
+          cd ../music
+          I="https://incompetech.com/music/royalty-free/mp3-royaltyfree"
+          for t in "Danse Macabre - Low Strings" "Ossuary 1 - A Beginning" "Gathering Darkness" "Come Play with Me" "Spider's Web" "Darkest Child" "Night of Chaos" "Spooky Ride" "Bump in the Night" "The House of Leaves" "Controlled Chaos" "Ghostpocalypse - 6 Crossing the Threshold" "Graveyard Shift" "Haunted" "Long Note Two"; do
+            n=$(echo "$t" | tr ' ' '_' | tr -d "'"); u=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$t")
+            curl -fsSL -A "$UA" -o "$n.mp3" "$I/$u.mp3" && echo "OK  $t" || { rm -f "$n.mp3"; echo "MISS $t"; }
+          done
+          for f in *.mp3; do printf "%-45s %s\n" "$f" "$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f")"; done | tee ../music/_index.txt
+      - name: Fog loop + look test
+        run: |
+          set -e
+          cd halloween
+          # 12 s fog loop, 24 fps, gray -> blurred, upscaled
+          python3 tools/fog.py 480 270 24 12 | ffmpeg -y -loglevel error -f rawvideo -pix_fmt gray -s 480x270 -r 24 -i - \
+            -vf "scale=1920:1080:flags=bicubic,gblur=sigma=6,format=yuv420p" -c:v libx264 -crf 18 -preset medium assets/fog/fog_1080.mp4 </dev/null
+          ffprobe -v error -show_entries format=duration -of csv=p=0 assets/fog/fog_1080.mp4
+          # Look test: mansion plate, slow push-in with handheld jitter, fog screen-blended, lightning flash, grain, vignette, flicker, title.
+          FONT=assets/fonts/Creepster-Regular.ttf
+          ffmpeg -y -loglevel error -loop 1 -framerate 24 -t 8 -i assets/plates/mansion.jpg -stream_loop -1 -i assets/fog/fog_1080.mp4 -t 8 \
+            -filter_complex "\
+[0:v]scale=2304:1296,zoompan=z='1.0+0.0009*on':x='iw/2-(iw/zoom/2)+8*sin(on/7)':y='ih/2-(ih/zoom/2)+6*sin(on/5)':d=1:s=1920x1080:fps=24,\
+eq=contrast=1.12:brightness=-0.02:saturation=0.75,colorbalance=rs=-0.06:gs=0.02:bs=0.10:rm=-0.05:bm=0.08,\
+eq=brightness='if(between(t,2.9,3.05),0.55,if(between(t,3.15,3.22),0.35,0))'[plate];\
+[1:v]format=gray,eq=brightness=-0.05:contrast=1.1,format=yuv420p[fog];\
+[plate][fog]blend=all_mode=screen:all_opacity=0.45[fogged];\
+[fogged]noise=alls=14:allf=t+u,vignette=PI/4.2,\
+drawtext=fontfile=$FONT:text='MANAGERS MEETING':fontsize=150:fontcolor=0xE8E0CC@0.95:x=(w-text_w)/2:y=(h-text_h)/2-70:alpha='if(lt(t,3.3),0,min(1,(t-3.3)/0.6))':shadowcolor=black@0.9:shadowx=0:shadowy=10,\
+drawtext=fontfile=assets/fonts/SpecialElite-Regular.ttf:text='HALLOWEEN 2026  ·  22 PROPERTIES  ·  ONE HAUNTED HOUSE':fontsize=38:fontcolor=0xC9B98A@0.9:x=(w-text_w)/2:y=(h/2)+90:alpha='if(lt(t,4.2),0,min(1,(t-4.2)/0.6))',\
+eq=brightness='0.012*sin(31*t)+0.008*sin(53*t)',\
+fade=t=in:st=0:d=1.2,fade=t=out:st=7.2:d=0.8,format=yuv420p[v]" \
+            -map "[v]" -c:v libx264 -crf 19 -preset medium -pix_fmt yuv420p -an out/_look_test.mp4 </dev/null
+          ffmpeg -y -loglevel error -i out/_look_test.mp4 -vf "fps=1,scale=640:-2,tile=4x2" -frames:v 1 out/_look_test_sheet.jpg </dev/null
+          ffmpeg -y -loglevel error -ss 5.5 -i out/_look_test.mp4 -frames:v 1 -q:v 2 out/_look_test_frame.jpg </dev/null
+          ls -la out assets/fog
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add halloween/assets/ halloween/out/
+          git commit -m "Add Halloween highlight assets and look test [skip ci]" || echo nothing
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
+            sleep $((i*3))
+          done
+          exit 1
