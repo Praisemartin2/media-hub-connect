@@ -26,8 +26,15 @@ jobs:
           curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o mansion.png "$B/hf_20261028_220644_6fd57b0a-79f5-4655-9633-5087d92467fb.png"
           curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o forest.png  "$B/hf_20261028_220644_7fcddf6e-a726-4960-a5b4-3e5a63e2125d.png"
           curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o hall.png    "$B/hf_20261028_220645_71519192-05e3-468e-a5e2-27f184a9847d.png"
-          for f in *.png; do convert "$f" -resize '1920x1080^' -gravity center -extent 1920x1080 -strip -quality 90 "${f%.png}.jpg"; done
-          montage *.jpg -tile 3x1 -geometry 640x360+4+4 -background black _plates_sheet.jpg
+          for f in mansion forest hall; do convert "$f.png" -resize '1920x1080^' -gravity center -extent 1920x1080 -strip -quality 90 "$f.jpg"; done
+          # vertical plates for the 9:16 cut
+          curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o v_mansion.png "$B/hf_20261028_222939_cdb65482-9da2-4a55-b4d9-886f73c4312b.png"
+          curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o v_forest.png  "$B/hf_20261028_222939_6042bdb7-5140-4c39-867f-9be135ec5ce1.png"
+          curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o v_hall.png    "$B/hf_20261028_222939_653a3d95-59cf-4073-8048-fbcda08c6d22.png"
+          curl -fsSL --retry 5 --retry-all-errors -A "$UA" -o v_door.png    "$B/hf_20261028_222939_40d34afb-bfb5-48ad-8806-583f5e618ac1.png"
+          for f in v_mansion v_forest v_hall v_door; do convert "$f.png" -resize '1080x1920^' -gravity center -extent 1080x1920 -strip -quality 90 "$f.jpg"; done
+          montage v_*.jpg -tile 4x1 -geometry 360x640+4+4 -background black _vplates_sheet.jpg
+          montage mansion.jpg forest.jpg hall.jpg -tile 3x1 -geometry 640x360+4+4 -background black _plates_sheet.jpg
           ls -la
           cd ../fonts
           G="https://raw.githubusercontent.com/google/fonts/main"
