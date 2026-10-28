@@ -45,10 +45,11 @@ def crop_expr(crop):
     return f'crop={cw}:ih:{x}:0'
 
 def fit_chain(kind, src_is_landscape, crop):
-    # produce 2x oversampled 9:16 frame for zoompan (2160x3840)
+    # produce 2x oversampled 9:16 frame for zoompan (2160x3840); videos normalised to 30 fps first
+    pre = f"fps={FPS}," if kind == 'video' else ""
     if src_is_landscape:
-        return f"{crop_expr(crop)},scale=2160:3840:flags=lanczos,setsar=1"
-    return "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1"
+        return f"{pre}{crop_expr(crop)},scale=2160:3840:flags=lanczos,setsar=1"
+    return f"{pre}scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1"
 
 def move_chain(move, shake, nframes, is_video):
     N = max(1, nframes); s = 10 * shake
@@ -116,7 +117,8 @@ def render_shot(i, shot, dur, fog_offset):
         if is_video and w and h: landscape = w > h
         elif not is_video:
             from PIL import Image, ImageOps
-            im = ImageOps.exif_transpose(Image.open(path)); landscape = im.size[0] > im.size[1]
+            im = ImageOps.exif_transpose(Image.open(path)).convert('RGB'); landscape = im.size[0] > im.size[1]
+            path = f'work/photo_{i:03d}.jpg'; im.save(path, quality=95)   # bake EXIF rotation
     fog_op = 0.0 if 'fogoff' in shot.get('fx', []) else (0.55 if 'fogheavy' in shot.get('fx', []) else (0.42 if is_plate else 0.30))
     grade = GRADE_PLATE if is_plate else GRADE
     vchain = f"[0:v]{fit_chain(kind, landscape, shot.get('crop'))},{move_chain(shot.get('move','push'), shot.get('shake',0), nframes, is_video)},{grade}[base];"
@@ -181,7 +183,7 @@ af = (f"[1:a]atrim=0:{intro_len+1.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,af
       f"afade=t=in:st=0:d={fade_in_groove},afade=t=out:st={max(0,total-intro_len-3.0):.2f}:d=3.0,adelay={int(intro_len*1000)}|{int(intro_len*1000)}[gr];"
       f"[0:a]asplit=2[nat][sc];"
       f"[gr][sc]sidechaincompress=threshold=0.02:ratio=6:attack=80:release=900:makeup=1:level_sc=1.5[grd];"
-      f"[dr][grd][nat]amix=inputs=3:duration=first:normalize=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.0:LRA=11[a]")
+      f"[nat][dr][grd]amix=inputs=3:duration=first:normalize=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.0:LRA=11[a]")
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/cut.mp4', '-i', drone, '-ss', f'{mstart:.2f}', '-i', music,
      '-filter_complex', af, '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', f'out/{OUT}.mp4'])
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'out/{OUT}.mp4', '-vf', 'fps=1/2,scale=216:-2,tile=10x5', '-frames:v', '1', f'out/_sheet_{OUT}.jpg'])
