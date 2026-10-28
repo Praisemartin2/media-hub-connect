@@ -57,16 +57,16 @@ jobs:
           FONT=assets/fonts/Creepster-Regular.ttf
           ffmpeg -y -loglevel error -loop 1 -framerate 24 -t 8 -i assets/plates/mansion.jpg -stream_loop -1 -i assets/fog/fog_1080.mp4 -t 8 \
             -filter_complex "\
-[0:v]scale=2304:1296,zoompan=z='1.0+0.0009*on':x='iw/2-(iw/zoom/2)+8*sin(on/7)':y='ih/2-(ih/zoom/2)+6*sin(on/5)':d=1:s=1920x1080:fps=24,\
-eq=contrast=1.12:brightness=-0.02:saturation=0.75,colorbalance=rs=-0.06:gs=0.02:bs=0.10:rm=-0.05:bm=0.08,\
-eq=brightness='if(between(t,2.9,3.05),0.55,if(between(t,3.15,3.22),0.35,0))'[plate];\
-[1:v]format=gray,eq=brightness=-0.05:contrast=1.1,format=yuv420p[fog];\
-[plate][fog]blend=all_mode=screen:all_opacity=0.45[fogged];\
-[fogged]noise=alls=14:allf=t+u,vignette=PI/4.2,\
-drawtext=fontfile=$FONT:text='MANAGERS MEETING':fontsize=150:fontcolor=0xE8E0CC@0.95:x=(w-text_w)/2:y=(h-text_h)/2-70:alpha='if(lt(t,3.3),0,min(1,(t-3.3)/0.6))':shadowcolor=black@0.9:shadowx=0:shadowy=10,\
-drawtext=fontfile=assets/fonts/SpecialElite-Regular.ttf:text='HALLOWEEN 2026  ·  22 PROPERTIES  ·  ONE HAUNTED HOUSE':fontsize=38:fontcolor=0xC9B98A@0.9:x=(w-text_w)/2:y=(h/2)+90:alpha='if(lt(t,4.2),0,min(1,(t-4.2)/0.6))',\
-eq=brightness='0.012*sin(31*t)+0.008*sin(53*t)',\
-fade=t=in:st=0:d=1.2,fade=t=out:st=7.2:d=0.8,format=yuv420p[v]" \
+          [0:v]scale=2304:1296,zoompan=z='1.0+0.0009*on':x='iw/2-(iw/zoom/2)+8*sin(on/7)':y='ih/2-(ih/zoom/2)+6*sin(on/5)':d=1:s=1920x1080:fps=24,\
+          eq=contrast=1.12:brightness=-0.02:saturation=0.75,colorbalance=rs=-0.06:gs=0.02:bs=0.10:rm=-0.05:bm=0.08,\
+          eq=brightness='if(between(t,2.9,3.05),0.55,if(between(t,3.15,3.22),0.35,0))'[plate];\
+          [1:v]format=gray,eq=brightness=-0.05:contrast=1.1,format=yuv420p[fog];\
+          [plate][fog]blend=all_mode=screen:all_opacity=0.45[fogged];\
+          [fogged]noise=alls=14:allf=t+u,vignette=PI/4.2,\
+          drawtext=fontfile=$FONT:text='MANAGERS MEETING':fontsize=150:fontcolor=0xE8E0CC@0.95:x=(w-text_w)/2:y=(h-text_h)/2-70:alpha='if(lt(t,3.3),0,min(1,(t-3.3)/0.6))':shadowcolor=black@0.9:shadowx=0:shadowy=10,\
+          drawtext=fontfile=assets/fonts/SpecialElite-Regular.ttf:text='HALLOWEEN 2026  ·  22 PROPERTIES  ·  ONE HAUNTED HOUSE':fontsize=38:fontcolor=0xC9B98A@0.9:x=(w-text_w)/2:y=(h/2)+90:alpha='if(lt(t,4.2),0,min(1,(t-4.2)/0.6))',\
+          eq=brightness='0.012*sin(31*t)+0.008*sin(53*t)',\
+          fade=t=in:st=0:d=1.2,fade=t=out:st=7.2:d=0.8,format=yuv420p[v]" \
             -map "[v]" -c:v libx264 -crf 19 -preset medium -pix_fmt yuv420p -an out/_look_test.mp4 </dev/null
           ffmpeg -y -loglevel error -i out/_look_test.mp4 -vf "fps=1,scale=640:-2,tile=4x2" -frames:v 1 out/_look_test_sheet.jpg </dev/null
           ffmpeg -y -loglevel error -ss 5.5 -i out/_look_test.mp4 -frames:v 1 -q:v 2 out/_look_test_frame.jpg </dev/null
