@@ -1,0 +1,100 @@
+name: Halloween analyze
+on:
+  push:
+    branches: [claude/ekabo-video-editing-styles-wrs455]
+    paths: ['.github/workflows/halloween-analyze.yml']
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download the event folder
+        run: |
+          set -e
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg imagemagick >/dev/null
+          pip install -q gdown faster-whisper pillow
+          mkdir -p halloween/src halloween/analysis
+          gdown --folder "https://drive.google.com/drive/folders/1dN60Fsa1aKRptaK7Xzn7bsuNQd0gRXQV" -O halloween/src --remaining-ok
+          find halloween/src -type f | sort
+          find halloween/src -type f | wc -l
+      - name: Probe, thumbnails, transcripts
+        run: |
+          set -e
+          cd halloween
+          python3 - <<'PY'
+          import os, glob, json, subprocess, csv
+          from PIL import Image, ImageOps
+          rows=[]
+          files=sorted(glob.glob('src/**/*', recursive=True))
+          files=[f for f in files if os.path.isfile(f)]
+          os.makedirs('analysis/thumbs', exist_ok=True); os.makedirs('analysis/sheets', exist_ok=True)
+          for f in files:
+              n=os.path.basename(f); stem=os.path.splitext(n)[0]; ext=os.path.splitext(n)[1].lower()
+              kind='video' if ext in ('.mp4','.mov','.m4v','.3gp','.webm') else 'photo' if ext in ('.jpg','.jpeg','.png','.heic','.webp') else 'other'
+              info={'file':n,'kind':kind,'bytes':os.path.getsize(f)}
+              if kind=='video':
+                  p=subprocess.run(['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=width,height,r_frame_rate,nb_frames:stream_side_data=rotation:format=duration','-of','json',f],capture_output=True,text=True)
+                  j=json.loads(p.stdout or '{}'); st=(j.get('streams') or [{}])[0]
+                  rot=0
+                  for sd in st.get('side_data_list',[]) or []:
+                      if 'rotation' in sd: rot=int(sd['rotation'])
+                  info.update(w=st.get('width'),h=st.get('height'),fps=st.get('r_frame_rate'),rot=rot,dur=round(float(j.get('format',{}).get('duration',0)),2))
+                  # orientation after rotation
+                  w,h=int(st.get('width',0)),int(st.get('height',0))
+                  if rot in (90,-90,270): w,h=h,w
+                  info['orient']='portrait' if h>w else 'landscape'
+                  d=info['dur']; step=max(1,int(d/20)) if d>20 else 1
+                  subprocess.run(['ffmpeg','-y','-loglevel','error','-i',f,'-vf',f'fps=1/{step},scale=360:-2,tile=5x4','-frames:v','1',f'analysis/sheets/{stem}.jpg'],stdin=subprocess.DEVNULL)
+                  info['sheet_step_s']=step
+                  subprocess.run(['ffmpeg','-y','-loglevel','error','-i',f,'-vn','-ac','1','-ar','16000',f'analysis/{stem}.wav'],stdin=subprocess.DEVNULL)
+                  lp=subprocess.run(['ffmpeg','-i',f,'-af','loudnorm=print_format=json','-f','null','-'],capture_output=True,text=True,stdin=subprocess.DEVNULL)
+                  try:
+                      js=lp.stderr[lp.stderr.rindex('{'):]; js=js[:js.index('}')+1]; info['lufs']=json.loads(js).get('input_i')
+                  except Exception: info['lufs']=None
+              elif kind=='photo':
+                  try:
+                      im=ImageOps.exif_transpose(Image.open(f)); info.update(w=im.size[0],h=im.size[1],orient='portrait' if im.size[1]>im.size[0] else 'landscape')
+                      im.convert('RGB'); im.thumbnail((640,640)); im.convert('RGB').save(f'analysis/thumbs/{stem}.jpg',quality=82)
+                  except Exception as e: info['err']=str(e)
+              rows.append(info); print(info)
+          keys=['file','kind','bytes','w','h','fps','rot','orient','dur','lufs','sheet_step_s','err']
+          with open('analysis/index.csv','w',newline='') as fh:
+              wtr=csv.DictWriter(fh,fieldnames=keys,extrasaction='ignore'); wtr.writeheader(); wtr.writerows(rows)
+          PY
+          # photo contact sheets (6 per row)
+          cd analysis && ls thumbs/*.jpg >/dev/null 2>&1 && montage thumbs/*.jpg -tile 6x -geometry 320x320+4+4 -background '#111' -fill white -pointsize 14 -label '%f' photos_sheet.jpg || true
+          cd .. && python3 - <<'PY'
+          import glob, json, os
+          from faster_whisper import WhisperModel
+          wavs=sorted(glob.glob('analysis/*.wav'))
+          if wavs:
+              m=WhisperModel('small.en',device='cpu',compute_type='int8')
+              with open('analysis/transcripts.txt','w') as out:
+                  for w in wavs:
+                      n=os.path.basename(w)[:-4]
+                      try:
+                          segs,info=m.transcribe(w,vad_filter=True)
+                          out.write(f'=== {n}\n')
+                          for s in segs: out.write(f'[{s.start:7.2f} -> {s.end:7.2f}] {s.text.strip()}\n')
+                          out.write('\n')
+                      except Exception as e: out.write(f'=== {n}\nERROR {e}\n\n')
+          PY
+          rm -f analysis/*.wav
+          ls -la analysis analysis/sheets analysis/thumbs | head -80
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add halloween/analysis/
+          git commit -m "Add Halloween event footage analysis [skip ci]" || echo nothing
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
+            sleep $((i*3))
+          done
+          exit 1

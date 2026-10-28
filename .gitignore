@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 bday/src/
 bday/work/
+halloween/src/
+halloween/work/
