@@ -29,7 +29,13 @@ jobs:
           python3 tools/fog.py 270 480 24 12 | ffmpeg -y -loglevel error -f rawvideo -pix_fmt gray -s 270x480 -r 24 -i - \
             -vf "scale=1080:1920:flags=bicubic,gblur=sigma=6,format=yuv420p" -c:v libx264 -crf 18 -preset medium assets/fog/fog_v.mp4
           python3 render_v.py edl.json "$(python3 -c "import json;print(json.load(open('edl.json')).get('out','Halloween_Managers_Meeting_v1'))")"
-          ls -la out
+          ls -la out work/*_master.mp4
+      - name: Keep the full-quality master as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: halloween-master
+          path: halloween/work/*_master.mp4
+          retention-days: 30
       - name: Commit outputs
         run: |
           git config user.name "github-actions[bot]"

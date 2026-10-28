@@ -185,7 +185,14 @@ af = (f"[1:a]atrim=0:{intro_len+1.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,af
       f"[gr][sc]sidechaincompress=threshold=0.02:ratio=6:attack=80:release=900:makeup=1:level_sc=1.5[grd];"
       f"[nat][dr][grd]amix=inputs=3:duration=first:normalize=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.0:LRA=11[a]")
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/cut.mp4', '-i', drone, '-ss', f'{mstart:.2f}', '-i', music,
-     '-filter_complex', af, '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', f'out/{OUT}.mp4'])
+     '-filter_complex', af, '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', f'work/{OUT}_master.mp4'])
+# social deliverable: bitrate-capped so it stays under GitHub's 100 MB file limit (platforms re-encode anyway)
+def social(crf):
+    run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'work/{OUT}_master.mp4', '-c:v', 'libx264', '-preset', 'slow', '-crf', str(crf),
+         '-maxrate', '7M', '-bufsize', '14M', '-pix_fmt', 'yuv420p', '-c:a', 'copy', '-movflags', '+faststart', f'out/{OUT}.mp4'])
+social(22)
+if os.path.getsize(f'out/{OUT}.mp4') > 95 * 1024 * 1024: social(26)
+print('social size MB', round(os.path.getsize(f'out/{OUT}.mp4') / 1048576, 1), 'master MB', round(os.path.getsize(f'work/{OUT}_master.mp4') / 1048576, 1))
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'out/{OUT}.mp4', '-vf', 'fps=1/2,scale=216:-2,tile=10x5', '-frames:v', '1', f'out/_sheet_{OUT}.jpg'])
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'out/{OUT}.mp4', '-vf', 'scale=540:960', '-c:v', 'libx264', '-crf', '27', '-preset', 'fast', '-c:a', 'aac', '-b:a', '96k', f'out/_preview_{OUT}.mp4'])
 json.dump({'durs': durs, 'total': total, 'intro': intro_len, 'tempo': tempo}, open(f'out/_timeline_{OUT}.json', 'w'), indent=1)
