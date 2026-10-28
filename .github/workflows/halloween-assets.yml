@@ -51,7 +51,7 @@ jobs:
           cd halloween
           # 12 s fog loop, 24 fps, gray -> blurred, upscaled
           python3 tools/fog.py 480 270 24 12 | ffmpeg -y -loglevel error -f rawvideo -pix_fmt gray -s 480x270 -r 24 -i - \
-            -vf "scale=1920:1080:flags=bicubic,gblur=sigma=6,format=yuv420p" -c:v libx264 -crf 18 -preset medium assets/fog/fog_1080.mp4 </dev/null
+            -vf "scale=1920:1080:flags=bicubic,gblur=sigma=6,format=yuv420p" -c:v libx264 -crf 18 -preset medium assets/fog/fog_1080.mp4
           ffprobe -v error -show_entries format=duration -of csv=p=0 assets/fog/fog_1080.mp4
           # Look test: mansion plate, slow push-in with handheld jitter, fog screen-blended, lightning flash, grain, vignette, flicker, title.
           FONT=assets/fonts/Creepster-Regular.ttf
