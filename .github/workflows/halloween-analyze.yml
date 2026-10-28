@@ -20,7 +20,8 @@ jobs:
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg imagemagick >/dev/null
           pip install -q gdown faster-whisper pillow
           mkdir -p halloween/src halloween/analysis
-          gdown --folder "https://drive.google.com/drive/folders/1dN60Fsa1aKRptaK7Xzn7bsuNQd0gRXQV" -O halloween/src --remaining-ok
+          # per-file download from the manifest (gdown's folder mode stops at 50 files); 4 in parallel
+          cut -f1,2 halloween/manifest.tsv | tr '\t' ' ' | xargs -P 4 -n 2 sh -c 'gdown -q -O "halloween/src/$0" "https://drive.google.com/uc?id=$1" || echo "FAILED $0"'
           find halloween/src -type f | sort
           find halloween/src -type f | wc -l
       - name: Probe, thumbnails, transcripts
