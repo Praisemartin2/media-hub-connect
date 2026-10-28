@@ -64,13 +64,14 @@ def move_chain(move, shake, nframes, is_video):
     y = f'ih/2-(ih/zoom/2){jy}'
     return f"zoompan=z='{z}':x='{x}':y='{y}':d=1:s={W}x{H}:fps={FPS}"
 
-GRADE = ("eq=contrast=1.10:brightness=-0.03:saturation=0.78,"
-         "colorbalance=rs=-0.08:gs=0.04:bs=0.08:rm=-0.06:gm=0.03:bm=0.05:rh=-0.02:gh=0.0:bh=0.02")
-GRADE_PLATE = "eq=contrast=1.06:brightness=-0.02:saturation=0.9"
+GRADE = ("eq=contrast=1.12:brightness=-0.035:saturation=0.84,"
+         "curves=all='0/0 0.12/0.06 0.5/0.47 1/0.96',"
+         "colorbalance=rs=-0.07:gs=0.02:bs=0.10:rm=-0.04:gm=0.02:bm=0.04:rh=0.05:gh=0.01:bh=-0.04")
+GRADE_PLATE = "eq=contrast=1.05:brightness=-0.02:saturation=0.95,curves=all='0/0 0.12/0.07 1/0.97'"
 
 def fx_chain(shot, dur):
     fx = set(shot.get('fx', [])); tr = shot.get('transition_in', 'cut'); parts = []
-    if 'flicker' in fx: parts.append("eq=brightness='0.012*sin(31*t)+0.008*sin(53*t)'")
+    if 'flicker' in fx: parts.append("eq=brightness='0.014*sin(31*t)+0.010*sin(53*t)':eval=frame")
     if 'glitch' in fx or tr == 'glitch':
         parts.append("rgbashift=rh=10:bh=-10:enable='lt(t,0.22)'")
         parts.append("noise=alls=40:allf=t:enable='lt(t,0.22)'")
@@ -81,20 +82,45 @@ def fx_chain(shot, dur):
     elif tr == 'fadewhite': parts.append("fade=t=in:st=0:d=0.5:color=white")
     if 'flash' in fx and tr != 'flash':  # a lightning hit mid-shot
         t0 = max(0.3, dur * 0.45)
-        parts.append(f"eq=brightness='if(between(t,{t0:.2f},{t0+0.08:.2f}),0.6,if(between(t,{t0+0.14:.2f},{t0+0.2:.2f}),0.35,0))'")
+        parts.append(f"eq=brightness='if(between(t,{t0:.2f},{t0+0.08:.2f}),0.6,if(between(t,{t0+0.14:.2f},{t0+0.2:.2f}),0.35,0))':eval=frame")
     return ','.join(parts)
 
+def fit_lines(text, font, maxw=920, maxsize=230, minsize=80, prefer_single=False):
+    from PIL import ImageFont
+    words = text.split(); f = ImageFont.truetype(font, maxsize)
+    if prefer_single and ImageFont.truetype(font, minsize).getlength(text) <= maxw:
+        size = maxsize
+        while size > minsize and ImageFont.truetype(font, size).getlength(text) > maxw: size -= 2
+        return [text], size
+    if f.getlength(text) <= maxw or len(words) == 1:
+        lines = [text]
+    else:
+        best = None
+        for k in range(1, len(words)):
+            a, b = ' '.join(words[:k]), ' '.join(words[k:])
+            m = max(f.getlength(a), f.getlength(b))
+            if best is None or m < best[0]: best = (m, [a, b])
+        lines = best[1]
+    size = maxsize
+    while size > minsize and max(ImageFont.truetype(font, size).getlength(l) for l in lines) > maxw: size -= 4
+    return lines, size
+
 def text_chain(shot, dur):
-    parts = []
+    parts = []; cy = H // 2 - 140; bottom = cy
     if shot.get('text'):
-        is_end = shot['kind'] == 'endcard'
-        size = 150 if is_end else 170
-        parts.append(f"drawtext=fontfile={FONT_T}:text='{esc(shot['text'])}':fontsize={size}:fontcolor=0xE8E0CC@0.96:"
-                     f"x=(w-text_w)/2:y=(h-text_h)/2-120:alpha='min(1,max(0,(t-0.6)/0.5))':shadowcolor=black@0.9:shadowx=0:shadowy=12:"
-                     f"borderw=0")
+        lines, size = fit_lines(shot['text'], FONT_T)
+        lh = int(size * 1.02); top = cy - (lh * len(lines)) // 2
+        for k, line in enumerate(lines):
+            parts.append(f"drawtext=fontfile={FONT_T}:text='{esc(line)}':fontsize={size}:fontcolor=0xE8E0CC@0.97:"
+                         f"x=(w-text_w)/2:y={top + k*lh}:alpha='min(1,max(0,(t-{0.6+0.25*k:.2f})/0.5))':"
+                         f"shadowcolor=black@0.9:shadowx=0:shadowy=12")
+        bottom = top + lh * len(lines)
     if shot.get('text2'):
-        parts.append(f"drawtext=fontfile={FONT_S}:text='{esc(shot['text2'])}':fontsize=46:fontcolor=0xC9B98A@0.92:"
-                     f"x=(w-text_w)/2:y=(h/2)+70:alpha='min(1,max(0,(t-1.2)/0.5))':shadowcolor=black@0.8:shadowx=0:shadowy=6")
+        lines2, size2 = fit_lines(shot['text2'], FONT_S, maxw=940, maxsize=50, minsize=34, prefer_single=True)
+        for k, line in enumerate(lines2):
+            parts.append(f"drawtext=fontfile={FONT_S}:text='{esc(line)}':fontsize={size2}:fontcolor=0xC9B98A@0.94:"
+                         f"x=(w-text_w)/2:y={bottom + 40 + k*int(size2*1.3)}:alpha='min(1,max(0,(t-1.3)/0.5))':"
+                         f"shadowcolor=black@0.85:shadowx=0:shadowy=6")
     return ','.join(parts)
 
 def render_shot(i, shot, dur, fog_offset):
@@ -122,8 +148,8 @@ def render_shot(i, shot, dur, fog_offset):
     fog_op = 0.0 if 'fogoff' in shot.get('fx', []) else (0.55 if 'fogheavy' in shot.get('fx', []) else (0.42 if is_plate else 0.30))
     grade = GRADE_PLATE if is_plate else GRADE
     vchain = f"[0:v]{fit_chain(kind, landscape, shot.get('crop'))},{move_chain(shot.get('move','push'), shot.get('shake',0), nframes, is_video)},{grade}[base];"
-    vchain += f"[1:v]format=gray,eq=brightness=-0.04:contrast=1.1,format=yuv420p[fog];"
-    vchain += f"[base][fog]blend=all_mode=screen:all_opacity={fog_op}[fogged];"
+    vchain += f"[1:v]fps={FPS},format=gray,eq=brightness=-0.04:contrast=1.1,format=gbrp[fog];"
+    vchain += f"[base]format=gbrp[baseR];[baseR][fog]blend=all_mode=screen:all_opacity={fog_op},format=yuv420p[fogged];"
     tail = fx_chain(shot, dur); tx = text_chain(shot, dur)
     vchain += f"[fogged]{tail}{(','+tx) if tx else ''},format=yuv420p,trim=duration={dur:.3f},setpts=PTS-STARTPTS[v]"
     cmd = ['ffmpeg', '-y', '-loglevel', 'error']
@@ -196,4 +222,28 @@ print('social size MB', round(os.path.getsize(f'out/{OUT}.mp4') / 1048576, 1), '
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'out/{OUT}.mp4', '-vf', 'fps=1/2,scale=216:-2,tile=10x5', '-frames:v', '1', f'out/_sheet_{OUT}.jpg'])
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'out/{OUT}.mp4', '-vf', 'scale=540:960', '-c:v', 'libx264', '-crf', '27', '-preset', 'fast', '-c:a', 'aac', '-b:a', '96k', f'out/_preview_{OUT}.mp4'])
 json.dump({'durs': durs, 'total': total, 'intro': intro_len, 'tempo': tempo}, open(f'out/_timeline_{OUT}.json', 'w'), indent=1)
+# ---------- QA artefacts ----------
+from PIL import Image, ImageDraw, ImageFont
+qa = f'out/qa_{OUT}'; os.makedirs(qa, exist_ok=True)
+thumbs = []
+for i, (s, d) in enumerate(zip(shots, durs)):
+    fp = f'{qa}/shot_{i:02d}.jpg'
+    run(['ffmpeg', '-y', '-loglevel', 'error', '-ss', f'{d*0.6:.2f}', '-i', f'work/s{i:03d}.mp4', '-frames:v', '1', '-vf', 'scale=432:768', '-q:v', '3', fp])
+    thumbs.append(fp)
+cols = 8; tw, th = 216, 384; rows = (len(thumbs) + cols - 1) // cols
+sheet = Image.new('RGB', (cols*tw, rows*(th+28)), (12, 12, 12)); dr = ImageDraw.Draw(sheet)
+lab = ImageFont.truetype(FONT_S, 18)
+for k, fp in enumerate(thumbs):
+    im = Image.open(fp).resize((tw, th)); x, y = (k % cols)*tw, (k // cols)*(th+28)
+    sheet.paste(im, (x, y)); dr.text((x+4, y+th+4), f"{k:02d} {shots[k]['src'][-14:]}", font=lab, fill=(220, 220, 220))
+sheet.save(f'out/_shots_{OUT}.jpg', quality=85)
+run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'out/{OUT}.mp4', '-filter_complex', 'showwavespic=s=2400x360:colors=0x9fd3ff', '-frames:v', '1', f'{qa}/wave.png'])
+wv = Image.open(f'{qa}/wave.png').convert('RGB'); d2 = ImageDraw.Draw(wv); acc = 0.0
+for k, d in enumerate(durs):
+    x = int(acc / total * wv.size[0]); d2.line([(x, 0), (x, wv.size[1])], fill=(255, 120, 0), width=1)
+    if shots[k].get('audio') == 'nat': d2.rectangle([x, 0, int((acc+d)/total*wv.size[0]), 14], fill=(255, 40, 40))
+    acc += d
+wv.save(f'out/_wave_{OUT}.png')
+r = subprocess.run(['ffmpeg', '-i', f'out/{OUT}.mp4', '-af', 'loudnorm=print_format=summary', '-f', 'null', '-'], capture_output=True, text=True, stdin=subprocess.DEVNULL)
+open(f'out/_loudness_{OUT}.txt', 'w').write('\n'.join(l for l in r.stderr.splitlines() if 'Input' in l))
 print('done', total)
