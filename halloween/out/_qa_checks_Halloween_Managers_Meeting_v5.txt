@@ -1,0 +1,2 @@
+clamped (requested > clip allows): (28, '20261028_145425.mp4', 2.64, 2.484833)
+shot 17: picture freezes at the end (20261028_120121.mp4)
