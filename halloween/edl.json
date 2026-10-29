@@ -4,10 +4,9 @@
  "music": "Bump_in_the_Night",
  "music_start_s": 0,
  "target_seconds": 93,
- "notes": "v3 changes from QA: TV bank-login screen masked on 115920/115955 (rembg person mask keeps people sharp); 120001 dropped (duplicate of 115955, same screen); 145423 cut (unflattering, over-covered); Chuckie gets a two-shot from 123232; pom-pom burst 122923 -> 122925; 104630 cropped to the duck; 131033 -> 131030 (no faces); witch claw pinned to end on the groove return (track 50.37 s); clips that would run out now slow down instead of freezing; cooler footage grade, lifted forest plate, cold lightning, endcard fade-out, edge-safety crop, fixed fog generator. Exclusions unchanged: 122047, 123050, 123129 and the flyer are never used. MUSIC: Bump_in_the_Night measured at ~107 bpm (beat 0.56 s, bar 2.24 s), a funk-swing groove in the Thriller register; Graveyard_Shift measured ~70 bpm, slower and darker, less party. Start at 0 s because render_v.py begins the groove at the first non-plate shot (11.0 s) and the 111-s track then maps onto the body like a score: full groove under the costume reveals (footage 0-47 s), the track's built-in DEAD STOP at track 47.7-49.9 s lands on shot 27 (witch claw-reach, footage 47.2-49.7, lightning hit at ~48.3 in the silence), the sparse breakdown at track 59-73 s carries the portraits/afternoon shots 32-39 (burst-twin stutter and slow push-ins; the \"It's the curls, isn't it?\" line at footage ~71-73 sits in that thin bed and reads clearly), and the finale at track 74-108 s returns exactly on the crew photo (shot 40) and runs under the endcard; the renderer's 3-s fade-out ends it before the track's natural stop at 108 s. Measured 1-s RMS is in the session log if the editor wants to nudge in/out points. The intro drone (Long_Note_Two) covers only the three plates (11.0 s) by renderer design, so the dread is carried visually in footage shots 4-13 (slow push-ins, heavy fog, flicker, lightning on the spider eyes and on Bob Ross's look-up); accept that the groove starts under the threshold door - it gives the creep momentum rather than fighting it. TIMING: intro 11.0 s (title text fades in at 7.1 s overall, text2 at 7.7 s), footage 77.4 s, endcard 4.5 s, total 92.9 s before beat snapping (renderer snaps cut points to beats within 0.35 s, so expect 92-94 s). Transition flashes only at section changes (title, threshold, first costume, crew monster poses); mid-shot lightning fx on 4 shots (mansion, spider eyes, Bob Ross eyes, witch claw); glitch jolts on 2 (mad doctor stinger, clown scream face); fadeblack only on shot 1 and the endcard. Nat sound on exactly 3 videos: 115830 \"Y'all look scary\" + laugh, 120331 the leopard-onesie laugh (operator's \"There you go, that's perfect\" is also in it - harmless; mute if the editor prefers), 145759 \"It's the curls, isn't it?\". PRIVACY/EXCLUSIONS: 20261028_122047.mp4 not used at all (no audio, no visuals); flyer PNG skipped; 103009/103016/103507/103512 skipped (laptop screens with documents, backs of heads); 145404 skipped (renderer cannot crop to the top half, and the full frame is weak). The wall TV behind the clown/trio (shots 15, 16, 17) shows a generic two-factor-authentication web page with no credentials; the teal grade, vignette and fog knock it back, but the editor should verify it is illegible on the 1080p master and add a darker upper-right vignette if not. 120054 shows the orange \"No Tricks Just Results\" agenda flyer - event decor, fine. CHRONOLOGY: strictly in order except Bob Ross 10:31 stills placed inside the 10:35 decor pass (same \"arrivals\" beat) and 145818 (14:58:18) placed 19 s ahead of the 145759 strut so the strut leads into the finale. CROPS: landscape sources 103620 and 103606 center, 142125 left (witch + grey window); all other sources are native 9:16. Photo src values are bare filenames in src/ (the reviewer's thumbs paths were normalized). If runtime must shrink, drop in this order: 123248 stutter, 103606 pumpkin, 131033 lunch, 120049 widow, 145818. The 120/240 fps clips (115830, 120049, 145425, 145759) could be conformed to slow-motion in a later pass; the current renderer has no speed control so they are cut 1:1.",
+ "notes": "v4 = the QA editor's merged shot list plus: title apostrophe; groove low-passed under the dread (door to doctor) so the party is 'behind the walls' until the flash cut to the clown; thunder under every lightning strike; music spliced from the downbeat at 79.88 s to the matching downbeat at 102.59 s so the endcard plays the song's real final hit (107.04) and ring-out instead of a fade. Pins use measured onsets (35.41 re-entry, 50.41 groove return, 64.43/66.63/71.11 stabs, 73.39 return). Exclusions unchanged: 122047, 123050, 123129 and the flyer are never used; the TV login is masked on 115920/115955.\n\nEDITOR NOTES: I checked every finding against the qa frames, thumbs and sheets. The working copy is already partly done: render_v.py (crop_box, mask_box, focus/zoom, gamma, slow-instead-of-freeze, edge safety crop, cooler GRADE, cold lightning, endcard fade), tools/fog.py (uses its args) and the out/masktest before/after frames cover most of the visual fixes. Still to do outside this list: regenerate assets/fog/fog_v.mp4 with the fixed fog.py, and do the sample-accurate audio pass.\n\nThis shot list uses the renderer's extra fields where needed: crop_x, crop_box, mask_box, focus, zoom, gamma. The orchestrator must pass them through to edl.json.\n\nTiming (track 0 = first footage shot = film 11.0, music_start_s 0):\n- Dread: 03-12, 13.3 s.\n- Doctor: 13.3.\n- Pom-pom burst pinned to 33.40, alien to 35.38, duck on the re-entry.\n- Claw pinned to 50.37 (in 3.6, about 3.49 s, inside the 7.19 s clip).\n- Breakdown pins: 61.76, 64.40, 66.63, 71.11, 73.37. Monster flash on the return.\n- 4-cut curtain call 75.60-80.04, endcard 80.04-84.54.\n- Total about 95.5 s. Snapping can move unpinned cuts by up to ±0.35 s; the pins absorb this.\n\nEvery video's in+dur is inside its clip per index.csv. The only stretches are 27 (1.01x) and 36 (1.004x), both invisible.\n\nNat audio on exactly 3 real bites: 115830 'Y'all look scary', 120331 laugh, 145759 'It's the curls, isn't it?'. The curtain-call reuse of 115830 is muted.\n\nThe TV login now appears only in 14 and 15, both masked. Verify every frame of 14 on the 1080p master before posting.\n\nExcluded: 122047, 123050, 123129 and the Charter House flyer.\n\nDropped from v2: 06, 07, 09, 16, 22, 28, 32, 33, 35. Added: 122923, 104641, the 123232 crop, and the 4 curtain-call cuts.\n\nCoverage (appearances):\n- Witch 5 (incl. group), clown 5 (incl. group)\n- Hippie 4, Wilma 4 (incl. group), widow/top hat 5 (incl. group and curtain)\n- Bob Ross 3, leopard 4 (incl. group), duck 4\n- Alien/pom-pom team 4, doctor 3, Luigi 3, Chuckie 2 (one face-forward two-shot)\n\nTitle text is left as 'MANAGERS MEETING' per this pass's brief. Adding the apostrophe ('MANAGERS' MEETING') is a separate one-character decision for the user.\n\nIf runtime must shrink, drop 104641 first, then curtain-call cut 3.",
  "shots": [
   {
-   "id": 1,
    "section": "intro",
    "kind": "plate",
    "src": "v_forest.jpg",
@@ -21,11 +20,11 @@
    "crop": "center",
    "transition_in": "fadeblack",
    "audio": "none",
-   "why": "Open from black on the moonlit forest path: the Thriller walk toward the house, drone and heavy fog.",
-   "gamma": 1.42
+   "gamma": 1.42,
+   "why": "Open from black on the moonlit forest path, lifted (gamma 1.42) so it reads on a phone and works as the cover frame; drone and heavy fog.",
+   "id": 1
   },
   {
-   "id": 2,
    "section": "intro",
    "kind": "plate",
    "src": "v_mansion.jpg",
@@ -39,10 +38,10 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "The mansion looms past the iron gate; a lightning hit at ~1.4 s lights the facade and the one lit window."
+   "why": "The mansion looms past the gate; lightning lights the facade.",
+   "id": 2
   },
   {
-   "id": 3,
    "section": "intro",
    "kind": "title",
    "src": "v_door.jpg",
@@ -58,14 +57,14 @@
    "audio": "none",
    "text": "MANAGERS' MEETING",
    "text2": "HALLOWEEN 2026",
-   "why": "Push through the door ajar as the title lands (text at 7.1 s overall), warm light leaking from inside."
+   "why": "Push through the door ajar as the title lands.",
+   "id": 3
   },
   {
-   "id": 4,
    "section": "dread",
    "kind": "photo",
    "src": "20261028_103527.jpg",
-   "dur": 2,
+   "dur": 2.2,
    "move": "push",
    "shake": 2,
    "fx": [
@@ -75,16 +74,34 @@
    "crop": "center",
    "transition_in": "flash",
    "audio": "none",
-   "why": "Match-cut mansion door to the real office door: webbed glass, purple HALLOWEEN tape, a pale figure approaching through the lobby."
+   "why": "Match-cut to the real office door: webbed glass, purple tape, a figure approaching. Groove starts here (track 0).",
+   "muffle": true,
+   "id": 4
   },
   {
-   "id": 5,
+   "section": "dread",
+   "kind": "photo",
+   "src": "20261028_103620.jpg",
+   "dur": 1.6,
+   "move": "push",
+   "shake": 1,
+   "fx": [
+    "flash"
+   ],
+   "crop": "center",
+   "crop_x": 0.59,
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "Skeleton spider with crop_x 0.59 so the red-eyed head is in frame; lightning hits the eyes.",
+   "muffle": true,
+   "id": 5
+  },
+  {
    "section": "dread",
    "kind": "video",
    "src": "20261028_103544.mp4",
    "in": 1.3,
-   "out": 3.1,
-   "dur": 1.8,
+   "dur": 1.6,
    "move": "push",
    "shake": 0,
    "fx": [
@@ -93,59 +110,11 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Decor detail: the dark crystal-ball dome on black cloth, the steadiest beat of the decor pan, fortune-teller dread."
+   "why": "Crystal-ball dome, from 1.3 s so it opens settled rather than mid-pan.",
+   "muffle": true,
+   "id": 6
   },
   {
-   "id": 6,
-   "section": "dread",
-   "kind": "photo",
-   "src": "20261028_103620.jpg",
-   "dur": 1.4,
-   "move": "push",
-   "shake": 1,
-   "fx": [
-    "flash"
-   ],
-   "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "Decor detail: the skeleton spider, window centred on its red-eyed head so the lightning lands on the eyes.",
-   "crop_x": 0.59
-  },
-  {
-   "id": 7,
-   "section": "dread",
-   "kind": "photo",
-   "src": "20261028_103606.jpg",
-   "dur": 1.3,
-   "move": "push",
-   "shake": 1,
-   "fx": [
-    "flicker"
-   ],
-   "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "Decor detail: the tinsel jack-o'-lantern grin; flicker reads as a guttering candle."
-  },
-  {
-   "id": 8,
-   "section": "dread",
-   "kind": "photo",
-   "src": "20261028_103100.jpg",
-   "dur": 1.0,
-   "move": "push",
-   "shake": 1,
-   "fx": [
-    "flicker"
-   ],
-   "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "Bob Ross head down mixing paint, unaware of the camera: the first inhabitant of the house."
-  },
-  {
-   "id": 9,
    "section": "dread",
    "kind": "photo",
    "src": "20261028_103102.jpg",
@@ -158,29 +127,15 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Two-frame beat: he looks straight into the lens on a lightning strike."
+   "why": "Bob Ross stares straight into the lens on a lightning strike: the house's first inhabitant, and the first face at film ~16.4 s.",
+   "muffle": true,
+   "id": 7
   },
   {
-   "id": 10,
-   "section": "dread",
-   "kind": "photo",
-   "src": "20261028_104638.jpg",
-   "dur": 1.6,
-   "move": "push",
-   "shake": 1,
-   "fx": [],
-   "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "Lone figure at the window past the foreground pumpkin; the autumn glass goes blue under the night grade."
-  },
-  {
-   "id": 11,
    "section": "fog",
    "kind": "video",
    "src": "20261028_104551.mp4",
    "in": 6.5,
-   "out": 9.1,
    "dur": 2.6,
    "move": "push",
    "shake": 0,
@@ -190,10 +145,11 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Hero fog beat: real fog-machine haze rolls over the table toward the costumed crowd; the fog loop stacks on the practical smoke."
+   "why": "Real fog-machine haze rolls over the table toward the costumed crowd.",
+   "muffle": true,
+   "id": 8
   },
   {
-   "id": 12,
    "section": "fog",
    "kind": "photo",
    "src": "20261028_104627.jpg",
@@ -207,10 +163,11 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "The room swallowed in smoke, chick onesie standing in it, exit sign glowing red."
+   "why": "Room swallowed in smoke, the duck onesie standing in it, exit sign glowing red.",
+   "muffle": true,
+   "id": 9
   },
   {
-   "id": 13,
    "section": "fog",
    "kind": "photo",
    "src": "20261028_104630.jpg",
@@ -222,24 +179,24 @@
     "flicker"
    ],
    "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "The duck onesie alone in the fog-machine haze in front of the orange credenza (pre-cropped: the seated colleague stays out of frame).",
    "crop_box": [
-    0.0,
+    0,
     0.38,
     0.56,
     0.94
-   ]
+   ],
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "Closer in the haze: pre-cropped to the duck in the fog in front of the orange credenza; the sipping witch and cup are out of frame.",
+   "muffle": true,
+   "id": 10
   },
   {
-   "id": 14,
    "section": "stinger",
    "kind": "video",
    "src": "20261028_115830.mp4",
    "in": 0,
-   "out": 3.2,
-   "dur": 3.2,
+   "dur": 3,
    "move": "push",
    "shake": 0,
    "fx": [
@@ -248,34 +205,34 @@
    "crop": "center",
    "transition_in": "glitch",
    "audio": "nat",
-   "why": "The mad doctor breaks the dread: 'Y'all look scary' and his laugh, the flip from haunted house to party; cut before the camera drifts off him."
+   "why": "The mad doctor breaks the dread: 'Y'all look scary' and his laugh. Out at source 3.0, before the camera drifts.",
+   "muffle": true,
+   "id": 11
   },
   {
-   "id": 15,
    "section": "costumes",
    "kind": "video",
    "src": "20261028_115920.mp4",
-   "in": 0.8,
-   "out": 4.4,
-   "dur": 3.6,
+   "in": 0.6,
+   "dur": 3.4,
    "move": "push",
    "shake": 0,
    "fx": [
     "flicker"
    ],
    "crop": "center",
-   "transition_in": "flash",
-   "audio": "none",
-   "why": "Pennywise beat: the clown gazes up at her balloons as the camera pushes in, then turns and smirks at us; the TV behind sits under grade and fog.",
    "mask_box": [
     0.55,
     0.04,
-    1.0,
+    1,
     0.64
-   ]
+   ],
+   "transition_in": "flash",
+   "audio": "none",
+   "why": "Pennywise beat: the clown gazes up at her balloons, then turns and smirks. The TV login is masked.",
+   "id": 12
   },
   {
-   "id": 16,
    "section": "costumes",
    "kind": "photo",
    "src": "20261028_115955.jpg",
@@ -286,40 +243,27 @@
     "flicker"
    ],
    "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "Trio portrait, slow push on the clown's cold stare between Luigi and the doctor.",
    "mask_box": [
     0.36,
     0.22,
-    1.0,
+    1,
     0.53
-   ]
-  },
-  {
-   "id": 17,
-   "section": "costumes",
-   "kind": "video",
-   "src": "20261028_115929.mp4",
-   "in": 1.8,
-   "out": 5,
-   "dur": 3.2,
-   "move": "push",
-   "shake": 0,
-   "fx": [],
-   "crop": "center",
+   ],
+   "focus": [
+    0.45,
+    0.45
+   ],
    "transition_in": "cut",
    "audio": "none",
-   "why": "Luigi hits a fists-up dance pose 1.2 s in, backlit by the window: the groove made flesh."
+   "why": "Trio portrait: slow push on the clown's cold stare between Luigi and the doctor. TV masked; the only trio shot.",
+   "id": 13
   },
   {
-   "id": 18,
    "section": "costumes",
    "kind": "video",
    "src": "20261028_120049.mp4",
    "in": 0,
-   "out": 2.2,
-   "dur": 2.2,
+   "dur": 2.45,
    "move": "push",
    "shake": 0,
    "fx": [
@@ -328,15 +272,29 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "The veiled Victorian widow waves hello through her polka-dot veil."
+   "why": "The veiled Victorian widow waves hello through her polka-dot veil.",
+   "id": 14
   },
   {
-   "id": 19,
+   "section": "costumes",
+   "kind": "video",
+   "src": "20261028_115929.mp4",
+   "in": 1.5,
+   "dur": 3.4,
+   "move": "push",
+   "shake": 0,
+   "fx": [],
+   "crop": "center",
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "Luigi turns and hits the fists-up dance pose. Standing, so it breaks up the seated run.",
+   "id": 15
+  },
+  {
    "section": "costumes",
    "kind": "video",
    "src": "20261028_120054.mp4",
-   "in": 0.8,
-   "out": 3.0,
+   "in": 0.6,
    "dur": 2.2,
    "move": "push",
    "shake": 0,
@@ -344,63 +302,79 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Wilma takes a call and looks up grinning: the call is coming from inside the house."
+   "why": "Wilma takes a call and looks up grinning: the call is coming from inside the house.",
+   "id": 16
   },
   {
-   "id": 20,
+   "section": "costumes",
+   "kind": "photo",
+   "src": "20261028_122923.jpg",
+   "dur": 1.1,
+   "move": "hold",
+   "shake": 1,
+   "fx": [],
+   "crop": "center",
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "Pom-pom team, first frame of a two-photo burst: their own beat, orange pom-poms kept warm.",
+   "id": 17
+  },
+  {
+   "section": "costumes",
+   "kind": "photo",
+   "src": "20261028_122925.jpg",
+   "dur": 1.85,
+   "end_track_s": 33.4,
+   "move": "push",
+   "shake": 1,
+   "fx": [],
+   "crop": "center",
+   "focus": [
+    0.5,
+    0.42
+   ],
+   "zoom": 0.12,
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "Second burst frame, everyone grinning, pushing in to their faces. Pinned to end as the music drains at 33.40.",
+   "id": 18
+  },
+  {
    "section": "costumes",
    "kind": "video",
    "src": "20261028_120121.mp4",
-   "in": 0.3,
-   "out": 2,
-   "dur": 1.7,
+   "in": 0.05,
+   "dur": 1.98,
+   "end_track_s": 35.41,
    "move": "push",
    "shake": 0,
    "fx": [],
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Toy Story alien, three eyes above her head, the leopard onesie gesturing behind her."
+   "why": "The pom-pom team's blue-dress member solo as the Toy Story alien, laid over the music's 0.4 s breath. Ends exactly on the 35.38 re-entry.",
+   "id": 19
   },
   {
-   "id": 21,
    "section": "costumes",
    "kind": "video",
    "src": "20261028_120132.mp4",
-   "in": 0,
-   "out": 3.1,
-   "dur": 3.1,
+   "in": 0.2,
+   "dur": 3,
    "move": "push",
    "shake": 0,
    "fx": [],
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Duck hood drop and wing flap, the comedy beat of the day; arms-wide at 2.4 s lands near a downbeat."
+   "why": "Duck hood drop starts on the re-entry hit; arms-wide (src 2.4) lands on the next bar hit at ~37.6.",
+   "id": 20
   },
   {
-   "id": 22,
-   "section": "costumes",
-   "kind": "photo",
-   "src": "20261028_103539.jpg",
-   "dur": 1.2,
-   "move": "pull",
-   "shake": 1,
-   "fx": [
-    "flicker"
-   ],
-   "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "Decor detail: the ghost-face bucket of candy, a quick treats insert to reset the eye."
-  },
-  {
-   "id": 23,
    "section": "costumes",
    "kind": "video",
    "src": "20261028_120227.mp4",
    "in": 0.9,
-   "out": 3.1,
    "dur": 2.2,
    "move": "push",
    "shake": 0,
@@ -408,15 +382,14 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Bob Ross, brush poised, deadpan at the lens; a hard cut makes the stare funny."
+   "why": "Bob Ross was visible behind the duck, so the camera finds him: brush poised, deadpan at the lens.",
+   "id": 21
   },
   {
-   "id": 24,
    "section": "costumes",
    "kind": "video",
    "src": "20261028_120238.mp4",
    "in": 0,
-   "out": 2.1,
    "dur": 2.1,
    "move": "push",
    "shake": 0,
@@ -424,15 +397,14 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "The afro-and-blue-shades hippie flashes a peace sign from his chair: his introduction before the afternoon strut."
+   "why": "The afro-and-blue-shades hippie flashes a peace sign. 2.1 s fits inside the 2.18 s clip.",
+   "id": 22
   },
   {
-   "id": 25,
    "section": "costumes",
    "kind": "video",
    "src": "20261028_120331.mp4",
    "in": 0,
-   "out": 2.4,
    "dur": 2.4,
    "move": "push",
    "shake": 0,
@@ -440,16 +412,37 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "nat",
-   "why": "Leopard onesie lunges with monster claws then cracks up; her laugh under the music is the second bite, Cruella and balloons behind."
+   "why": "Leopard onesie lunges with monster claws, then cracks up: the second sound bite (her laugh). Cut before the camera tilts.",
+   "id": 23
   },
   {
-   "id": 26,
+   "section": "costumes",
+   "kind": "photo",
+   "src": "20261028_104641.jpg",
+   "dur": 1.8,
+   "move": "push",
+   "shake": 1,
+   "fx": [
+    "flicker"
+   ],
+   "crop": "center",
+   "focus": [
+    0.45,
+    0.5
+   ],
+   "zoom": 0.1,
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "Group breather: the whole table mid-laugh (witch, alien, clown, Wilma, top hat, leopard). It finds the witch in the crowd just before her solo.",
+   "id": 24
+  },
+  {
    "section": "witch",
    "kind": "video",
    "src": "20261028_120159.mp4",
-   "in": 4.0,
-   "out": 7.15,
-   "dur": 2.5,
+   "in": 3.6,
+   "dur": 3.49,
+   "end_track_s": 50.41,
    "move": "push",
    "shake": 0,
    "fx": [
@@ -458,16 +451,14 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "The witch beckons with a long-nailed claw inside the track's dead stop; lightning in the silence, and the cut lands exactly on the groove's return.",
-   "end_track_s": 50.37
+   "why": "The witch turns and reaches a long-nailed claw toward us across the track's dead stop; lightning lands in the silence. Pinned to end exactly on the groove's return at 50.37 (src 3.6 to about 7.1, inside the 7.19 s clip).",
+   "id": 25
   },
   {
-   "id": 27,
    "section": "witch",
    "kind": "video",
    "src": "20261028_120208.mp4",
-   "in": 0.0,
-   "out": 2.2,
+   "in": 0,
    "dur": 2.2,
    "move": "pan_left",
    "shake": 0,
@@ -475,127 +466,68 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "The groove slams back on her over-the-shoulder glam pose, red heel kicked up; drift right-to-left down the hallway."
+   "why": "The groove slams back on her over-the-shoulder glam pose, red heel up. A 1.01x stretch, no freeze.",
+   "id": 26
   },
   {
-   "id": 28,
-   "section": "portraits",
-   "kind": "photo",
-   "src": "20261028_103645.jpg",
-   "dur": 1.2,
-   "move": "push",
-   "shake": 1,
-   "fx": [],
-   "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "Decor detail: a table of ghost-print goodie bags, the ghosts lyric moment."
-  },
-  {
-   "id": 29,
    "section": "portraits",
    "kind": "photo",
    "src": "20261028_122347.jpg",
-   "dur": 2.2,
+   "dur": 2.14,
    "move": "hold",
    "shake": 1,
    "fx": [],
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Quartet portrait that holds all four in 9:16: Bob Ross painting, leopard onesie, witch, chick in profile."
+   "why": "Quartet on the bar: Bob Ross, leopard onesie, witch, duck. Held, so the duck at the right edge stays whole.",
+   "id": 27
   },
   {
-   "id": 30,
-   "section": "portraits",
-   "kind": "photo",
-   "src": "20261028_122923.jpg",
-   "dur": 1.0,
-   "move": "hold",
-   "shake": 1,
-   "fx": [],
-   "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "Pom-pom team, first frame of the burst: everyone smiling at the lens."
-  },
-  {
-   "id": 31,
-   "section": "portraits",
-   "kind": "photo",
-   "src": "20261028_122925.jpg",
-   "dur": 1.4,
-   "move": "push",
-   "shake": 1,
-   "fx": [],
-   "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "Burst twin: push in on the orange pom-poms, the warm accent against the teal.",
-   "focus": [
-    0.55,
-    0.6
-   ]
-  },
-  {
-   "id": 32,
    "section": "portraits",
    "kind": "photo",
    "src": "20261028_123246.jpg",
-   "dur": 2.1,
+   "dur": 1.62,
    "move": "push",
    "shake": 1,
    "fx": [],
    "crop": "center",
+   "focus": [
+    0.5,
+    0.4
+   ],
+   "zoom": 0.3,
    "transition_in": "cut",
    "audio": "none",
-   "why": "Pumpkin goodie bags in the foreground, the hippie/Wilma/top-hat/Chuckie lineup behind; push from bags up to faces as the breakdown starts.",
-   "focus": [
-    0.53,
-    0.52
-   ],
-   "zoom": 0.2
+   "why": "Goodie bags up front, lineup behind (hippie, Wilma, top hat, Chuckie). The push is anchored high so it travels from the bags to the faces.",
+   "id": 28
   },
   {
-   "id": 33,
    "section": "portraits",
    "kind": "photo",
    "src": "20261028_123232.jpg",
-   "dur": 2.3,
+   "dur": 2.23,
    "move": "push",
    "shake": 1,
    "fx": [],
    "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "Chuckie Finster and the top-hat widow, full-length two-shot, both smiling at the lens.",
    "crop_box": [
     0.48,
     0.29,
     0.99,
     0.8
-   ]
-  },
-  {
-   "id": 34,
-   "section": "afternoon",
-   "kind": "photo",
-   "src": "20261028_131030.jpg",
-   "dur": 1.3,
-   "move": "pull",
-   "shake": 1,
-   "fx": [],
-   "crop": "center",
+   ],
    "transition_in": "cut",
    "audio": "none",
-   "why": "Lunch: the buffet trays and a plate of pasta, the house feeds its guests (no faces)."
+   "why": "Chuckie's moment: a pre-cropped two-shot of Chuckie Finster and the top-hat colleague, both smiling at the lens. Wide lineup, then close.",
+   "id": 29
   },
   {
-   "id": 35,
    "section": "afternoon",
    "kind": "photo",
    "src": "20261028_142125.jpg",
-   "dur": 2.2,
+   "dur": 3.2,
+   "end_track_s": 61.77,
    "move": "push",
    "shake": 1,
    "fx": [
@@ -605,16 +537,16 @@
    "crop": "left",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Witch silhouette against grey glass and red trees, the most haunted natural image in the set; left crop, fog on the window."
+   "why": "Witch silhouette against grey glass and red trees, slow push as the music empties out. Ends on the breakdown at 61.76.",
+   "id": 30
   },
   {
-   "id": 36,
    "section": "afternoon",
    "kind": "video",
    "src": "20261028_145425.mp4",
-   "in": 3.4,
-   "out": 5.9,
-   "dur": 2.5,
+   "in": 3.5,
+   "dur": 2.64,
+   "end_track_s": 64.43,
    "move": "push",
    "shake": 0,
    "fx": [
@@ -623,88 +555,154 @@
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Her arm rises overhead like a summoning, bare branches behind; steady, well lit."
+   "why": "Leopard presenter: her arm rises overhead like a summoning, and the shot ends on the 64.40 stab. in=3.3 skips the hand-at-face moment.",
+   "id": 31
   },
   {
-   "id": 37,
    "section": "afternoon",
    "kind": "photo",
    "src": "20261028_145818.jpg",
-   "dur": 1.8,
+   "dur": 2.23,
+   "end_track_s": 66.63,
    "move": "pull",
    "shake": 1,
    "fx": [],
    "crop": "center",
    "transition_in": "cut",
    "audio": "none",
-   "why": "Wilma, the top hat and the hippie at the team flip charts; pull reveals the glitter pumpkin in the foreground."
+   "why": "Wilma, the top hat and the hippie at the team flip charts; the pull reveals the glitter pumpkin. Stab to stab.",
+   "id": 32
   },
   {
-   "id": 38,
    "section": "finale",
    "kind": "video",
    "src": "20261028_145759.mp4",
-   "in": 6.0,
-   "out": 9.4,
-   "dur": 3.4,
+   "in": 4.7,
+   "dur": 4.48,
+   "end_track_s": 71.11,
    "move": "push",
    "shake": 0,
-   "fx": [],
+   "fx": [
+    "flash"
+   ],
    "crop": "center",
-   "transition_in": "cut",
-   "audio": "nat",
-   "why": "The afro-wig strut past camera under the balloons with 'It's the curls, isn't it?', ending on the two-shot with Wilma laughing.",
    "focus": [
     0.42,
-    0.55
-   ]
+    0.5
+   ],
+   "zoom": 0.06,
+   "transition_in": "cut",
+   "audio": "nat",
+   "why": "Enters on the whip-pan tail: the face-on point, lightning near the 68.89 stab, then 'It's the curls, isn't it?' (src 6.3-8.3). Ends on Wilma laughing in the two-shot at the 71.11 stab. Third bite.",
+   "id": 33
   },
   {
-   "id": 39,
    "section": "finale",
    "kind": "photo",
    "src": "20261028_151323.jpg",
-   "dur": 2.2,
+   "dur": 2.26,
+   "end_track_s": 73.39,
    "move": "push",
    "shake": 1,
    "fx": [],
    "crop": "center",
-   "transition_in": "cut",
-   "audio": "none",
-   "why": "The crew: five in a row at the autumn window, red and black balloons, calm pose as the finale groove returns.",
    "crop_box": [
-    0.19,
-    0.1,
-    0.99,
-    0.9
+    0.2,
+    0.08,
+    0.98,
+    0.86
    ],
    "focus": [
     0.5,
     0.45
    ],
-   "zoom": 0.08
+   "zoom": 0.03,
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "The crew, calm pose at the autumn window, exactly one bar. Pre-cropped to drop most of the chair back while keeping the clown and all five whole.",
+   "id": 34
   },
   {
-   "id": 40,
    "section": "finale",
    "kind": "photo",
    "src": "20261028_151336.jpg",
-   "dur": 1.8,
+   "dur": 2.23,
    "move": "push",
    "shake": 1,
    "fx": [],
    "crop": "center",
-   "transition_in": "flash",
-   "audio": "none",
-   "why": "Lightning flash to the same five in monster poses: roar, raised balloon, peace signs; the laugh button.",
    "focus": [
     0.5,
     0.4
    ],
-   "zoom": 0.06
+   "zoom": 0.06,
+   "transition_in": "flash",
+   "audio": "none",
+   "why": "Lightning flash-cut on the groove's return (73.37) to the same five in monster poses. Holds a full bar, with the push anchored high.",
+   "id": 35
   },
   {
-   "id": 41,
+   "section": "curtain",
+   "kind": "video",
+   "src": "20261028_115830.mp4",
+   "in": 1.4,
+   "dur": 1.11,
+   "move": "push",
+   "shake": 0,
+   "fx": [],
+   "crop": "center",
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "Curtain call, 2 beats: the mad doctor's big grin (muted).",
+   "id": 36
+  },
+  {
+   "section": "curtain",
+   "kind": "video",
+   "src": "20261028_115929.mp4",
+   "in": 3,
+   "dur": 1.11,
+   "move": "push",
+   "shake": 0,
+   "fx": [],
+   "crop": "center",
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "Curtain call: Luigi's hip-cocked dance pose.",
+   "id": 37
+  },
+  {
+   "section": "curtain",
+   "kind": "video",
+   "src": "20261028_120049.mp4",
+   "in": 1.2,
+   "dur": 1.11,
+   "move": "push",
+   "shake": 0,
+   "fx": [],
+   "crop": "center",
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "Curtain call: the veiled widow's wave.",
+   "id": 38
+  },
+  {
+   "section": "curtain",
+   "kind": "video",
+   "src": "20261028_120132.mp4",
+   "in": 1,
+   "dur": 1.11,
+   "move": "push",
+   "shake": 0,
+   "fx": [],
+   "crop": "center",
+   "transition_in": "cut",
+   "audio": "none",
+   "why": "Curtain call: the duck's beak-down flap, the comedy button before the sign-off.",
+   "end_track_s": 79.88,
+   "id": 39
+  },
+  {
    "section": "end",
    "kind": "endcard",
    "src": "v_hall.jpg",
@@ -720,8 +718,15 @@
    "audio": "none",
    "text": "HAPPY HALLOWEEN",
    "text2": "22 PROPERTIES · ONE HAUNTED HOUSE",
-   "why": "Deeper into the house: the candlelit staircase hall carries the sign-off and the company line as the groove fades."
+   "why": "Candlelit staircase hall carries the sign-off. Fades to black over the last 1.2 s with the music fade.",
+   "end_track_s": 108.55,
+   "nosnap": true,
+   "id": 40
   }
  ],
- "out": "Halloween_Managers_Meeting_v3"
+ "out": "Halloween_Managers_Meeting_v4",
+ "music_splice": [
+  79.88,
+  102.59
+ ]
 }

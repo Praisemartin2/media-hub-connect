@@ -41,7 +41,9 @@ fx (fogheavy, fogoff, flicker, flash, glitch), transition_in (cut/flash/glitch/f
 audio (none/nat), text/text2, crop (left/center/right) or crop_x (0..1 centre) for landscape sources,
 crop_box [x0,y0,x1,y1] (fractions, keep 9:16), mask_box [x0,y0,x1,y1] (privacy blur of the background
 inside the box; people are protected by a rembg person mask), focus [fx,fy] (push anchor), zoom (push
-amount), gamma (per-shot lift), end_track_s (pin this shot's end to a music time, track seconds).
+amount), gamma (per-shot lift), end_track_s (pin this shot's end to a time in the music file, seconds),
+muffle (groove low-passed while these shots play), nosnap (keep this cut off the beat grid).
+Top level: music, music_start_s, intro_drone, music_splice [a, b] (file seconds, jump a -> b), out.
 Cuts snap to beats within 0.35 s; videos that run short are slowed (max 1.5x) instead of freezing.
 
 ## Content rules (do not break)
@@ -57,8 +59,16 @@ Cuts snap to beats within 0.35 s; videos that run short are slowed (max 1.5x) in
 - v1: first cut (purple cast from a YUV blend, title clipped).
 - v2: teal night grade, fitted titles, 42 shots. QA found the bank login on the TV, a right-edge bar,
   fog stripes, frozen clip ends and coverage gaps.
-- v3 (render of commit 14a5994): all of the above fixed; 41 shots; Chuckie and the pom-pom team get beats;
-  the witch's claw-reach ends exactly on the groove's return.
+- v3 (commit 14a5994): QA fixes; the CI render failed on an unquoted crop expression and was superseded.
+- v4: the QA editor's merged list (40 shots, ~97 s): tighter dread under a low-passed "party behind the walls"
+  groove that opens on the flash cut to the clown; pom-pom team/alien/duck aligned to the music's drain and
+  re-entry; witch claw ends on the groove's return; breakdown cuts on the stabs; a 4-cut curtain call; the music
+  is spliced (79.88 -> 102.59, matching downbeats) so the endcard plays the song's real final hit; thunder on
+  every lightning strike. Rehearsed locally with stand-in media before the CI render.
+
+## Local rehearsal (no Drive access from the Claude container)
+Build stand-ins from analysis/thumbs (photos) and analysis/sheets (clips), symlink assets/tools, then run
+render_v.py in that folder. Renders are cached per shot (work/sNNN.mp4.key), so an interrupted run resumes.
 
 ## Open questions -> see the chat; answers should be recorded here when they arrive.
 Names/properties for lower thirds; Thriller licence; tone; deadline; where it will be posted.

@@ -12,6 +12,16 @@ PLATES = {'v_mansion.jpg', 'v_forest.jpg', 'v_hall.jpg', 'v_door.jpg'}
 ENC = ['-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p', '-r', str(FPS),
        '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-ac', '2']
 
+def run_cached(cmd, out):
+    # skip work whose exact command already produced `out` (lets an interrupted render resume)
+    import hashlib
+    h = hashlib.sha1(json.dumps(cmd).encode())
+    for c in cmd:                                  # inputs that are regenerated in place (crops, masks) count by content
+        if isinstance(c, str) and c.startswith('work/') and c != out and os.path.isfile(c): h.update(open(c, 'rb').read())
+    key = h.hexdigest()
+    if os.path.exists(out) and os.path.exists(out + '.key') and open(out + '.key').read() == key: return
+    run(cmd); open(out + '.key', 'w').write(key)
+
 def run(cmd):
     r = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True)
     if r.returncode != 0:
@@ -42,7 +52,7 @@ def crop_expr(crop, crop_x=None):
     # landscape -> 9:16 window by height; crop_x (0..1) centres the window on that fraction of the width
     cw = 'ih*9/16'
     if crop_x is not None:
-        x = f'max(0,min(iw-{cw},iw*{float(crop_x):.4f}-{cw}/2))'
+        x = f"'max(0,min(iw-{cw},iw*{float(crop_x):.4f}-{cw}/2))'"   # quoted: the commas would split the filter
     else:
         x = {'left': '0', 'right': f'iw-{cw}', 'center': f'(iw-{cw})/2'}.get(crop or 'center', f'(iw-{cw})/2')
     return f'crop={cw}:ih:{x}:0'
@@ -163,7 +173,7 @@ def render_shot(i, shot, dur, fog_offset):
             from PIL import Image, ImageOps
             if shot.get('mask_box'):          # blur/darken a screen behind people (privacy)
                 clean = f'work/clean_{i:03d}.jpg'
-                run([sys.executable, 'tools/privacy_mask.py', path, clean, ','.join(f'{v:.4f}' for v in shot['mask_box'])])
+                run_cached([sys.executable, 'tools/privacy_mask.py', path, clean, ','.join(f'{v:.4f}' for v in shot['mask_box'])], clean)
                 im = Image.open(clean).convert('RGB')
             else:
                 im = ImageOps.exif_transpose(Image.open(path)).convert('RGB')
@@ -178,8 +188,8 @@ def render_shot(i, shot, dur, fog_offset):
         if dur > avail: slow = dur / avail          # stretch the clip instead of freezing its last frame
         if shot.get('mask_box'):
             clean = f'work/clean_{i:03d}.mp4'
-            run([sys.executable, 'tools/privacy_mask.py', path, clean, ','.join(f'{v:.4f}' for v in shot['mask_box']),
-                 f'{vin:.3f}', f'{min(dur / slow, avail) + 0.1:.3f}'])
+            run_cached([sys.executable, 'tools/privacy_mask.py', path, clean, ','.join(f'{v:.4f}' for v in shot['mask_box']),
+                        f'{vin:.3f}', f'{min(dur / slow, avail) + 0.1:.3f}'], clean)
             path, vin = clean, 0.0
     fog_op = 0.0 if 'fogoff' in shot.get('fx', []) else (0.55 if 'fogheavy' in shot.get('fx', []) else (0.42 if is_plate else 0.30))
     grade = GRADE_PLATE if is_plate else GRADE
@@ -205,7 +215,7 @@ def render_shot(i, shot, dur, fog_offset):
         cmd += ['-f', 'lavfi', '-t', f'{dur:.3f}', '-i', 'anullsrc=r=48000:cl=stereo']
         achain = f"[2:a]atrim=duration={dur:.3f},asetpts=PTS-STARTPTS[a]"
     cmd += ['-filter_complex', vchain + ';' + achain, '-map', '[v]', '-map', '[a]', '-t', f'{dur:.3f}'] + ENC + [out]
-    run(cmd)
+    run_cached(cmd, out)
     return out
 
 # ---------- timeline ----------
@@ -271,7 +281,7 @@ natural_end = bool(splice) or bool(EDL.get('music_natural_end'))
 mfade = (f"afade=t=out:st={max(0, mlen-0.8):.2f}:d=0.8" if natural_end else f"afade=t=out:st={max(0, total-intro_len-3.0):.2f}:d=3.0")
 if splice:
     mus = (f"[2:a]asplit=2[ma][mb];[ma]atrim={mstart:.3f}:{float(splice[0]):.3f},asetpts=PTS-STARTPTS[m1];"
-           f"[mb]atrim=start={float(splice[1]):.3f},asetpts=PTS-STARTPTS[m2];[m1][m2]acrossfade=d=0.04:c1=tri:c2=tri,")
+           f"[mb]atrim=start={float(splice[1])-0.04:.3f},asetpts=PTS-STARTPTS[m2];[m1][m2]acrossfade=d=0.04:c1=tri:c2=tri,")   # overlap ends exactly on b
 else:
     mus = f"[2:a]atrim=start={mstart:.3f},asetpts=PTS-STARTPTS,"
 af = (f"[1:a]atrim=0:{drone_end+1.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-22:TP=-2:LRA=9,"
