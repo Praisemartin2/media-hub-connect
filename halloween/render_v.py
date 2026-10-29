@@ -38,35 +38,46 @@ def esc(s):  # drawtext escaping
     return s.replace('\\', '\\\\').replace(':', '\\:').replace("'", "\\\\\\'").replace(',', '\\,').replace('%', '\\%')
 
 # ---------- per-shot filter builders ----------
-def crop_expr(crop):
-    # landscape -> 9:16 window by height
+def crop_expr(crop, crop_x=None):
+    # landscape -> 9:16 window by height; crop_x (0..1) centres the window on that fraction of the width
     cw = 'ih*9/16'
-    x = {'left': '0', 'right': f'iw-{cw}', 'center': f'(iw-{cw})/2'}.get(crop or 'center', f'(iw-{cw})/2')
+    if crop_x is not None:
+        x = f'max(0,min(iw-{cw},iw*{float(crop_x):.4f}-{cw}/2))'
+    else:
+        x = {'left': '0', 'right': f'iw-{cw}', 'center': f'(iw-{cw})/2'}.get(crop or 'center', f'(iw-{cw})/2')
     return f'crop={cw}:ih:{x}:0'
 
-def fit_chain(kind, src_is_landscape, crop):
+def fit_chain(kind, src_is_landscape, crop, crop_x=None, crop_box=None, slow=1.0):
     # produce 2x oversampled 9:16 frame for zoompan (2160x3840); videos normalised to 30 fps first
-    pre = f"fps={FPS}," if kind == 'video' else ""
+    pre = (f"setpts={slow:.4f}*PTS," if slow > 1.001 else "") + (f"fps={FPS}," if kind == 'video' else "")
+    if crop_box and kind == 'video':
+        x0, y0, x1, y1 = crop_box
+        pre += f"crop=iw*{x1-x0:.4f}:ih*{y1-y0:.4f}:iw*{x0:.4f}:ih*{y0:.4f},"
+        src_is_landscape = False
     if src_is_landscape:
-        return f"{pre}{crop_expr(crop)},scale=2160:3840:flags=lanczos,setsar=1"
+        return f"{pre}{crop_expr(crop, crop_x)},scale=2160:3840:flags=lanczos,setsar=1"
     return f"{pre}scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1"
 
-def move_chain(move, shake, nframes, is_video):
+def move_chain(move, shake, nframes, is_video, focus=None, zoom=None):
     N = max(1, nframes); s = 10 * shake
-    amp = 0.06 if is_video else 0.10
+    amp = float(zoom) if zoom is not None else (0.06 if is_video else 0.10)
     z = {'push': f'1+{amp}*on/{N}', 'pull': f'1+{amp}-{amp}*on/{N}', 'hold': '1.02',
          'pan_left': f'1+{amp}', 'pan_right': f'1+{amp}'}.get(move, f'1+{amp}*on/{N}')
     jx = f'+{s}*sin(on/3.1)+{s*0.6}*sin(on/7.3)' if shake else ''
     jy = f'+{s*0.8}*sin(on/4.3)+{s*0.5}*cos(on/9.1)' if shake else ''
+    fx, fy = (focus or [0.5, 0.5])
     if move == 'pan_left': x = f'(iw-iw/zoom)*(1-on/{N}){jx}'
     elif move == 'pan_right': x = f'(iw-iw/zoom)*(on/{N}){jx}'
-    else: x = f'iw/2-(iw/zoom/2){jx}'
-    y = f'ih/2-(ih/zoom/2){jy}'
+    else: x = f'iw*{fx:.4f}-(iw/zoom/2){jx}'
+    y = f'ih*{fy:.4f}-(ih/zoom/2){jy}'
+    # clamp so the window never leaves the picture (out-of-frame samples render as black edges)
+    x = f'max(0,min(iw-iw/zoom,{x}))'; y = f'max(0,min(ih-ih/zoom,{y}))'
     return f"zoompan=z='{z}':x='{x}':y='{y}':d=1:s={W}x{H}:fps={FPS}"
 
-GRADE = ("eq=contrast=1.12:brightness=-0.035:saturation=0.84,"
-         "curves=all='0/0 0.12/0.06 0.5/0.47 1/0.96',"
-         "colorbalance=rs=-0.07:gs=0.02:bs=0.10:rm=-0.04:gm=0.02:bm=0.04:rh=0.05:gh=0.01:bh=-0.04")
+GRADE = ("eq=contrast=1.12:brightness=-0.06:saturation=0.82,"
+         "curves=all='0/0 0.12/0.05 0.5/0.45 1/0.90',"
+         "selectivecolor=yellows='0 0 -0.28 0':neutrals='0 0 -0.08 0':whites='0 0 -0.10 0',"
+         "colorbalance=rs=-0.06:gs=0.0:bs=0.10:rm=-0.06:gm=0.01:bm=0.05:rh=-0.02:gh=0.0:bh=0.03")
 GRADE_PLATE = "eq=contrast=1.05:brightness=-0.02:saturation=0.95,curves=all='0/0 0.12/0.07 1/0.97'"
 
 def fx_chain(shot, dur):
@@ -77,12 +88,16 @@ def fx_chain(shot, dur):
         parts.append("noise=alls=40:allf=t:enable='lt(t,0.22)'")
     parts.append("noise=alls=11:allf=t+u")
     parts.append("vignette=PI/4.6")
-    if tr == 'flash': parts.append("fade=t=in:st=0:d=0.18:color=white")
+    if tr == 'flash':   # lightning on the cut: crushed-highlight cold strike, silhouettes stay legible
+        parts.append("curves=all='0/0 0.30/0.88 1/1':enable='lt(t,0.10)'")
+        parts.append("colorbalance=bs=0.18:bm=0.12:enable='lt(t,0.10)'")
     elif tr == 'fadeblack': parts.append("fade=t=in:st=0:d=0.6:color=black")
     elif tr == 'fadewhite': parts.append("fade=t=in:st=0:d=0.5:color=white")
     if 'flash' in fx and tr != 'flash':  # a lightning hit mid-shot
         t0 = max(0.3, dur * 0.45)
-        parts.append(f"eq=brightness='if(between(t,{t0:.2f},{t0+0.08:.2f}),0.6,if(between(t,{t0+0.14:.2f},{t0+0.2:.2f}),0.35,0))':eval=frame")
+        parts.append(f"curves=all='0/0 0.35/0.86 1/1':enable='between(t,{t0:.2f},{t0+0.08:.2f})'")
+        parts.append(f"colorbalance=bs=0.16:bm=0.10:enable='between(t,{t0:.2f},{t0+0.08:.2f})'")
+        parts.append(f"curves=all='0/0 0.45/0.68 1/1':enable='between(t,{t0+0.14:.2f},{t0+0.20:.2f})'")
     return ','.join(parts)
 
 def fit_lines(text, font, maxw=920, maxsize=230, minsize=80, prefer_single=False):
@@ -105,20 +120,23 @@ def fit_lines(text, font, maxw=920, maxsize=230, minsize=80, prefer_single=False
     while size > minsize and max(ImageFont.truetype(font, size).getlength(l) for l in lines) > maxw: size -= 4
     return lines, size
 
-def text_chain(shot, dur):
+def tfile(i, k, line):
+    fp = f'work/txt_{i:03d}_{k}.txt'; open(fp, 'w').write(line); return fp
+
+def text_chain(shot, dur, i=0):
     parts = []; cy = H // 2 - 140; bottom = cy
     if shot.get('text'):
         lines, size = fit_lines(shot['text'], FONT_T)
         lh = int(size * 1.02); top = cy - (lh * len(lines)) // 2
         for k, line in enumerate(lines):
-            parts.append(f"drawtext=fontfile={FONT_T}:text='{esc(line)}':fontsize={size}:fontcolor=0xE8E0CC@0.97:"
+            parts.append(f"drawtext=fontfile={FONT_T}:textfile={tfile(i, k, line)}:expansion=none:fontsize={size}:fontcolor=0xE8E0CC@0.97:"
                          f"x=(w-text_w)/2:y={top + k*lh}:alpha='min(1,max(0,(t-{0.6+0.25*k:.2f})/0.5))':"
                          f"shadowcolor=black@0.9:shadowx=0:shadowy=12")
         bottom = top + lh * len(lines)
     if shot.get('text2'):
         lines2, size2 = fit_lines(shot['text2'], FONT_S, maxw=940, maxsize=50, minsize=34, prefer_single=True)
         for k, line in enumerate(lines2):
-            parts.append(f"drawtext=fontfile={FONT_S}:text='{esc(line)}':fontsize={size2}:fontcolor=0xC9B98A@0.94:"
+            parts.append(f"drawtext=fontfile={FONT_S}:textfile={tfile(i, 10 + k, line)}:expansion=none:fontsize={size2}:fontcolor=0xC9B98A@0.94:"
                          f"x=(w-text_w)/2:y={bottom + 40 + k*int(size2*1.3)}:alpha='min(1,max(0,(t-1.3)/0.5))':"
                          f"shadowcolor=black@0.85:shadowx=0:shadowy=6")
     return ','.join(parts)
@@ -143,23 +161,46 @@ def render_shot(i, shot, dur, fog_offset):
         if is_video and w and h: landscape = w > h
         elif not is_video:
             from PIL import Image, ImageOps
-            im = ImageOps.exif_transpose(Image.open(path)).convert('RGB'); landscape = im.size[0] > im.size[1]
-            path = f'work/photo_{i:03d}.jpg'; im.save(path, quality=95)   # bake EXIF rotation
+            if shot.get('mask_box'):          # blur/darken a screen behind people (privacy)
+                clean = f'work/clean_{i:03d}.jpg'
+                run([sys.executable, 'tools/privacy_mask.py', path, clean, ','.join(f'{v:.4f}' for v in shot['mask_box'])])
+                im = Image.open(clean).convert('RGB')
+            else:
+                im = ImageOps.exif_transpose(Image.open(path)).convert('RGB')
+            if shot.get('crop_box'):
+                x0, y0, x1, y1 = shot['crop_box']; Wi, Hi = im.size
+                im = im.crop((int(x0*Wi), int(y0*Hi), int(x1*Wi), int(y1*Hi)))
+            landscape = im.size[0] > im.size[1]
+            path = f'work/photo_{i:03d}.jpg'; im.save(path, quality=95)   # bake EXIF rotation + crop
+    vin = float(shot.get('in', 0) or 0); slow = 1.0
+    if is_video:
+        avail = probe_dur(path) - vin - 0.04
+        if dur > avail: slow = dur / avail          # stretch the clip instead of freezing its last frame
+        if shot.get('mask_box'):
+            clean = f'work/clean_{i:03d}.mp4'
+            run([sys.executable, 'tools/privacy_mask.py', path, clean, ','.join(f'{v:.4f}' for v in shot['mask_box']),
+                 f'{vin:.3f}', f'{min(dur / slow, avail) + 0.1:.3f}'])
+            path, vin = clean, 0.0
     fog_op = 0.0 if 'fogoff' in shot.get('fx', []) else (0.55 if 'fogheavy' in shot.get('fx', []) else (0.42 if is_plate else 0.30))
     grade = GRADE_PLATE if is_plate else GRADE
-    vchain = f"[0:v]{fit_chain(kind, landscape, shot.get('crop'))},{move_chain(shot.get('move','push'), shot.get('shake',0), nframes, is_video)},{grade}[base];"
+    if shot.get('gamma'): grade += f",eq=gamma={float(shot['gamma']):.3f}"
+    vchain = (f"[0:v]{fit_chain(kind, landscape, shot.get('crop'), shot.get('crop_x'), shot.get('crop_box'), slow)},"
+              f"{move_chain(shot.get('move','push'), shot.get('shake',0), nframes, is_video, shot.get('focus'), shot.get('zoom'))},{grade}[base];")
     vchain += f"[1:v]fps={FPS},format=gray,eq=brightness=-0.04:contrast=1.1,format=gbrp[fog];"
     vchain += f"[base]format=gbrp[baseR];[baseR][fog]blend=all_mode=screen:all_opacity={fog_op},format=yuv420p[fogged];"
-    tail = fx_chain(shot, dur); tx = text_chain(shot, dur)
-    vchain += f"[fogged]{tail}{(','+tx) if tx else ''},format=yuv420p,trim=duration={dur:.3f},setpts=PTS-STARTPTS[v]"
+    tail = fx_chain(shot, dur); tx = text_chain(shot, dur, i)
+    end = f",fade=t=out:st={max(0.0, dur-1.2):.3f}:d=1.2:color=black" if kind == 'endcard' else ""
+    safe = ",crop=1068:1899:0:10,scale=1080:1920:flags=lanczos"     # trims any edge artefact, keeps aspect
+    vchain += f"[fogged]{tail}{(','+tx) if tx else ''}{end}{safe},format=yuv420p,trim=duration={dur:.3f},setpts=PTS-STARTPTS[v]"
     cmd = ['ffmpeg', '-y', '-loglevel', 'error']
     if is_video:
-        cmd += ['-ss', f"{shot.get('in',0):.3f}", '-to', f"{shot.get('in',0)+dur:.3f}", '-i', path]
+        cmd += ['-ss', f"{vin:.3f}", '-to', f"{vin + dur/slow + 0.05:.3f}", '-i', path]
     else:
         cmd += ['-loop', '1', '-framerate', str(FPS), '-t', f'{dur+0.5:.3f}', '-i', path]
     cmd += ['-ss', f'{fog_offset:.2f}', '-stream_loop', '-1', '-i', 'assets/fog/fog_v.mp4']
-    if is_video and shot.get('audio') == 'nat':
-        achain = f"[0:a]loudnorm=I=-18:TP=-1.5:LRA=11,aresample=48000,aformat=channel_layouts=stereo,atrim=duration={dur:.3f},asetpts=PTS-STARTPTS[a]"
+    if is_video and shot.get('audio') == 'nat' and not shot.get('mask_box'):
+        tempo = f"atempo={1/slow:.4f}," if slow > 1.001 else ""
+        achain = f"[0:a]{tempo}loudnorm=I=-18:TP=-1.5:LRA=11,aresample=48000,aformat=channel_layouts=stereo,atrim=duration={dur:.3f},asetpts=PTS-STARTPTS[a]"
     else:
         cmd += ['-f', 'lavfi', '-t', f'{dur:.3f}', '-i', 'anullsrc=r=48000:cl=stereo']
         achain = f"[2:a]atrim=duration={dur:.3f},asetpts=PTS-STARTPTS[a]"
@@ -178,9 +219,13 @@ for s in shots:
     else: break
 beats, tempo = beats_for(music, mstart)
 beats_v = [intro_len + b for b in beats]
-t = 0.0; durs = []
+def max_video_dur(s):
+    if s['kind'] != 'video': return 1e9
+    return 1.5 * max(0.3, probe_dur(f"src/{s['src']}") - float(s.get('in', 0) or 0) - 0.04)
+t = 0.0; durs = []; clamps = []
 for idx, s in enumerate(shots):
     d = float(s['dur'])
+    if d > max_video_dur(s): clamps.append((idx, s['src'], d, max_video_dur(s))); d = max_video_dur(s)
     if s.get('end_track_s') is not None:          # pin this cut to a musical event (e.g. the groove's return)
         pinned = intro_len + float(s['end_track_s']) - t
         if pinned >= 0.8: d = pinned
@@ -190,7 +235,7 @@ for idx, s in enumerate(shots):
         cands = [b for b in beats_v if b > t + max(0.6, d * 0.7)]
         if cands:
             b = min(cands, key=lambda x: abs(x - target))
-            if abs(b - target) <= 0.35: d = b - t
+            if abs(b - target) <= 0.35 and b - t <= max_video_dur(s): d = b - t
     d = round(d * FPS) / FPS                      # whole frames, so cut times never drift from the music grid
     durs.append(round(d, 4)); t += d
 total = t
@@ -242,6 +287,14 @@ for k, fp in enumerate(thumbs):
     im = Image.open(fp).resize((tw, th)); x, y = (k % cols)*tw, (k // cols)*(th+28)
     sheet.paste(im, (x, y)); dr.text((x+4, y+th+4), f"{k:02d} {shots[k]['src'][-14:]}", font=lab, fill=(220, 220, 220))
 sheet.save(f'out/_shots_{OUT}.jpg', quality=85)
+checks = [f'clamped (requested > clip allows): {c}' for c in clamps]
+for k, fp in enumerate(thumbs):
+    g = Image.open(fp).convert('L'); Wq, Hq = g.size
+    edge = sum(g.getpixel((Wq-2, y)) for y in range(0, Hq, 4)) / (Hq / 4)
+    inner = sum(g.getpixel((Wq-24, y)) for y in range(0, Hq, 4)) / (Hq / 4)
+    if inner > 30 and edge < 0.6 * inner: checks.append(f'shot {k:02d}: dark right edge {edge:.0f} vs {inner:.0f}')
+open(f'out/_qa_checks_{OUT}.txt', 'w').write('\n'.join(checks) or 'all checks passed')
+print('QA checks:', checks or 'all passed')
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'out/{OUT}.mp4', '-filter_complex', 'showwavespic=s=2400x360:colors=0x9fd3ff', '-frames:v', '1', f'{qa}/wave.png'])
 wv = Image.open(f'{qa}/wave.png').convert('RGB'); d2 = ImageDraw.Draw(wv); acc = 0.0
 for k, d in enumerate(durs):

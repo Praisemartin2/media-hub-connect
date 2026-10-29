@@ -18,8 +18,11 @@ def sample(g, xs, ys):
     a = g[y0, x0]; b = g[y0, x0 + 1]; c = g[y0 + 1, x0]; d = g[y0 + 1, x0 + 1]
     return (a * (1 - fx) + b * fx) * (1 - fy) + (c * (1 - fx) + d * fx) * fy
 # low-res field, upscaled by ffmpeg scale + gblur
-w, h = 480, 270
-octs = [(grid(6, 4), 6, 4, 1.0, 0.030), (grid(12, 8), 12, 8, 0.5, 0.055), (grid(24, 14), 24, 14, 0.25, 0.090)]
+w, h = W, H                       # write exactly the size ffmpeg is told to read (was hard-coded 480x270)
+if h > w:   # portrait: grids taller than wide so the noise cells stay round
+    octs = [(grid(4, 6), 4, 6, 1.0, 0.030), (grid(8, 12), 8, 12, 0.5, 0.055), (grid(14, 24), 14, 24, 0.25, 0.090)]
+else:
+    octs = [(grid(6, 4), 6, 4, 1.0, 0.030), (grid(12, 8), 12, 8, 0.5, 0.055), (grid(24, 14), 24, 14, 0.25, 0.090)]
 yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
 grad = np.clip((yy / h - 0.25) / 0.75, 0, 1) ** 1.4   # denser at the bottom
 out = sys.stdout.buffer

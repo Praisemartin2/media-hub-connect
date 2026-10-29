@@ -2,7 +2,7 @@ name: Halloween render
 on:
   push:
     branches: [claude/ekabo-video-editing-styles-wrs455]
-    paths: ['.github/workflows/halloween-render.yml', 'halloween/edl.json', 'halloween/render_v.py']
+    paths: ['.github/workflows/halloween-render.yml', 'halloween/edl.json']
   workflow_dispatch: {}
 permissions:
   contents: write
@@ -18,7 +18,7 @@ jobs:
         run: |
           set -e
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg >/dev/null
-          pip install -q gdown numpy pillow librosa
+          pip install -q gdown numpy pillow librosa "rembg[cpu]"
           mkdir -p halloween/src
           cut -f1,2 halloween/manifest.tsv | tr '\t' ' ' | xargs -P 4 -n 2 sh -c 'gdown -q -O "halloween/src/$0" "https://drive.google.com/uc?id=$1" || echo "FAILED $0"'
           ls halloween/src | wc -l
