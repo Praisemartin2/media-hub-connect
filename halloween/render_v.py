@@ -32,6 +32,13 @@ def probe_dur(path):
     r = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', path], capture_output=True, text=True)
     return float(r.stdout.strip() or 0)
 
+def lufs(path, ss=None, t=None):
+    # integrated loudness (LUFS) of a file or a slice of it
+    cmd = ['ffmpeg', '-hide_banner', '-nostats'] + (['-ss', f'{ss:.3f}'] if ss is not None else []) + (['-t', f'{t:.3f}'] if t else [])
+    r = subprocess.run(cmd + ['-i', path, '-af', 'loudnorm=print_format=json', '-f', 'null', '-'], capture_output=True, text=True, stdin=subprocess.DEVNULL)
+    j = r.stderr[r.stderr.rindex('{'):r.stderr.rindex('}') + 1]
+    return float(json.loads(j)['input_i'])
+
 # ---------- beat grid ----------
 def beats_for(track, start):
     try:
@@ -284,13 +291,15 @@ if splice:
            f"[mb]atrim=start={float(splice[1])-0.04:.3f},asetpts=PTS-STARTPTS[m2];[m1][m2]acrossfade=d=0.04:c1=tri:c2=tri,")   # overlap ends exactly on b
 else:
     mus = f"[2:a]atrim=start={mstart:.3f},asetpts=PTS-STARTPTS,"
-af = (f"[1:a]atrim=0:{drone_end+1.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-22:TP=-2:LRA=9,"
+# fixed gains (not loudnorm's automatic gain) so the track's own breaks, stops and the muffled section keep their contrast
+g_dr = -22.0 - lufs(drone, 0, 60); g_mu = -15.0 - lufs(music)
+af = (f"[1:a]atrim=0:{drone_end+1.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,volume={g_dr:.2f}dB,"
       f"afade=t=in:st=0:d=1.5,afade=t=out:st={max(0,drone_end-0.3):.2f}:d=1.2[dr];"
-      f"{mus}atrim=0:{mlen:.2f},aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-15:TP=-1.5:LRA=9,"
+      f"{mus}atrim=0:{mlen:.2f},aresample=48000,aformat=channel_layouts=stereo,volume={g_mu:.2f}dB,"
       f"afade=t=in:st=0:d=0.6,{mfade}")
 if mu:
     inside = f"clip((t-{mu0:.3f})/0.05,0,1)*clip(({mu1:.3f}-t)/0.12,0,1)"
-    af += (f",asplit=2[gfull][gmuf];[gmuf]lowpass=f=380,lowpass=f=380,volume='1.6*{inside}':eval=frame[gm];"
+    af += (f",asplit=2[gfull][gmuf];[gmuf]lowpass=f=380,lowpass=f=380,volume='0.6*{inside}':eval=frame[gm];"
            f"[gfull]volume='1-{inside}':eval=frame[gf];[gf][gm]amix=inputs=2:normalize=0")
 af += f",adelay={int(intro_len*1000)}|{int(intro_len*1000)}[gr];"
 # thunder under every lightning strike: a short crack plus a long low rumble
@@ -301,7 +310,7 @@ for k, s in enumerate(shots):
     if 'flash' in fxs and tr != 'flash': strikes.append(starts[k] + max(0.3, durs[k] * 0.45))
 th = []
 for k, ts in enumerate(strikes):
-    ms = int(ts * 1000); loud = 1.0 if ts < intro_len + mu1 + 0.5 else 0.5     # fuller in the dread, lighter under the groove
+    ms = int(ts * 1000); loud = 0.8 if ts < intro_len + mu1 + 0.5 else 0.5     # fuller in the dread, lighter under the groove
     af += (f"anoisesrc=d=4:c=brown:r=48000:a=0.9:seed={11+k},lowpass=f=170,lowpass=f=170,"
            f"afade=t=in:d=0.04,afade=t=out:st=0.35:d=3.4,volume={1.1*loud:.2f}[tr{k}];"
            f"anoisesrc=d=0.5:c=white:r=48000:a=0.6:seed={41+k},highpass=f=900,lowpass=f=5000,"
@@ -311,9 +320,14 @@ for k, ts in enumerate(strikes):
 if th: af += f"{''.join(th)}amix=inputs={len(th)}:normalize=0[thun];"
 af += (f"[0:a]asplit=2[nat][sc];"
        f"[gr][sc]sidechaincompress=threshold=0.02:ratio=6:attack=80:release=900:makeup=1:level_sc=1.5[grd];"
-       f"[nat][dr][grd]{'[thun]' if th else ''}amix=inputs={4 if th else 3}:duration=first:normalize=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.0:LRA=11[a]")
+       f"[nat][dr][grd]{'[thun]' if th else ''}amix=inputs={4 if th else 3}:duration=first:normalize=0,alimiter=limit=0.95[a]")
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/cut.mp4', '-i', drone, '-i', music,
-     '-filter_complex', af, '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', f'work/{OUT}_master.mp4'])
+     '-filter_complex', af, '-map', '[a]', '-c:a', 'pcm_f32le', 'work/mix.wav'])
+g_mix = -14.0 - lufs('work/mix.wav')               # one fixed gain for the whole film: the designed dynamics survive
+print(f'gains: drone {g_dr:+.1f} dB, music {g_mu:+.1f} dB, mix {g_mix:+.1f} dB')
+run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/cut.mp4', '-i', 'work/mix.wav',
+     '-filter_complex', f"[1:a]volume={g_mix:.2f}dB,alimiter=limit=0.89:level=false[a]", '-map', '0:v', '-map', '[a]',
+     '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-movflags', '+faststart', f'work/{OUT}_master.mp4'])
 # social deliverable: bitrate-capped so it stays under GitHub's 100 MB file limit (platforms re-encode anyway)
 def social(crf):
     run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'work/{OUT}_master.mp4', '-c:v', 'libx264', '-preset', 'slow', '-crf', str(crf),
@@ -342,9 +356,9 @@ sheet.save(f'out/_shots_{OUT}.jpg', quality=85)
 checks = [f'clamped (requested > clip allows): {c}' for c in clamps] + pins
 for k, fp in enumerate(thumbs):
     g = Image.open(fp).convert('L'); Wq, Hq = g.size
-    edge = sum(g.getpixel((Wq-2, y)) for y in range(0, Hq, 4)) / (Hq / 4)
-    inner = sum(g.getpixel((Wq-24, y)) for y in range(0, Hq, 4)) / (Hq / 4)
-    if inner > 30 and edge < 0.6 * inner: checks.append(f'shot {k:02d}: dark right edge {edge:.0f} vs {inner:.0f}')
+    col = lambda x: sum(g.getpixel((x, y)) for y in range(0, Hq, 4)) / (Hq / 4)
+    edge, near = col(Wq-2), col(Wq-8)               # a hard bar is an abrupt step, a vignette is a gentle slope
+    if near > 30 and edge < 0.5 * near: checks.append(f'shot {k:02d}: dark right edge {edge:.0f} vs {near:.0f}')
 open(f'out/_qa_checks_{OUT}.txt', 'w').write('\n'.join(checks) or 'all checks passed')
 print('QA checks:', checks or 'all passed')
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'out/{OUT}.mp4', '-filter_complex', 'showwavespic=s=2400x360:colors=0x9fd3ff', '-frames:v', '1', f'{qa}/wave.png'])
