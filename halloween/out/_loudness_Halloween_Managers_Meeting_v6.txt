@@ -1,0 +1,5 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'out/Halloween_Managers_Meeting_v6.mp4':
+Input Integrated:    -14.3 LUFS
+Input True Peak:      -1.9 dBTP
+Input LRA:            12.3 LU
+Input Threshold:     -24.7 LUFS
