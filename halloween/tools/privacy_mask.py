@@ -9,8 +9,9 @@ usage: python3 privacy_mask.py SRC OUT BOX [IN DUR] [--keep x0,y0,x1,y1] [--mode
   --keep  extra region (normalised) where anything the segmenter even faintly calls foreground is kept
           (thin props such as a cone hat in front of the screen)
   --model rembg model, default isnet-general-use (cleaner hair and hat edges than u2net)
-People and props are protected with a segmentation mask, held over +-3 frames in videos so a hat that
-drops out of one frame does not flicker. The mask is feathered inward, so no sharp screen pixels survive
+People and props are protected with a segmentation mask, median-filtered over +-3 frames in videos so
+one-frame dropouts (a hat) and one-frame false hits (a piece of screen) both vanish. Screen-coloured fringes
+outside a person's solid core and the screen seen through sheer fabric are blurred as well. The mask is feathered inward, so no sharp screen pixels survive
 around a silhouette, and the blur is computed from the background alone so people leave no dark halo in it.
 """
 import sys, os, subprocess, tempfile, glob
@@ -49,16 +50,29 @@ def fg_mask(im):
         sub = fg[y0:y1, x0:x1]; fg[y0:y1, x0:x1] = np.maximum(sub, (sub > 0.05).astype(np.float32))
     return fg
 
+def screen_like(a):
+    # the bank page's violet / blue (hue 215-300 deg, clearly saturated, not dark): screen, unless deep inside a person
+    mx, mn = a.max(axis=2), a.min(axis=2); v = mx / 255.0; sat = (mx - mn) / np.maximum(mx, 1)
+    r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    hue = (np.degrees(np.arctan2(np.sqrt(3) * (g - b), 2 * r - g - b)) + 360) % 360
+    return (hue > 215) & (hue < 300) & (sat > 0.28) & (v > 0.22)
+
 def clean(im, fg):
     im = im.convert('RGB'); W, H = im.size
     x0, y0, x1, y1 = int(BOX[0]*W), int(BOX[1]*H), int(BOX[2]*W), int(BOX[3]*H)
     box = Image.new('L', (W, H), 0); box.paste(255, (x0, y0, x1, y1))
     box = np.asarray(box.filter(ImageFilter.GaussianBlur(max(6, W // 60))), np.float32) / 255.0
-    hard = Image.fromarray(((fg > 0.5) * 255).astype(np.uint8))
+    a = np.asarray(im, np.float32)
+    solid = Image.fromarray(((fg > 0.5) * 255).astype(np.uint8))
+    core = np.asarray(solid.filter(ImageFilter.MinFilter(max(5, (W // 120) | 1))), np.float32) > 127   # the body itself
+    person = (fg > 0.5) & ~(screen_like(a) & ~core)          # screen-coloured fringes are not person
+    hard = Image.fromarray((person * 255).astype(np.uint8))
     grow = max(3, (W // 360) | 1)
     # feather inward: the soft edge sits just inside the silhouette, so no sharp screen pixels ring it
-    keep = np.asarray(hard.filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(max(2, W // 540))), np.float32) / 255.0
-    a = np.asarray(im, np.float32)
+    feath = np.asarray(hard.filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(max(2, W // 540))), np.float32) / 255.0
+    # semi-transparent parts (tulle, wisps of hair) are only partly kept: the screen seen through them is blurred too
+    alpha = np.clip((fg - 0.5) / 0.4, 0, 1)
+    keep = np.maximum(feath * alpha, feath * core)
     # blur the background only (normalised convolution), so people do not smear dark halos into it
     bg = 1.0 - np.asarray(hard.filter(ImageFilter.MaxFilter(grow + 4)), np.float32) / 255.0
     sig = max(18, W // 40)
@@ -84,7 +98,7 @@ else:
         masks.append(fg_mask(Image.open(f).convert('RGB')))
         if k % 20 == 0: print(f'{os.path.basename(SRC)} mask {k}/{len(frames)}', flush=True)
     for k, f in enumerate(frames):
-        held = np.max(np.stack(masks[max(0, k - 3):k + 4]), axis=0)   # hold foreground over +-3 frames: no flicker
+        held = np.median(np.stack(masks[max(0, k - 3):k + 4]), axis=0)   # +-3 frame median: one-frame dropouts and false hits both vanish
         clean(Image.open(f), held).save(f)
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', '30', '-i', f'{tmp}/f_%04d.png',
                     '-c:v', 'libx264', '-crf', '14', '-preset', 'medium', '-pix_fmt', 'yuv420p', OUT], check=True, stdin=subprocess.DEVNULL)

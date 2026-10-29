@@ -30,7 +30,7 @@ jobs:
           gdown -q -O src/20261028_115920.mp4 "https://drive.google.com/uc?id=1rB4bvUcIbGUvv8SjzL_OsfAhhLZ5MqI_"
           time python3 tools/privacy_mask.py src/20261028_115955.jpg work/clean/20261028_115955.jpg 0.36,0.22,1.0,0.53 --keep 0.435,0.33,0.51,0.40
           time python3 tools/privacy_mask.py src/20261028_115920.mp4 work/clean/20261028_115920.mp4 0.55,0.04,1.0,0.64 0.6 3.4
-          for t in 0.2 0.7 1.2 1.8 2.4 3.0; do
+          for t in 0.1 0.4 0.7 1.0 1.3 1.6 1.9 2.2 2.5 2.8 3.1 3.3; do
             ffmpeg -y -loglevel error -ss $t -i work/clean/20261028_115920.mp4 -frames:v 1 work/a_$t.png
           done
           python3 - <<'PY'
@@ -39,11 +39,11 @@ jobs:
           b = Image.open('work/clean/20261028_115955.jpg'); W, H = b.size
           c = b.crop((int(0.30*W), int(0.20*H), int(0.85*W), int(0.62*H))); c.thumbnail((1600, 1600)); c.save('out/masktest/115955_masked_crop.jpg', quality=88)
           tiles = []
-          for t in ['0.2', '0.7', '1.2', '1.8', '2.4', '3.0']:
+          for t in ['0.1', '0.4', '0.7', '1.0', '1.3', '1.6', '1.9', '2.2', '2.5', '2.8', '3.1', '3.3']:
               f = Image.open(f'work/a_{t}.png').convert('RGB'); W, H = f.size
               tiles.append(f.crop((int(0.30*W), 0, W, int(0.62*H))))
-          tw, th = tiles[0].size; s = Image.new('RGB', (tw*3, th*2), 'black')
-          for k, t in enumerate(tiles): s.paste(t, ((k % 3)*tw, (k // 3)*th))
+          tw, th = tiles[0].size; s = Image.new('RGB', (tw*4, th*3), 'black')
+          for k, t in enumerate(tiles): s.paste(t, ((k % 4)*tw, (k // 4)*th))
           s.save('out/masktest/115920_masked_frames.jpg', quality=85)
           PY
           ls -la out/masktest work/clean
