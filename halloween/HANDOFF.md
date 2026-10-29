@@ -12,10 +12,16 @@ meeting on 2026-10-28, Halloween theme, every manager in costume, filmed on phon
 ## Pipeline (same as bday/)
 - Sources: user drops clips in a Google Drive folder shared "anyone with link"; CI downloads with gdown.
 - Analysis job: ffprobe + whisper + contact sheets -> halloween/analysis/.
-- Render: halloween/render.sh run by .github/workflows/halloween-render.yml (own-path trigger or
-  workflow_dispatch); outputs committed to halloween/out/ (1080p master + 480p preview + sheet).
-- Local container has NO ffmpeg; PIL yes; numpy no. All video work happens in CI (or the Higgsfield sandbox).
-- Deliver: 480p preview via attachment (30 MB cap); 1080p via raw GitHub link.
+- Sources: halloween/manifest.tsv (filename<TAB>Drive id, 84 files); CI downloads each with gdown
+  (gdown's folder mode stops at 50 files).
+- Render: `python3 render_v.py edl.json <out>` run by .github/workflows/halloween-render.yml, which
+  triggers on pushes that touch edl.json or the workflow file (or workflow_dispatch). Outputs are
+  committed to halloween/out/; the full-quality master is the `halloween-master` run artifact (30 days),
+  because GitHub rejects files over 100 MB. The committed mp4 is the bitrate-capped social master.
+- QA artefacts per render: out/_shots_<out>.jpg (labelled frame per shot), out/_wave_<out>.png (cuts in
+  orange, nat-sound bites in red), out/_qa_checks_<out>.txt, out/_loudness_<out>.txt, out/_timeline_<out>.json.
+- Local container has NO ffmpeg; PIL and numpy yes. All video work happens in CI (or the Higgsfield sandbox).
+- Deliver: 540p preview via attachment (30 MB cap); 1080p via raw GitHub link.
 
 ## Assets (halloween/assets/)
 - plates/: Higgsfield stills — mansion exterior, foggy forest path, mansion entrance hall (16:9).
@@ -29,4 +35,30 @@ Teal/green night grade, crushed blacks, film grain, vignette, slow push-ins with
 lightning flash cuts, flicker, chromatic aberration on transitions, fog in every shot, tombstone-style
 lower thirds (name + property), horror display type for titles.
 
+## EDL fields (edl.json -> render_v.py)
+kind (plate/title/video/photo/endcard), src, dur, in, move (push/pull/hold/pan_left/pan_right), shake,
+fx (fogheavy, fogoff, flicker, flash, glitch), transition_in (cut/flash/glitch/fadeblack/fadewhite),
+audio (none/nat), text/text2, crop (left/center/right) or crop_x (0..1 centre) for landscape sources,
+crop_box [x0,y0,x1,y1] (fractions, keep 9:16), mask_box [x0,y0,x1,y1] (privacy blur of the background
+inside the box; people are protected by a rembg person mask), focus [fx,fy] (push anchor), zoom (push
+amount), gamma (per-shot lift), end_track_s (pin this shot's end to a music time, track seconds).
+Cuts snap to beats within 0.35 s; videos that run short are slowed (max 1.5x) instead of freezing.
+
+## Content rules (do not break)
+- Never use 20261028_122047.mp4 (management role-play disciplining an employee) — no picture, no sound.
+- Keep 20261028_123050.mp4 and 20261028_123129.mp4 out (role-play skits) and the Charter House flyer.
+- The wall TV in the 11:59-12:00 clown/trio shots shows a bank login: always mask_box it.
+- Fun-spooky and flattering: no eating, sipping or caught-off-guard frames.
+- "Thriller" is copyrighted: royalty-free score (incompetech, CC-BY Kevin MacLeod) unless the user
+  supplies a licensed file. Credit line if posted publicly: "Music: Bump in the Night - Kevin MacLeod
+  (incompetech.com), CC BY 4.0".
+
+## Versions
+- v1: first cut (purple cast from a YUV blend, title clipped).
+- v2: teal night grade, fitted titles, 42 shots. QA found the bank login on the TV, a right-edge bar,
+  fog stripes, frozen clip ends and coverage gaps.
+- v3 (render of commit 14a5994): all of the above fixed; 41 shots; Chuckie and the pom-pom team get beats;
+  the witch's claw-reach ends exactly on the groove's return.
+
 ## Open questions -> see the chat; answers should be recorded here when they arrive.
+Names/properties for lower thirds; Thriller licence; tone; deadline; where it will be posted.

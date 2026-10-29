@@ -212,25 +212,31 @@ def render_shot(i, shot, dur, fog_offset):
 shots = EDL['shots']
 music = f"assets/music/{EDL['music']}" + ('' if EDL['music'].endswith('.mp3') else '.mp3')
 mstart = float(EDL.get('music_start_s', 0))
+splice = EDL.get('music_splice')        # [a, b] file seconds: jump from bar a to bar b so the song's real ending plays
+gap = (float(splice[1]) - float(splice[0])) if splice else 0.0
 # music begins at the first non-plate shot
 intro_len = 0.0
 for s in shots:
     if s['kind'] in ('plate', 'title'): intro_len += float(s['dur'])
     else: break
-beats, tempo = beats_for(music, mstart)
-beats_v = [intro_len + b for b in beats]
+def m2f(ft):                             # music file time -> film time
+    if splice and ft >= float(splice[1]): ft -= gap
+    return intro_len + ft - mstart
+beats, tempo = beats_for(music, 0.0)
+beats_v = [m2f(b) for b in beats if b >= mstart and not (splice and float(splice[0]) < b < float(splice[1]))]
 def max_video_dur(s):
     if s['kind'] != 'video': return 1e9
     return 1.5 * max(0.3, probe_dur(f"src/{s['src']}") - float(s.get('in', 0) or 0) - 0.04)
-t = 0.0; durs = []; clamps = []
+t = 0.0; durs = []; clamps = []; pins = []
 for idx, s in enumerate(shots):
     d = float(s['dur'])
     if d > max_video_dur(s): clamps.append((idx, s['src'], d, max_video_dur(s))); d = max_video_dur(s)
-    if s.get('end_track_s') is not None:          # pin this cut to a musical event (e.g. the groove's return)
-        pinned = intro_len + float(s['end_track_s']) - t
-        if pinned >= 0.8: d = pinned
+    if s.get('end_track_s') is not None:          # pin this cut to a musical event (music file seconds)
+        pinned = m2f(float(s['end_track_s'])) - t
+        if pinned >= 0.5: d = pinned
+        else: pins.append(f"shot {idx:02d}: pin {s['end_track_s']} unreachable (would be {pinned:.2f}s)")
         d = round(d * FPS) / FPS; durs.append(round(d, 4)); t += d; continue
-    if beats_v and t >= intro_len - 1e-6 and s['kind'] not in ('endcard',):
+    if beats_v and t >= intro_len - 1e-6 and s['kind'] not in ('endcard',) and not s.get('nosnap'):
         target = t + d
         cands = [b for b in beats_v if b > t + max(0.6, d * 0.7)]
         if cands:
@@ -240,6 +246,9 @@ for idx, s in enumerate(shots):
     durs.append(round(d, 4)); t += d
 total = t
 print(f'intro {intro_len:.2f}s, total {total:.2f}s, {len(shots)} shots')
+starts = [sum(durs[:k]) for k in range(len(durs))]
+for k, s in enumerate(shots):
+    print(f"  {k:02d} film {starts[k]:6.2f}-{starts[k]+durs[k]:6.2f}  music {starts[k]-intro_len+mstart:6.2f}  {s['src']}")
 
 segs = []
 for i, (s, d) in enumerate(zip(shots, durs)):
@@ -252,15 +261,48 @@ run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', '
 # ---------- audio: drone for intro, groove from first footage, nat bites ducking ----------
 drone = EDL.get('intro_drone') or 'Long_Note_Two'
 drone = f"assets/music/{drone}" + ('' if drone.endswith('.mp3') else '.mp3')
-fade_in_groove = 0.6
-af = (f"[1:a]atrim=0:{intro_len+1.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-22:TP=-2:LRA=9,"
-      f"afade=t=in:st=0:d=1.5,afade=t=out:st={max(0,intro_len-0.3):.2f}:d=1.2[dr];"
-      f"[2:a]atrim=0:{total-intro_len+0.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-15:TP=-1.5:LRA=9,"
-      f"afade=t=in:st=0:d={fade_in_groove},afade=t=out:st={max(0,total-intro_len-3.0):.2f}:d=3.0,adelay={int(intro_len*1000)}|{int(intro_len*1000)}[gr];"
-      f"[0:a]asplit=2[nat][sc];"
-      f"[gr][sc]sidechaincompress=threshold=0.02:ratio=6:attack=80:release=900:makeup=1:level_sc=1.5[grd];"
-      f"[nat][dr][grd]amix=inputs=3:duration=first:normalize=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.0:LRA=11[a]")
-run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/cut.mp4', '-i', drone, '-ss', f'{mstart:.2f}', '-i', music,
+# shots flagged "muffle" hear the groove low-passed, as if through the walls; the drone keeps going under them
+mu = [k for k, s in enumerate(shots) if s.get('muffle')]
+mu0 = (starts[mu[0]] - intro_len) if mu else 0.0
+mu1 = (starts[mu[-1]] + durs[mu[-1]] - intro_len) if mu else 0.0
+drone_end = intro_len + (mu1 if mu else 0.0)
+mlen = total - intro_len + 0.5
+natural_end = bool(splice) or bool(EDL.get('music_natural_end'))
+mfade = (f"afade=t=out:st={max(0, mlen-0.8):.2f}:d=0.8" if natural_end else f"afade=t=out:st={max(0, total-intro_len-3.0):.2f}:d=3.0")
+if splice:
+    mus = (f"[2:a]asplit=2[ma][mb];[ma]atrim={mstart:.3f}:{float(splice[0]):.3f},asetpts=PTS-STARTPTS[m1];"
+           f"[mb]atrim=start={float(splice[1]):.3f},asetpts=PTS-STARTPTS[m2];[m1][m2]acrossfade=d=0.04:c1=tri:c2=tri,")
+else:
+    mus = f"[2:a]atrim=start={mstart:.3f},asetpts=PTS-STARTPTS,"
+af = (f"[1:a]atrim=0:{drone_end+1.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-22:TP=-2:LRA=9,"
+      f"afade=t=in:st=0:d=1.5,afade=t=out:st={max(0,drone_end-0.3):.2f}:d=1.2[dr];"
+      f"{mus}atrim=0:{mlen:.2f},aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-15:TP=-1.5:LRA=9,"
+      f"afade=t=in:st=0:d=0.6,{mfade}")
+if mu:
+    inside = f"clip((t-{mu0:.3f})/0.05,0,1)*clip(({mu1:.3f}-t)/0.12,0,1)"
+    af += (f",asplit=2[gfull][gmuf];[gmuf]lowpass=f=380,lowpass=f=380,volume='1.6*{inside}':eval=frame[gm];"
+           f"[gfull]volume='1-{inside}':eval=frame[gf];[gf][gm]amix=inputs=2:normalize=0")
+af += f",adelay={int(intro_len*1000)}|{int(intro_len*1000)}[gr];"
+# thunder under every lightning strike: a short crack plus a long low rumble
+strikes = []
+for k, s in enumerate(shots):
+    fxs = set(s.get('fx', [])); tr = s.get('transition_in', 'cut')
+    if tr == 'flash': strikes.append(starts[k])
+    if 'flash' in fxs and tr != 'flash': strikes.append(starts[k] + max(0.3, durs[k] * 0.45))
+th = []
+for k, ts in enumerate(strikes):
+    ms = int(ts * 1000); loud = 1.0 if ts < intro_len + mu1 + 0.5 else 0.5     # fuller in the dread, lighter under the groove
+    af += (f"anoisesrc=d=4:c=brown:r=48000:a=0.9:seed={11+k},lowpass=f=170,lowpass=f=170,"
+           f"afade=t=in:d=0.04,afade=t=out:st=0.35:d=3.4,volume={1.1*loud:.2f}[tr{k}];"
+           f"anoisesrc=d=0.5:c=white:r=48000:a=0.6:seed={41+k},highpass=f=900,lowpass=f=5000,"
+           f"afade=t=in:d=0.005,afade=t=out:st=0.02:d=0.4,volume={0.35*loud:.2f}[tc{k}];"
+           f"[tr{k}][tc{k}]amix=inputs=2:normalize=0,aformat=channel_layouts=stereo,adelay=delays={ms}:all=1[th{k}];")
+    th.append(f"[th{k}]")
+if th: af += f"{''.join(th)}amix=inputs={len(th)}:normalize=0[thun];"
+af += (f"[0:a]asplit=2[nat][sc];"
+       f"[gr][sc]sidechaincompress=threshold=0.02:ratio=6:attack=80:release=900:makeup=1:level_sc=1.5[grd];"
+       f"[nat][dr][grd]{'[thun]' if th else ''}amix=inputs={4 if th else 3}:duration=first:normalize=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.0:LRA=11[a]")
+run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/cut.mp4', '-i', drone, '-i', music,
      '-filter_complex', af, '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', f'work/{OUT}_master.mp4'])
 # social deliverable: bitrate-capped so it stays under GitHub's 100 MB file limit (platforms re-encode anyway)
 def social(crf):
@@ -271,7 +313,7 @@ if os.path.getsize(f'out/{OUT}.mp4') > 95 * 1024 * 1024: social(26)
 print('social size MB', round(os.path.getsize(f'out/{OUT}.mp4') / 1048576, 1), 'master MB', round(os.path.getsize(f'work/{OUT}_master.mp4') / 1048576, 1))
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'out/{OUT}.mp4', '-vf', 'fps=1/2,scale=216:-2,tile=10x5', '-frames:v', '1', f'out/_sheet_{OUT}.jpg'])
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'out/{OUT}.mp4', '-vf', 'scale=540:960', '-c:v', 'libx264', '-crf', '27', '-preset', 'fast', '-c:a', 'aac', '-b:a', '96k', f'out/_preview_{OUT}.mp4'])
-json.dump({'durs': durs, 'total': total, 'intro': intro_len, 'tempo': tempo}, open(f'out/_timeline_{OUT}.json', 'w'), indent=1)
+json.dump({'durs': durs, 'starts': starts, 'total': total, 'intro': intro_len, 'tempo': tempo, 'strikes': strikes, 'muffle': [mu0, mu1] if mu else None}, open(f'out/_timeline_{OUT}.json', 'w'), indent=1)
 # ---------- QA artefacts ----------
 from PIL import Image, ImageDraw, ImageFont
 qa = f'out/qa_{OUT}'; os.makedirs(qa, exist_ok=True)
@@ -287,7 +329,7 @@ for k, fp in enumerate(thumbs):
     im = Image.open(fp).resize((tw, th)); x, y = (k % cols)*tw, (k // cols)*(th+28)
     sheet.paste(im, (x, y)); dr.text((x+4, y+th+4), f"{k:02d} {shots[k]['src'][-14:]}", font=lab, fill=(220, 220, 220))
 sheet.save(f'out/_shots_{OUT}.jpg', quality=85)
-checks = [f'clamped (requested > clip allows): {c}' for c in clamps]
+checks = [f'clamped (requested > clip allows): {c}' for c in clamps] + pins
 for k, fp in enumerate(thumbs):
     g = Image.open(fp).convert('L'); Wq, Hq = g.size
     edge = sum(g.getpixel((Wq-2, y)) for y in range(0, Hq, 4)) / (Hq / 4)
