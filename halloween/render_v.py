@@ -256,7 +256,11 @@ def render_shot(i, shot, dur, fog_offset):
 
 # ---------- timeline ----------
 shots = EDL['shots']
-music = f"assets/music/{EDL['music']}" + ('' if EDL['music'].endswith('.mp3') else '.mp3')
+# MUSIC_FILE overrides the edl (a licensed track that must not live in this public repo is mixed locally);
+# music null = no score in this render (drone and thunder only)
+music = os.environ.get('MUSIC_FILE') or (f"assets/music/{EDL['music']}" + ('' if EDL['music'].endswith('.mp3') else '.mp3') if EDL.get('music') else None)
+if not music:
+    run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo', '-t', '400', 'work/silence.wav'])
 mstart = float(EDL.get('music_start_s', 0))
 splice = EDL.get('music_splice')        # [a, b] file seconds: jump from bar a to bar b so the song's real ending plays
 gap = (float(splice[1]) - float(splice[0])) if splice else 0.0
@@ -268,7 +272,7 @@ for s in shots:
 def m2f(ft):                             # music file time -> film time
     if splice and ft >= float(splice[1]): ft -= gap
     return intro_len + ft - mstart
-beats, tempo = beats_for(music, 0.0)
+beats, tempo = beats_for(music, 0.0) if music else ([], 0.0)
 beats_v = [m2f(b) for b in beats if b >= mstart and not (splice and float(splice[0]) < b < float(splice[1]))]
 def max_video_dur(s):
     if s['kind'] != 'video': return 1e9
@@ -326,7 +330,7 @@ if splice:
 else:
     mus = f"[2:a]atrim=start={mstart:.3f},asetpts=PTS-STARTPTS,"
 # fixed gains (not loudnorm's automatic gain) so the track's own breaks, stops and the muffled section keep their contrast
-g_dr = -22.0 - lufs(drone, 3.0, 60); g_mu = -15.0 - lufs(music)
+g_dr = -22.0 - lufs(drone, 3.0, 60); g_mu = (-15.0 - lufs(music)) if music else 0.0
 af = (f"[1:a]atrim=start=3.0:end={3.0+drone_end+1.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,volume={g_dr:.2f}dB,"
       f"afade=t=in:st=0:d=0.4,afade=t=out:st={max(0,drone_end-0.3):.2f}:d=1.2[dr];"
       f"{mus}atrim=0:{mlen:.2f},aresample=48000,aformat=channel_layouts=stereo,volume={g_mu:.2f}dB,"
@@ -356,7 +360,7 @@ nk = [k for k, s in enumerate(shots) if s.get('audio') == 'nat' and not s.get('m
 duck = '+'.join(f"clip((t-{starts[k]-0.05:.3f})/0.08,0,1)*clip(({starts[k]+durs[k]-0.05:.3f}-t)/0.15,0,1)" for k in nk) or '0'
 af += (f"[gr]volume='1-0.75*min(1,{duck})':eval=frame[grd];"
        f"[0:a][dr][grd]{'[thun]' if th else ''}amix=inputs={4 if th else 3}:duration=first:normalize=0,alimiter=limit=0.95[a]")
-run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/nat.wav', '-i', drone, '-i', music,
+run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/nat.wav', '-i', drone, '-i', music or 'work/silence.wav',
      '-filter_complex', af, '-map', '[a]', '-c:a', 'pcm_f32le', 'work/mix.wav'])
 g_mix = -14.0 - lufs('work/mix.wav')               # one fixed gain for the whole film: the designed dynamics survive
 print(f'gains: drone {g_dr:+.1f} dB, music {g_mu:+.1f} dB, mix {g_mix:+.1f} dB')
