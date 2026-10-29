@@ -65,7 +65,9 @@ def clean(im, fg):
     a = np.asarray(im, np.float32)
     solid = Image.fromarray(((fg > 0.5) * 255).astype(np.uint8))
     core = np.asarray(solid.filter(ImageFilter.MinFilter(max(5, (W // 120) | 1))), np.float32) > 127   # the body itself
-    person = (fg > 0.5) & ~(screen_like(a) & ~core)          # screen-coloured fringes are not person
+    kb = np.zeros((H, W), bool)
+    if KEEP: kb[int(KEEP[1]*H):int(KEEP[3]*H), int(KEEP[0]*W):int(KEEP[2]*W)] = True
+    person = (fg > 0.5) & ~(screen_like(a) & (~core | kb))   # screen-coloured fringes are not person (nor inside --keep)
     hard = Image.fromarray((person * 255).astype(np.uint8))
     grow = max(3, (W // 360) | 1)
     # feather inward: the soft edge sits just inside the silhouette, so no sharp screen pixels ring it

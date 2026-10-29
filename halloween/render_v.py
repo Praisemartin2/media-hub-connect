@@ -130,8 +130,8 @@ def fx_chain(shot, dur):
         parts.append("colorbalance=bs=0.18:bm=0.12:enable='lt(t,0.10)'")
     elif tr == 'fadeblack': parts.append("fade=t=in:st=0:d=0.6:color=black")
     elif tr == 'fadewhite': parts.append("fade=t=in:st=0:d=0.5:color=white")
-    if 'flash' in fx and tr != 'flash':  # a lightning hit mid-shot
-        t0 = max(0.3, dur * 0.45)
+    if 'flash' in fx and tr != 'flash':  # a lightning hit mid-shot (or on a pinned music hit)
+        t0 = float(shot.get('_flash_t0', max(0.3, dur * 0.45)))
         parts.append(f"curves=r='0/0 0.35/0.70 1/0.86':g='0/0 0.35/0.78 1/0.93':b='0/0 0.35/0.90 1/1':enable='between(t,{t0:.2f},{t0+0.08:.2f})'")
         parts.append(f"colorbalance=bs=0.16:bm=0.10:enable='between(t,{t0:.2f},{t0+0.08:.2f})'")
         parts.append(f"curves=all='0/0 0.45/0.68 1/1':enable='between(t,{t0+0.14:.2f},{t0+0.20:.2f})'")
@@ -293,6 +293,8 @@ total = t
 print(f'intro {intro_len:.2f}s, total {total:.2f}s, {len(shots)} shots')
 starts = [sum(durs[:k]) for k in range(len(durs))]
 for k, s in enumerate(shots):
+    if s.get('flash_track_s') is not None: s['_flash_t0'] = max(0.05, m2f(float(s['flash_track_s'])) - starts[k])
+for k, s in enumerate(shots):
     print(f"  {k:02d} film {starts[k]:6.2f}-{starts[k]+durs[k]:6.2f}  music {starts[k]-intro_len+mstart:6.2f}  {s['src']}")
 
 segs = []
@@ -338,7 +340,7 @@ strikes = []
 for k, s in enumerate(shots):
     fxs = set(s.get('fx', [])); tr = s.get('transition_in', 'cut')
     if tr == 'flash': strikes.append(starts[k])
-    if 'flash' in fxs and tr != 'flash': strikes.append(starts[k] + max(0.3, durs[k] * 0.45))
+    if 'flash' in fxs and tr != 'flash': strikes.append(starts[k] + float(s.get('_flash_t0', max(0.3, durs[k] * 0.45))))
 th = []
 for k, ts in enumerate(strikes):
     ms = int(ts * 1000); loud = 0.8 if ts < intro_len + mu1 + 0.5 else 0.5     # fuller in the dread, lighter under the groove
