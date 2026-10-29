@@ -42,7 +42,9 @@ audio (none/nat), text/text2, crop (left/center/right) or crop_x (0..1 centre) f
 crop_box [x0,y0,x1,y1] (fractions, keep 9:16), mask_box [x0,y0,x1,y1] (privacy blur of the background
 inside the box; people are protected by a rembg person mask), focus [fx,fy] (push anchor), zoom (push
 amount), gamma (per-shot lift), end_track_s (pin this shot's end to a time in the music file, seconds),
-muffle (groove low-passed while these shots play), nosnap (keep this cut off the beat grid).
+muffle (groove low-passed while these shots play), nosnap (keep this cut off the beat grid),
+wb (white balance in kelvin for a warm phone photo), keep_box [x0,y0,x1,y1] (inside a mask_box: always keep thin
+props such as a hat; screen-coloured pixels are still blurred), flash_track_s (put a shot's lightning on a music-file time).
 Top level: music, music_start_s, intro_drone, music_splice [a, b] (file seconds, jump a -> b), out.
 Cuts snap to beats within 0.35 s; videos that run short are slowed (max 1.5x) instead of freezing.
 
@@ -65,6 +67,17 @@ Cuts snap to beats within 0.35 s; videos that run short are slowed (max 1.5x) in
   re-entry; witch claw ends on the groove's return; breakdown cuts on the stabs; a 4-cut curtain call; the music
   is spliced (79.88 -> 102.59, matching downbeats) so the endcard plays the song's real final hit; thunder on
   every lightning strike. Rehearsed locally with stand-in media before the CI render.
+
+- v5: confirmed fixes from a four-lens QA of the real v4 render (privacy/people, picture, sound/sync, story):
+  hair-aware privacy mask (isnet, +-3-frame median, screen-colour veto, inward feather), dialogue in sync
+  (shot audio joined as PCM; the AAC concat had drifted up to 1 s), no frozen clip ends (real video-stream end),
+  no B-frame offset, timeline ducking, oversampled limiter, no hand-at-face frames, 2 s tighter opening,
+  lightning on the song's final hit. 38 shots, ~94.8 s.
+
+## Privacy note
+The v1/v2 renders, their QA frames and the first mask-test "before" images showed the bank login unmasked.
+They were removed from the branch tip, but they remain in git history. Purging them needs a history rewrite
+and a force-push, which should only happen with the user's OK. Mask tests now publish masked frames only.
 
 ## Local rehearsal (no Drive access from the Claude container)
 Build stand-ins from analysis/thumbs (photos) and analysis/sheets (clips), symlink assets/tools, then run
