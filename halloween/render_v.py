@@ -9,17 +9,18 @@ W, H, FPS = 1080, 1920, 30
 os.makedirs('work', exist_ok=True); os.makedirs('out', exist_ok=True)
 FONT_T = 'assets/fonts/Creepster-Regular.ttf'; FONT_S = 'assets/fonts/SpecialElite-Regular.ttf'
 PLATES = {'v_mansion.jpg', 'v_forest.jpg', 'v_hall.jpg', 'v_door.jpg'}
-ENC = ['-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p', '-r', str(FPS),
-       '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-ac', '2']
+# no B-frames: a -c copy concat of these segments then starts at exactly 0 with no edit-list offset
+ENC = ['-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-bf', '0', '-pix_fmt', 'yuv420p', '-color_range', 'tv', '-r', str(FPS)]
+SR = 48000
 
-def run_cached(cmd, out):
+def run_cached(cmd, out, also=()):
     # skip work whose exact command already produced `out` (lets an interrupted render resume)
     import hashlib
     h = hashlib.sha1(json.dumps(cmd).encode())
     for c in cmd:                                  # inputs that are regenerated in place (crops, masks) count by content
         if isinstance(c, str) and (c.startswith('work/') or c.endswith('.py')) and c != out and os.path.isfile(c): h.update(open(c, 'rb').read())
     key = h.hexdigest()
-    if os.path.exists(out) and os.path.exists(out + '.key') and open(out + '.key').read() == key: return
+    if all(os.path.exists(o) for o in (out,) + tuple(also)) and os.path.exists(out + '.key') and open(out + '.key').read() == key: return
     run(cmd); open(out + '.key', 'w').write(key)
 
 def run(cmd):
@@ -31,6 +32,23 @@ def run(cmd):
 def probe_dur(path):
     r = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', path], capture_output=True, text=True)
     return float(r.stdout.strip() or 0)
+
+def video_end(path):
+    # time just after the last video frame; falls back to the container duration
+    r = subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'packet=pts_time:stream=r_frame_rate',
+                        '-of', 'json', path], capture_output=True, text=True)
+    try:
+        j = json.loads(r.stdout); pts = [float(p['pts_time']) for p in j.get('packets', []) if p.get('pts_time') not in (None, 'N/A')]
+        st = (j.get('streams') or [{}])[0]; num, den = (st.get('r_frame_rate') or '30/1').split('/')
+        return max(pts) + float(den) / float(num)
+    except Exception:
+        return probe_dur(path)
+
+def src_fps(path):
+    r = subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=r_frame_rate', '-of', 'csv=p=0', path],
+                       capture_output=True, text=True)
+    try: num, den = r.stdout.strip().split('/'); return float(num) / float(den)
+    except Exception: return 30.0
 
 def lufs(path, ss=None, t=None):
     # integrated loudness (LUFS) of a file or a slice of it
@@ -64,9 +82,11 @@ def crop_expr(crop, crop_x=None):
         x = {'left': '0', 'right': f'iw-{cw}', 'center': f'(iw-{cw})/2'}.get(crop or 'center', f'(iw-{cw})/2')
     return f'crop={cw}:ih:{x}:0'
 
-def fit_chain(kind, src_is_landscape, crop, crop_x=None, crop_box=None, slow=1.0):
-    # produce 2x oversampled 9:16 frame for zoompan (2160x3840); videos normalised to 30 fps first
-    pre = (f"setpts={slow:.4f}*PTS," if slow > 1.001 else "") + (f"fps={FPS}," if kind == 'video' else "")
+def fit_chain(kind, src_is_landscape, crop, crop_x=None, crop_box=None, slow=1.0, fps_in=30.0):
+    # produce 2x oversampled 9:16 frame for zoompan (2160x3840); videos normalised to 30 fps first.
+    # A slowed low-frame-rate clip gets blended in-between frames instead of repeated ones (no judder).
+    resamp = f"framerate=fps={FPS}" if (slow > 1.001 and fps_in < 50) else f"fps={FPS}"
+    pre = (f"setpts={slow:.4f}*PTS," if slow > 1.001 else "") + (f"{resamp}," if kind == 'video' else "")
     if crop_box and kind == 'video':
         x0, y0, x1, y1 = crop_box
         pre += f"crop=iw*{x1-x0:.4f}:ih*{y1-y0:.4f}:iw*{x0:.4f}:ih*{y0:.4f},"
@@ -106,13 +126,13 @@ def fx_chain(shot, dur):
     parts.append("noise=alls=11:allf=t+u")
     parts.append("vignette=PI/4.6")
     if tr == 'flash':   # lightning on the cut: crushed-highlight cold strike, silhouettes stay legible
-        parts.append("curves=all='0/0 0.30/0.88 1/1':enable='lt(t,0.10)'")
+        parts.append("curves=r='0/0 0.30/0.70 1/0.86':g='0/0 0.30/0.78 1/0.93':b='0/0 0.30/0.90 1/1':enable='lt(t,0.10)'")
         parts.append("colorbalance=bs=0.18:bm=0.12:enable='lt(t,0.10)'")
     elif tr == 'fadeblack': parts.append("fade=t=in:st=0:d=0.6:color=black")
     elif tr == 'fadewhite': parts.append("fade=t=in:st=0:d=0.5:color=white")
     if 'flash' in fx and tr != 'flash':  # a lightning hit mid-shot
         t0 = max(0.3, dur * 0.45)
-        parts.append(f"curves=all='0/0 0.35/0.86 1/1':enable='between(t,{t0:.2f},{t0+0.08:.2f})'")
+        parts.append(f"curves=r='0/0 0.35/0.70 1/0.86':g='0/0 0.35/0.78 1/0.93':b='0/0 0.35/0.90 1/1':enable='between(t,{t0:.2f},{t0+0.08:.2f})'")
         parts.append(f"colorbalance=bs=0.16:bm=0.10:enable='between(t,{t0:.2f},{t0+0.08:.2f})'")
         parts.append(f"curves=all='0/0 0.45/0.68 1/1':enable='between(t,{t0+0.14:.2f},{t0+0.20:.2f})'")
     return ','.join(parts)
@@ -193,26 +213,28 @@ def render_shot(i, shot, dur, fog_offset):
                 im = im.crop((int(x0*Wi), int(y0*Hi), int(x1*Wi), int(y1*Hi)))
             landscape = im.size[0] > im.size[1]
             path = f'work/photo_{i:03d}.jpg'; im.save(path, quality=95)   # bake EXIF rotation + crop
-    vin = float(shot.get('in', 0) or 0); slow = 1.0
+    vin = float(shot.get('in', 0) or 0); slow = 1.0; fps_in = 30.0
     if is_video:
-        avail = probe_dur(path) - vin - 0.04
+        avail = video_end(path) - vin - 0.04; fps_in = src_fps(path)
         if dur > avail: slow = dur / avail          # stretch the clip instead of freezing its last frame
         if shot.get('mask_box'):
             clean = f'work/clean_{i:03d}.mp4'
             run_cached([sys.executable, 'tools/privacy_mask.py', path, clean, ','.join(f'{v:.4f}' for v in shot['mask_box']),
                         f'{vin:.3f}', f'{min(dur / slow, avail) + 0.1:.3f}'] + keep_arg(shot), clean)
-            path, vin = clean, 0.0
+            path, vin, fps_in = clean, 0.0, 30.0
     fog_op = 0.0 if 'fogoff' in shot.get('fx', []) else (0.55 if 'fogheavy' in shot.get('fx', []) else (0.42 if is_plate else 0.30))
     grade = GRADE_PLATE if is_plate else GRADE
+    if shot.get('wb'): grade = f"colortemperature=temperature={int(shot['wb'])}," + grade      # cool a warm phone photo
     if shot.get('gamma'): grade += f",eq=gamma={float(shot['gamma']):.3f}"
-    vchain = (f"[0:v]{fit_chain(kind, landscape, shot.get('crop'), shot.get('crop_x'), shot.get('crop_box'), slow)},"
+    vchain = (f"[0:v]{fit_chain(kind, landscape, shot.get('crop'), shot.get('crop_x'), shot.get('crop_box'), slow, fps_in)},"
               f"{move_chain(shot.get('move','push'), shot.get('shake',0), nframes, is_video, shot.get('focus'), shot.get('zoom'))},{grade}[base];")
     vchain += f"[1:v]fps={FPS},format=gray,eq=brightness=-0.04:contrast=1.1,format=gbrp[fog];"
     vchain += f"[base]format=gbrp[baseR];[baseR][fog]blend=all_mode=screen:all_opacity={fog_op},format=yuv420p[fogged];"
     tail = fx_chain(shot, dur); tx = text_chain(shot, dur, i)
     end = f",fade=t=out:st={max(0.0, dur-1.2):.3f}:d=1.2:color=black" if kind == 'endcard' else ""
-    safe = ",crop=1068:1899:0:10,scale=1080:1920:flags=lanczos"     # trims any edge artefact, keeps aspect
+    safe = ",crop=1068:1899:0:10,scale=1080:1920:flags=lanczos:out_range=tv"     # trims any edge artefact, keeps aspect; one range for all
     vchain += f"[fogged]{tail}{(','+tx) if tx else ''}{end}{safe},format=yuv420p,trim=duration={dur:.3f},setpts=PTS-STARTPTS[v]"
+    nsamp = int(round(dur * SR)); wav = f'work/a{i:03d}.wav'
     cmd = ['ffmpeg', '-y', '-loglevel', 'error']
     if is_video:
         cmd += ['-ss', f"{vin:.3f}", '-to', f"{vin + dur/slow + 0.05:.3f}", '-i', path]
@@ -221,12 +243,14 @@ def render_shot(i, shot, dur, fog_offset):
     cmd += ['-ss', f'{fog_offset:.2f}', '-stream_loop', '-1', '-i', 'assets/fog/fog_v.mp4']
     if is_video and shot.get('audio') == 'nat' and not shot.get('mask_box'):
         tempo = f"atempo={1/slow:.4f}," if slow > 1.001 else ""
-        achain = f"[0:a]{tempo}loudnorm=I=-18:TP=-1.5:LRA=11,aresample=48000,aformat=channel_layouts=stereo,atrim=duration={dur:.3f},asetpts=PTS-STARTPTS[a]"
+        achain = (f"[0:a]{tempo}loudnorm=I=-18:TP=-1.5:LRA=11,aresample={SR},aformat=channel_layouts=stereo,apad,atrim=end_sample={nsamp},"
+                  f"afade=t=in:d=0.03,afade=t=out:st={max(0.0, dur-0.2):.3f}:d=0.2,asetpts=PTS-STARTPTS[a]")
     else:
         cmd += ['-f', 'lavfi', '-t', f'{dur:.3f}', '-i', 'anullsrc=r=48000:cl=stereo']
-        achain = f"[2:a]atrim=duration={dur:.3f},asetpts=PTS-STARTPTS[a]"
-    cmd += ['-filter_complex', vchain + ';' + achain, '-map', '[v]', '-map', '[a]', '-t', f'{dur:.3f}'] + ENC + [out]
-    run_cached(cmd, out)
+        achain = f"[2:a]apad,atrim=end_sample={nsamp},asetpts=PTS-STARTPTS[a]"
+    cmd += ['-filter_complex', vchain + ';' + achain, '-map', '[v]', '-t', f'{dur:.3f}'] + ENC + [out,
+            '-map', '[a]', '-c:a', 'pcm_s16le', '-ar', str(SR), '-ac', '2', wav]
+    run_cached(cmd, out, also=(wav,))
     return out
 
 # ---------- timeline ----------
@@ -247,7 +271,7 @@ beats, tempo = beats_for(music, 0.0)
 beats_v = [m2f(b) for b in beats if b >= mstart and not (splice and float(splice[0]) < b < float(splice[1]))]
 def max_video_dur(s):
     if s['kind'] != 'video': return 1e9
-    return 1.5 * max(0.3, probe_dur(f"src/{s['src']}") - float(s.get('in', 0) or 0) - 0.04)
+    return 1.5 * max(0.3, video_end(f"src/{s['src']}") - float(s.get('in', 0) or 0) - 0.04)
 t = 0.0; durs = []; clamps = []; pins = []
 for idx, s in enumerate(shots):
     d = float(s['dur'])
@@ -277,7 +301,10 @@ for i, (s, d) in enumerate(zip(shots, durs)):
     segs.append(render_shot(i, s, d, fog_offset=(i * 1.7) % 11.0))
 with open('work/concat.txt', 'w') as f:
     for p in segs: f.write(f"file '{os.path.basename(p)}'\n")
-run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', 'work/concat.txt', '-c', 'copy', 'work/cut.mp4'])
+run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', 'work/concat.txt', '-an', '-c', 'copy', 'work/cut.mp4'])
+with open('work/aconcat.txt', 'w') as f:
+    for i in range(len(segs)): f.write(f"file 'a{i:03d}.wav'\n")
+run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', 'work/aconcat.txt', '-c', 'copy', 'work/nat.wav'])
 
 # ---------- audio: drone for intro, groove from first footage, nat bites ducking ----------
 drone = EDL.get('intro_drone') or 'Long_Note_Two'
@@ -296,13 +323,13 @@ if splice:
 else:
     mus = f"[2:a]atrim=start={mstart:.3f},asetpts=PTS-STARTPTS,"
 # fixed gains (not loudnorm's automatic gain) so the track's own breaks, stops and the muffled section keep their contrast
-g_dr = -22.0 - lufs(drone, 0, 60); g_mu = -15.0 - lufs(music)
-af = (f"[1:a]atrim=0:{drone_end+1.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,volume={g_dr:.2f}dB,"
-      f"afade=t=in:st=0:d=1.5,afade=t=out:st={max(0,drone_end-0.3):.2f}:d=1.2[dr];"
+g_dr = -22.0 - lufs(drone, 3.0, 60); g_mu = -15.0 - lufs(music)
+af = (f"[1:a]atrim=start=3.0:end={3.0+drone_end+1.5:.2f},asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,volume={g_dr:.2f}dB,"
+      f"afade=t=in:st=0:d=0.4,afade=t=out:st={max(0,drone_end-0.3):.2f}:d=1.2[dr];"
       f"{mus}atrim=0:{mlen:.2f},aresample=48000,aformat=channel_layouts=stereo,volume={g_mu:.2f}dB,"
       f"afade=t=in:st=0:d=0.6,{mfade}")
 if mu:
-    inside = f"clip((t-{mu0:.3f})/0.05,0,1)*clip(({mu1:.3f}-t)/0.12,0,1)"
+    inside = f"clip((t-{mu0:.3f})/0.05,0,1)*clip(({mu1+0.03:.3f}-t)/0.03,0,1)"
     af += (f",asplit=2[gfull][gmuf];[gmuf]lowpass=f=380,lowpass=f=380,volume='0.6*{inside}':eval=frame[gm];"
            f"[gfull]volume='1-{inside}':eval=frame[gf];[gf][gm]amix=inputs=2:normalize=0")
 af += f",adelay={int(intro_len*1000)}|{int(intro_len*1000)}[gr];"
@@ -322,16 +349,17 @@ for k, ts in enumerate(strikes):
            f"[tr{k}][tc{k}]amix=inputs=2:normalize=0,aformat=channel_layouts=stereo,adelay=delays={ms}:all=1[th{k}];")
     th.append(f"[th{k}]")
 if th: af += f"{''.join(th)}amix=inputs={len(th)}:normalize=0[thun];"
-af += (f"[0:a]asplit=2[nat][sc];"
-       f"[gr][sc]sidechaincompress=threshold=0.02:ratio=6:attack=80:release=900:makeup=1:level_sc=1.5[grd];"
-       f"[nat][dr][grd]{'[thun]' if th else ''}amix=inputs={4 if th else 3}:duration=first:normalize=0,alimiter=limit=0.95[a]")
-run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/cut.mp4', '-i', drone, '-i', music,
+nk = [k for k, s in enumerate(shots) if s.get('audio') == 'nat' and not s.get('muffle')]
+duck = '+'.join(f"clip((t-{starts[k]-0.05:.3f})/0.08,0,1)*clip(({starts[k]+durs[k]-0.05:.3f}-t)/0.15,0,1)" for k in nk) or '0'
+af += (f"[gr]volume='1-0.75*min(1,{duck})':eval=frame[grd];"
+       f"[0:a][dr][grd]{'[thun]' if th else ''}amix=inputs={4 if th else 3}:duration=first:normalize=0,alimiter=limit=0.95[a]")
+run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/nat.wav', '-i', drone, '-i', music,
      '-filter_complex', af, '-map', '[a]', '-c:a', 'pcm_f32le', 'work/mix.wav'])
 g_mix = -14.0 - lufs('work/mix.wav')               # one fixed gain for the whole film: the designed dynamics survive
 print(f'gains: drone {g_dr:+.1f} dB, music {g_mu:+.1f} dB, mix {g_mix:+.1f} dB')
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/cut.mp4', '-i', 'work/mix.wav',
-     '-filter_complex', f"[1:a]volume={g_mix:.2f}dB,alimiter=limit=0.83:level=false[a]", '-map', '0:v', '-map', '[a]',
-     '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-movflags', '+faststart', f'work/{OUT}_master.mp4'])
+     '-filter_complex', f"[1:a]volume={g_mix:.2f}dB,aresample=192000,alimiter=limit=0.79:level=false,aresample=48000[a]", '-map', '0:v', '-map', '[a]',
+     '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest', '-movflags', '+faststart', f'work/{OUT}_master.mp4'])
 # social deliverable: bitrate-capped so it stays under GitHub's 100 MB file limit (platforms re-encode anyway)
 def social(crf):
     run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'work/{OUT}_master.mp4', '-c:v', 'libx264', '-preset', 'slow', '-crf', str(crf),
@@ -358,6 +386,18 @@ for k, fp in enumerate(thumbs):
     sheet.paste(im, (x, y)); dr.text((x+4, y+th+4), f"{k:02d} {shots[k]['src'][-14:]}", font=lab, fill=(220, 220, 220))
 sheet.save(f'out/_shots_{OUT}.jpg', quality=85)
 checks = [f'clamped (requested > clip allows): {c}' for c in clamps] + pins
+r = subprocess.run(['ffmpeg', '-nostats', '-i', f'out/{OUT}.mp4', '-af', 'ebur128=peak=true', '-f', 'null', '-'], capture_output=True, text=True)
+tp = [float(l.split()[1]) for l in r.stderr.splitlines() if l.strip().startswith('Peak:')]
+if tp and tp[-1] > -1.0: checks.append(f'true peak {tp[-1]:.1f} dBTP (limit -1.0)')
+r = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'stream=codec_type,start_time,duration', '-of', 'csv=p=0', f'out/{OUT}.mp4'], capture_output=True, text=True)
+sd = {l.split(',')[0]: (float(l.split(',')[1]), float(l.split(',')[2])) for l in r.stdout.split() if l.count(',') == 2}
+if 'video' in sd and 'audio' in sd and (abs(sd['video'][0]) > 0.005 or abs(sd['video'][1] - sd['audio'][1]) > 0.05):
+    checks.append(f'stream timing video start {sd["video"][0]:.3f} dur {sd["video"][1]:.3f} vs audio dur {sd["audio"][1]:.3f}')
+for k in range(len(shots)):
+    if shots[k]['kind'] != 'video': continue
+    r = subprocess.run(['ffmpeg', '-nostats', '-sseof', '-0.35', '-i', f'work/s{k:03d}.mp4', '-vf', 'freezedetect=n=0.003:d=0.1', '-f', 'null', '-'],
+                       capture_output=True, text=True)
+    if 'freeze_start' in r.stderr: checks.append(f'shot {k:02d}: picture freezes at the end ({shots[k]["src"]})')
 for k, fp in enumerate(thumbs):
     g = Image.open(fp).convert('L'); Wq, Hq = g.size
     col = lambda x: sum(g.getpixel((x, y)) for y in range(0, Hq, 4)) / (Hq / 4)
