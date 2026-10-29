@@ -181,13 +181,18 @@ beats_v = [intro_len + b for b in beats]
 t = 0.0; durs = []
 for idx, s in enumerate(shots):
     d = float(s['dur'])
+    if s.get('end_track_s') is not None:          # pin this cut to a musical event (e.g. the groove's return)
+        pinned = intro_len + float(s['end_track_s']) - t
+        if pinned >= 0.8: d = pinned
+        d = round(d * FPS) / FPS; durs.append(round(d, 4)); t += d; continue
     if beats_v and t >= intro_len - 1e-6 and s['kind'] not in ('endcard',):
         target = t + d
         cands = [b for b in beats_v if b > t + max(0.6, d * 0.7)]
         if cands:
             b = min(cands, key=lambda x: abs(x - target))
             if abs(b - target) <= 0.35: d = b - t
-    durs.append(round(d, 3)); t += d
+    d = round(d * FPS) / FPS                      # whole frames, so cut times never drift from the music grid
+    durs.append(round(d, 4)); t += d
 total = t
 print(f'intro {intro_len:.2f}s, total {total:.2f}s, {len(shots)} shots')
 

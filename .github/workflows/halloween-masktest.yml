@@ -1,0 +1,48 @@
+name: Halloween mask test
+on:
+  push:
+    branches: [claude/ekabo-video-editing-styles-wrs455]
+    paths: ['.github/workflows/halloween-masktest.yml', 'halloween/tools/privacy_mask.py']
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  mask:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Mask the TV in the clown / trio shots
+        run: |
+          set -e
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg >/dev/null
+          pip install -q gdown pillow numpy "rembg[cpu]"
+          cd halloween && mkdir -p src work/clean out/masktest
+          gdown -q -O src/20261028_115955.jpg "https://drive.google.com/uc?id=1R4v4ZaZAjhEPJJjDsUtdcBe4dEISeESi"
+          gdown -q -O src/20261028_120001.jpg "https://drive.google.com/uc?id=17_wFyIjcef2TY7OiSaqDpZ_ccRSQvXdp"
+          gdown -q -O src/20261028_115920.mp4 "https://drive.google.com/uc?id=1rB4bvUcIbGUvv8SjzL_OsfAhhLZ5MqI_"
+          time python3 tools/privacy_mask.py src/20261028_115955.jpg work/clean/20261028_115955.jpg 0.36,0.22,1.0,0.53
+          time python3 tools/privacy_mask.py src/20261028_120001.jpg work/clean/20261028_120001.jpg 0.47,0.16,1.0,0.48
+          time python3 tools/privacy_mask.py src/20261028_115920.mp4 work/clean/20261028_115920.mp4 0.55,0.04,1.0,0.64 0.6 3.9
+          python3 - <<'PY'
+          from PIL import Image, ImageOps
+          for n in ['20261028_115955','20261028_120001']:
+              a=ImageOps.exif_transpose(Image.open(f'src/{n}.jpg')).convert('RGB'); b=Image.open(f'work/clean/{n}.jpg')
+              a.thumbnail((540,960)); b.thumbnail((540,960))
+              s=Image.new('RGB',(a.size[0]*2+10,a.size[1]),'black'); s.paste(a,(0,0)); s.paste(b,(a.size[0]+10,0)); s.save(f'out/masktest/{n}_before_after.jpg',quality=85)
+          PY
+          ffmpeg -y -loglevel error -i work/clean/20261028_115920.mp4 -vf "fps=1,scale=360:-2,tile=4x1" -frames:v 1 out/masktest/20261028_115920_masked_sheet.jpg
+          ls -la out/masktest work/clean
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add halloween/out/masktest/
+          git commit -m "Halloween privacy mask test frames [skip ci]" || echo nothing
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin claude/ekabo-video-editing-styles-wrs455 && git push && exit 0
+            sleep $((i*3))
+          done
+          exit 1
