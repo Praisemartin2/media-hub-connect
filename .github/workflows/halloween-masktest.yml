@@ -14,26 +14,38 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Cache the mask model
+        uses: actions/cache@v4
+        with:
+          path: ~/.u2net
+          key: halloween-u2net-isnet-v1
       - name: Mask the TV in the clown / trio shots
         run: |
           set -e
           sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg >/dev/null
-          pip install -q gdown pillow numpy "rembg[cpu]"
+          pip install -q gdown pillow numpy scipy "rembg[cpu]"
           cd halloween && mkdir -p src work/clean out/masktest
+          rm -f out/masktest/*
           gdown -q -O src/20261028_115955.jpg "https://drive.google.com/uc?id=1R4v4ZaZAjhEPJJjDsUtdcBe4dEISeESi"
-          gdown -q -O src/20261028_120001.jpg "https://drive.google.com/uc?id=17_wFyIjcef2TY7OiSaqDpZ_ccRSQvXdp"
           gdown -q -O src/20261028_115920.mp4 "https://drive.google.com/uc?id=1rB4bvUcIbGUvv8SjzL_OsfAhhLZ5MqI_"
-          time python3 tools/privacy_mask.py src/20261028_115955.jpg work/clean/20261028_115955.jpg 0.36,0.22,1.0,0.53
-          time python3 tools/privacy_mask.py src/20261028_120001.jpg work/clean/20261028_120001.jpg 0.47,0.16,1.0,0.48
-          time python3 tools/privacy_mask.py src/20261028_115920.mp4 work/clean/20261028_115920.mp4 0.55,0.04,1.0,0.64 0.6 3.9
+          time python3 tools/privacy_mask.py src/20261028_115955.jpg work/clean/20261028_115955.jpg 0.36,0.22,1.0,0.53 --keep 0.435,0.33,0.51,0.40
+          time python3 tools/privacy_mask.py src/20261028_115920.mp4 work/clean/20261028_115920.mp4 0.55,0.04,1.0,0.64 0.6 3.4
+          for t in 0.2 0.7 1.2 1.8 2.4 3.0; do
+            ffmpeg -y -loglevel error -ss $t -i work/clean/20261028_115920.mp4 -frames:v 1 work/a_$t.png
+          done
           python3 - <<'PY'
-          from PIL import Image, ImageOps
-          for n in ['20261028_115955','20261028_120001']:
-              a=ImageOps.exif_transpose(Image.open(f'src/{n}.jpg')).convert('RGB'); b=Image.open(f'work/clean/{n}.jpg')
-              a.thumbnail((540,960)); b.thumbnail((540,960))
-              s=Image.new('RGB',(a.size[0]*2+10,a.size[1]),'black'); s.paste(a,(0,0)); s.paste(b,(a.size[0]+10,0)); s.save(f'out/masktest/{n}_before_after.jpg',quality=85)
+          from PIL import Image
+          # masked output only (the unmasked screen must never be committed): full-res crops of the hat / halo region
+          b = Image.open('work/clean/20261028_115955.jpg'); W, H = b.size
+          c = b.crop((int(0.30*W), int(0.20*H), int(0.85*W), int(0.62*H))); c.thumbnail((1600, 1600)); c.save('out/masktest/115955_masked_crop.jpg', quality=88)
+          tiles = []
+          for t in ['0.2', '0.7', '1.2', '1.8', '2.4', '3.0']:
+              f = Image.open(f'work/a_{t}.png').convert('RGB'); W, H = f.size
+              tiles.append(f.crop((int(0.30*W), 0, W, int(0.62*H))))
+          tw, th = tiles[0].size; s = Image.new('RGB', (tw*3, th*2), 'black')
+          for k, t in enumerate(tiles): s.paste(t, ((k % 3)*tw, (k // 3)*th))
+          s.save('out/masktest/115920_masked_frames.jpg', quality=85)
           PY
-          ffmpeg -y -loglevel error -i work/clean/20261028_115920.mp4 -vf "fps=1,scale=360:-2,tile=4x1" -frames:v 1 out/masktest/20261028_115920_masked_sheet.jpg
           ls -la out/masktest work/clean
       - name: Commit
         run: |

@@ -17,7 +17,7 @@ def run_cached(cmd, out):
     import hashlib
     h = hashlib.sha1(json.dumps(cmd).encode())
     for c in cmd:                                  # inputs that are regenerated in place (crops, masks) count by content
-        if isinstance(c, str) and c.startswith('work/') and c != out and os.path.isfile(c): h.update(open(c, 'rb').read())
+        if isinstance(c, str) and (c.startswith('work/') or c.endswith('.py')) and c != out and os.path.isfile(c): h.update(open(c, 'rb').read())
     key = h.hexdigest()
     if os.path.exists(out) and os.path.exists(out + '.key') and open(out + '.key').read() == key: return
     run(cmd); open(out + '.key', 'w').write(key)
@@ -158,6 +158,10 @@ def text_chain(shot, dur, i=0):
                          f"shadowcolor=black@0.85:shadowx=0:shadowy=6")
     return ','.join(parts)
 
+def keep_arg(shot):
+    # optional region where thin props in front of the masked screen (a cone hat) are always kept
+    return ['--keep', ','.join(f'{v:.4f}' for v in shot['keep_box'])] if shot.get('keep_box') else []
+
 def render_shot(i, shot, dur, fog_offset):
     kind = shot['kind']; src = shot['src']; out = f'work/s{i:03d}.mp4'
     nframes = int(round(dur * FPS))
@@ -180,7 +184,7 @@ def render_shot(i, shot, dur, fog_offset):
             from PIL import Image, ImageOps
             if shot.get('mask_box'):          # blur/darken a screen behind people (privacy)
                 clean = f'work/clean_{i:03d}.jpg'
-                run_cached([sys.executable, 'tools/privacy_mask.py', path, clean, ','.join(f'{v:.4f}' for v in shot['mask_box'])], clean)
+                run_cached([sys.executable, 'tools/privacy_mask.py', path, clean, ','.join(f'{v:.4f}' for v in shot['mask_box'])] + keep_arg(shot), clean)
                 im = Image.open(clean).convert('RGB')
             else:
                 im = ImageOps.exif_transpose(Image.open(path)).convert('RGB')
@@ -196,7 +200,7 @@ def render_shot(i, shot, dur, fog_offset):
         if shot.get('mask_box'):
             clean = f'work/clean_{i:03d}.mp4'
             run_cached([sys.executable, 'tools/privacy_mask.py', path, clean, ','.join(f'{v:.4f}' for v in shot['mask_box']),
-                        f'{vin:.3f}', f'{min(dur / slow, avail) + 0.1:.3f}'], clean)
+                        f'{vin:.3f}', f'{min(dur / slow, avail) + 0.1:.3f}'] + keep_arg(shot), clean)
             path, vin = clean, 0.0
     fog_op = 0.0 if 'fogoff' in shot.get('fx', []) else (0.55 if 'fogheavy' in shot.get('fx', []) else (0.42 if is_plate else 0.30))
     grade = GRADE_PLATE if is_plate else GRADE
