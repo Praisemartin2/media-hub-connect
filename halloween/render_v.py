@@ -326,7 +326,7 @@ run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/cut.mp4', '-i', drone, '-
 g_mix = -14.0 - lufs('work/mix.wav')               # one fixed gain for the whole film: the designed dynamics survive
 print(f'gains: drone {g_dr:+.1f} dB, music {g_mu:+.1f} dB, mix {g_mix:+.1f} dB')
 run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'work/cut.mp4', '-i', 'work/mix.wav',
-     '-filter_complex', f"[1:a]volume={g_mix:.2f}dB,alimiter=limit=0.89:level=false[a]", '-map', '0:v', '-map', '[a]',
+     '-filter_complex', f"[1:a]volume={g_mix:.2f}dB,alimiter=limit=0.83:level=false[a]", '-map', '0:v', '-map', '[a]',
      '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-movflags', '+faststart', f'work/{OUT}_master.mp4'])
 # social deliverable: bitrate-capped so it stays under GitHub's 100 MB file limit (platforms re-encode anyway)
 def social(crf):
