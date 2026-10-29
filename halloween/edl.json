@@ -214,7 +214,7 @@
    ],
    "crop": "center",
    "transition_in": "glitch",
-   "audio": "nat",
+   "audio": "none",
    "why": "The mad doctor breaks the dread: 'Y'all look scary' and his laugh. Out at source 3.0, before the camera drifts.",
    "muffle": true,
    "id": 11
@@ -415,7 +415,7 @@
    "fx": [],
    "crop": "center",
    "transition_in": "cut",
-   "audio": "nat",
+   "audio": "none",
    "why": "Leopard onesie lunges with monster claws, then cracks up: the second sound bite (her laugh). Cut before the camera tilts.",
    "id": 22
   },
@@ -573,7 +573,7 @@
    ],
    "zoom": 0.06,
    "transition_in": "cut",
-   "audio": "nat",
+   "audio": "none",
    "why": "Enters on the whip-pan tail: the face-on point, lightning near the 68.89 stab, then 'It's the curls, isn't it?' (src 6.3-8.3). Ends on Wilma laughing in the two-shot at the 71.11 stab. Third bite.",
    "id": 31
   },
