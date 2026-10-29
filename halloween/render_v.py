@@ -35,12 +35,17 @@ def probe_dur(path):
 
 def video_end(path):
     # time just after the last video frame; falls back to the container duration
-    r = subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'packet=pts_time:stream=r_frame_rate',
+    r = subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'packet=pts_time:stream=r_frame_rate:format=start_time',
                         '-of', 'json', path], capture_output=True, text=True)
     try:
         j = json.loads(r.stdout); pts = [float(p['pts_time']) for p in j.get('packets', []) if p.get('pts_time') not in (None, 'N/A')]
         st = (j.get('streams') or [{}])[0]; num, den = (st.get('r_frame_rate') or '30/1').split('/')
-        return max(pts) + float(den) / float(num)
+        t0 = float((j.get('format') or {}).get('start_time') or 0)      # -ss/-to count from the file's start time
+        by_pts = max(pts) + float(den) / float(num) - t0
+        c = subprocess.run(['ffprobe', '-v', 'error', '-count_frames', '-select_streams', 'v:0', '-show_entries', 'stream=nb_read_frames',
+                            '-of', 'csv=p=0', path], capture_output=True, text=True)
+        by_count = int(c.stdout.strip().split(',')[0]) * float(den) / float(num)  # decodable frames, whatever the timestamps say
+        return min(by_pts, by_count)
     except Exception:
         return probe_dur(path)
 
