@@ -14,6 +14,10 @@ export type COFYEvent = {
   featured?: boolean;
   /** Promo film shown in the lead slot instead of a photo. */
   video?: string;
+  /** The event's own artwork (its flyer), shown in the lead slot. */
+  image?: string;
+  /** Description of that artwork, for people using a screen reader. */
+  imageAlt?: string;
   /**
    * Recap film for an event that has happened, shown as a highlight.
    * A Google Drive embed URL, so the full-resolution footage streams
@@ -120,16 +124,20 @@ export const events: COFYEvent[] = [
   },
   {
     id: "webinar-2026-11-27",
-    title: "Quarterly Educational Webinar for Teachers, Parents & Caregivers",
+    title: "Critical Thinking Skills — Fall '26 Educational Webinar",
     date: "2026-11-27",
     time: "Time to be announced",
     location: "Online (Zoom)",
     venue: "Virtual",
     description:
-      "The next webinar in our quarterly series for the people who support our youth — practical, research-based strategies from experienced educators, for teachers, parents and caregivers. Free of charge, like every COFY event. The session topic, start time and Zoom link are confirmed closer to the date — ask us to be added to the list and we will send them to you first.",
+      "Our Fall '26 educational webinar, presented by Dr Ngozi Martin-Oguike. Theme: Problem Based Learning. Topic: Critical Thinking Skills. Part of our quarterly webinar series for teachers, parents and caregivers, free of charge like every COFY event. Sign up below and we will send you the joining details.",
     category: "Workshop",
     gradient: "from-brand-blue to-brand-blue-dark",
+    registerUrl: "https://forms.gle/yP7rQ7LrZEd5L5Eh7",
     featured: true,
+    image: `${import.meta.env.BASE_URL}media/webinar-2026-11-27.webp`,
+    imageAlt:
+      "COFY Inc. Fall '26 webinar flyer: theme Problem Based Learning, topic Critical Thinking Skills, presented by Dr Ngozi Martin-Oguike, November 27th 2026",
   },
   // Past events
   {
