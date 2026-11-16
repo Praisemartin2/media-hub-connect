@@ -25,16 +25,15 @@ export function UpcomingEvents() {
     <section className="relative overflow-hidden bg-secondary py-20 text-secondary-foreground lg:py-24">
       <Sunburst className="absolute -top-4 right-8 w-56 text-black/20" />
       <div className="container-cofy relative">
-        <p className="eyebrow font-display text-black/60">
-          Educational Mission — Summer 2026
-        </p>
+        <p className="eyebrow font-display text-black/60">Upcoming at COFY</p>
         <h2 className="mt-2 max-w-3xl font-display text-5xl font-medium leading-none tracking-tight sm:text-6xl">
           What's coming up
         </h2>
         <p className="mt-6 max-w-2xl font-serif text-lg leading-relaxed text-black/80">
-          Theme: <strong>Teaching How They Learn</strong> (TeachHTL). Reaching
-          schools with transformational education. Every COFY event is free
-          of charge, and you can register below.
+          Webinars for teachers, parents and caregivers, professional
+          development for educators, and outreach for the young people we
+          serve. Every COFY event is <strong>free of charge</strong> — register
+          below, or ask us to hold you a place.
         </p>
 
         {/* Lead slot: the current event, with its promo film */}
@@ -62,7 +61,7 @@ export function UpcomingEvents() {
               <p className="mt-5 font-serif text-base leading-relaxed text-foreground/75">
                 {featured.description}
               </p>
-              {featured.registerUrl?.startsWith("http") && (
+              {featured.registerUrl?.startsWith("http") ? (
                 <a
                   href={featured.registerUrl}
                   target="_blank"
@@ -73,6 +72,15 @@ export function UpcomingEvents() {
                   Register now
                   <ArrowUpRight className="h-5 w-5" />
                 </a>
+              ) : (
+                <Link
+                  to="/contact"
+                  aria-label={`Save your place for ${featured.title}`}
+                  className="mt-7 inline-flex w-fit items-center gap-1.5 bg-primary px-6 py-3 font-display text-lg font-bold text-white transition-colors hover:bg-brand-blue-dark focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                >
+                  Save my place
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
               )}
             </div>
           </div>
