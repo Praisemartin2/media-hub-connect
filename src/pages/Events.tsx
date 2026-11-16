@@ -16,10 +16,22 @@ import { SEO } from "@/components/shared/SEO";
 import { FeaturedEvent } from "@/components/events/FeaturedEvent";
 import { RecapFilm } from "@/components/events/RecapFilm";
 import { events, type COFYEvent } from "@/data/events";
-import { isUpcoming, dateParts, formatDateRange, formatPlace } from "@/lib/format";
+import { cn } from "@/lib/utils";
+import {
+  isUpcoming,
+  dateParts,
+  formatDateRange,
+  formatPlace,
+} from "@/lib/format";
 
 /** Square date block: month + day (and end day for ranges). */
-function DateSquare({ event, past = false }: { event: COFYEvent; past?: boolean }) {
+function DateSquare({
+  event,
+  past = false,
+}: {
+  event: COFYEvent;
+  past?: boolean;
+}) {
   const { month, day } = dateParts(event.date);
   const end = event.endDate ? dateParts(event.endDate) : undefined;
   return (
@@ -30,7 +42,9 @@ function DateSquare({ event, past = false }: { event: COFYEvent; past?: boolean 
           : "flex h-20 w-20 shrink-0 flex-col items-center justify-center bg-secondary text-secondary-foreground"
       }
     >
-      <span className="text-[11px] font-bold uppercase tracking-widest">{month}</span>
+      <span className="text-[11px] font-bold uppercase tracking-widest">
+        {month}
+      </span>
       <span className="font-display text-2xl font-bold leading-none">
         {day}
         {end && <span className="text-base font-semibold">–{end.day}</span>}
@@ -40,7 +54,13 @@ function DateSquare({ event, past = false }: { event: COFYEvent; past?: boolean 
 }
 
 /** One row in the sequential square list. */
-function EventRow({ event, past = false }: { event: COFYEvent; past?: boolean }) {
+function EventRow({
+  event,
+  past = false,
+}: {
+  event: COFYEvent;
+  past?: boolean;
+}) {
   const canRegister = !past && event.registerUrl?.startsWith("http");
   return (
     <div className="card-lift flex items-stretch gap-0 border border-border bg-card">
@@ -57,7 +77,7 @@ function EventRow({ event, past = false }: { event: COFYEvent; past?: boolean })
           {event.location}
         </p>
       </div>
-      {canRegister && (
+      {canRegister ? (
         <a
           href={event.registerUrl}
           target="_blank"
@@ -68,7 +88,16 @@ function EventRow({ event, past = false }: { event: COFYEvent; past?: boolean })
           Register
           <ArrowUpRight className="h-4 w-4" />
         </a>
-      )}
+      ) : !past ? (
+        <Link
+          to="/contact"
+          aria-label={`Save your place for ${event.title}`}
+          className="flex shrink-0 items-center gap-1.5 self-center border border-primary px-4 py-2.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-white focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring mr-4"
+        >
+          Save my place
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      ) : null}
     </div>
   );
 }
@@ -100,55 +129,85 @@ const Events = () => {
         <div className="container-cofy">
           <div className="mb-8 flex items-center gap-2">
             <CalendarClock className="h-5 w-5 text-primary" />
-            <h2 className="font-display text-2xl font-bold sm:text-3xl">Upcoming</h2>
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">
+              Upcoming
+            </h2>
           </div>
 
           {upcoming.length > 0 ? (
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
-              {/* Lead slot: the current event */}
+            <div
+              className={cn(
+                "grid grid-cols-1 gap-8 lg:gap-10",
+                rest.length > 0 && "lg:grid-cols-2",
+              )}
+            >
+              {/* Lead slot: the current event. With nothing else upcoming it
+                  spreads across both columns rather than leaving a gap. */}
               {featured && (
                 <Reveal>
-                  <FeaturedEvent event={featured} />
-                  <p className="mt-6 text-sm font-bold uppercase tracking-wider text-primary">
-                    {formatDateRange(featured.date, featured.endDate)}
-                  </p>
-                  <h3 className="mt-1 font-display text-2xl font-bold leading-tight sm:text-3xl">
-                    {featured.title}
-                  </h3>
-                  <p className="mt-3 flex items-start gap-1.5 text-sm text-muted-foreground">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    <span>{formatPlace(featured.venue, featured.location)}</span>
-                  </p>
-                  <p className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground">
-                    <Clock className="h-4 w-4 shrink-0 text-primary" />
-                    {featured.time}
-                  </p>
-                  <p className="mt-4 font-serif text-base leading-relaxed text-muted-foreground">
-                    {featured.description}
-                  </p>
-                  {featured.registerUrl?.startsWith("http") && (
-                    <a
-                      href={featured.registerUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`Register for ${featured.title}`}
-                      className="mt-6 inline-flex items-center gap-1.5 bg-primary px-6 py-3 font-display text-lg font-bold text-white transition-colors hover:bg-brand-blue-dark focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-                    >
-                      Register now
-                      <ArrowUpRight className="h-5 w-5" />
-                    </a>
-                  )}
+                  <div
+                    className={cn(
+                      rest.length === 0 &&
+                        "grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center lg:gap-12",
+                    )}
+                  >
+                    <FeaturedEvent event={featured} />
+                    <div>
+                      <p className="mt-6 text-sm font-bold uppercase tracking-wider text-primary">
+                        {formatDateRange(featured.date, featured.endDate)}
+                      </p>
+                      <h3 className="mt-1 font-display text-2xl font-bold leading-tight sm:text-3xl">
+                        {featured.title}
+                      </h3>
+                      <p className="mt-3 flex items-start gap-1.5 text-sm text-muted-foreground">
+                        <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                        <span>
+                          {formatPlace(featured.venue, featured.location)}
+                        </span>
+                      </p>
+                      <p className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground">
+                        <Clock className="h-4 w-4 shrink-0 text-primary" />
+                        {featured.time}
+                      </p>
+                      <p className="mt-4 font-serif text-base leading-relaxed text-muted-foreground">
+                        {featured.description}
+                      </p>
+                      {featured.registerUrl?.startsWith("http") ? (
+                        <a
+                          href={featured.registerUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Register for ${featured.title}`}
+                          className="mt-6 inline-flex items-center gap-1.5 bg-primary px-6 py-3 font-display text-lg font-bold text-white transition-colors hover:bg-brand-blue-dark focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                        >
+                          Register now
+                          <ArrowUpRight className="h-5 w-5" />
+                        </a>
+                      ) : (
+                        <Link
+                          to="/contact"
+                          aria-label={`Save your place for ${featured.title}`}
+                          className="mt-6 inline-flex items-center gap-1.5 bg-primary px-6 py-3 font-display text-lg font-bold text-white transition-colors hover:bg-brand-blue-dark focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                        >
+                          Save my place
+                          <ArrowRight className="h-5 w-5" />
+                        </Link>
+                      )}
+                    </div>
+                  </div>
                 </Reveal>
               )}
 
               {/* Everything else, in date order */}
-              <div className="grid grid-cols-1 content-start gap-4">
-                {rest.map((event, i) => (
-                  <Reveal key={event.id} delay={i * 60}>
-                    <EventRow event={event} />
-                  </Reveal>
-                ))}
-              </div>
+              {rest.length > 0 && (
+                <div className="grid grid-cols-1 content-start gap-4">
+                  {rest.map((event, i) => (
+                    <Reveal key={event.id} delay={i * 60}>
+                      <EventRow event={event} />
+                    </Reveal>
+                  ))}
+                </div>
+              )}
             </div>
           ) : (
             <p className="py-10 text-muted-foreground">
@@ -163,7 +222,9 @@ const Events = () => {
         <div className="container-cofy">
           <div className="mb-8 flex items-center gap-2">
             <History className="h-5 w-5 text-primary" />
-            <h2 className="font-display text-2xl font-bold sm:text-3xl">Past events</h2>
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">
+              Past events
+            </h2>
           </div>
 
           {/* Recap film from an event that has happened */}
@@ -198,7 +259,8 @@ const Events = () => {
                     {pastHighlight.title}
                   </h3>
                   <p className="mt-2 text-sm font-semibold text-muted-foreground">
-                    {formatDateRange(pastHighlight.date, pastHighlight.endDate)} · {pastHighlight.location}
+                    {formatDateRange(pastHighlight.date, pastHighlight.endDate)}{" "}
+                    · {pastHighlight.location}
                   </p>
                   <p className="mt-3 font-serif text-base leading-relaxed text-foreground/75">
                     {pastHighlight.description}

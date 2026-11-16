@@ -27,7 +27,6 @@ export type COFYEvent = {
 /** Promo film for the TOTAL-36 Educational Mission, Summer 2026. */
 export const missionVideo = `${import.meta.env.BASE_URL}media/educational-mission-2026.mp4`;
 
-// "Today" reference for the site: 2026-06-25
 export const events: COFYEvent[] = [
   // Upcoming — COFY's recurring annual activities
   {
@@ -118,6 +117,19 @@ export const events: COFYEvent[] = [
     category: "Outreach",
     gradient: "from-brand-blue-dark to-brand-blue-deep",
     registerUrl: "#register",
+  },
+  {
+    id: "webinar-2026-11-27",
+    title: "Quarterly Educational Webinar for Teachers, Parents & Caregivers",
+    date: "2026-11-27",
+    time: "Time to be announced",
+    location: "Online (Zoom)",
+    venue: "Virtual",
+    description:
+      "The next webinar in our quarterly series for the people who support our youth — practical, research-based strategies from experienced educators, for teachers, parents and caregivers. Free of charge, like every COFY event. The session topic, start time and Zoom link are confirmed closer to the date — ask us to be added to the list and we will send them to you first.",
+    category: "Workshop",
+    gradient: "from-brand-blue to-brand-blue-dark",
+    featured: true,
   },
   // Past events
   {
