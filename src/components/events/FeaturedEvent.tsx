@@ -12,10 +12,11 @@ const categoryPhoto: Record<COFYEvent["category"], PhotoKey> = {
 };
 
 /**
- * Media for the lead event slot: its promo film when it has one,
- * otherwise a photo of that kind of event. The film keeps its own
- * portrait shape and only loads metadata until the visitor plays it,
- * so the page stays light and the audio works when they choose to.
+ * Media for the lead event slot, in order of preference: the event's
+ * promo film, then its own artwork (the flyer), then a photo of that
+ * kind of event. The film keeps its own portrait shape and only loads
+ * metadata until the visitor plays it, so the page stays light and the
+ * audio works when they choose to.
  */
 export function FeaturedEvent({ event }: { event: COFYEvent }) {
   const photo = photos[categoryPhoto[event.category]];
@@ -32,6 +33,22 @@ export function FeaturedEvent({ event }: { event: COFYEvent }) {
           aria-label={`Promotional film for ${event.title}`}
         />
         <Badge className="pointer-events-none absolute left-4 top-4 gap-1.5 border-0 bg-secondary font-bold text-secondary-foreground">
+          Happening next · {event.category}
+        </Badge>
+      </div>
+    );
+  }
+
+  if (event.image) {
+    return (
+      <div className="relative overflow-hidden bg-brand-blue-deep">
+        <img
+          src={event.image}
+          alt={event.imageAlt ?? `Flyer for ${event.title}`}
+          loading="eager"
+          className="aspect-square w-full max-w-full object-cover"
+        />
+        <Badge className="absolute left-4 top-4 gap-1.5 border-0 bg-secondary font-bold text-secondary-foreground">
           Happening next · {event.category}
         </Badge>
       </div>
