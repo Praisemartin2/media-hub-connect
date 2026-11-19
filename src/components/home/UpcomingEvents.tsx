@@ -72,6 +72,15 @@ export function UpcomingEvents() {
                   Register now
                   <ArrowUpRight className="h-5 w-5" />
                 </a>
+              ) : featured.registerUrl?.startsWith("#") ? (
+                <Link
+                  to={`/events${featured.registerUrl}`}
+                  aria-label={`Register for ${featured.title}`}
+                  className="mt-7 inline-flex w-fit items-center gap-1.5 bg-primary px-6 py-3 font-display text-lg font-bold text-white transition-colors hover:bg-brand-blue-dark focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                >
+                  Register now
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
               ) : (
                 <Link
                   to="/contact"
@@ -91,6 +100,7 @@ export function UpcomingEvents() {
             const { month, day } = dateParts(event.date);
             const end = event.endDate ? dateParts(event.endDate) : undefined;
             const canRegister = event.registerUrl?.startsWith("http");
+            const scrollsToForm = event.registerUrl?.startsWith("#");
             return (
               <Reveal key={event.id} delay={(i % 3) * 80}>
                 <div className="flex h-full flex-col bg-white p-6">
@@ -141,6 +151,15 @@ export function UpcomingEvents() {
                         Register
                         <ArrowUpRight className="h-4 w-4" />
                       </a>
+                    ) : scrollsToForm ? (
+                      <Link
+                        to={`/events${event.registerUrl}`}
+                        aria-label={`Register for ${event.title}`}
+                        className="inline-flex items-center gap-1.5 font-display text-base font-bold text-primary hover:underline focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                      >
+                        Register
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
                     ) : (
                       <Link
                         to="/events"

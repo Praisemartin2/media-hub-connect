@@ -19,6 +19,17 @@ export const site = {
   serves: ["Online", "Homes", "Churches", "Public Libraries", "Parks"],
 };
 
+/**
+ * The Google Form people register for COFY events with. Embedded on the
+ * Events page at #register, so visitors can sign up without leaving the
+ * site; `?embedded=true` drops Google's own page chrome.
+ */
+export const registrationForm = {
+  view: "https://docs.google.com/forms/d/e/1FAIpQLSf0YKvJSy57hqhttXbA9Lsq-iGfL9bfI27SsFSfdhj2TdO8fg/viewform",
+  embed:
+    "https://docs.google.com/forms/d/e/1FAIpQLSf0YKvJSy57hqhttXbA9Lsq-iGfL9bfI27SsFSfdhj2TdO8fg/viewform?embedded=true",
+};
+
 export const navLinks = [
   { label: "Mission", to: "/about" },
   { label: "Events", to: "/events" },

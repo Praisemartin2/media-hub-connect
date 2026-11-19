@@ -133,7 +133,8 @@ export const events: COFYEvent[] = [
       "Our Fall '26 educational webinar, presented by Dr Ngozi Martin-Oguike. Theme: Problem Based Learning. Topic: Critical Thinking Skills. Part of our quarterly webinar series for teachers, parents and caregivers, free of charge like every COFY event. Sign up below and we will send you the joining details.",
     category: "Workshop",
     gradient: "from-brand-blue to-brand-blue-dark",
-    registerUrl: "https://forms.gle/yP7rQ7LrZEd5L5Eh7",
+    // The same form, embedded on the Events page at #register.
+    registerUrl: "#register",
     featured: true,
     image: `${import.meta.env.BASE_URL}media/webinar-2026-11-27.webp`,
     imageAlt:
