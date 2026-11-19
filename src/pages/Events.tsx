@@ -8,6 +8,7 @@ import {
   Clock,
   ArrowRight,
   ArrowUpRight,
+  ArrowDown,
 } from "lucide-react";
 import { Reveal } from "@/components/shared/Reveal";
 import { Sunburst } from "@/components/shared/Sunburst";
@@ -15,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/shared/SEO";
 import { FeaturedEvent } from "@/components/events/FeaturedEvent";
 import { RecapFilm } from "@/components/events/RecapFilm";
+import { RegisterForm } from "@/components/events/RegisterForm";
 import { events, type COFYEvent } from "@/data/events";
 import { cn } from "@/lib/utils";
 import {
@@ -62,6 +64,7 @@ function EventRow({
   past?: boolean;
 }) {
   const canRegister = !past && event.registerUrl?.startsWith("http");
+  const scrollsToForm = !past && event.registerUrl?.startsWith("#");
   return (
     <div className="card-lift flex items-stretch gap-0 border border-border bg-card">
       <DateSquare event={event} past={past} />
@@ -87,6 +90,15 @@ function EventRow({
         >
           Register
           <ArrowUpRight className="h-4 w-4" />
+        </a>
+      ) : scrollsToForm ? (
+        <a
+          href={event.registerUrl}
+          aria-label={`Register for ${event.title}`}
+          className="flex shrink-0 items-center gap-1.5 self-center border border-primary px-4 py-2.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-white focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring mr-4"
+        >
+          Register
+          <ArrowDown className="h-4 w-4" />
         </a>
       ) : !past ? (
         <Link
@@ -183,6 +195,15 @@ const Events = () => {
                           Register now
                           <ArrowUpRight className="h-5 w-5" />
                         </a>
+                      ) : featured.registerUrl?.startsWith("#") ? (
+                        <a
+                          href={featured.registerUrl}
+                          aria-label={`Register for ${featured.title}`}
+                          className="mt-6 inline-flex items-center gap-1.5 bg-primary px-6 py-3 font-display text-lg font-bold text-white transition-colors hover:bg-brand-blue-dark focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                        >
+                          Register now
+                          <ArrowDown className="h-5 w-5" />
+                        </a>
                       ) : (
                         <Link
                           to="/contact"
@@ -216,6 +237,9 @@ const Events = () => {
           )}
         </div>
       </section>
+
+      {/* Registration */}
+      <RegisterForm />
 
       {/* Past events */}
       <section className="py-10 lg:py-16">

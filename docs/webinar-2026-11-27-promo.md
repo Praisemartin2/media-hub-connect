@@ -4,7 +4,10 @@
 Theme: Problem Based Learning · Topic: Critical Thinking Skills
 Presented by Dr Ngozi Martin-Oguike
 Friday, 27 November 2026 · Online (Zoom) · Free of charge
-Sign-up: <https://forms.gle/yP7rQ7LrZEd5L5Eh7>
+Sign-up: <https://forms.gle/yP7rQ7LrZEd5L5Eh7> — the same form is now
+embedded on the site at <https://www.cofyouth.org/events#register>, so either
+link works. Use the short one on print and in captions; the site link is
+better anywhere people are already browsing.
 
 The start time is not on the flyer, so nothing here states one. When it is
 set, add it to `time` in `src/data/events.ts` and to the posts below.

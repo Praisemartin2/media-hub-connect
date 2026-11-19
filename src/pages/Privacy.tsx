@@ -13,7 +13,7 @@ const sections: { title: string; body: string[] }[] = [
     title: "What we collect, and where it goes",
     body: [
       "Website forms: the contact, volunteer and newsletter forms on this site are delivered to our inbox by FormSubmit.co, a form-to-email relay. What you type in the form (your name, contact details and message) is emailed to us and handled under FormSubmit's own privacy policy in transit. We use it only to reply and to send you what you asked for.",
-      "Event registration: when you register for an event, the form runs on Google Forms. Your answers (typically your name and contact details) go to COFY so we can run the event. Google processes the form under its own privacy policy.",
+      "Event registration: our registration form runs on Google Forms and is embedded in the Events page, so it loads from Google when you open that page, as any embedded content would. Your answers (typically your name and contact details) go to COFY so we can run the event. Google processes the form under its own privacy policy.",
       "Donations: payments are handled entirely by PayPal on PayPal's pages. COFY receives your name, the amount, and the contact details PayPal shares with recipients. We never see your card number.",
       "Email: if you write to us, we keep the correspondence so we can reply and follow up.",
     ],
@@ -54,7 +54,7 @@ const Privacy = () => (
     <PageHero
       eyebrow="Legal"
       title="Privacy Policy"
-      description="What this site collects, what it doesn't, and where your information goes. Last updated August 2026."
+      description="What this site collects, what it doesn't, and where your information goes. Last updated November 2026."
     />
     <section className="py-16 lg:py-20">
       <div className="container-cofy max-w-3xl">
