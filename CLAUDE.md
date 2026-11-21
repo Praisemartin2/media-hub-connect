@@ -54,6 +54,26 @@ Standard single-page React app bootstrapped by `src/main.tsx` → `src/App.tsx`.
 
 Vitest with `jsdom`, globals enabled, and `@testing-library/react` + `@testing-library/jest-dom`. Global setup in `src/test/setup.ts` stubs `window.matchMedia`. Test files match `src/**/*.{test,spec}.{ts,tsx}`.
 
+## Social media
+
+COFY posts to four accounts: Instagram (@cofyinc), Facebook (cofyinc),
+LinkedIn (COFYinc: Creating Opportunities For Youth) and X (@cofyinc).
+
+**Whenever a website change is something the public would care about** — a new
+or changed event, a new programme or resource, a new story or video, a
+significant new page — write matching posts for all four networks as part of
+the same piece of work, and link each one to the page that changed. Invisible
+changes (refactors, dependency bumps, layout and accessibility fixes, copy
+tidying) ship silently.
+
+Read `docs/social/README.md` first: it holds the cadence, the voice, the
+per-network shape and limits, and the current connection status. Campaign and
+post copy lives in `docs/social/`.
+
+Nothing is ever posted without the user approving it. In particular the daily
+news story is proposed as **three** options each morning, and only the chosen
+one is published.
+
 ## Lovable integration
 
 This project syncs with the Lovable platform. The `lovable-tagger` Vite plugin runs only in development mode to tag components for the Lovable editor. Changes pushed to the repo and edits made in Lovable are bidirectional, so keep commits focused and conventional.

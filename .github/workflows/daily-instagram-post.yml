@@ -2,23 +2,25 @@ name: Daily Instagram Post
 
 # Runs Claude Code headless every day: researches one youth-opportunity news
 # story from around the world, writes automation/out/post.json, renders a
-# branded 1080x1350 image, commits it to public/ig/, and publishes it to
-# @cofyinc via the Instagram Graph API.
+# branded 1080x1350 image, and commits it to public/ig/ as a DRAFT.
+#
+# It does NOT publish on a schedule. COFY approves every post before it goes
+# out (docs/social/README.md), so publishing only happens on a manual run with
+# publish=true. The daily three-options-for-approval routine is the normal
+# path; this workflow is the fallback that keeps producing drafts.
 #
 # Required repo secrets (Settings -> Secrets and variables -> Actions):
 #   ANTHROPIC_API_KEY  - console.anthropic.com API key (powers the research/writing)
-#   IG_USER_ID         - Instagram Professional account ID
-#   IG_ACCESS_TOKEN    - long-lived Instagram Graph API token (instagram_content_publish)
-# If the two IG_* secrets are missing, the run still produces and commits the
-# image + caption (a ready-to-post draft) and just skips the publish step.
+#   IG_USER_ID         - Instagram Professional account ID   (publish only)
+#   IG_ACCESS_TOKEN    - long-lived Instagram Graph API token (publish only)
 
 on:
   schedule:
     - cron: "23 13 * * *" # ~9:23am US Eastern (daylight time)
   workflow_dispatch:
     inputs:
-      dry_run:
-        description: "Generate + commit the post but do not publish to Instagram"
+      publish:
+        description: "Publish the generated post to Instagram (only for a post COFY has already approved)"
         type: boolean
         default: false
 
@@ -101,16 +103,19 @@ jobs:
           git push origin HEAD:main
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
 
-      - name: Publish to Instagram
-        if: ${{ !inputs.dry_run }}
+      # Publishing is OFF by default and deliberately so: COFY approves every
+      # post before it goes out (see docs/social/README.md). This step only
+      # runs on a manual dispatch with publish=true, never on the schedule.
+      - name: Publish to Instagram (manual, approved runs only)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish }}
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IMAGE_URL: https://raw.githubusercontent.com/${{ github.repository }}/main/public/ig/${{ steps.commit.outputs.date }}.png
         run: |
           if [ -z "$IG_USER_ID" ] || [ -z "$IG_ACCESS_TOKEN" ]; then
-            echo "::warning::IG_USER_ID / IG_ACCESS_TOKEN secrets not set. The post draft (image + caption) was committed to public/ig/ and automation/archive/ — publish skipped. See docs/instagram-automation.md for setup."
-            exit 0
+            echo "::error::publish=true was requested but IG_USER_ID / IG_ACCESS_TOKEN are not set. See docs/instagram-automation.md."
+            exit 1
           fi
           node scripts/ig/publish.mjs automation/out/post.json
 
