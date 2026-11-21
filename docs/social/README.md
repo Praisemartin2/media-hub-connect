@@ -17,6 +17,46 @@ Scheduling runs through **Metricool**. The account
 only `pmomedia` on Instagram — that is a different organisation and COFY
 content must never be posted there.
 
+### Which Metricool account COFY should live in
+
+This matters more than it looks. Claude reaches Metricool through a connector
+that is authorised against **one** Metricool account — currently
+marketwithpmo@gmail.com. A brand created in a *different* Metricool account is
+invisible to it.
+
+So there are two workable shapes:
+
+- **COFY's own account** (cofyincorporated@gmail.com), with Claude's Metricool
+  connector re-authorised to it. Correct ownership for a nonprofit, and the
+  free tier's single brand slot is exactly what COFY needs. The trade-off:
+  re-authorising points Claude at the COFY account, so it can no longer reach
+  the PMO MEDIA LLC brand. **This is the recommended shape.**
+- **A second brand inside the existing account.** Nothing to re-authorise and
+  Claude sees it immediately, but the existing account's one free brand slot
+  is already used by PMO MEDIA LLC, so a second brand needs a paid plan — and
+  COFY's presence then sits under a personal account.
+
+Sharing one brand across both accounts is *not* a free option: Metricool
+restricts user sharing to its Advanced and Custom plans.
+
+Re-authorising is done in Claude's connector settings and is an ordinary
+sign-in flow. **No Metricool password should ever be pasted into a chat** —
+Claude neither needs nor can use one.
+
+### Budget check before committing to the cadence
+
+Reported limits worth confirming on Metricool's own pricing page, because
+third-party sources disagree:
+
+- The **free tier is reported at ~20 scheduled posts per month**. A daily
+  story across four networks is roughly 120 publications a month, so the free
+  tier almost certainly will not carry this cadence.
+- **X scheduling is a paid add-on**, reported between $5 and $10 per month per
+  connected account.
+
+If the cost is not wanted, the fallback is unchanged and costs nothing: Claude
+writes every post into `docs/social/`, and they get pasted by hand.
+
 ### What has to be connected, once
 
 Claude cannot do this part: connecting an account means signing in to each
