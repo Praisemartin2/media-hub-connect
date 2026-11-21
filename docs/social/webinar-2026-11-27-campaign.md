@@ -2,7 +2,8 @@
 
 **Cadence:** every 3 days until the event — **21 Nov**, **24 Nov**, **27 Nov**.
 **Networks:** Instagram (@cofyinc) · Facebook (cofyinc) · LinkedIn (COFYinc:
-Creating Opportunities For Youth) · X (@cofyinc).
+Creating Opportunities For Youth) · Google Business Profile.
+X copy is included but unused — the account could not be connected.
 **Every post drives to:** <https://www.cofyouth.org/events#register>
 
 **Image for every slot:** the flyer —
@@ -86,6 +87,21 @@ and gets cropped: `public/media/promo/linkedin-16x9.png`.
 > #SpecialEducation #InclusiveEducation #Neurodiversity #CriticalThinking
 > #ProblemBasedLearning #Nonprofit #Education #Caregivers #NewJersey
 
+### Google Business Profile
+> **Free online webinar — Friday, November 27, 2026**
+>
+> Critical Thinking Skills, presented by Dr Ngozi Martin-Oguike. Part of
+> COFY Inc.'s Fall '26 educational series, on the theme of Problem Based
+> Learning.
+>
+> It is written for the adults supporting a young person who learns
+> differently — teachers, parents and caregivers — with strategies you can
+> use straight away.
+>
+> Held online on Zoom. Free of charge, as every COFY event and service is.
+>
+> Register: https://www.cofyouth.org/events#register
+
 ### X
 > Save the date: Friday, Nov 27.
 >
@@ -156,6 +172,20 @@ and gets cropped: `public/media/promo/linkedin-16x9.png`.
 > #SpecialEducation #InclusiveEducation #ProblemBasedLearning #CriticalThinking
 > #Neurodiversity #Education #Nonprofit #Caregivers
 
+### Google Business Profile
+> **This Friday: Critical Thinking Skills — a free online webinar**
+>
+> COFY Inc.'s Fall '26 educational webinar is on Friday, November 27, 2026,
+> presented by Dr Ngozi Martin-Oguike.
+>
+> For teachers, parents and caregivers of young people with developmental
+> delays. Problem Based Learning — starting from a real problem and building
+> the thinking around it.
+>
+> Online on Zoom. Free of charge. Places are still open.
+>
+> Register: https://www.cofyouth.org/events#register
+
 ### X
 > A child who can't yet read a word problem is not a child who can't think.
 >
@@ -209,6 +239,17 @@ and gets cropped: `public/media/promo/linkedin-16x9.png`.
 > our Events page. Thank you to everyone who signed up — we'll see you there.
 >
 > #SpecialEducation #InclusiveEducation #CriticalThinking #Nonprofit #Education
+
+### Google Business Profile
+> **Today: Critical Thinking Skills — free online webinar**
+>
+> COFY Inc.'s Fall '26 educational webinar runs today, Friday, November 27,
+> 2026, presented by Dr Ngozi Martin-Oguike. Online on Zoom, free of charge,
+> for teachers, parents and caregivers.
+>
+> Registration stays open until we begin.
+>
+> Register: https://www.cofyouth.org/events#register
 
 ### X
 > Today. Critical Thinking Skills, with Dr Ngozi Martin-Oguike.

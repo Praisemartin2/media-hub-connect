@@ -7,15 +7,22 @@ session reads before writing or scheduling anything.
 
 | Network | Account | Status |
 |---|---|---|
-| Instagram | @cofyinc | **not yet connected for posting** |
-| Facebook | cofyinc | **not yet connected for posting** |
-| LinkedIn | COFYinc: Creating Opportunities For Youth (company page) | **not yet connected for posting** |
-| X | @cofyinc | **not yet connected for posting** |
+| Instagram | @cofyinc | connected in Metricool |
+| Facebook | cofyinc | connected in Metricool |
+| LinkedIn | COFYinc: Creating Opportunities For Youth (company page) | connected in Metricool |
+| Google Business Profile | COFY Inc. | connected in Metricool |
+| YouTube | COFY | connected in Metricool — needs video, not used for the webinar campaign |
+| X | @cofyinc | **not connected.** Could not be linked; dropped by decision, not an oversight |
 
-Scheduling runs through **Metricool**. The account
-(marketwithpmo@gmail.com) currently holds one brand, *PMO MEDIA LLC*, with
-only `pmomedia` on Instagram — that is a different organisation and COFY
-content must never be posted there.
+Scheduling runs through **Metricool**, under the COFY account
+(cofyincorporated@gmail.com).
+
+> **Claude cannot reach that account yet.** Claude's Metricool connector is
+> still authorised against marketwithpmo@gmail.com, whose only brand is
+> *PMO MEDIA LLC* — a different organisation. Until the connector is
+> re-authorised to the COFY account, `getBrandSettings` returns only
+> PMO MEDIA LLC, and **COFY content must never be posted there.** Posts stay
+> paste-by-hand from this folder until then.
 
 ### Which Metricool account COFY should live in
 
@@ -151,7 +158,18 @@ no implying COFY was involved in something it was not.
 | Instagram | square flyer or 4:5 graphic — required | caption can run long | not clickable; use "link in bio" **and** write the URL out |
 | Facebook | square or landscape | medium | clickable in the text |
 | LinkedIn | **landscape 1200×627** — square gets cropped | longest, most professional | clickable |
-| X | landscape 1200×627 | **≤ 280 characters**, single post, never a thread | counts as 23 characters |
+| Google Business Profile | optional | ≤ 1500 characters; plain, factual, local-search shaped | clickable |
+| YouTube | **video required**, plus a title and a kids/not-kids audience setting | description | clickable |
+| X | landscape 1200×627 | ≤ 280 characters, single post, never a thread | counts as 23 characters |
+
+X is not connected, so its copy is written but goes unused. Leave it in the
+campaign files: it costs nothing and is ready if the account is ever linked.
+
+Google Business Profile posts use the `publication` type (a text update on the
+profile). The `photo` type carries media but no text of its own, so it is not
+a substitute. GMB readers are usually local people searching for services
+rather than followers, so keep those posts plainer than the social ones: what
+it is, when, that it is free, and the link.
 
 ## Assets
 
